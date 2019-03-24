@@ -182,6 +182,8 @@ export class AcMapComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
   }
 
   ngOnDestroy(): void {
+    const viewer = this.getCesiumViewer();
+    viewer.destroy();
     this.mapContainer.remove();
     this.mapsManagerService._removeMapById(this.mapId);
   }

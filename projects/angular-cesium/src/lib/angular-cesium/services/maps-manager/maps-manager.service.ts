@@ -36,6 +36,11 @@ export class MapsManagerService {
   }
 
   _removeMapById(id: string) {
+    if (this._Maps.has(id) && this._Maps.get(id) === this.firstMap) {
+      const iter = this._Maps.values();
+      iter.next(); // skip firstMap
+      this.firstMap = iter.next().value;
+    }
     return this._Maps.delete(id);
   }
 
