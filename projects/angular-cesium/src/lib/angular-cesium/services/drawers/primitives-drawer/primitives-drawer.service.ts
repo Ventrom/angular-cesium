@@ -18,7 +18,7 @@ export abstract class PrimitivesDrawerService extends BasicDrawerService {
   init() {
     const scene = this.cesiumService.getScene();
     this._cesiumCollection = new this.drawerType({ scene });
-    this._primitiveCollectionWrap = new Cesium.PrimitiveCollection();
+    this._primitiveCollectionWrap = new Cesium.PrimitiveCollection({destroyPrimitives: false});
     this._primitiveCollectionWrap.add(this._cesiumCollection);
     scene.primitives.add(this._primitiveCollectionWrap);
   }
