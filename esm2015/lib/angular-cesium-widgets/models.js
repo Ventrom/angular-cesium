@@ -1,0 +1,33 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { EditActions } from './models/edit-actions.enum';
+export { EditModes } from './models/edit-mode.enum';
+export { EditPoint } from './models/edit-point';
+export { EditPolyline } from './models/edit-polyline';
+export { EditArc } from './models/edit-arc';
+export { EditablePolygon } from './models/editable-polygon';
+export { EditableCircle } from './models/editable-circle';
+export { EditablePolyline } from './models/editable-polyline';
+export { EditableEllipse } from './models/editable-ellipse';
+export { EditorObservable } from './models/editor-observable';
+export { PolylineEditorObservable } from './models/polyline-editor-observable';
+export { PolygonEditorObservable } from './models/polygon-editor-observable';
+export { CircleEditorObservable } from './models/circle-editor-observable';
+export { EllipseEditorObservable } from './models/ellipse-editor-observable';
+export {} from './models/polygon-edit-update';
+export {} from './models/circle-edit-update';
+export {} from './models/ellipse-edit-update';
+export {} from './models/basic-edit-update';
+export {} from './models/polygon-edit-options';
+export {} from './models/hippodrome-edit-update';
+export {} from './models/polyline-edit-options';
+export {} from './models/editor-edit-options';
+export {} from './models/circle-edit-options';
+export {} from './models/ellipse-edit-options';
+export { defaultLabelProps } from './models/label-props';
+export {} from './models/hippodrome-edit-options';
+export { HippodromeEditorObservable } from './models/hippodrome-editor-oboservable';
+export { EditableHippodrome } from './models/editable-hippodrome';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibW9kZWxzLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1jZXNpdW0vIiwic291cmNlcyI6WyJsaWIvYW5ndWxhci1jZXNpdW0td2lkZ2V0cy9tb2RlbHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7OztBQUFBLDRCQUFjLDRCQUE0QixDQUFDO0FBQzNDLDBCQUFjLHlCQUF5QixDQUFDO0FBQ3hDLDBCQUFjLHFCQUFxQixDQUFDO0FBQ3BDLDZCQUFjLHdCQUF3QixDQUFDO0FBQ3ZDLHdCQUFjLG1CQUFtQixDQUFDO0FBQ2xDLGdDQUFjLDJCQUEyQixDQUFDO0FBQzFDLCtCQUFjLDBCQUEwQixDQUFDO0FBQ3pDLGlDQUFjLDRCQUE0QixDQUFDO0FBQzNDLGdDQUFjLDJCQUEyQixDQUFDO0FBQzFDLGlDQUFjLDRCQUE0QixDQUFDO0FBQzNDLHlDQUFjLHFDQUFxQyxDQUFDO0FBQ3BELHdDQUFjLG9DQUFvQyxDQUFDO0FBQ25ELHVDQUFjLG1DQUFtQyxDQUFDO0FBQ2xELHdDQUFjLG9DQUFvQyxDQUFDO0FBQ25ELGVBQWMsOEJBQThCLENBQUM7QUFDN0MsZUFBYyw2QkFBNkIsQ0FBQztBQUM1QyxlQUFjLDhCQUE4QixDQUFDO0FBQzdDLGVBQWMsNEJBQTRCLENBQUM7QUFDM0MsZUFBYywrQkFBK0IsQ0FBQztBQUM5QyxlQUFjLGlDQUFpQyxDQUFDO0FBQ2hELGVBQWMsZ0NBQWdDLENBQUM7QUFDL0MsZUFBYyw4QkFBOEIsQ0FBQztBQUM3QyxlQUFjLDhCQUE4QixDQUFDO0FBQzdDLGVBQWMsK0JBQStCLENBQUM7QUFDOUMsa0NBQWMsc0JBQXNCLENBQUM7QUFDckMsZUFBYyxrQ0FBa0MsQ0FBQztBQUNqRCwyQ0FBYyx3Q0FBd0MsQ0FBQztBQUN2RCxtQ0FBYyw4QkFBOEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VkaXQtYWN0aW9ucy5lbnVtJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VkaXQtbW9kZS5lbnVtJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VkaXQtcG9pbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvZWRpdC1wb2x5bGluZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9lZGl0LWFyYyc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9lZGl0YWJsZS1wb2x5Z29uJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VkaXRhYmxlLWNpcmNsZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9lZGl0YWJsZS1wb2x5bGluZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9lZGl0YWJsZS1lbGxpcHNlJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VkaXRvci1vYnNlcnZhYmxlJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL3BvbHlsaW5lLWVkaXRvci1vYnNlcnZhYmxlJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL3BvbHlnb24tZWRpdG9yLW9ic2VydmFibGUnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvY2lyY2xlLWVkaXRvci1vYnNlcnZhYmxlJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2VsbGlwc2UtZWRpdG9yLW9ic2VydmFibGUnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvcG9seWdvbi1lZGl0LXVwZGF0ZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9jaXJjbGUtZWRpdC11cGRhdGUnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvZWxsaXBzZS1lZGl0LXVwZGF0ZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9iYXNpYy1lZGl0LXVwZGF0ZSc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9wb2x5Z29uLWVkaXQtb3B0aW9ucyc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9oaXBwb2Ryb21lLWVkaXQtdXBkYXRlJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL3BvbHlsaW5lLWVkaXQtb3B0aW9ucyc7XG5leHBvcnQgKiBmcm9tICcuL21vZGVscy9lZGl0b3ItZWRpdC1vcHRpb25zJztcbmV4cG9ydCAqIGZyb20gJy4vbW9kZWxzL2NpcmNsZS1lZGl0LW9wdGlvbnMnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvZWxsaXBzZS1lZGl0LW9wdGlvbnMnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvbGFiZWwtcHJvcHMnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvaGlwcG9kcm9tZS1lZGl0LW9wdGlvbnMnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvaGlwcG9kcm9tZS1lZGl0b3Itb2Jvc2VydmFibGUnO1xuZXhwb3J0ICogZnJvbSAnLi9tb2RlbHMvZWRpdGFibGUtaGlwcG9kcm9tZSc7XG4iXX0=

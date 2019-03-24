@@ -1,0 +1,35 @@
+import { OnDestroy } from '@angular/core';
+import { AcNotification } from '../../../angular-cesium/models/ac-notification';
+import { CoordinateConverter } from '../../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
+import { MapEventsManagerService } from '../../../angular-cesium/services/map-events-mananger/map-events-manager';
+import { Subject } from 'rxjs';
+import { CameraService } from '../../../angular-cesium/services/camera/camera.service';
+import { EditPoint } from '../../models/edit-point';
+import { EllipsesManagerService } from '../../services/entity-editors/ellipses-editor/ellipses-manager.service';
+import { EllipsesEditorService } from '../../services/entity-editors/ellipses-editor/ellipses-editor.service';
+import { EllipseEditUpdate } from '../../models/ellipse-edit-update';
+import { LabelProps } from '../../models/label-props';
+import { EditableEllipse } from '../../models/editable-ellipse';
+export declare class EllipsesEditorComponent implements OnDestroy {
+    private ellipsesEditor;
+    private coordinateConverter;
+    private mapEventsManager;
+    private cameraService;
+    private ellipsesManager;
+    private editLabelsRenderFn;
+    Cesium: any;
+    editPoints$: Subject<AcNotification>;
+    editEllipses$: Subject<AcNotification>;
+    private editEllipsesLayer;
+    private editPointsLayer;
+    constructor(ellipsesEditor: EllipsesEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, ellipsesManager: EllipsesManagerService);
+    private startListeningToEditorUpdates;
+    getLabelId(element: any, index: number): string;
+    renderEditLabels(ellipse: EditableEllipse, update: EllipseEditUpdate, labels?: LabelProps[]): void;
+    removeEditLabels(ellipse: EditableEllipse): void;
+    handleCreateUpdates(update: EllipseEditUpdate): void;
+    handleEditUpdates(update: EllipseEditUpdate): void;
+    ngOnDestroy(): void;
+    getPointSize(point: EditPoint): number;
+    getPointShow(point: EditPoint): boolean;
+}
