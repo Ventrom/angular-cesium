@@ -210,7 +210,9 @@ export class CameraService {
    * API: https://cesiumjs.org/Cesium/Build/Documentation/Camera.html?classFilter=cam#flyTo
    */
   cameraFlyTo(options: any) {
-    return this.camera.flyTo(options);
+    if (options) {
+      return this.camera.flyTo(options);
+    }
   }
 
   /**
