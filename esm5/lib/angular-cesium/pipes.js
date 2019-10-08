@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { PixelOffsetPipe } from './pipes/pixel-offset/pixel-offset.pipe';
 export { RadiansToDegreesPipe } from './pipes/radians-to-degrees/radians-to-degrees.pipe';

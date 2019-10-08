@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { AngularCesiumWidgetsModule } from './angular-cesium-widgets.module';
 export { EditActions, EditModes, EditPoint, EditPolyline, EditArc, EditablePolygon, EditableCircle, EditablePolyline, EditableEllipse, EditorObservable, PolylineEditorObservable, PolygonEditorObservable, CircleEditorObservable, EllipseEditorObservable, defaultLabelProps, HippodromeEditorObservable, EditableHippodrome } from './models';

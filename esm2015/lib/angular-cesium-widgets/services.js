@@ -1,6 +1,6 @@
 /**
  * @fileoverview added by tsickle
- * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 export { DEFAULT_POLYGON_OPTIONS, PolygonsEditorService } from './services/entity-editors/polygons-editor/polygons-editor.service';
 export { DEFAULT_CIRCLE_OPTIONS, CirclesEditorService } from './services/entity-editors/circles-editor/circles-editor.service';
