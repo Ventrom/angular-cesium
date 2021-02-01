@@ -1,7 +1,7 @@
 import { EditorObservable } from './editor-observable';
 import { Cartesian3 } from '../../angular-cesium/models/cartesian3';
 import { CircleEditUpdate } from './circle-edit-update';
-import { PointProps } from './polyline-edit-options';
+import { PointProps } from './point-edit-options';
 import { EllipseProps } from './ellipse-edit-options';
 export declare class CircleEditorObservable extends EditorObservable<CircleEditUpdate> {
     setManually: (center: Cartesian3, radius: number, centerPointProp?: PointProps, radiusPointProp?: PointProps, circleProp?: EllipseProps) => void;

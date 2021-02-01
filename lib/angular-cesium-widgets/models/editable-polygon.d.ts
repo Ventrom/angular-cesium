@@ -4,7 +4,8 @@ import { AcLayerComponent } from '../../angular-cesium/components/ac-layer/ac-la
 import { Cartesian3 } from '../../angular-cesium/models/cartesian3';
 import { CoordinateConverter } from '../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
 import { PolygonEditOptions, PolygonProps } from './polygon-edit-options';
-import { PointProps, PolylineProps } from './polyline-edit-options';
+import { PointProps } from './point-edit-options';
+import { PolylineProps } from './polyline-edit-options';
 import { LabelProps } from './label-props';
 export declare class EditablePolygon extends AcEntity {
     private id;
@@ -12,6 +13,7 @@ export declare class EditablePolygon extends AcEntity {
     private pointsLayer;
     private polylinesLayer;
     private coordinateConverter;
+    private polygonOptions;
     private positions;
     private polylines;
     private movingPoint;
@@ -23,11 +25,16 @@ export declare class EditablePolygon extends AcEntity {
     private lastDraggedToPosition;
     private _labels;
     constructor(id: string, polygonsLayer: AcLayerComponent, pointsLayer: AcLayerComponent, polylinesLayer: AcLayerComponent, coordinateConverter: CoordinateConverter, polygonOptions: PolygonEditOptions, positions?: Cartesian3[]);
-    labels: LabelProps[];
-    defaultPolylineProps: PolylineProps;
-    defaultPointProps: PointProps;
-    polygonProps: PolygonProps;
-    enableEdit: boolean;
+    get labels(): LabelProps[];
+    set labels(labels: LabelProps[]);
+    get defaultPolylineProps(): PolylineProps;
+    set defaultPolylineProps(value: PolylineProps);
+    get defaultPointProps(): PointProps;
+    get polygonProps(): PolygonProps;
+    set polygonProps(value: PolygonProps);
+    set defaultPointProps(value: PointProps);
+    get enableEdit(): boolean;
+    set enableEdit(value: boolean);
     private createFromExisting;
     setPointsManually(points: {
         position: Cartesian3;
@@ -40,6 +47,7 @@ export declare class EditablePolygon extends AcEntity {
     private renderPolylines;
     addPointFromExisting(position: Cartesian3): void;
     addPoint(position: Cartesian3): void;
+    movePointFinish(editPoint: EditPoint): void;
     movePoint(toPosition: Cartesian3, editPoint: EditPoint): void;
     moveTempMovingPoint(toPosition: Cartesian3): void;
     movePolygon(startMovingPosition: Cartesian3, draggedToPosition: Cartesian3): void;
@@ -48,6 +56,7 @@ export declare class EditablePolygon extends AcEntity {
     addLastPoint(position: Cartesian3): void;
     getRealPositions(): Cartesian3[];
     getRealPoints(): EditPoint[];
+    getPoints(): EditPoint[];
     getPositionsHierarchy(): Cartesian3[];
     getPositionsHierarchyCallbackProperty(): Cartesian3[];
     private removePosition;

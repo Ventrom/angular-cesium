@@ -13,10 +13,10 @@ export declare class PlonterService {
     private _eventResult;
     private _plonterChangeNotifier;
     constructor();
-    readonly plonterChangeNotifier: EventEmitter<any>;
-    readonly plonterShown: boolean;
-    readonly entitesToPlonter: AcEntity[];
-    readonly plonterClickPosition: Movement;
+    get plonterChangeNotifier(): EventEmitter<any>;
+    get plonterShown(): boolean;
+    get entitesToPlonter(): AcEntity[];
+    get plonterClickPosition(): Movement;
     plonterIt(eventResult: EventResult): Subject<EventResult>;
     resolvePlonter(entity: AcEntity): void;
 }

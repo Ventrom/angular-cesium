@@ -7,6 +7,7 @@ import { EllipseEditUpdate } from '../../../models/ellipse-edit-update';
 import { EllipsesManagerService } from './ellipses-manager.service';
 import { EllipseEditorObservable } from '../../../models/ellipse-editor-observable';
 import { EllipseEditOptions } from '../../../models/ellipse-edit-options';
+import { CesiumService } from '../../../../angular-cesium';
 export declare const DEFAULT_ELLIPSE_OPTIONS: EllipseEditOptions;
 /**
  * Service for creating editable ellipses
@@ -49,7 +50,8 @@ export declare class EllipsesEditorService {
     private cameraService;
     private ellipsesManager;
     private observablesMap;
-    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, ellipsesManager: EllipsesManagerService): void;
+    private cesiumScene;
+    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, ellipsesManager: EllipsesManagerService, cesiumViewer: CesiumService): void;
     onUpdate(): Observable<EllipseEditUpdate>;
     create(options?: EllipseEditOptions, priority?: number): EllipseEditorObservable;
     edit(center: Cartesian3, majorRadius: number, rotation?: number, minorRadius?: number, options?: EllipseEditOptions, priority?: number): EllipseEditorObservable;

@@ -1,4 +1,5 @@
 import { OnDestroy } from '@angular/core';
+import { CesiumService } from '../../../angular-cesium/services/cesium/cesium.service';
 import { AcNotification } from '../../../angular-cesium/models/ac-notification';
 import { CoordinateConverter } from '../../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
 import { MapEventsManagerService } from '../../../angular-cesium/services/map-events-mananger/map-events-manager';
@@ -16,6 +17,7 @@ export declare class PolylinesEditorComponent implements OnDestroy {
     private mapEventsManager;
     private cameraService;
     private polylinesManager;
+    private cesiumService;
     private editLabelsRenderFn;
     Cesium: any;
     editPoints$: Subject<AcNotification>;
@@ -24,7 +26,7 @@ export declare class PolylinesEditorComponent implements OnDestroy {
     private editPointsLayer;
     private editPolylinesLayer;
     private polylineLabelsLayer;
-    constructor(polylinesEditor: PolylinesEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, polylinesManager: PolylinesManagerService);
+    constructor(polylinesEditor: PolylinesEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, polylinesManager: PolylinesManagerService, cesiumService: CesiumService);
     private startListeningToEditorUpdates;
     getLabelId(element: any, index: number): string;
     renderEditLabels(polyline: EditablePolyline, update: PolylineEditUpdate, labels?: LabelProps[]): void;

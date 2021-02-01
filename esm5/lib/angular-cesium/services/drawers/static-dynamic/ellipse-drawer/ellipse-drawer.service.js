@@ -1,30 +1,25 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import * as tslib_1 from "tslib";
+import { __decorate, __extends, __metadata } from "tslib";
 import { CesiumService } from '../../../cesium/cesium.service';
 import { Injectable } from '@angular/core';
 import { StaticPrimitiveDrawer } from '../static-primitive-drawer/static-primitive-drawer.service';
 /**
- * + *  This drawer is responsible for drawing an ellipse over the Cesium map.
- * + *  This implementation uses simple EllipseGeometry and Primitive parameters.
- * + *  This doesn't allow us to change the position, color, etc.. of the ellipses. For that you may use the dynamic ellipse component.
- * +
- */
+ + *  This drawer is responsible for drawing an ellipse over the Cesium map.
+ + *  This implementation uses simple EllipseGeometry and Primitive parameters.
+ + *  This doesn't allow us to change the position, color, etc.. of the ellipses. For that you may use the dynamic ellipse component.
+ + */
 var StaticEllipseDrawerService = /** @class */ (function (_super) {
-    tslib_1.__extends(StaticEllipseDrawerService, _super);
+    __extends(StaticEllipseDrawerService, _super);
     function StaticEllipseDrawerService(cesiumService) {
         return _super.call(this, Cesium.EllipseGeometry, cesiumService) || this;
     }
-    StaticEllipseDrawerService.decorators = [
-        { type: Injectable }
-    ];
-    /** @nocollapse */
     StaticEllipseDrawerService.ctorParameters = function () { return [
         { type: CesiumService }
     ]; };
+    StaticEllipseDrawerService = __decorate([
+        Injectable(),
+        __metadata("design:paramtypes", [CesiumService])
+    ], StaticEllipseDrawerService);
     return StaticEllipseDrawerService;
 }(StaticPrimitiveDrawer));
 export { StaticEllipseDrawerService };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWxsaXBzZS1kcmF3ZXIuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2FuZ3VsYXItY2VzaXVtLyIsInNvdXJjZXMiOlsibGliL2FuZ3VsYXItY2VzaXVtL3NlcnZpY2VzL2RyYXdlcnMvc3RhdGljLWR5bmFtaWMvZWxsaXBzZS1kcmF3ZXIvZWxsaXBzZS1kcmF3ZXIuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7OztBQUFBLE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSxnQ0FBZ0MsQ0FBQztBQUMvRCxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBRSxxQkFBcUIsRUFBRSxNQUFNLDREQUE0RCxDQUFDOzs7Ozs7O0FBUW5HO0lBQ2dELHNEQUFxQjtJQUNuRSxvQ0FBWSxhQUE0QjtlQUN0QyxrQkFBTSxNQUFNLENBQUMsZUFBZSxFQUFFLGFBQWEsQ0FBQztJQUM5QyxDQUFDOztnQkFKRixVQUFVOzs7O2dCQVZGLGFBQWE7O0lBZXRCLGlDQUFDO0NBQUEsQUFMRCxDQUNnRCxxQkFBcUIsR0FJcEU7U0FKWSwwQkFBMEIiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDZXNpdW1TZXJ2aWNlIH0gZnJvbSAnLi4vLi4vLi4vY2VzaXVtL2Nlc2l1bS5zZXJ2aWNlJztcbmltcG9ydCB7IEluamVjdGFibGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IFN0YXRpY1ByaW1pdGl2ZURyYXdlciB9IGZyb20gJy4uL3N0YXRpYy1wcmltaXRpdmUtZHJhd2VyL3N0YXRpYy1wcmltaXRpdmUtZHJhd2VyLnNlcnZpY2UnO1xuXG5cbi8qKlxuICsgKiAgVGhpcyBkcmF3ZXIgaXMgcmVzcG9uc2libGUgZm9yIGRyYXdpbmcgYW4gZWxsaXBzZSBvdmVyIHRoZSBDZXNpdW0gbWFwLlxuICsgKiAgVGhpcyBpbXBsZW1lbnRhdGlvbiB1c2VzIHNpbXBsZSBFbGxpcHNlR2VvbWV0cnkgYW5kIFByaW1pdGl2ZSBwYXJhbWV0ZXJzLlxuICsgKiAgVGhpcyBkb2Vzbid0IGFsbG93IHVzIHRvIGNoYW5nZSB0aGUgcG9zaXRpb24sIGNvbG9yLCBldGMuLiBvZiB0aGUgZWxsaXBzZXMuIEZvciB0aGF0IHlvdSBtYXkgdXNlIHRoZSBkeW5hbWljIGVsbGlwc2UgY29tcG9uZW50LlxuICsgKi9cbkBJbmplY3RhYmxlKClcbmV4cG9ydCBjbGFzcyBTdGF0aWNFbGxpcHNlRHJhd2VyU2VydmljZSBleHRlbmRzIFN0YXRpY1ByaW1pdGl2ZURyYXdlciB7XG4gIGNvbnN0cnVjdG9yKGNlc2l1bVNlcnZpY2U6IENlc2l1bVNlcnZpY2UpIHtcbiAgICBzdXBlcihDZXNpdW0uRWxsaXBzZUdlb21ldHJ5LCBjZXNpdW1TZXJ2aWNlKTtcbiAgfVxufVxuIl19
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWxsaXBzZS1kcmF3ZXIuc2VydmljZS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2FuZ3VsYXItY2VzaXVtLyIsInNvdXJjZXMiOlsibGliL2FuZ3VsYXItY2VzaXVtL3NlcnZpY2VzL2RyYXdlcnMvc3RhdGljLWR5bmFtaWMvZWxsaXBzZS1kcmF3ZXIvZWxsaXBzZS1kcmF3ZXIuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLGFBQWEsRUFBRSxNQUFNLGdDQUFnQyxDQUFDO0FBQy9ELE9BQU8sRUFBRSxVQUFVLEVBQUUsTUFBTSxlQUFlLENBQUM7QUFDM0MsT0FBTyxFQUFFLHFCQUFxQixFQUFFLE1BQU0sNERBQTRELENBQUM7QUFHbkc7Ozs7S0FJSztBQUVMO0lBQWdELDhDQUFxQjtJQUNuRSxvQ0FBWSxhQUE0QjtlQUN0QyxrQkFBTSxNQUFNLENBQUMsZUFBZSxFQUFFLGFBQWEsQ0FBQztJQUM5QyxDQUFDOztnQkFGMEIsYUFBYTs7SUFEN0IsMEJBQTBCO1FBRHRDLFVBQVUsRUFBRTt5Q0FFZ0IsYUFBYTtPQUQ3QiwwQkFBMEIsQ0FJdEM7SUFBRCxpQ0FBQztDQUFBLEFBSkQsQ0FBZ0QscUJBQXFCLEdBSXBFO1NBSlksMEJBQTBCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2VzaXVtU2VydmljZSB9IGZyb20gJy4uLy4uLy4uL2Nlc2l1bS9jZXNpdW0uc2VydmljZSc7XG5pbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBTdGF0aWNQcmltaXRpdmVEcmF3ZXIgfSBmcm9tICcuLi9zdGF0aWMtcHJpbWl0aXZlLWRyYXdlci9zdGF0aWMtcHJpbWl0aXZlLWRyYXdlci5zZXJ2aWNlJztcblxuXG4vKipcbiArICogIFRoaXMgZHJhd2VyIGlzIHJlc3BvbnNpYmxlIGZvciBkcmF3aW5nIGFuIGVsbGlwc2Ugb3ZlciB0aGUgQ2VzaXVtIG1hcC5cbiArICogIFRoaXMgaW1wbGVtZW50YXRpb24gdXNlcyBzaW1wbGUgRWxsaXBzZUdlb21ldHJ5IGFuZCBQcmltaXRpdmUgcGFyYW1ldGVycy5cbiArICogIFRoaXMgZG9lc24ndCBhbGxvdyB1cyB0byBjaGFuZ2UgdGhlIHBvc2l0aW9uLCBjb2xvciwgZXRjLi4gb2YgdGhlIGVsbGlwc2VzLiBGb3IgdGhhdCB5b3UgbWF5IHVzZSB0aGUgZHluYW1pYyBlbGxpcHNlIGNvbXBvbmVudC5cbiArICovXG5ASW5qZWN0YWJsZSgpXG5leHBvcnQgY2xhc3MgU3RhdGljRWxsaXBzZURyYXdlclNlcnZpY2UgZXh0ZW5kcyBTdGF0aWNQcmltaXRpdmVEcmF3ZXIge1xuICBjb25zdHJ1Y3RvcihjZXNpdW1TZXJ2aWNlOiBDZXNpdW1TZXJ2aWNlKSB7XG4gICAgc3VwZXIoQ2VzaXVtLkVsbGlwc2VHZW9tZXRyeSwgY2VzaXVtU2VydmljZSk7XG4gIH1cbn1cbiJdfQ==

@@ -1,4 +1,5 @@
 import { OnDestroy } from '@angular/core';
+import { CesiumService } from '../../../angular-cesium/services/cesium/cesium.service';
 import { AcNotification } from '../../../angular-cesium/models/ac-notification';
 import { CoordinateConverter } from '../../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
 import { MapEventsManagerService } from '../../../angular-cesium/services/map-events-mananger/map-events-manager';
@@ -16,13 +17,14 @@ export declare class EllipsesEditorComponent implements OnDestroy {
     private mapEventsManager;
     private cameraService;
     private ellipsesManager;
+    private cesiumService;
     private editLabelsRenderFn;
     Cesium: any;
     editPoints$: Subject<AcNotification>;
     editEllipses$: Subject<AcNotification>;
     private editEllipsesLayer;
     private editPointsLayer;
-    constructor(ellipsesEditor: EllipsesEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, ellipsesManager: EllipsesManagerService);
+    constructor(ellipsesEditor: EllipsesEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, ellipsesManager: EllipsesManagerService, cesiumService: CesiumService);
     private startListeningToEditorUpdates;
     getLabelId(element: any, index: number): string;
     renderEditLabels(ellipse: EditableEllipse, update: EllipseEditUpdate, labels?: LabelProps[]): void;

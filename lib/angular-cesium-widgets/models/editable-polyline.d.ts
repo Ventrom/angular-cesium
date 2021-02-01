@@ -3,7 +3,8 @@ import { EditPoint } from './edit-point';
 import { AcLayerComponent } from '../../angular-cesium/components/ac-layer/ac-layer.component';
 import { Cartesian3 } from '../../angular-cesium/models/cartesian3';
 import { CoordinateConverter } from '../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
-import { PointProps, PolylineEditOptions, PolylineProps } from './polyline-edit-options';
+import { PointProps } from './point-edit-options';
+import { PolylineEditOptions, PolylineProps } from './polyline-edit-options';
 import { LabelProps } from './label-props';
 export declare class EditablePolyline extends AcEntity {
     private id;
@@ -21,10 +22,14 @@ export declare class EditablePolyline extends AcEntity {
     private lastDraggedToPosition;
     private _labels;
     constructor(id: string, pointsLayer: AcLayerComponent, polylinesLayer: AcLayerComponent, coordinateConverter: CoordinateConverter, editOptions: PolylineEditOptions, positions?: Cartesian3[]);
-    labels: LabelProps[];
-    props: PolylineProps;
-    pointProps: PointProps;
-    enableEdit: boolean;
+    get labels(): LabelProps[];
+    set labels(labels: LabelProps[]);
+    get props(): PolylineProps;
+    set props(value: PolylineProps);
+    get pointProps(): PointProps;
+    set pointProps(value: PointProps);
+    get enableEdit(): boolean;
+    set enableEdit(value: boolean);
     private createFromExisting;
     setManually(points: {
         position: Cartesian3;
@@ -37,6 +42,7 @@ export declare class EditablePolyline extends AcEntity {
     private renderPolylines;
     addPointFromExisting(position: Cartesian3): void;
     addPoint(position: Cartesian3): void;
+    movePointFinish(editPoint: EditPoint): void;
     movePoint(toPosition: Cartesian3, editPoint: EditPoint): void;
     moveTempMovingPoint(toPosition: Cartesian3): void;
     moveShape(startMovingPosition: Cartesian3, draggedToPosition: Cartesian3): void;
@@ -45,7 +51,9 @@ export declare class EditablePolyline extends AcEntity {
     addLastPoint(position: Cartesian3): void;
     getRealPositions(): Cartesian3[];
     getRealPoints(): EditPoint[];
+    getPoints(): EditPoint[];
     getPositions(): Cartesian3[];
+    getPositionsCallbackProperty(): Cartesian3[];
     private removePosition;
     private updatePointsLayer;
     update(): void;

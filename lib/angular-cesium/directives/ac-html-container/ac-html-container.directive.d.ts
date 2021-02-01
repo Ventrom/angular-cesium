@@ -5,6 +5,6 @@ export declare class AcHtmlContainerDirective implements OnInit {
     private _acHtmlManager;
     private _id;
     constructor(_element: ElementRef, _acHtmlManager: AcHtmlManager);
-    acHtmlContainer: string;
+    set acHtmlContainer(id: string);
     ngOnInit(): void;
 }

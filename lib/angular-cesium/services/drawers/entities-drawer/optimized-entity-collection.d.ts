@@ -9,9 +9,11 @@ export declare class OptimizedEntityCollection {
     private _onEventResumeCallback;
     constructor(entityCollection: any, collectionSize?: number, updateRate?: number);
     setShow(show: boolean): void;
-    readonly isSuspended: boolean;
-    updateRate: number;
-    collectionSize: number;
+    get isSuspended(): boolean;
+    get updateRate(): number;
+    set updateRate(value: number);
+    get collectionSize(): number;
+    set collectionSize(value: number);
     collection(): any;
     isFree(): boolean;
     add(entity: any): any;

@@ -1,10 +1,7 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-import { ChangeDetectionStrategy, Component, ElementRef, Input } from '@angular/core';
+import { __decorate, __metadata } from "tslib";
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnDestroy, OnInit, OnChanges, SimpleChanges, Output, EventEmitter } from '@angular/core';
 import { fromEvent as observableFromEvent } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium.service';
 /**
  * Toolbar widget, act as a container for ac-toolbar-button components
@@ -12,12 +9,12 @@ import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium
  *
  * Usage:
  * ```
- * <ac-toolbar [allowDrag]="true">
- * <ac-toolbar-button [iconUrl]="'assets/home-icon.svg'" (onClick)="goHome()">
- * </ac-toolbar-button>
- * <ac-toolbar-button [iconUrl]="'assets/explore-icon.svg'" (onClick)="rangeAndBearing()">
- * </ac-toolbar-button>
- * </ac-toolbar>
+ * <ac-toolbar [allowDrag]="true" (onDrag)="handleDrag($event)">
+ <ac-toolbar-button [iconUrl]="'assets/home-icon.svg'" (onClick)="goHome()">
+ </ac-toolbar-button>
+ <ac-toolbar-button [iconUrl]="'assets/explore-icon.svg'" (onClick)="rangeAndBearing()">
+ </ac-toolbar-button>
+ </ac-toolbar>
  * ```
  *
  */
@@ -26,94 +23,69 @@ var AcToolbarComponent = /** @class */ (function () {
         this.element = element;
         this.cesiumService = cesiumService;
         this.allowDrag = true;
+        this.onDrag = new EventEmitter();
         this.dragStyle = {
             'height.px': 20,
             'width.px': 20,
         };
     }
-    /**
-     * @return {?}
-     */
-    AcToolbarComponent.prototype.ngOnInit = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
+    AcToolbarComponent.prototype.ngOnInit = function () {
         this.cesiumService.getMap().getMapContainer().appendChild(this.element.nativeElement);
         if (this.allowDrag) {
-            /** @type {?} */
-            var mouseDown$ = observableFromEvent(this.element.nativeElement, 'mousedown');
-            /** @type {?} */
-            var mouseMove$_1 = observableFromEvent(document, 'mousemove');
-            /** @type {?} */
-            var mouseUp$_1 = observableFromEvent(document, 'mouseup');
-            /** @type {?} */
-            var drag$ = mouseDown$.pipe(switchMap((/**
-             * @return {?}
-             */
-            function () { return mouseMove$_1.pipe(takeUntil(mouseUp$_1)); })));
-            this.subscription = drag$.subscribe((/**
-             * @param {?} event
-             * @return {?}
-             */
-            function (event) {
-                _this.element.nativeElement.style.left = event.x + 'px';
-                _this.element.nativeElement.style.top = event.y + 'px';
-            }));
+            this.listenForDragging();
         }
     };
-    /**
-     * @return {?}
-     */
-    AcToolbarComponent.prototype.ngOnDestroy = /**
-     * @return {?}
-     */
-    function () {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
+    AcToolbarComponent.prototype.ngOnChanges = function (changes) {
+        if (changes.allowDrag && changes.allowDrag.currentValue && !changes.allowDrag.previousValue) {
+            this.listenForDragging();
+        }
+        if (changes.allowDrag && !changes.allowDrag.currentValue && changes.allowDrag.previousValue) {
+            this.dragSubscription.unsubscribe();
         }
     };
-    AcToolbarComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'ac-toolbar',
-                    template: "\n        <div class=\"{{toolbarClass}}\">\n            <div *ngIf=\"allowDrag\">\n                <ac-toolbar-button>\n                    <ac-drag-icon></ac-drag-icon>\n                </ac-toolbar-button>\n            </div>\n\n            <ng-content></ng-content>\n        </div>\n    ",
-                    changeDetection: ChangeDetectionStrategy.OnPush,
-                    styles: ["\n        :host {\n            position: absolute;\n            top: 20px;\n            left: 20px;\n            width: 20px;\n            height: 20px;\n            z-index: 999;\n            -webkit-user-drag: none;\n        }\n    "]
-                }] }
-    ];
-    /** @nocollapse */
+    AcToolbarComponent.prototype.ngOnDestroy = function () {
+        if (this.dragSubscription) {
+            this.dragSubscription.unsubscribe();
+        }
+    };
+    AcToolbarComponent.prototype.listenForDragging = function () {
+        var _this = this;
+        this.mouseDown$ = this.mouseDown$ || observableFromEvent(this.element.nativeElement, 'mousedown');
+        this.mouseMove$ = this.mouseMove$ || observableFromEvent(document, 'mousemove');
+        this.mouseUp$ = this.mouseUp$ || observableFromEvent(document, 'mouseup');
+        this.drag$ = this.drag$ ||
+            this.mouseDown$.pipe(switchMap(function () { return _this.mouseMove$.pipe(tap(_this.onDrag.emit), takeUntil(_this.mouseUp$)); }));
+        this.dragSubscription = this.drag$.subscribe(function (event) {
+            _this.element.nativeElement.style.left = event.x + "px";
+            _this.element.nativeElement.style.top = event.y + "px";
+        });
+    };
     AcToolbarComponent.ctorParameters = function () { return [
         { type: ElementRef },
         { type: CesiumService }
     ]; };
-    AcToolbarComponent.propDecorators = {
-        toolbarClass: [{ type: Input }],
-        allowDrag: [{ type: Input }]
-    };
+    __decorate([
+        Input(),
+        __metadata("design:type", String)
+    ], AcToolbarComponent.prototype, "toolbarClass", void 0);
+    __decorate([
+        Input(),
+        __metadata("design:type", Object)
+    ], AcToolbarComponent.prototype, "allowDrag", void 0);
+    __decorate([
+        Output(),
+        __metadata("design:type", Object)
+    ], AcToolbarComponent.prototype, "onDrag", void 0);
+    AcToolbarComponent = __decorate([
+        Component({
+            selector: 'ac-toolbar',
+            template: "\n        <div class=\"{{toolbarClass}}\">\n            <div *ngIf=\"allowDrag\">\n                <ac-toolbar-button>\n                    <ac-drag-icon></ac-drag-icon>\n                </ac-toolbar-button>\n            </div>\n\n            <ng-content></ng-content>\n        </div>\n    ",
+            changeDetection: ChangeDetectionStrategy.OnPush,
+            styles: ["\n        :host {\n            position: absolute;\n            top: 20px;\n            left: 20px;\n            width: 20px;\n            height: 20px;\n            z-index: 999;\n            -webkit-user-drag: none;\n        }\n    "]
+        }),
+        __metadata("design:paramtypes", [ElementRef, CesiumService])
+    ], AcToolbarComponent);
     return AcToolbarComponent;
 }());
 export { AcToolbarComponent };
-if (false) {
-    /** @type {?} */
-    AcToolbarComponent.prototype.toolbarClass;
-    /** @type {?} */
-    AcToolbarComponent.prototype.allowDrag;
-    /** @type {?} */
-    AcToolbarComponent.prototype.dragStyle;
-    /**
-     * @type {?}
-     * @private
-     */
-    AcToolbarComponent.prototype.subscription;
-    /**
-     * @type {?}
-     * @private
-     */
-    AcToolbarComponent.prototype.element;
-    /**
-     * @type {?}
-     * @private
-     */
-    AcToolbarComponent.prototype.cesiumService;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWMtdG9vbGJhci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS13aWRnZXRzL2NvbXBvbmVudHMvdG9vbGJhci9hYy10b29sYmFyL2FjLXRvb2xiYXIuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsdUJBQXVCLEVBQUUsU0FBUyxFQUFFLFVBQVUsRUFBRSxLQUFLLEVBQXFCLE1BQU0sZUFBZSxDQUFDO0FBQ3pHLE9BQU8sRUFBRSxTQUFTLElBQUksbUJBQW1CLEVBQWdCLE1BQU0sTUFBTSxDQUFDO0FBQ3RFLE9BQU8sRUFBRSxTQUFTLEVBQUUsU0FBUyxFQUFFLE1BQU0sZ0JBQWdCLENBQUM7QUFDdEQsT0FBTyxFQUFFLGFBQWEsRUFBRSxNQUFNLDJEQUEyRCxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O0FBa0IxRjtJQXlDRSw0QkFBb0IsT0FBbUIsRUFBVSxhQUE0QjtRQUF6RCxZQUFPLEdBQVAsT0FBTyxDQUFZO1FBQVUsa0JBQWEsR0FBYixhQUFhLENBQWU7UUFUN0UsY0FBUyxHQUFHLElBQUksQ0FBQztRQUVqQixjQUFTLEdBQUc7WUFDVixXQUFXLEVBQUUsRUFBRTtZQUNmLFVBQVUsRUFBRSxFQUFFO1NBQ2YsQ0FBQztJQUtGLENBQUM7Ozs7SUFFRCxxQ0FBUTs7O0lBQVI7UUFBQSxpQkFjQztRQWJDLElBQUksQ0FBQyxhQUFhLENBQUMsTUFBTSxFQUFFLENBQUMsZUFBZSxFQUFFLENBQUMsV0FBVyxDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLENBQUM7UUFDdEYsSUFBSSxJQUFJLENBQUMsU0FBUyxFQUFFOztnQkFDWixVQUFVLEdBQUcsbUJBQW1CLENBQUMsSUFBSSxDQUFDLE9BQU8sQ0FBQyxhQUFhLEVBQUUsV0FBVyxDQUFDOztnQkFDekUsWUFBVSxHQUFHLG1CQUFtQixDQUFDLFFBQVEsRUFBRSxXQUFXLENBQUM7O2dCQUN2RCxVQUFRLEdBQUcsbUJBQW1CLENBQUMsUUFBUSxFQUFFLFNBQVMsQ0FBQzs7Z0JBRW5ELEtBQUssR0FBRyxVQUFVLENBQUMsSUFBSSxDQUFDLFNBQVM7OztZQUFDLGNBQU0sT0FBQSxZQUFVLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxVQUFRLENBQUMsQ0FBQyxFQUFwQyxDQUFvQyxFQUFDLENBQUM7WUFFcEYsSUFBSSxDQUFDLFlBQVksR0FBRyxLQUFLLENBQUMsU0FBUzs7OztZQUFDLFVBQUMsS0FBaUI7Z0JBQ3BELEtBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxJQUFJLEdBQUcsS0FBSyxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUM7Z0JBQ3ZELEtBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxHQUFHLEdBQUcsS0FBSyxDQUFDLENBQUMsR0FBRyxJQUFJLENBQUM7WUFDeEQsQ0FBQyxFQUFDLENBQUM7U0FDSjtJQUNILENBQUM7Ozs7SUFFRCx3Q0FBVzs7O0lBQVg7UUFDRSxJQUFJLElBQUksQ0FBQyxZQUFZLEVBQUU7WUFDckIsSUFBSSxDQUFDLFlBQVksQ0FBQyxXQUFXLEVBQUUsQ0FBQztTQUNqQztJQUNILENBQUM7O2dCQWhFRixTQUFTLFNBQ1I7b0JBQ0UsUUFBUSxFQUFFLFlBQVk7b0JBQ3RCLFFBQVEsRUFBRSxvU0FVVDtvQkFZRCxlQUFlLEVBQUUsdUJBQXVCLENBQUMsTUFBTTs2QkFYdEMsNE9BVVI7aUJBRUY7Ozs7Z0JBL0MwQyxVQUFVO2dCQUc5QyxhQUFhOzs7K0JBK0NuQixLQUFLOzRCQUVMLEtBQUs7O0lBa0NSLHlCQUFDO0NBQUEsQUFqRUQsSUFpRUM7U0FyQ1ksa0JBQWtCOzs7SUFDN0IsMENBQ3FCOztJQUNyQix1Q0FDaUI7O0lBRWpCLHVDQUdFOzs7OztJQUVGLDBDQUFtQzs7Ozs7SUFFdkIscUNBQTJCOzs7OztJQUFFLDJDQUFvQyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IENoYW5nZURldGVjdGlvblN0cmF0ZWd5LCBDb21wb25lbnQsIEVsZW1lbnRSZWYsIElucHV0LCBPbkRlc3Ryb3ksIE9uSW5pdCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgZnJvbUV2ZW50IGFzIG9ic2VydmFibGVGcm9tRXZlbnQsIFN1YnNjcmlwdGlvbiB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgc3dpdGNoTWFwLCB0YWtlVW50aWwgfSBmcm9tICdyeGpzL29wZXJhdG9ycyc7XG5pbXBvcnQgeyBDZXNpdW1TZXJ2aWNlIH0gZnJvbSAnLi4vLi4vLi4vLi4vYW5ndWxhci1jZXNpdW0vc2VydmljZXMvY2VzaXVtL2Nlc2l1bS5zZXJ2aWNlJztcblxuXG4vKipcbiAqIFRvb2xiYXIgd2lkZ2V0LCBhY3QgYXMgYSBjb250YWluZXIgZm9yIGFjLXRvb2xiYXItYnV0dG9uIGNvbXBvbmVudHNcbiAqIGFsbG93aW5nIGRyYWcgY29uZmlndXJhdGlvbiBhbmQgcGFzc2luZyBgdG9vbGJhckNsYXNzYCBhcyBhdHRyaWJ1dGVzXG4gKlxuICogVXNhZ2U6XG4gKiBgYGBcbiAqIDxhYy10b29sYmFyIFthbGxvd0RyYWddPVwidHJ1ZVwiPlxuIDxhYy10b29sYmFyLWJ1dHRvbiBbaWNvblVybF09XCInYXNzZXRzL2hvbWUtaWNvbi5zdmcnXCIgKG9uQ2xpY2spPVwiZ29Ib21lKClcIj5cbiA8L2FjLXRvb2xiYXItYnV0dG9uPlxuIDxhYy10b29sYmFyLWJ1dHRvbiBbaWNvblVybF09XCInYXNzZXRzL2V4cGxvcmUtaWNvbi5zdmcnXCIgKG9uQ2xpY2spPVwicmFuZ2VBbmRCZWFyaW5nKClcIj5cbiA8L2FjLXRvb2xiYXItYnV0dG9uPlxuIDwvYWMtdG9vbGJhcj5cbiAqIGBgYFxuICpcbiAqL1xuQENvbXBvbmVudChcbiAge1xuICAgIHNlbGVjdG9yOiAnYWMtdG9vbGJhcicsXG4gICAgdGVtcGxhdGU6IGBcbiAgICAgICAgPGRpdiBjbGFzcz1cInt7dG9vbGJhckNsYXNzfX1cIj5cbiAgICAgICAgICAgIDxkaXYgKm5nSWY9XCJhbGxvd0RyYWdcIj5cbiAgICAgICAgICAgICAgICA8YWMtdG9vbGJhci1idXR0b24+XG4gICAgICAgICAgICAgICAgICAgIDxhYy1kcmFnLWljb24+PC9hYy1kcmFnLWljb24+XG4gICAgICAgICAgICAgICAgPC9hYy10b29sYmFyLWJ1dHRvbj5cbiAgICAgICAgICAgIDwvZGl2PlxuXG4gICAgICAgICAgICA8bmctY29udGVudD48L25nLWNvbnRlbnQ+XG4gICAgICAgIDwvZGl2PlxuICAgIGAsXG4gICAgc3R5bGVzOiBbYFxuICAgICAgICA6aG9zdCB7XG4gICAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICAgICAgICB0b3A6IDIwcHg7XG4gICAgICAgICAgICBsZWZ0OiAyMHB4O1xuICAgICAgICAgICAgd2lkdGg6IDIwcHg7XG4gICAgICAgICAgICBoZWlnaHQ6IDIwcHg7XG4gICAgICAgICAgICB6LWluZGV4OiA5OTk7XG4gICAgICAgICAgICAtd2Via2l0LXVzZXItZHJhZzogbm9uZTtcbiAgICAgICAgfVxuICAgIGBdLFxuICAgIGNoYW5nZURldGVjdGlvbjogQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3kuT25QdXNoLFxuICB9XG4pXG5leHBvcnQgY2xhc3MgQWNUb29sYmFyQ29tcG9uZW50IGltcGxlbWVudHMgT25Jbml0LCBPbkRlc3Ryb3kge1xuICBASW5wdXQoKVxuICB0b29sYmFyQ2xhc3M6IHN0cmluZztcbiAgQElucHV0KClcbiAgYWxsb3dEcmFnID0gdHJ1ZTtcblxuICBkcmFnU3R5bGUgPSB7XG4gICAgJ2hlaWdodC5weCc6IDIwLFxuICAgICd3aWR0aC5weCc6IDIwLFxuICB9O1xuXG4gIHByaXZhdGUgc3Vic2NyaXB0aW9uOiBTdWJzY3JpcHRpb247XG5cbiAgY29uc3RydWN0b3IocHJpdmF0ZSBlbGVtZW50OiBFbGVtZW50UmVmLCBwcml2YXRlIGNlc2l1bVNlcnZpY2U6IENlc2l1bVNlcnZpY2UpIHtcbiAgfVxuXG4gIG5nT25Jbml0KCkge1xuICAgIHRoaXMuY2VzaXVtU2VydmljZS5nZXRNYXAoKS5nZXRNYXBDb250YWluZXIoKS5hcHBlbmRDaGlsZCh0aGlzLmVsZW1lbnQubmF0aXZlRWxlbWVudCk7XG4gICAgaWYgKHRoaXMuYWxsb3dEcmFnKSB7XG4gICAgICBjb25zdCBtb3VzZURvd24kID0gb2JzZXJ2YWJsZUZyb21FdmVudCh0aGlzLmVsZW1lbnQubmF0aXZlRWxlbWVudCwgJ21vdXNlZG93bicpO1xuICAgICAgY29uc3QgbW91c2VNb3ZlJCA9IG9ic2VydmFibGVGcm9tRXZlbnQoZG9jdW1lbnQsICdtb3VzZW1vdmUnKTtcbiAgICAgIGNvbnN0IG1vdXNlVXAkID0gb2JzZXJ2YWJsZUZyb21FdmVudChkb2N1bWVudCwgJ21vdXNldXAnKTtcblxuICAgICAgY29uc3QgZHJhZyQgPSBtb3VzZURvd24kLnBpcGUoc3dpdGNoTWFwKCgpID0+IG1vdXNlTW92ZSQucGlwZSh0YWtlVW50aWwobW91c2VVcCQpKSkpO1xuXG4gICAgICB0aGlzLnN1YnNjcmlwdGlvbiA9IGRyYWckLnN1YnNjcmliZSgoZXZlbnQ6IE1vdXNlRXZlbnQpID0+IHtcbiAgICAgICAgdGhpcy5lbGVtZW50Lm5hdGl2ZUVsZW1lbnQuc3R5bGUubGVmdCA9IGV2ZW50LnggKyAncHgnO1xuICAgICAgICB0aGlzLmVsZW1lbnQubmF0aXZlRWxlbWVudC5zdHlsZS50b3AgPSBldmVudC55ICsgJ3B4JztcbiAgICAgIH0pO1xuICAgIH1cbiAgfVxuXG4gIG5nT25EZXN0cm95KCk6IHZvaWQge1xuICAgIGlmICh0aGlzLnN1YnNjcmlwdGlvbikge1xuICAgICAgdGhpcy5zdWJzY3JpcHRpb24udW5zdWJzY3JpYmUoKTtcbiAgICB9XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYWMtdG9vbGJhci5jb21wb25lbnQuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS13aWRnZXRzL2NvbXBvbmVudHMvdG9vbGJhci9hYy10b29sYmFyL2FjLXRvb2xiYXIuY29tcG9uZW50LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQ0wsdUJBQXVCLEVBQ3ZCLFNBQVMsRUFDVCxVQUFVLEVBQ1YsS0FBSyxFQUNMLFNBQVMsRUFDVCxNQUFNLEVBQ04sU0FBUyxFQUNULGFBQWEsRUFDYixNQUFNLEVBQ04sWUFBWSxFQUNiLE1BQU0sZUFBZSxDQUFDO0FBQ3ZCLE9BQU8sRUFBRSxTQUFTLElBQUksbUJBQW1CLEVBQTRCLE1BQU0sTUFBTSxDQUFDO0FBQ2xGLE9BQU8sRUFBRSxTQUFTLEVBQUUsU0FBUyxFQUFFLEdBQUcsRUFBRSxNQUFNLGdCQUFnQixDQUFDO0FBQzNELE9BQU8sRUFBRSxhQUFhLEVBQUUsTUFBTSwyREFBMkQsQ0FBQztBQUcxRjs7Ozs7Ozs7Ozs7Ozs7R0FjRztBQTZCSDtJQW1CRSw0QkFBb0IsT0FBbUIsRUFBVSxhQUE0QjtRQUF6RCxZQUFPLEdBQVAsT0FBTyxDQUFZO1FBQVUsa0JBQWEsR0FBYixhQUFhLENBQWU7UUFmN0UsY0FBUyxHQUFHLElBQUksQ0FBQztRQUVqQixXQUFNLEdBQUcsSUFBSSxZQUFZLEVBQWMsQ0FBQztRQUV4QyxjQUFTLEdBQUc7WUFDVixXQUFXLEVBQUUsRUFBRTtZQUNmLFVBQVUsRUFBRSxFQUFFO1NBQ2YsQ0FBQztJQVE4RSxDQUFDO0lBRWpGLHFDQUFRLEdBQVI7UUFDRSxJQUFJLENBQUMsYUFBYSxDQUFDLE1BQU0sRUFBRSxDQUFDLGVBQWUsRUFBRSxDQUFDLFdBQVcsQ0FBQyxJQUFJLENBQUMsT0FBTyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1FBQ3RGLElBQUksSUFBSSxDQUFDLFNBQVMsRUFBRTtZQUNsQixJQUFJLENBQUMsaUJBQWlCLEVBQUUsQ0FBQztTQUMxQjtJQUNILENBQUM7SUFHRCx3Q0FBVyxHQUFYLFVBQVksT0FBc0I7UUFDaEMsSUFBSSxPQUFPLENBQUMsU0FBUyxJQUFJLE9BQU8sQ0FBQyxTQUFTLENBQUMsWUFBWSxJQUFJLENBQUMsT0FBTyxDQUFDLFNBQVMsQ0FBQyxhQUFhLEVBQUU7WUFDM0YsSUFBSSxDQUFDLGlCQUFpQixFQUFFLENBQUM7U0FDMUI7UUFFRCxJQUFJLE9BQU8sQ0FBQyxTQUFTLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxDQUFDLFlBQVksSUFBSSxPQUFPLENBQUMsU0FBUyxDQUFDLGFBQWEsRUFBRTtZQUMzRixJQUFJLENBQUMsZ0JBQWdCLENBQUMsV0FBVyxFQUFFLENBQUM7U0FDckM7SUFDSCxDQUFDO0lBRUQsd0NBQVcsR0FBWDtRQUNFLElBQUksSUFBSSxDQUFDLGdCQUFnQixFQUFFO1lBQ3pCLElBQUksQ0FBQyxnQkFBZ0IsQ0FBQyxXQUFXLEVBQUUsQ0FBQztTQUNyQztJQUNILENBQUM7SUFFTyw4Q0FBaUIsR0FBekI7UUFBQSxpQkFpQkM7UUFoQkMsSUFBSSxDQUFDLFVBQVUsR0FBRyxJQUFJLENBQUMsVUFBVSxJQUFJLG1CQUFtQixDQUFDLElBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxFQUFFLFdBQVcsQ0FBQyxDQUFDO1FBQ2xHLElBQUksQ0FBQyxVQUFVLEdBQUcsSUFBSSxDQUFDLFVBQVUsSUFBSSxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsV0FBVyxDQUEyQixDQUFDO1FBQzFHLElBQUksQ0FBQyxRQUFRLEdBQUcsSUFBSSxDQUFDLFFBQVEsSUFBSSxtQkFBbUIsQ0FBQyxRQUFRLEVBQUUsU0FBUyxDQUEyQixDQUFDO1FBRXBHLElBQUksQ0FBQyxLQUFLLEdBQUcsSUFBSSxDQUFDLEtBQUs7WUFDVixJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FDakIsU0FBUyxDQUFDLGNBQU0sT0FBQSxLQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FDbEMsR0FBRyxDQUFDLEtBQUksQ0FBQyxNQUFNLENBQUMsSUFBSSxDQUFDLEVBQ3JCLFNBQVMsQ0FBQyxLQUFJLENBQUMsUUFBUSxDQUFDLENBQ3pCLEVBSGUsQ0FHZixDQUFDLENBQ0osQ0FBQztRQUVmLElBQUksQ0FBQyxnQkFBZ0IsR0FBRyxJQUFJLENBQUMsS0FBSyxDQUFDLFNBQVMsQ0FBQyxVQUFDLEtBQWlCO1lBQzdELEtBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxJQUFJLEdBQU0sS0FBSyxDQUFDLENBQUMsT0FBSSxDQUFDO1lBQ3ZELEtBQUksQ0FBQyxPQUFPLENBQUMsYUFBYSxDQUFDLEtBQUssQ0FBQyxHQUFHLEdBQU0sS0FBSyxDQUFDLENBQUMsT0FBSSxDQUFDO1FBQ3hELENBQUMsQ0FBQyxDQUFDO0lBQ0wsQ0FBQzs7Z0JBM0M0QixVQUFVO2dCQUF5QixhQUFhOztJQWpCN0U7UUFEQyxLQUFLLEVBQUU7OzREQUNhO0lBRXJCO1FBREMsS0FBSyxFQUFFOzt5REFDUztJQUVqQjtRQURDLE1BQU0sRUFBRTs7c0RBQytCO0lBTjdCLGtCQUFrQjtRQTVCOUIsU0FBUyxDQUNSO1lBQ0UsUUFBUSxFQUFFLFlBQVk7WUFDdEIsUUFBUSxFQUFFLG9TQVVUO1lBWUQsZUFBZSxFQUFFLHVCQUF1QixDQUFDLE1BQU07cUJBWHRDLDRPQVVSO1NBRUYsQ0FDRjt5Q0FvQjhCLFVBQVUsRUFBeUIsYUFBYTtPQW5CbEUsa0JBQWtCLENBK0Q5QjtJQUFELHlCQUFDO0NBQUEsQUEvREQsSUErREM7U0EvRFksa0JBQWtCIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHtcbiAgQ2hhbmdlRGV0ZWN0aW9uU3RyYXRlZ3ksXG4gIENvbXBvbmVudCxcbiAgRWxlbWVudFJlZixcbiAgSW5wdXQsXG4gIE9uRGVzdHJveSxcbiAgT25Jbml0LFxuICBPbkNoYW5nZXMsXG4gIFNpbXBsZUNoYW5nZXMsXG4gIE91dHB1dCxcbiAgRXZlbnRFbWl0dGVyXG59IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuaW1wb3J0IHsgZnJvbUV2ZW50IGFzIG9ic2VydmFibGVGcm9tRXZlbnQsIFN1YnNjcmlwdGlvbiwgT2JzZXJ2YWJsZSB9IGZyb20gJ3J4anMnO1xuaW1wb3J0IHsgc3dpdGNoTWFwLCB0YWtlVW50aWwsIHRhcCB9IGZyb20gJ3J4anMvb3BlcmF0b3JzJztcbmltcG9ydCB7IENlc2l1bVNlcnZpY2UgfSBmcm9tICcuLi8uLi8uLi8uLi9hbmd1bGFyLWNlc2l1bS9zZXJ2aWNlcy9jZXNpdW0vY2VzaXVtLnNlcnZpY2UnO1xuXG5cbi8qKlxuICogVG9vbGJhciB3aWRnZXQsIGFjdCBhcyBhIGNvbnRhaW5lciBmb3IgYWMtdG9vbGJhci1idXR0b24gY29tcG9uZW50c1xuICogYWxsb3dpbmcgZHJhZyBjb25maWd1cmF0aW9uIGFuZCBwYXNzaW5nIGB0b29sYmFyQ2xhc3NgIGFzIGF0dHJpYnV0ZXNcbiAqXG4gKiBVc2FnZTpcbiAqIGBgYFxuICogPGFjLXRvb2xiYXIgW2FsbG93RHJhZ109XCJ0cnVlXCIgKG9uRHJhZyk9XCJoYW5kbGVEcmFnKCRldmVudClcIj5cbiA8YWMtdG9vbGJhci1idXR0b24gW2ljb25VcmxdPVwiJ2Fzc2V0cy9ob21lLWljb24uc3ZnJ1wiIChvbkNsaWNrKT1cImdvSG9tZSgpXCI+XG4gPC9hYy10b29sYmFyLWJ1dHRvbj5cbiA8YWMtdG9vbGJhci1idXR0b24gW2ljb25VcmxdPVwiJ2Fzc2V0cy9leHBsb3JlLWljb24uc3ZnJ1wiIChvbkNsaWNrKT1cInJhbmdlQW5kQmVhcmluZygpXCI+XG4gPC9hYy10b29sYmFyLWJ1dHRvbj5cbiA8L2FjLXRvb2xiYXI+XG4gKiBgYGBcbiAqXG4gKi9cbkBDb21wb25lbnQoXG4gIHtcbiAgICBzZWxlY3RvcjogJ2FjLXRvb2xiYXInLFxuICAgIHRlbXBsYXRlOiBgXG4gICAgICAgIDxkaXYgY2xhc3M9XCJ7e3Rvb2xiYXJDbGFzc319XCI+XG4gICAgICAgICAgICA8ZGl2ICpuZ0lmPVwiYWxsb3dEcmFnXCI+XG4gICAgICAgICAgICAgICAgPGFjLXRvb2xiYXItYnV0dG9uPlxuICAgICAgICAgICAgICAgICAgICA8YWMtZHJhZy1pY29uPjwvYWMtZHJhZy1pY29uPlxuICAgICAgICAgICAgICAgIDwvYWMtdG9vbGJhci1idXR0b24+XG4gICAgICAgICAgICA8L2Rpdj5cblxuICAgICAgICAgICAgPG5nLWNvbnRlbnQ+PC9uZy1jb250ZW50PlxuICAgICAgICA8L2Rpdj5cbiAgICBgLFxuICAgIHN0eWxlczogW2BcbiAgICAgICAgOmhvc3Qge1xuICAgICAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgICAgICAgdG9wOiAyMHB4O1xuICAgICAgICAgICAgbGVmdDogMjBweDtcbiAgICAgICAgICAgIHdpZHRoOiAyMHB4O1xuICAgICAgICAgICAgaGVpZ2h0OiAyMHB4O1xuICAgICAgICAgICAgei1pbmRleDogOTk5O1xuICAgICAgICAgICAgLXdlYmtpdC11c2VyLWRyYWc6IG5vbmU7XG4gICAgICAgIH1cbiAgICBgXSxcbiAgICBjaGFuZ2VEZXRlY3Rpb246IENoYW5nZURldGVjdGlvblN0cmF0ZWd5Lk9uUHVzaCxcbiAgfVxuKVxuZXhwb3J0IGNsYXNzIEFjVG9vbGJhckNvbXBvbmVudCBpbXBsZW1lbnRzIE9uSW5pdCwgT25DaGFuZ2VzLCBPbkRlc3Ryb3kge1xuICBASW5wdXQoKVxuICB0b29sYmFyQ2xhc3M6IHN0cmluZztcbiAgQElucHV0KClcbiAgYWxsb3dEcmFnID0gdHJ1ZTtcbiAgQE91dHB1dCgpXG4gIG9uRHJhZyA9IG5ldyBFdmVudEVtaXR0ZXI8TW91c2VFdmVudD4oKTtcblxuICBkcmFnU3R5bGUgPSB7XG4gICAgJ2hlaWdodC5weCc6IDIwLFxuICAgICd3aWR0aC5weCc6IDIwLFxuICB9O1xuXG4gIHByaXZhdGUgbW91c2VEb3duJDogT2JzZXJ2YWJsZTxNb3VzZUV2ZW50PjtcbiAgcHJpdmF0ZSBtb3VzZU1vdmUkOiBPYnNlcnZhYmxlPE1vdXNlRXZlbnQ+O1xuICBwcml2YXRlIG1vdXNlVXAkOiBPYnNlcnZhYmxlPE1vdXNlRXZlbnQ+O1xuICBwcml2YXRlIGRyYWckOiBPYnNlcnZhYmxlPE1vdXNlRXZlbnQ+O1xuICBwcml2YXRlIGRyYWdTdWJzY3JpcHRpb246IFN1YnNjcmlwdGlvbjtcblxuICBjb25zdHJ1Y3Rvcihwcml2YXRlIGVsZW1lbnQ6IEVsZW1lbnRSZWYsIHByaXZhdGUgY2VzaXVtU2VydmljZTogQ2VzaXVtU2VydmljZSkge31cblxuICBuZ09uSW5pdCgpIHtcbiAgICB0aGlzLmNlc2l1bVNlcnZpY2UuZ2V0TWFwKCkuZ2V0TWFwQ29udGFpbmVyKCkuYXBwZW5kQ2hpbGQodGhpcy5lbGVtZW50Lm5hdGl2ZUVsZW1lbnQpO1xuICAgIGlmICh0aGlzLmFsbG93RHJhZykge1xuICAgICAgdGhpcy5saXN0ZW5Gb3JEcmFnZ2luZygpO1xuICAgIH1cbiAgfVxuXG5cbiAgbmdPbkNoYW5nZXMoY2hhbmdlczogU2ltcGxlQ2hhbmdlcykge1xuICAgIGlmIChjaGFuZ2VzLmFsbG93RHJhZyAmJiBjaGFuZ2VzLmFsbG93RHJhZy5jdXJyZW50VmFsdWUgJiYgIWNoYW5nZXMuYWxsb3dEcmFnLnByZXZpb3VzVmFsdWUpIHtcbiAgICAgIHRoaXMubGlzdGVuRm9yRHJhZ2dpbmcoKTtcbiAgICB9XG5cbiAgICBpZiAoY2hhbmdlcy5hbGxvd0RyYWcgJiYgIWNoYW5nZXMuYWxsb3dEcmFnLmN1cnJlbnRWYWx1ZSAmJiBjaGFuZ2VzLmFsbG93RHJhZy5wcmV2aW91c1ZhbHVlKSB7XG4gICAgICB0aGlzLmRyYWdTdWJzY3JpcHRpb24udW5zdWJzY3JpYmUoKTtcbiAgICB9XG4gIH1cblxuICBuZ09uRGVzdHJveSgpOiB2b2lkIHtcbiAgICBpZiAodGhpcy5kcmFnU3Vic2NyaXB0aW9uKSB7XG4gICAgICB0aGlzLmRyYWdTdWJzY3JpcHRpb24udW5zdWJzY3JpYmUoKTtcbiAgICB9XG4gIH1cblxuICBwcml2YXRlIGxpc3RlbkZvckRyYWdnaW5nKCkge1xuICAgIHRoaXMubW91c2VEb3duJCA9IHRoaXMubW91c2VEb3duJCB8fCBvYnNlcnZhYmxlRnJvbUV2ZW50KHRoaXMuZWxlbWVudC5uYXRpdmVFbGVtZW50LCAnbW91c2Vkb3duJyk7XG4gICAgdGhpcy5tb3VzZU1vdmUkID0gdGhpcy5tb3VzZU1vdmUkIHx8IG9ic2VydmFibGVGcm9tRXZlbnQoZG9jdW1lbnQsICdtb3VzZW1vdmUnKSBhcyBPYnNlcnZhYmxlPE1vdXNlRXZlbnQ+O1xuICAgIHRoaXMubW91c2VVcCQgPSB0aGlzLm1vdXNlVXAkIHx8IG9ic2VydmFibGVGcm9tRXZlbnQoZG9jdW1lbnQsICdtb3VzZXVwJykgYXMgT2JzZXJ2YWJsZTxNb3VzZUV2ZW50PjtcblxuICAgIHRoaXMuZHJhZyQgPSB0aGlzLmRyYWckIHx8XG4gICAgICAgICAgICAgICAgIHRoaXMubW91c2VEb3duJC5waXBlKFxuICAgICAgICAgICAgICAgICAgICBzd2l0Y2hNYXAoKCkgPT4gdGhpcy5tb3VzZU1vdmUkLnBpcGUoXG4gICAgICAgICAgICAgICAgICAgICAgdGFwKHRoaXMub25EcmFnLmVtaXQpLFxuICAgICAgICAgICAgICAgICAgICAgIHRha2VVbnRpbCh0aGlzLm1vdXNlVXAkKVxuICAgICAgICAgICAgICAgICAgICApKVxuICAgICAgICAgICAgICAgICApO1xuXG4gICAgdGhpcy5kcmFnU3Vic2NyaXB0aW9uID0gdGhpcy5kcmFnJC5zdWJzY3JpYmUoKGV2ZW50OiBNb3VzZUV2ZW50KSA9PiB7XG4gICAgICB0aGlzLmVsZW1lbnQubmF0aXZlRWxlbWVudC5zdHlsZS5sZWZ0ID0gYCR7ZXZlbnQueH1weGA7XG4gICAgICB0aGlzLmVsZW1lbnQubmF0aXZlRWxlbWVudC5zdHlsZS50b3AgPSBgJHtldmVudC55fXB4YDtcbiAgICB9KTtcbiAgfVxufVxuIl19

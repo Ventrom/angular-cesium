@@ -19,7 +19,7 @@ export declare class AcToolbarButtonComponent implements OnInit {
     iconUrl: string;
     buttonClass: string;
     iconClass: string;
-    onClick: EventEmitter<{}>;
+    onClick: EventEmitter<any>;
     constructor();
     ngOnInit(): void;
 }

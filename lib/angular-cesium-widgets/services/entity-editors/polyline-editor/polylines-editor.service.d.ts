@@ -7,6 +7,7 @@ import { PolylinesManagerService } from './polylines-manager.service';
 import { PolylineEditOptions } from '../../../models/polyline-edit-options';
 import { PolylineEditUpdate } from '../../../models/polyline-edit-update';
 import { PolylineEditorObservable } from '../../../models/polyline-editor-observable';
+import { CesiumService } from '../../../../angular-cesium';
 export declare const DEFAULT_POLYLINE_OPTIONS: PolylineEditOptions;
 /**
  * Service for creating editable polylines
@@ -49,8 +50,12 @@ export declare class PolylinesEditorService {
     private cameraService;
     private polylinesManager;
     private observablesMap;
-    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, polylinesManager: PolylinesManagerService): void;
+    private cesiumScene;
+    private clampPointsDebounced;
+    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, polylinesManager: PolylinesManagerService, cesiumViewer: CesiumService): void;
     onUpdate(): Observable<PolylineEditUpdate>;
+    private clampPoints;
+    private screenToPosition;
     create(options?: PolylineEditOptions, eventPriority?: number): PolylineEditorObservable;
     private switchToEditMode;
     edit(positions: Cartesian3[], options?: PolylineEditOptions, priority?: number): PolylineEditorObservable;

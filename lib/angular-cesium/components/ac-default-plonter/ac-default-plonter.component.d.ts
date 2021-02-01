@@ -7,6 +7,6 @@ export declare class AcDefaultPlonterComponent implements OnInit {
     private geoConverter;
     constructor(plonterService: PlonterService, cd: ChangeDetectorRef, geoConverter: CoordinateConverter);
     ngOnInit(): void;
-    readonly plonterPosition: any;
+    get plonterPosition(): any;
     chooseEntity(entity: any): void;
 }

@@ -1,15 +1,7 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @enum {number} */
-const EditModes = {
-    CREATE: 0,
-    EDIT: 1,
-    CREATE_OR_EDIT: 2,
-};
-export { EditModes };
-EditModes[EditModes.CREATE] = 'CREATE';
-EditModes[EditModes.EDIT] = 'EDIT';
-EditModes[EditModes.CREATE_OR_EDIT] = 'CREATE_OR_EDIT';
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWRpdC1tb2RlLmVudW0uanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS13aWRnZXRzL21vZGVscy9lZGl0LW1vZGUuZW51bS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7SUFDRSxTQUFNO0lBQ04sT0FBSTtJQUNKLGlCQUFjIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGVudW0gRWRpdE1vZGVzIHtcbiAgQ1JFQVRFLFxuICBFRElULFxuICBDUkVBVEVfT1JfRURJVFxufVxuIl19
+export var EditModes;
+(function (EditModes) {
+    EditModes[EditModes["CREATE"] = 0] = "CREATE";
+    EditModes[EditModes["EDIT"] = 1] = "EDIT";
+    EditModes[EditModes["CREATE_OR_EDIT"] = 2] = "CREATE_OR_EDIT";
+})(EditModes || (EditModes = {}));
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWRpdC1tb2RlLmVudW0uanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS13aWRnZXRzL21vZGVscy9lZGl0LW1vZGUuZW51bS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQU4sSUFBWSxTQUlYO0FBSkQsV0FBWSxTQUFTO0lBQ25CLDZDQUFNLENBQUE7SUFDTix5Q0FBSSxDQUFBO0lBQ0osNkRBQWMsQ0FBQTtBQUNoQixDQUFDLEVBSlcsU0FBUyxLQUFULFNBQVMsUUFJcEIiLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgZW51bSBFZGl0TW9kZXMge1xuICBDUkVBVEUsXG4gIEVESVQsXG4gIENSRUFURV9PUl9FRElUXG59XG4iXX0=

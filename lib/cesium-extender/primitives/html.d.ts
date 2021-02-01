@@ -11,11 +11,17 @@ export declare class HtmlPrimitive {
     private _collection;
     private _mapContainer;
     constructor(options: any, collection?: HtmlCollection);
-    scene: any;
-    show: boolean;
-    position: Cartesian3;
-    pixelOffset: Cartesian2;
-    element: HTMLElement;
-    collection: HtmlCollection;
+    set scene(scene: any);
+    set show(show: boolean);
+    get show(): boolean;
+    set position(position: Cartesian3);
+    get position(): Cartesian3;
+    set pixelOffset(pixelOffset: Cartesian2);
+    get pixelOffset(): Cartesian2;
+    set element(element: HTMLElement);
+    get element(): HTMLElement;
+    set collection(collection: HtmlCollection);
+    get collection(): HtmlCollection;
     update(): void;
+    remove(): void;
 }

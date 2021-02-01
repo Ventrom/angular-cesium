@@ -30,6 +30,11 @@ import { Cartesian3 } from '../../models/cartesian3';
 export declare class CoordinateConverter {
     private cesiumService?;
     constructor(cesiumService?: CesiumService);
+    static cartesian3ToLatLon(cartesian3: Cartesian3, ellipsoid?: any): {
+        lon: number;
+        lat: number;
+        height: number;
+    };
     screenToCartesian3(screenPos: {
         x: number;
         y: number;

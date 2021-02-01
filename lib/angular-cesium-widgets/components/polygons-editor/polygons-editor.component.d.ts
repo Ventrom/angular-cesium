@@ -1,4 +1,5 @@
 import { OnDestroy } from '@angular/core';
+import { CesiumService } from '../../../angular-cesium/services/cesium/cesium.service';
 import { PolygonEditUpdate } from '../../models/polygon-edit-update';
 import { AcNotification } from '../../../angular-cesium/models/ac-notification';
 import { CoordinateConverter } from '../../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
@@ -16,21 +17,16 @@ export declare class PolygonsEditorComponent implements OnDestroy {
     private mapEventsManager;
     private cameraService;
     private polygonsManager;
+    private cesiumService;
     private editLabelsRenderFn;
     Cesium: any;
     editPoints$: Subject<AcNotification>;
     editPolylines$: Subject<AcNotification>;
     editPolygons$: Subject<AcNotification>;
-    appearance: any;
-    attributes: {
-        color: any;
-    };
-    polygonColor: any;
-    lineColor: any;
     private editPolygonsLayer;
     private editPointsLayer;
     private editPolylinesLayer;
-    constructor(polygonsEditor: PolygonsEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, polygonsManager: PolygonsManagerService);
+    constructor(polygonsEditor: PolygonsEditorService, coordinateConverter: CoordinateConverter, mapEventsManager: MapEventsManagerService, cameraService: CameraService, polygonsManager: PolygonsManagerService, cesiumService: CesiumService);
     private startListeningToEditorUpdates;
     getLabelId(element: any, index: number): string;
     renderEditLabels(polygon: EditablePolygon, update: PolygonEditUpdate, labels?: LabelProps[]): void;

@@ -1,4 +1,6 @@
+export * from './services/entity-editors/points-editor/points-editor.service';
 export * from './services/entity-editors/polygons-editor/polygons-editor.service';
+export * from './services/entity-editors/rectangles-editor/rectangles-editor.service';
 export * from './services/entity-editors/circles-editor/circles-editor.service';
 export * from './services/entity-editors/polyline-editor/polylines-editor.service';
 export * from './services/entity-editors/hippodrome-editor/hippodrome-editor.service';

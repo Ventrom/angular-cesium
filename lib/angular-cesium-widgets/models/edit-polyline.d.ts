@@ -8,9 +8,11 @@ export declare class EditPolyline extends AcEntity {
     private positions;
     private _polylineProps;
     constructor(entityId: string, startPosition: Cartesian3, endPosition: Cartesian3, polylineProps?: PolylineProps);
-    props: PolylineProps;
+    get props(): PolylineProps;
+    set props(value: PolylineProps);
     getEditedEntityId(): string;
     getPositions(): any[];
+    getPositionsCallbackProperty(): Cartesian3[];
     validatePositions(): boolean;
     getStartPosition(): Cartesian3;
     getEndPosition(): Cartesian3;

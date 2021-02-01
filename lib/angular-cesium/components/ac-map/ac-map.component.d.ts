@@ -1,8 +1,8 @@
 import { AfterViewInit, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { CesiumService } from '../../services/cesium/cesium.service';
 import { ConfigurationService } from '../../cesium-enhancements/ConfigurationService';
 import { SceneMode } from '../../models/scene-mode.enum';
 import { CameraService } from '../../services/camera/camera.service';
-import { CesiumService } from '../../services/cesium/cesium.service';
 import { ContextMenuService } from '../../services/context-menu/context-menu.service';
 import { CoordinateConverter } from '../../services/coordinate-converter/coordinate-converter.service';
 import { ArcDrawerService } from '../../services/drawers/arc-drawer/arc-drawer.service';
@@ -85,7 +85,7 @@ export declare class AcMapComponent implements OnChanges, OnInit, AfterViewInit,
     /**
      * @returns ac-map's cesium service
      */
-    getCesiumSerivce(): CesiumService;
+    getCesiumService(): CesiumService;
     /**
      * @returns map's cesium viewer
      */

@@ -18,19 +18,21 @@ export declare class ViewerConfiguration {
     private _viewerModifier;
     private nextViewerOptionsIndex;
     private nextViewerModifierIndex;
-    /**
-    * Can be used to set initial map viewer options.
-    * If there is more than one map you can give the function an array of options.
-    * The map initialized first will be set with the first option object in the options array and so on.
-    */
-    viewerOptions: object | object[];
+    get viewerOptions(): object | object[];
     Ï: any;
     getNextViewerOptions(): object | object[];
     /**
-    * Can be used to set map viewer options after the map has been initialized.
-    * If there is more than one map you can give the function an array of functions.
-    * The map initialized first will be set with the first option object in the options array and so on.
-    */
-    viewerModifier: Function | Function[];
+     * Can be used to set initial map viewer options.
+     * If there is more than one map you can give the function an array of options.
+     * The map initialized first will be set with the first option object in the options array and so on.
+     */
+    set viewerOptions(value: object | object[]);
+    get viewerModifier(): Function | Function[];
     getNextViewerModifier(): Function | Function[];
+    /**
+     * Can be used to set map viewer options after the map has been initialized.
+     * If there is more than one map you can give the function an array of functions.
+     * The map initialized first will be set with the first option object in the options array and so on.
+     */
+    set viewerModifier(value: Function | Function[]);
 }

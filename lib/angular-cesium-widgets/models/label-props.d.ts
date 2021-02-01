@@ -21,6 +21,7 @@ export interface LabelStyle {
     scaleByDistance?: any;
     translucencyByDistance?: any;
     verticalOrigin?: any;
+    disableDepthTestDistance?: number;
 }
 export interface LabelProps {
     text: string;
@@ -44,5 +45,6 @@ export interface LabelProps {
     scaleByDistance?: any;
     translucencyByDistance?: any;
     verticalOrigin?: any;
+    disableDepthTestDistance?: number;
 }
 export declare const defaultLabelProps: LabelProps;

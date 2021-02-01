@@ -7,7 +7,10 @@ export interface EllipseProps {
     outlineWidth?: number;
     outlineColor?: any;
     granularity?: number;
-    fill?: any;
+    fill?: boolean;
+    zIndex?: number;
+    classificationType?: any;
+    shadows?: any;
 }
 export interface EllipseEditOptions extends EditorEditOptions {
     ellipseProps?: EllipseProps;

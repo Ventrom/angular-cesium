@@ -42,6 +42,7 @@ import { CzmlDrawerService } from '../../services/drawers/czml-drawer/czml-drawe
  *  + zIndex `{number}` - controls the zIndex (order) of the layer, layers with greater zIndex will be in front of layers with lower zIndex
  *    (Exception For `Billboard` and `Label`, should use `[eyeOffset]` prop instead)</br>
  *    zIndex won't work for pritimitve descs (like ac-primitive-polyline...)
+ *  + debug `{boolean}` - prints every acNotification
  *
  *
  *  __Usage :__
@@ -77,6 +78,7 @@ export declare class AcLayerComponent implements OnInit, OnChanges, AfterContent
     store: boolean;
     options: LayerOptions;
     zIndex: number;
+    debug: boolean;
     private readonly acForRgx;
     private entityName;
     private stopObservable;

@@ -33,10 +33,18 @@ import { AcMapComponent } from '../../angular-cesium/components/ac-map/ac-map.co
  *  borderStyle - optional - the style of the rectangle element border - default: '3px dashed #FFFFFF'
  *  backgroundColor - optional - the background color of the rectangle element - default: 'transparent'
  *  resetKeyCode - optional - the key code of the key that is used to reset the drawing of the rectangle - default: 27 (ESC key)
+ *  threshold - optional - the minimum area of the screen rectangle (in pixels) that is required to perform zoom - default: 9
+ *  keepRotation - optional - whether or not to keep the rotation when zooming in - default: true
+ *  mouseButton - optional - sets the mouse button for drawing the rectangle - default: left mouse button (0)
  * }
  * @param mapId - optional - the mapId of the map that the tool will be used in.
  *
  */
+export declare enum MouseButtons {
+    LEFT = 0,
+    MIDDLE = 1,
+    RIGHT = 2
+}
 export declare class ZoomToRectangleService {
     private mapsManager;
     constructor(mapsManager: MapsManagerService, cameraService: CameraService, cesiumService: CesiumService);
@@ -48,8 +56,11 @@ export declare class ZoomToRectangleService {
     activate(options?: {
         onStart?: (acMap?: AcMapComponent) => any;
         onComplete?: (acMap?: AcMapComponent) => any;
+        mouseButton?: MouseButtons;
         autoDisableOnZoom?: boolean;
         animationDurationInSeconds?: number;
+        threshold?: number;
+        keepRotation?: boolean;
         borderStyle?: string;
         backgroundColor?: string;
         resetKeyCode?: number;

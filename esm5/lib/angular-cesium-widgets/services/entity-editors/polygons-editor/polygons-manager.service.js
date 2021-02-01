@@ -1,83 +1,29 @@
-/**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
+import { __decorate } from "tslib";
 import { Injectable } from '@angular/core';
 import { EditablePolygon } from '../../../models/editable-polygon';
 var PolygonsManagerService = /** @class */ (function () {
     function PolygonsManagerService() {
         this.polygons = new Map();
     }
-    /**
-     * @param {?} id
-     * @param {?} editPolygonsLayer
-     * @param {?} editPointsLayer
-     * @param {?} editPolylinesLayer
-     * @param {?} coordinateConverter
-     * @param {?=} polygonOptions
-     * @param {?=} positions
-     * @return {?}
-     */
-    PolygonsManagerService.prototype.createEditablePolygon = /**
-     * @param {?} id
-     * @param {?} editPolygonsLayer
-     * @param {?} editPointsLayer
-     * @param {?} editPolylinesLayer
-     * @param {?} coordinateConverter
-     * @param {?=} polygonOptions
-     * @param {?=} positions
-     * @return {?}
-     */
-    function (id, editPolygonsLayer, editPointsLayer, editPolylinesLayer, coordinateConverter, polygonOptions, positions) {
-        /** @type {?} */
+    PolygonsManagerService.prototype.createEditablePolygon = function (id, editPolygonsLayer, editPointsLayer, editPolylinesLayer, coordinateConverter, polygonOptions, positions) {
         var editablePolygon = new EditablePolygon(id, editPolygonsLayer, editPointsLayer, editPolylinesLayer, coordinateConverter, polygonOptions, positions);
         this.polygons.set(id, editablePolygon);
     };
-    /**
-     * @param {?} id
-     * @return {?}
-     */
-    PolygonsManagerService.prototype.dispose = /**
-     * @param {?} id
-     * @return {?}
-     */
-    function (id) {
+    PolygonsManagerService.prototype.dispose = function (id) {
         this.polygons.get(id).dispose();
         this.polygons.delete(id);
     };
-    /**
-     * @param {?} id
-     * @return {?}
-     */
-    PolygonsManagerService.prototype.get = /**
-     * @param {?} id
-     * @return {?}
-     */
-    function (id) {
+    PolygonsManagerService.prototype.get = function (id) {
         return this.polygons.get(id);
     };
-    /**
-     * @return {?}
-     */
-    PolygonsManagerService.prototype.clear = /**
-     * @return {?}
-     */
-    function () {
-        this.polygons.forEach((/**
-         * @param {?} polygon
-         * @return {?}
-         */
-        function (polygon) { return polygon.dispose(); }));
+    PolygonsManagerService.prototype.clear = function () {
+        this.polygons.forEach(function (polygon) { return polygon.dispose(); });
         this.polygons.clear();
     };
-    PolygonsManagerService.decorators = [
-        { type: Injectable }
-    ];
+    PolygonsManagerService = __decorate([
+        Injectable()
+    ], PolygonsManagerService);
     return PolygonsManagerService;
 }());
 export { PolygonsManagerService };
-if (false) {
-    /** @type {?} */
-    PolygonsManagerService.prototype.polygons;
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9seWdvbnMtbWFuYWdlci5zZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1jZXNpdW0vIiwic291cmNlcyI6WyJsaWIvYW5ndWxhci1jZXNpdW0td2lkZ2V0cy9zZXJ2aWNlcy9lbnRpdHktZWRpdG9ycy9wb2x5Z29ucy1lZGl0b3IvcG9seWdvbnMtbWFuYWdlci5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBRSxlQUFlLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQU1uRTtJQUFBO1FBRUUsYUFBUSxHQUFpQyxJQUFJLEdBQUcsRUFBMkIsQ0FBQztJQThCOUUsQ0FBQzs7Ozs7Ozs7Ozs7SUE1QkMsc0RBQXFCOzs7Ozs7Ozs7O0lBQXJCLFVBQXNCLEVBQVUsRUFBRSxpQkFBbUMsRUFBRSxlQUFpQyxFQUNsRixrQkFBb0MsRUFBRSxtQkFBd0MsRUFDOUUsY0FBbUMsRUFBRSxTQUF3Qjs7WUFDM0UsZUFBZSxHQUFHLElBQUksZUFBZSxDQUN6QyxFQUFFLEVBQ0YsaUJBQWlCLEVBQ2pCLGVBQWUsRUFDZixrQkFBa0IsRUFDbEIsbUJBQW1CLEVBQ25CLGNBQWMsRUFDZCxTQUFTLENBQUM7UUFDWixJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFLEVBQUUsZUFBZSxDQUNwQyxDQUFDO0lBQ0osQ0FBQzs7Ozs7SUFFRCx3Q0FBTzs7OztJQUFQLFVBQVEsRUFBVTtRQUNoQixJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsQ0FBQyxPQUFPLEVBQUUsQ0FBQztRQUNoQyxJQUFJLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUMzQixDQUFDOzs7OztJQUVELG9DQUFHOzs7O0lBQUgsVUFBSSxFQUFVO1FBQ1osT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUMvQixDQUFDOzs7O0lBRUQsc0NBQUs7OztJQUFMO1FBQ0UsSUFBSSxDQUFDLFFBQVEsQ0FBQyxPQUFPOzs7O1FBQUMsVUFBQSxPQUFPLElBQUksT0FBQSxPQUFPLENBQUMsT0FBTyxFQUFFLEVBQWpCLENBQWlCLEVBQUMsQ0FBQztRQUNwRCxJQUFJLENBQUMsUUFBUSxDQUFDLEtBQUssRUFBRSxDQUFDO0lBQ3hCLENBQUM7O2dCQS9CRixVQUFVOztJQWdDWCw2QkFBQztDQUFBLEFBaENELElBZ0NDO1NBL0JZLHNCQUFzQjs7O0lBQ2pDLDBDQUE0RSIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEluamVjdGFibGUgfSBmcm9tICdAYW5ndWxhci9jb3JlJztcbmltcG9ydCB7IEVkaXRhYmxlUG9seWdvbiB9IGZyb20gJy4uLy4uLy4uL21vZGVscy9lZGl0YWJsZS1wb2x5Z29uJztcbmltcG9ydCB7IENhcnRlc2lhbjMgfSBmcm9tICcuLi8uLi8uLi8uLi9hbmd1bGFyLWNlc2l1bS9tb2RlbHMvY2FydGVzaWFuMyc7XG5pbXBvcnQgeyBQb2x5Z29uRWRpdE9wdGlvbnMgfSBmcm9tICcuLi8uLi8uLi9tb2RlbHMvcG9seWdvbi1lZGl0LW9wdGlvbnMnO1xuaW1wb3J0IHsgQWNMYXllckNvbXBvbmVudCB9IGZyb20gJy4uLy4uLy4uLy4uL2FuZ3VsYXItY2VzaXVtL2NvbXBvbmVudHMvYWMtbGF5ZXIvYWMtbGF5ZXIuY29tcG9uZW50JztcbmltcG9ydCB7IENvb3JkaW5hdGVDb252ZXJ0ZXIgfSBmcm9tICcuLi8uLi8uLi8uLi9hbmd1bGFyLWNlc2l1bS9zZXJ2aWNlcy9jb29yZGluYXRlLWNvbnZlcnRlci9jb29yZGluYXRlLWNvbnZlcnRlci5zZXJ2aWNlJztcblxuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIFBvbHlnb25zTWFuYWdlclNlcnZpY2Uge1xuICBwb2x5Z29uczogTWFwPHN0cmluZywgRWRpdGFibGVQb2x5Z29uPiA9IG5ldyBNYXA8c3RyaW5nLCBFZGl0YWJsZVBvbHlnb24+KCk7XG5cbiAgY3JlYXRlRWRpdGFibGVQb2x5Z29uKGlkOiBzdHJpbmcsIGVkaXRQb2x5Z29uc0xheWVyOiBBY0xheWVyQ29tcG9uZW50LCBlZGl0UG9pbnRzTGF5ZXI6IEFjTGF5ZXJDb21wb25lbnQsXG4gICAgICAgICAgICAgICAgICAgICAgICBlZGl0UG9seWxpbmVzTGF5ZXI6IEFjTGF5ZXJDb21wb25lbnQsIGNvb3JkaW5hdGVDb252ZXJ0ZXI6IENvb3JkaW5hdGVDb252ZXJ0ZXIsXG4gICAgICAgICAgICAgICAgICAgICAgICBwb2x5Z29uT3B0aW9ucz86IFBvbHlnb25FZGl0T3B0aW9ucywgcG9zaXRpb25zPzogQ2FydGVzaWFuM1tdKSB7XG4gICAgY29uc3QgZWRpdGFibGVQb2x5Z29uID0gbmV3IEVkaXRhYmxlUG9seWdvbihcbiAgICAgIGlkLFxuICAgICAgZWRpdFBvbHlnb25zTGF5ZXIsXG4gICAgICBlZGl0UG9pbnRzTGF5ZXIsXG4gICAgICBlZGl0UG9seWxpbmVzTGF5ZXIsXG4gICAgICBjb29yZGluYXRlQ29udmVydGVyLFxuICAgICAgcG9seWdvbk9wdGlvbnMsXG4gICAgICBwb3NpdGlvbnMpO1xuICAgIHRoaXMucG9seWdvbnMuc2V0KGlkLCBlZGl0YWJsZVBvbHlnb25cbiAgICApO1xuICB9XG5cbiAgZGlzcG9zZShpZDogc3RyaW5nKSB7XG4gICAgdGhpcy5wb2x5Z29ucy5nZXQoaWQpLmRpc3Bvc2UoKTtcbiAgICB0aGlzLnBvbHlnb25zLmRlbGV0ZShpZCk7XG4gIH1cblxuICBnZXQoaWQ6IHN0cmluZyk6IEVkaXRhYmxlUG9seWdvbiB7XG4gICAgcmV0dXJuIHRoaXMucG9seWdvbnMuZ2V0KGlkKTtcbiAgfVxuXG4gIGNsZWFyKCkge1xuICAgIHRoaXMucG9seWdvbnMuZm9yRWFjaChwb2x5Z29uID0+IHBvbHlnb24uZGlzcG9zZSgpKTtcbiAgICB0aGlzLnBvbHlnb25zLmNsZWFyKCk7XG4gIH1cbn1cbiJdfQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicG9seWdvbnMtbWFuYWdlci5zZXJ2aWNlLmpzIiwic291cmNlUm9vdCI6Im5nOi8vYW5ndWxhci1jZXNpdW0vIiwic291cmNlcyI6WyJsaWIvYW5ndWxhci1jZXNpdW0td2lkZ2V0cy9zZXJ2aWNlcy9lbnRpdHktZWRpdG9ycy9wb2x5Z29ucy1lZGl0b3IvcG9seWdvbnMtbWFuYWdlci5zZXJ2aWNlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7QUFBQSxPQUFPLEVBQUUsVUFBVSxFQUFFLE1BQU0sZUFBZSxDQUFDO0FBQzNDLE9BQU8sRUFBRSxlQUFlLEVBQUUsTUFBTSxrQ0FBa0MsQ0FBQztBQU9uRTtJQUFBO1FBQ0UsYUFBUSxHQUFpQyxJQUFJLEdBQUcsRUFBMkIsQ0FBQztJQThCOUUsQ0FBQztJQTVCQyxzREFBcUIsR0FBckIsVUFBc0IsRUFBVSxFQUFFLGlCQUFtQyxFQUFFLGVBQWlDLEVBQ2xGLGtCQUFvQyxFQUFFLG1CQUF3QyxFQUM5RSxjQUFtQyxFQUFFLFNBQXdCO1FBQ2pGLElBQU0sZUFBZSxHQUFHLElBQUksZUFBZSxDQUN6QyxFQUFFLEVBQ0YsaUJBQWlCLEVBQ2pCLGVBQWUsRUFDZixrQkFBa0IsRUFDbEIsbUJBQW1CLEVBQ25CLGNBQWMsRUFDZCxTQUFTLENBQUMsQ0FBQztRQUNiLElBQUksQ0FBQyxRQUFRLENBQUMsR0FBRyxDQUFDLEVBQUUsRUFBRSxlQUFlLENBQ3BDLENBQUM7SUFDSixDQUFDO0lBRUQsd0NBQU8sR0FBUCxVQUFRLEVBQVU7UUFDaEIsSUFBSSxDQUFDLFFBQVEsQ0FBQyxHQUFHLENBQUMsRUFBRSxDQUFDLENBQUMsT0FBTyxFQUFFLENBQUM7UUFDaEMsSUFBSSxDQUFDLFFBQVEsQ0FBQyxNQUFNLENBQUMsRUFBRSxDQUFDLENBQUM7SUFDM0IsQ0FBQztJQUVELG9DQUFHLEdBQUgsVUFBSSxFQUFVO1FBQ1osT0FBTyxJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUMvQixDQUFDO0lBRUQsc0NBQUssR0FBTDtRQUNFLElBQUksQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLFVBQUEsT0FBTyxJQUFJLE9BQUEsT0FBTyxDQUFDLE9BQU8sRUFBRSxFQUFqQixDQUFpQixDQUFDLENBQUM7UUFDcEQsSUFBSSxDQUFDLFFBQVEsQ0FBQyxLQUFLLEVBQUUsQ0FBQztJQUN4QixDQUFDO0lBOUJVLHNCQUFzQjtRQURsQyxVQUFVLEVBQUU7T0FDQSxzQkFBc0IsQ0ErQmxDO0lBQUQsNkJBQUM7Q0FBQSxBQS9CRCxJQStCQztTQS9CWSxzQkFBc0IiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBFZGl0YWJsZVBvbHlnb24gfSBmcm9tICcuLi8uLi8uLi9tb2RlbHMvZWRpdGFibGUtcG9seWdvbic7XG5pbXBvcnQgeyBDYXJ0ZXNpYW4zIH0gZnJvbSAnLi4vLi4vLi4vLi4vYW5ndWxhci1jZXNpdW0vbW9kZWxzL2NhcnRlc2lhbjMnO1xuaW1wb3J0IHsgUG9seWdvbkVkaXRPcHRpb25zIH0gZnJvbSAnLi4vLi4vLi4vbW9kZWxzL3BvbHlnb24tZWRpdC1vcHRpb25zJztcbmltcG9ydCB7IEFjTGF5ZXJDb21wb25lbnQgfSBmcm9tICcuLi8uLi8uLi8uLi9hbmd1bGFyLWNlc2l1bS9jb21wb25lbnRzL2FjLWxheWVyL2FjLWxheWVyLmNvbXBvbmVudCc7XG5pbXBvcnQgeyBDb29yZGluYXRlQ29udmVydGVyIH0gZnJvbSAnLi4vLi4vLi4vLi4vYW5ndWxhci1jZXNpdW0vc2VydmljZXMvY29vcmRpbmF0ZS1jb252ZXJ0ZXIvY29vcmRpbmF0ZS1jb252ZXJ0ZXIuc2VydmljZSc7XG5cbkBJbmplY3RhYmxlKClcbmV4cG9ydCBjbGFzcyBQb2x5Z29uc01hbmFnZXJTZXJ2aWNlIHtcbiAgcG9seWdvbnM6IE1hcDxzdHJpbmcsIEVkaXRhYmxlUG9seWdvbj4gPSBuZXcgTWFwPHN0cmluZywgRWRpdGFibGVQb2x5Z29uPigpO1xuXG4gIGNyZWF0ZUVkaXRhYmxlUG9seWdvbihpZDogc3RyaW5nLCBlZGl0UG9seWdvbnNMYXllcjogQWNMYXllckNvbXBvbmVudCwgZWRpdFBvaW50c0xheWVyOiBBY0xheWVyQ29tcG9uZW50LFxuICAgICAgICAgICAgICAgICAgICAgICAgZWRpdFBvbHlsaW5lc0xheWVyOiBBY0xheWVyQ29tcG9uZW50LCBjb29yZGluYXRlQ29udmVydGVyOiBDb29yZGluYXRlQ29udmVydGVyLFxuICAgICAgICAgICAgICAgICAgICAgICAgcG9seWdvbk9wdGlvbnM/OiBQb2x5Z29uRWRpdE9wdGlvbnMsIHBvc2l0aW9ucz86IENhcnRlc2lhbjNbXSkge1xuICAgIGNvbnN0IGVkaXRhYmxlUG9seWdvbiA9IG5ldyBFZGl0YWJsZVBvbHlnb24oXG4gICAgICBpZCxcbiAgICAgIGVkaXRQb2x5Z29uc0xheWVyLFxuICAgICAgZWRpdFBvaW50c0xheWVyLFxuICAgICAgZWRpdFBvbHlsaW5lc0xheWVyLFxuICAgICAgY29vcmRpbmF0ZUNvbnZlcnRlcixcbiAgICAgIHBvbHlnb25PcHRpb25zLFxuICAgICAgcG9zaXRpb25zKTtcbiAgICB0aGlzLnBvbHlnb25zLnNldChpZCwgZWRpdGFibGVQb2x5Z29uXG4gICAgKTtcbiAgfVxuXG4gIGRpc3Bvc2UoaWQ6IHN0cmluZykge1xuICAgIHRoaXMucG9seWdvbnMuZ2V0KGlkKS5kaXNwb3NlKCk7XG4gICAgdGhpcy5wb2x5Z29ucy5kZWxldGUoaWQpO1xuICB9XG5cbiAgZ2V0KGlkOiBzdHJpbmcpOiBFZGl0YWJsZVBvbHlnb24ge1xuICAgIHJldHVybiB0aGlzLnBvbHlnb25zLmdldChpZCk7XG4gIH1cblxuICBjbGVhcigpIHtcbiAgICB0aGlzLnBvbHlnb25zLmZvckVhY2gocG9seWdvbiA9PiBwb2x5Z29uLmRpc3Bvc2UoKSk7XG4gICAgdGhpcy5wb2x5Z29ucy5jbGVhcigpO1xuICB9XG59XG4iXX0=

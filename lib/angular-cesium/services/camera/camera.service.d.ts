@@ -120,13 +120,13 @@ export declare class CameraService {
     /**
      * Make the camera track a specific entity
      * API: https://cesiumjs.org/Cesium/Build/Documentation/Viewer.html?classFilter=viewer#trackedEntity
-     * @param entity - entity to track
+     * @param cesiumEntity - cesium entity( billboard, polygon...) to track
      * @param options - track entity options
      */
-    trackEntity(entity?: any, options?: {
+    trackEntity(cesiumEntity?: any, options?: {
         flyTo: boolean;
         flyToDuration?: number;
         altitude?: number;
-    }): Promise<{}>;
+    }): Promise<unknown>;
     untrackEntity(): void;
 }

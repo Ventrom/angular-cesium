@@ -1,4 +1,4 @@
-import { ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { ElementRef, OnDestroy, OnInit, OnChanges, SimpleChanges, EventEmitter } from '@angular/core';
 import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium.service';
 /**
  * Toolbar widget, act as a container for ac-toolbar-button components
@@ -6,7 +6,7 @@ import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium
  *
  * Usage:
  * ```
- * <ac-toolbar [allowDrag]="true">
+ * <ac-toolbar [allowDrag]="true" (onDrag)="handleDrag($event)">
  <ac-toolbar-button [iconUrl]="'assets/home-icon.svg'" (onClick)="goHome()">
  </ac-toolbar-button>
  <ac-toolbar-button [iconUrl]="'assets/explore-icon.svg'" (onClick)="rangeAndBearing()">
@@ -15,17 +15,24 @@ import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium
  * ```
  *
  */
-export declare class AcToolbarComponent implements OnInit, OnDestroy {
+export declare class AcToolbarComponent implements OnInit, OnChanges, OnDestroy {
     private element;
     private cesiumService;
     toolbarClass: string;
     allowDrag: boolean;
+    onDrag: EventEmitter<MouseEvent>;
     dragStyle: {
         'height.px': number;
         'width.px': number;
     };
-    private subscription;
+    private mouseDown$;
+    private mouseMove$;
+    private mouseUp$;
+    private drag$;
+    private dragSubscription;
     constructor(element: ElementRef, cesiumService: CesiumService);
     ngOnInit(): void;
+    ngOnChanges(changes: SimpleChanges): void;
     ngOnDestroy(): void;
+    private listenForDragging;
 }

@@ -1,67 +1,11 @@
 /**
- * @fileoverview added by tsickle
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/**
  *  Abstract drawer. All drawers extends this class.
- */
-/**
- * @abstract
  */
 export class BasicDrawerService {
     constructor() {
     }
-    /**
-     * @param {?} assigner
-     * @return {?}
-     */
     setPropsAssigner(assigner) {
         this._propsAssigner = assigner;
     }
 }
-if (false) {
-    /**
-     * @type {?}
-     * @protected
-     */
-    BasicDrawerService.prototype._propsAssigner;
-    /**
-     * @abstract
-     * @param {?} cesiumProps
-     * @param {...?} args
-     * @return {?}
-     */
-    BasicDrawerService.prototype.add = function (cesiumProps, args) { };
-    /**
-     * @abstract
-     * @param {?} primitive
-     * @param {?} cesiumProps
-     * @param {...?} args
-     * @return {?}
-     */
-    BasicDrawerService.prototype.update = function (primitive, cesiumProps, args) { };
-    /**
-     * @abstract
-     * @param {?} primitive
-     * @return {?}
-     */
-    BasicDrawerService.prototype.remove = function (primitive) { };
-    /**
-     * @abstract
-     * @return {?}
-     */
-    BasicDrawerService.prototype.removeAll = function () { };
-    /**
-     * @abstract
-     * @param {?} showValue
-     * @return {?}
-     */
-    BasicDrawerService.prototype.setShow = function (showValue) { };
-    /**
-     * @abstract
-     * @param {?=} options
-     * @return {?}
-     */
-    BasicDrawerService.prototype.init = function (options) { };
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzaWMtZHJhd2VyLnNlcnZpY2UuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS9zZXJ2aWNlcy9kcmF3ZXJzL2Jhc2ljLWRyYXdlci9iYXNpYy1kcmF3ZXIuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7O0FBSUEsTUFBTSxPQUFnQixrQkFBa0I7SUFHdEM7SUFDQSxDQUFDOzs7OztJQWNELGdCQUFnQixDQUFDLFFBQWtCO1FBQ2pDLElBQUksQ0FBQyxjQUFjLEdBQUcsUUFBUSxDQUFDO0lBQ2pDLENBQUM7Q0FDRjs7Ozs7O0lBcEJDLDRDQUFtQzs7Ozs7OztJQUtuQyxvRUFBb0Q7Ozs7Ozs7O0lBRXBELGtGQUF3RTs7Ozs7O0lBRXhFLCtEQUFzQzs7Ozs7SUFFdEMseURBQTJCOzs7Ozs7SUFFM0IsZ0VBQTJDOzs7Ozs7SUFFM0MsMkRBQWtDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiAgQWJzdHJhY3QgZHJhd2VyLiBBbGwgZHJhd2VycyBleHRlbmRzIHRoaXMgY2xhc3MuXG4gKi9cblxuZXhwb3J0IGFic3RyYWN0IGNsYXNzIEJhc2ljRHJhd2VyU2VydmljZSB7XG4gIHByb3RlY3RlZCBfcHJvcHNBc3NpZ25lcjogRnVuY3Rpb247XG5cbiAgY29uc3RydWN0b3IoKSB7XG4gIH1cblxuICBhYnN0cmFjdCBhZGQoY2VzaXVtUHJvcHM6IGFueSwgLi4uYXJnczogYW55W10pOiBhbnk7XG5cbiAgYWJzdHJhY3QgdXBkYXRlKHByaW1pdGl2ZTogYW55LCBjZXNpdW1Qcm9wczogYW55LCAuLi5hcmdzOiBhbnlbXSk6IHZvaWQ7XG5cbiAgYWJzdHJhY3QgcmVtb3ZlKHByaW1pdGl2ZTogYW55KTogdm9pZDtcblxuICBhYnN0cmFjdCByZW1vdmVBbGwoKTogdm9pZDtcblxuICBhYnN0cmFjdCBzZXRTaG93KHNob3dWYWx1ZTogYm9vbGVhbik6IHZvaWQ7XG5cbiAgYWJzdHJhY3QgaW5pdChvcHRpb25zPzogYW55KTogYW55O1xuXG4gIHNldFByb3BzQXNzaWduZXIoYXNzaWduZXI6IEZ1bmN0aW9uKSB7XG4gICAgdGhpcy5fcHJvcHNBc3NpZ25lciA9IGFzc2lnbmVyO1xuICB9XG59XG4iXX0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYmFzaWMtZHJhd2VyLnNlcnZpY2UuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9hbmd1bGFyLWNlc2l1bS8iLCJzb3VyY2VzIjpbImxpYi9hbmd1bGFyLWNlc2l1bS9zZXJ2aWNlcy9kcmF3ZXJzL2Jhc2ljLWRyYXdlci9iYXNpYy1kcmF3ZXIuc2VydmljZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUVILE1BQU0sT0FBZ0Isa0JBQWtCO0lBR3RDO0lBQ0EsQ0FBQztJQWNELGdCQUFnQixDQUFDLFFBQWtCO1FBQ2pDLElBQUksQ0FBQyxjQUFjLEdBQUcsUUFBUSxDQUFDO0lBQ2pDLENBQUM7Q0FDRiIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogIEFic3RyYWN0IGRyYXdlci4gQWxsIGRyYXdlcnMgZXh0ZW5kcyB0aGlzIGNsYXNzLlxuICovXG5cbmV4cG9ydCBhYnN0cmFjdCBjbGFzcyBCYXNpY0RyYXdlclNlcnZpY2Uge1xuICBwcm90ZWN0ZWQgX3Byb3BzQXNzaWduZXI6IEZ1bmN0aW9uO1xuXG4gIGNvbnN0cnVjdG9yKCkge1xuICB9XG5cbiAgYWJzdHJhY3QgYWRkKGNlc2l1bVByb3BzOiBhbnksIC4uLmFyZ3M6IGFueVtdKTogYW55O1xuXG4gIGFic3RyYWN0IHVwZGF0ZShwcmltaXRpdmU6IGFueSwgY2VzaXVtUHJvcHM6IGFueSwgLi4uYXJnczogYW55W10pOiB2b2lkO1xuXG4gIGFic3RyYWN0IHJlbW92ZShwcmltaXRpdmU6IGFueSk6IHZvaWQ7XG5cbiAgYWJzdHJhY3QgcmVtb3ZlQWxsKCk6IHZvaWQ7XG5cbiAgYWJzdHJhY3Qgc2V0U2hvdyhzaG93VmFsdWU6IGJvb2xlYW4pOiB2b2lkO1xuXG4gIGFic3RyYWN0IGluaXQob3B0aW9ucz86IGFueSk6IGFueTtcblxuICBzZXRQcm9wc0Fzc2lnbmVyKGFzc2lnbmVyOiBGdW5jdGlvbikge1xuICAgIHRoaXMuX3Byb3BzQXNzaWduZXIgPSBhc3NpZ25lcjtcbiAgfVxufVxuIl19

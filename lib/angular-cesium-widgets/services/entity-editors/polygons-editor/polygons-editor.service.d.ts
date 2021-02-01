@@ -1,3 +1,4 @@
+import { CesiumService } from '../../../../angular-cesium/services/cesium/cesium.service';
 import { MapEventsManagerService } from '../../../../angular-cesium/services/map-events-mananger/map-events-manager';
 import { Observable } from 'rxjs';
 import { PolygonEditUpdate } from '../../../models/polygon-edit-update';
@@ -49,8 +50,12 @@ export declare class PolygonsEditorService {
     private cameraService;
     private polygonsManager;
     private observablesMap;
-    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, polygonsManager: PolygonsManagerService): void;
+    private cesiumScene;
+    private clampPointsDebounced;
+    init(mapEventsManager: MapEventsManagerService, coordinateConverter: CoordinateConverter, cameraService: CameraService, polygonsManager: PolygonsManagerService, cesiumViewer: CesiumService): void;
     onUpdate(): Observable<PolygonEditUpdate>;
+    private clampPoints;
+    private screenToPosition;
     create(options?: PolygonEditOptions, priority?: number): PolygonEditorObservable;
     private switchToEditMode;
     edit(positions: Cartesian3[], options?: PolygonEditOptions, priority?: number): PolygonEditorObservable;

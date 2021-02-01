@@ -3,7 +3,7 @@ import { EditPoint } from './edit-point';
 import { AcLayerComponent } from '../../angular-cesium/components/ac-layer/ac-layer.component';
 import { Cartesian3 } from '../../angular-cesium/models/cartesian3';
 import { CoordinateConverter } from '../../angular-cesium/services/coordinate-converter/coordinate-converter.service';
-import { PointProps } from './polyline-edit-options';
+import { PointProps } from './point-edit-options';
 import { HippodromeEditOptions, HippodromeProps } from './hippodrome-edit-options';
 import { LabelProps } from './label-props';
 export declare class EditableHippodrome extends AcEntity {
@@ -20,10 +20,14 @@ export declare class EditableHippodrome extends AcEntity {
     private lastDraggedToPosition;
     private _labels;
     constructor(id: string, pointsLayer: AcLayerComponent, hippodromeLayer: AcLayerComponent, coordinateConverter: CoordinateConverter, editOptions: HippodromeEditOptions, positions?: Cartesian3[]);
-    labels: LabelProps[];
-    hippodromeProps: HippodromeProps;
-    defaultPointProps: PointProps;
-    enableEdit: boolean;
+    get labels(): LabelProps[];
+    set labels(labels: LabelProps[]);
+    get hippodromeProps(): HippodromeProps;
+    set hippodromeProps(value: HippodromeProps);
+    get defaultPointProps(): PointProps;
+    set defaultPointProps(value: PointProps);
+    get enableEdit(): boolean;
+    set enableEdit(value: boolean);
     private createFromExisting;
     setPointsManually(points: EditPoint[], widthMeters?: number): void;
     addPointFromExisting(position: Cartesian3): void;

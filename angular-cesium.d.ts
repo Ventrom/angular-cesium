@@ -2,22 +2,21 @@
  * Generated bundle index. Do not edit.
  */
 export * from './public_api';
-export { DragIconComponent as ɵcg } from './lib/angular-cesium-widgets/components/toolbar/ac-toolbar/drag-icon.component';
-export { CirclesManagerService as ɵcd } from './lib/angular-cesium-widgets/services/entity-editors/circles-editor/circles-manager.service';
-export { EllipsesManagerService as ɵce } from './lib/angular-cesium-widgets/services/entity-editors/ellipses-editor/ellipses-manager.service';
-export { HippodromeManagerService as ɵcb } from './lib/angular-cesium-widgets/services/entity-editors/hippodrome-editor/hippodrome-manager.service';
-export { PolygonsManagerService as ɵcc } from './lib/angular-cesium-widgets/services/entity-editors/polygons-editor/polygons-manager.service';
-export { PolylinesManagerService as ɵcf } from './lib/angular-cesium-widgets/services/entity-editors/polyline-editor/polylines-manager.service';
+export { DragIconComponent as ɵcf } from './lib/angular-cesium-widgets/components/toolbar/ac-toolbar/drag-icon.component';
+export { CirclesManagerService as ɵcc } from './lib/angular-cesium-widgets/services/entity-editors/circles-editor/circles-manager.service';
+export { EllipsesManagerService as ɵcd } from './lib/angular-cesium-widgets/services/entity-editors/ellipses-editor/ellipses-manager.service';
+export { HippodromeManagerService as ɵbz } from './lib/angular-cesium-widgets/services/entity-editors/hippodrome-editor/hippodrome-manager.service';
+export { PointsManagerService as ɵby } from './lib/angular-cesium-widgets/services/entity-editors/points-editor/points-manager.service';
+export { PolygonsManagerService as ɵca } from './lib/angular-cesium-widgets/services/entity-editors/polygons-editor/polygons-manager.service';
+export { PolylinesManagerService as ɵce } from './lib/angular-cesium-widgets/services/entity-editors/polyline-editor/polylines-manager.service';
+export { RectanglesManagerService as ɵcb } from './lib/angular-cesium-widgets/services/entity-editors/rectangles-editor/rectangles-manager.service';
 export { ANGULAR_CESIUM_CONFIG as ɵr, ConfigurationService as ɵs } from './lib/angular-cesium/cesium-enhancements/ConfigurationService';
-export { AcContextMenuWrapperComponent as ɵbt } from './lib/angular-cesium/components/ac-context-menu-wrapper/ac-context-menu-wrapper.component';
-export { AcCzmlDescComponent as ɵbz } from './lib/angular-cesium/components/ac-czml-desc/ac-czml-desc.component';
-export { AcModelDescComponent as ɵbs } from './lib/angular-cesium/components/ac-model-desc/ac-model-desc.component';
-export { AcPointPrimitiveDescComponent as ɵbu } from './lib/angular-cesium/components/ac-point-primitive-desc/ac-point-primitive-desc.component';
-export { AcHtmlContainerDirective as ɵby } from './lib/angular-cesium/directives/ac-html-container/ac-html-container.directive';
-export { AcHtmlContext as ɵbw, AcHtmlDirective as ɵbx } from './lib/angular-cesium/directives/ac-html/ac-html.directive';
-export { AcHtmlManager as ɵbv } from './lib/angular-cesium/services/ac-html-manager/ac-html-manager.service';
+export { AcContextMenuWrapperComponent as ɵbs } from './lib/angular-cesium/components/ac-context-menu-wrapper/ac-context-menu-wrapper.component';
+export { AcHtmlContainerDirective as ɵbw } from './lib/angular-cesium/directives/ac-html-container/ac-html-container.directive';
+export { AcHtmlContext as ɵbu, AcHtmlDirective as ɵbv } from './lib/angular-cesium/directives/ac-html/ac-html.directive';
+export { AcHtmlManager as ɵbt } from './lib/angular-cesium/services/ac-html-manager/ac-html-manager.service';
 export { BasicDesc as ɵbp } from './lib/angular-cesium/services/basic-desc/basic-desc.service';
-export { BasicStaticPrimitiveDesc as ɵca } from './lib/angular-cesium/services/basic-primitive-desc/basic-static-primitive-desc.service';
+export { BasicStaticPrimitiveDesc as ɵbx } from './lib/angular-cesium/services/basic-primitive-desc/basic-static-primitive-desc.service';
 export { CesiumProperties as ɵbq } from './lib/angular-cesium/services/cesium-properties/cesium-properties.service';
 export { ComputationCache as ɵu } from './lib/angular-cesium/services/computation-cache/computation-cache.service';
 export { ArcDrawerService as ɵn } from './lib/angular-cesium/services/drawers/arc-drawer/arc-drawer.service';
