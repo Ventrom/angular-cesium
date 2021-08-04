@@ -8,6 +8,7 @@ export declare enum MapLayerProviderOptions {
     BingMaps,
     GoogleEarthEnterpriseMaps,
     MapBox,
+    MapboxStyleImageryProvider,
     UrlTemplateImagery,
     OFFLINE
 }

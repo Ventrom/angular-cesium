@@ -1,17 +1,16 @@
-import { __decorate, __metadata, __param } from 'tslib';
-import { Injectable, NgZone, Optional, InjectionToken, Inject, EventEmitter, ElementRef, Input, Component, ChangeDetectionStrategy, Directive, Output, forwardRef, Pipe, NgModule, Renderer2, ChangeDetectorRef, TemplateRef, ViewContainerRef, ViewChild, ContentChild, ComponentFactoryResolver, ContentChildren, HostListener } from '@angular/core';
+import { Injectable, NgZone, Optional, InjectionToken, Inject, EventEmitter, Component, ElementRef, Input, ChangeDetectionStrategy, Directive, Output, forwardRef, Pipe, NgModule, Renderer2, ChangeDetectorRef, TemplateRef, ViewContainerRef, ViewChild, ContentChild, ComponentFactoryResolver, ContentChildren, HostListener } from '@angular/core';
 import { DOCUMENT, CommonModule } from '@angular/common';
 import * as geodesy from 'geodesy';
 import { LatLonVectors as LatLonVectors$1, LatLonEllipsoidal, Utm } from 'geodesy';
 import { isNumber } from 'util';
 import { publish, mergeMap, delay, takeUntil, filter, map, switchMap, tap, merge as merge$1 } from 'rxjs/operators';
-import { Observable, of, Subject, merge, from, BehaviorSubject, fromEvent } from 'rxjs';
+import { Observable, merge, of, Subject, from, BehaviorSubject, fromEvent } from 'rxjs';
 import { EllipsePrimitive } from 'primitive-primitives';
 import { JsonStringMapper } from 'json-string-mapper';
 import { Parse, PIPES_CONFIG, Angular2ParseModule } from 'angular2parse';
 import * as _get from 'lodash.get';
 
-let ViewerFactory = class ViewerFactory {
+class ViewerFactory {
     constructor() {
         this.cesium = Cesium;
     }
@@ -38,11 +37,11 @@ let ViewerFactory = class ViewerFactory {
         }
         return viewer;
     }
-};
-ViewerFactory = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], ViewerFactory);
+}
+ViewerFactory.decorators = [
+    { type: Injectable }
+];
+ViewerFactory.ctorParameters = () => [];
 
 /**
  * Service for setting cesium viewer map options.
@@ -56,7 +55,7 @@ ViewerFactory = __decorate([
  * ```
  * notice this configuration will be for all <ac-maps> in your component.
  */
-let ViewerConfiguration = class ViewerConfiguration {
+class ViewerConfiguration {
     constructor() {
         this.nextViewerOptionsIndex = 0;
         this.nextViewerModifierIndex = 0;
@@ -99,15 +98,15 @@ let ViewerConfiguration = class ViewerConfiguration {
     set viewerModifier(value) {
         this._viewerModifier = value;
     }
-};
-ViewerConfiguration = __decorate([
-    Injectable()
-], ViewerConfiguration);
+}
+ViewerConfiguration.decorators = [
+    { type: Injectable }
+];
 
 /**
  *  Service that initialize cesium viewer and expose cesium viewer and scene.
  */
-let CesiumService = class CesiumService {
+class CesiumService {
     constructor(ngZone, viewerFactory, viewerConfiguration) {
         this.ngZone = ngZone;
         this.viewerFactory = viewerFactory;
@@ -148,17 +147,15 @@ let CesiumService = class CesiumService {
     getMap() {
         return this.map;
     }
-};
+}
+CesiumService.decorators = [
+    { type: Injectable }
+];
 CesiumService.ctorParameters = () => [
     { type: NgZone },
     { type: ViewerFactory },
     { type: ViewerConfiguration, decorators: [{ type: Optional }] }
 ];
-CesiumService = __decorate([
-    Injectable(),
-    __param(2, Optional()),
-    __metadata("design:paramtypes", [NgZone, ViewerFactory, ViewerConfiguration])
-], CesiumService);
 
 /**
  * Fix for the constant entity shadowing.
@@ -488,7 +485,7 @@ function fixCesiumEntitiesShadows() {
 }
 
 const ANGULAR_CESIUM_CONFIG = new InjectionToken('ANGULAR_CESIUM_CONFIG');
-let ConfigurationService = class ConfigurationService {
+class ConfigurationService {
     constructor(config) {
         this.config = config;
         const fixEntitiesShadows = config ? config.fixEntitiesShadows : true;
@@ -496,15 +493,13 @@ let ConfigurationService = class ConfigurationService {
             fixCesiumEntitiesShadows();
         }
     }
-};
+}
+ConfigurationService.decorators = [
+    { type: Injectable }
+];
 ConfigurationService.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Optional }, { type: Inject, args: [ANGULAR_CESIUM_CONFIG,] }] }
 ];
-ConfigurationService = __decorate([
-    Injectable(),
-    __param(0, Optional()), __param(0, Inject(ANGULAR_CESIUM_CONFIG)),
-    __metadata("design:paramtypes", [Object])
-], ConfigurationService);
 
 /**
  * Cesium scene modes
@@ -517,13 +512,12 @@ var SceneMode;
     SceneMode[SceneMode["PERFORMANCE_SCENE2D"] = 3] = "PERFORMANCE_SCENE2D";
 })(SceneMode || (SceneMode = {}));
 
-var CameraService_1;
 /**
  *  The service exposes the scene's camera and screenSpaceCameraController
  *  SceneMode.PERFORMANCE_SCENE2D -  is a 3D scene mode that acts like Cesium 2D mode,
  *  but is more efficient performance wise.
  */
-let CameraService = CameraService_1 = class CameraService {
+class CameraService {
     constructor() {
         this.isSceneModePerformance2D = false;
     }
@@ -661,7 +655,7 @@ let CameraService = CameraService_1 = class CameraService {
                 this.scene.morphToColumbusView(duration);
                 const morphCompleteEventListener = this.scene.morphComplete.addEventListener(() => {
                     this.camera.setView({
-                        destination: Cesium.Cartesian3.fromDegrees(0.0, 0.0, Math.min(CameraService_1.PERFORMANCE_2D_ALTITUDE, this.getMaximumZoom())),
+                        destination: Cesium.Cartesian3.fromDegrees(0.0, 0.0, Math.min(CameraService.PERFORMANCE_2D_ALTITUDE, this.getMaximumZoom())),
                         orientation: {
                             pitch: Cesium.Math.toRadians(-90)
                         }
@@ -777,12 +771,12 @@ let CameraService = CameraService_1 = class CameraService {
     untrackEntity() {
         this.trackEntity();
     }
-};
+}
 CameraService.PERFORMANCE_2D_ALTITUDE = 25000000;
-CameraService = CameraService_1 = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], CameraService);
+CameraService.decorators = [
+    { type: Injectable }
+];
+CameraService.ctorParameters = () => [];
 
 /**
  * Event options for registration on map-event-manager.
@@ -857,7 +851,7 @@ var PickOptions;
  *  }
  * ```
  */
-let ContextMenuService = class ContextMenuService {
+class ContextMenuService {
     constructor() {
         this._showContextMenu = false;
         this._contextMenuChangeNotifier = new EventEmitter();
@@ -928,10 +922,10 @@ let ContextMenuService = class ContextMenuService {
         this._contextMenuChangeNotifier.emit();
         this._onClose.emit();
     }
-};
-ContextMenuService = __decorate([
-    Injectable()
-], ContextMenuService);
+}
+ContextMenuService.decorators = [
+    { type: Injectable }
+];
 
 const LatLonVectors = LatLonVectors$1; // doesnt exists on typings
 window['geodesy'] = geodesy;
@@ -960,7 +954,7 @@ window['geodesy'] = geodesy;
  * }
  *
  */
-let CoordinateConverter = class CoordinateConverter {
+class CoordinateConverter {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
     }
@@ -1056,15 +1050,13 @@ let CoordinateConverter = class CoordinateConverter {
         const secondCart = Cesium.Cartographic.fromCartesian(secondCartesian3);
         return this.bearingTo(firstCart, secondCart);
     }
-};
+}
+CoordinateConverter.decorators = [
+    { type: Injectable }
+];
 CoordinateConverter.ctorParameters = () => [
     { type: CesiumService, decorators: [{ type: Optional }] }
 ];
-CoordinateConverter = __decorate([
-    Injectable(),
-    __param(0, Optional()),
-    __metadata("design:paramtypes", [CesiumService])
-], CoordinateConverter);
 
 /**
  *  Abstract drawer. All drawers extends this class.
@@ -1120,8 +1112,7 @@ class PrimitivesDrawerService extends BasicDrawerService {
     }
 }
 
-var GeoUtilsService_1;
-let GeoUtilsService = GeoUtilsService_1 = class GeoUtilsService {
+class GeoUtilsService {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
     }
@@ -1139,7 +1130,7 @@ let GeoUtilsService = GeoUtilsService_1 = class GeoUtilsService {
         while (counter === 0 ||
             (counter < 16 && Math.max(resultDistance, meterDistance) / Math.min(resultDistance, meterDistance) > 1.000001)) {
             const factor = distanceFactorRangeMin + (distanceFactorRangeMax - distanceFactorRangeMin) / 2;
-            resultPosition = GeoUtilsService_1._pointByLocationDistanceAndAzimuth(cartographicLocation, distance * (1 + factor), radianAzimuth);
+            resultPosition = GeoUtilsService._pointByLocationDistanceAndAzimuth(cartographicLocation, distance * (1 + factor), radianAzimuth);
             resultDistance = this.distance(cartesianLocation, resultPosition);
             if (resultDistance > meterDistance) {
                 distanceFactorRangeMax = distanceFactorRangeMin + (distanceFactorRangeMax - distanceFactorRangeMin) / 2;
@@ -1197,21 +1188,20 @@ let GeoUtilsService = GeoUtilsService_1 = class GeoUtilsService {
         const camera = this.cesiumService.getViewer().camera;
         return camera.pickEllipsoid(screenPos);
     }
-};
+}
+GeoUtilsService.decorators = [
+    { type: Injectable }
+];
 GeoUtilsService.ctorParameters = () => [
     { type: CesiumService }
 ];
-GeoUtilsService = GeoUtilsService_1 = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], GeoUtilsService);
 
 /**
  +  This drawer is responsible for drawing an arc over the Cesium map.
  +  This implementation uses simple PolylineGeometry and Primitive parameters.
  +  This doesn't allow us to change the position, color, etc.. of the arc but setShow only.
  */
-let ArcDrawerService = class ArcDrawerService extends PrimitivesDrawerService {
+class ArcDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.PolylineCollection, cesiumService);
     }
@@ -1256,14 +1246,13 @@ let ArcDrawerService = class ArcDrawerService extends PrimitivesDrawerService {
         primitive.positions = this._calculateArc(cesiumProps);
         return primitive;
     }
-};
+}
+ArcDrawerService.decorators = [
+    { type: Injectable }
+];
 ArcDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-ArcDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], ArcDrawerService);
 
 var GraphicsType;
 (function (GraphicsType) {
@@ -1503,23 +1492,22 @@ class EntitiesDrawerService extends BasicDrawerService {
 /**
  *  This drawer is responsible for drawing billboards.
  */
-let BillboardDrawerService = class BillboardDrawerService extends EntitiesDrawerService {
+class BillboardDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.billboard);
     }
-};
+}
+BillboardDrawerService.decorators = [
+    { type: Injectable }
+];
 BillboardDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-BillboardDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], BillboardDrawerService);
 
 /**
  *  This drawer is responsible for drawing czml dataSources.
  */
-let CzmlDrawerService = class CzmlDrawerService extends BasicDrawerService {
+class CzmlDrawerService extends BasicDrawerService {
     constructor(cesiumService) {
         super();
         this.cesiumService = cesiumService;
@@ -1548,100 +1536,94 @@ let CzmlDrawerService = class CzmlDrawerService extends BasicDrawerService {
     setShow(showValue) {
         this.czmlStream.entities.show = showValue;
     }
-};
+}
+CzmlDrawerService.decorators = [
+    { type: Injectable }
+];
 CzmlDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-CzmlDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], CzmlDrawerService);
 
 /**
  *  This drawer is responsible for drawing ellipses.
  */
-let EllipseDrawerService = class EllipseDrawerService extends EntitiesDrawerService {
+class EllipseDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.ellipse);
     }
-};
+}
+EllipseDrawerService.decorators = [
+    { type: Injectable }
+];
 EllipseDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-EllipseDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], EllipseDrawerService);
 
 /**
  *  This drawer is responsible for drawing labels.
  */
-let LabelDrawerService = class LabelDrawerService extends EntitiesDrawerService {
+class LabelDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.label);
     }
-};
+}
+LabelDrawerService.decorators = [
+    { type: Injectable }
+];
 LabelDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-LabelDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], LabelDrawerService);
 
 /**
  *  This drawer is responsible for drawing points.
  */
-let PointDrawerService = class PointDrawerService extends EntitiesDrawerService {
+class PointDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.point);
     }
-};
+}
+PointDrawerService.decorators = [
+    { type: Injectable }
+];
 PointDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PointDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PointDrawerService);
 
 /**
  *  This drawer is responsible for drawing polygons.
  */
-let PolygonDrawerService = class PolygonDrawerService extends EntitiesDrawerService {
+class PolygonDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.polygon);
     }
-};
+}
+PolygonDrawerService.decorators = [
+    { type: Injectable }
+];
 PolygonDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PolygonDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PolygonDrawerService);
 
 /**
  *  This drawer is responsible of drawing polylines.
  */
-let PolylineDrawerService = class PolylineDrawerService extends EntitiesDrawerService {
+class PolylineDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.polyline);
     }
-};
+}
+PolylineDrawerService.decorators = [
+    { type: Injectable }
+];
 PolylineDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PolylineDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PolylineDrawerService);
 
 /**
  *  This drawer is responsible of drawing polylines as primitives.
  *  This drawer is more efficient than PolylineDrawerService when drawing dynamic polylines.
  */
-let PolylinePrimitiveDrawerService = class PolylinePrimitiveDrawerService extends PrimitivesDrawerService {
+class PolylinePrimitiveDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.PolylineCollection, cesiumService);
     }
@@ -1668,14 +1650,13 @@ let PolylinePrimitiveDrawerService = class PolylinePrimitiveDrawerService extend
         }
         return cesiumProps;
     }
-};
+}
+PolylinePrimitiveDrawerService.decorators = [
+    { type: Injectable }
+];
 PolylinePrimitiveDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PolylinePrimitiveDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PolylinePrimitiveDrawerService);
 
 var KeyboardAction;
 (function (KeyboardAction) {
@@ -1994,7 +1975,7 @@ var KeyEventState;
  * + `KeyboardAction.CAMERA_ZOOM_OUT` -  Zoom out from the current camera center position, accepts a numeric parameter named
  * `amount` that controls the amount of zoom in meters.
  */
-let KeyboardControlService = class KeyboardControlService {
+class KeyboardControlService {
     /**
      * Creats the keyboard control service.
      */
@@ -2185,17 +2166,15 @@ let KeyboardControlService = class KeyboardControlService {
         this.document.removeEventListener('keyup', this.handleKeyup);
         this.cesiumService.getViewer().clock.onTick.removeEventListener(this.handleTick);
     }
-};
+}
+KeyboardControlService.decorators = [
+    { type: Injectable }
+];
 KeyboardControlService.ctorParameters = () => [
     { type: NgZone },
     { type: CesiumService },
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] }
 ];
-KeyboardControlService = __decorate([
-    Injectable(),
-    __param(2, Inject(DOCUMENT)),
-    __metadata("design:paramtypes", [NgZone, CesiumService, Object])
-], KeyboardControlService);
 
 class CesiumPureEventObserver {
     constructor(event, modifier) {
@@ -2239,7 +2218,8 @@ class CesiumLongPressObserver extends CesiumPureEventObserver {
             stopEvent = CesiumEvent.MIDDLE_UP;
         }
         const startEventObservable = this.eventFactory.get(startEvent, this.modifier);
-        const stopEventObservable = this.eventFactory.get(stopEvent, this.modifier);
+        const stopEventObservable = merge(this.eventFactory.get(stopEvent, this.modifier), this.eventFactory.get(CesiumEvent.MOUSE_MOVE, this.modifier) // Prevent drag mistaken for long press
+        );
         // publish for preventing side effect
         const longPressObservable = publish()(startEventObservable.pipe(mergeMap((e) => of(e).pipe(delay(CesiumLongPressObserver.LONG_PRESS_EVENTS_DURATION), takeUntil(stopEventObservable)))));
         return longPressObservable;
@@ -2247,8 +2227,7 @@ class CesiumLongPressObserver extends CesiumPureEventObserver {
 }
 CesiumLongPressObserver.LONG_PRESS_EVENTS_DURATION = 250;
 
-var CesiumEventBuilder_1;
-let CesiumEventBuilder = CesiumEventBuilder_1 = class CesiumEventBuilder {
+class CesiumEventBuilder {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
         this.cesiumEventsObservables = new Map();
@@ -2265,7 +2244,7 @@ let CesiumEventBuilder = CesiumEventBuilder_1 = class CesiumEventBuilder {
         this.eventsHandler = this.cesiumService.getViewer().screenSpaceEventHandler;
     }
     get(event, modifier) {
-        const eventName = CesiumEventBuilder_1.getEventFullName(event, modifier);
+        const eventName = CesiumEventBuilder.getEventFullName(event, modifier);
         if (this.cesiumEventsObservables.has(eventName)) {
             return this.cesiumEventsObservables.get(eventName);
         }
@@ -2277,7 +2256,7 @@ let CesiumEventBuilder = CesiumEventBuilder_1 = class CesiumEventBuilder {
     }
     createCesiumEventObservable(event, modifier) {
         let cesiumEventObservable;
-        if (CesiumEventBuilder_1.longPressEvents.has(event)) {
+        if (CesiumEventBuilder.longPressEvents.has(event)) {
             cesiumEventObservable = this.createSpecialCesiumEventObservable(event, modifier);
         }
         else {
@@ -2290,25 +2269,24 @@ let CesiumEventBuilder = CesiumEventBuilder_1 = class CesiumEventBuilder {
         // could support more events if needed
         return new CesiumLongPressObserver(event, modifier, this).init();
     }
-};
-CesiumEventBuilder.ctorParameters = () => [
-    { type: CesiumService }
-];
+}
 CesiumEventBuilder.longPressEvents = new Set([
     CesiumEvent.LONG_LEFT_PRESS,
     CesiumEvent.LONG_RIGHT_PRESS,
     CesiumEvent.LONG_MIDDLE_PRESS
 ]);
-CesiumEventBuilder = CesiumEventBuilder_1 = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], CesiumEventBuilder);
+CesiumEventBuilder.decorators = [
+    { type: Injectable }
+];
+CesiumEventBuilder.ctorParameters = () => [
+    { type: CesiumService }
+];
 
 /**
  * Service for solving plonter.
  * Used by map-event-manager and plonter context component
  */
-let PlonterService = class PlonterService {
+class PlonterService {
     constructor() {
         this._entitesToPlonter = [];
         this._plonterChangeNotifier = new EventEmitter();
@@ -2339,11 +2317,11 @@ let PlonterService = class PlonterService {
         this._plonterChangeNotifier.emit();
         this._plonterObserver.next(this._eventResult);
     }
-};
-PlonterService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], PlonterService);
+}
+PlonterService.decorators = [
+    { type: Injectable }
+];
+PlonterService.ctorParameters = () => [];
 
 const ɵ0 = (array) => {
     return array.reduce((accumulator, currentValue) => {
@@ -2405,7 +2383,7 @@ class Registration {
  * __param:__ entityType - entity type class that you are interested like (Track). the class must extends AcEntity
  * __param:__ pickOption - self explained
  */
-let MapEventsManagerService = class MapEventsManagerService {
+class MapEventsManagerService {
     constructor(cesiumService, eventBuilder, plonterService) {
         this.cesiumService = cesiumService;
         this.eventBuilder = eventBuilder;
@@ -2587,20 +2565,17 @@ let MapEventsManagerService = class MapEventsManagerService {
             return of(entitiesAndMovement);
         }
     }
-};
+}
+MapEventsManagerService.decorators = [
+    { type: Injectable }
+];
 MapEventsManagerService.ctorParameters = () => [
     { type: CesiumService },
     { type: CesiumEventBuilder },
     { type: PlonterService }
 ];
-MapEventsManagerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService,
-        CesiumEventBuilder,
-        PlonterService])
-], MapEventsManagerService);
 
-let MapLayersService = class MapLayersService {
+class MapLayersService {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
         this.layersDataSources = [];
@@ -2638,20 +2613,19 @@ let MapLayersService = class MapLayersService {
             }
         });
     }
-};
+}
+MapLayersService.decorators = [
+    { type: Injectable }
+];
 MapLayersService.ctorParameters = () => [
     { type: CesiumService }
 ];
-MapLayersService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], MapLayersService);
 
 /**
  *  The service manages `ac-map` instances. `ac-map` register itself to this service.
  *  This allows retrieval of maps provided services outside of `ac-map` scope.
  */
-let MapsManagerService = class MapsManagerService {
+class MapsManagerService {
     constructor() {
         this.defaultIdCounter = 0;
         this._Maps = new Map();
@@ -2744,11 +2718,11 @@ let MapsManagerService = class MapsManagerService {
         this.eventRemoveCallbacks.forEach(removeCallback => removeCallback());
         this.eventRemoveCallbacks = [];
     }
-};
-MapsManagerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], MapsManagerService);
+}
+MapsManagerService.decorators = [
+    { type: Injectable }
+];
+MapsManagerService.ctorParameters = () => [];
 
 /**
  * Take screenshot of your cesium globe.
@@ -2764,7 +2738,7 @@ MapsManagerService = __decorate([
  * ```
  *
  */
-let ScreenshotService = class ScreenshotService {
+class ScreenshotService {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
     }
@@ -2784,14 +2758,13 @@ let ScreenshotService = class ScreenshotService {
         link.click();
         document.body.removeChild(link);
     }
-};
+}
+ScreenshotService.decorators = [
+    { type: Injectable }
+];
 ScreenshotService.ctorParameters = () => [
     { type: CesiumService }
 ];
-ScreenshotService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], ScreenshotService);
 
 /**
  * This is a map implementation, creates the cesium map.
@@ -2808,7 +2781,7 @@ ScreenshotService = __decorate([
  *     <dynamic-ellipse-layer #layer></dynamic-ellipse-layer>
  * </ac-map>
  */
-let AcMapComponent = class AcMapComponent {
+class AcMapComponent {
     constructor(_cesiumService, _cameraService, _elemRef, document, mapsManagerService, billboardDrawerService, labelDrawerService, ellipseDrawerService, polylineDrawerService, polygonDrawerService, arcDrawerService, pointDrawerService, czmlDrawerService, mapEventsManager, keyboardControlService, mapLayersService, configurationService, screenshotService, contextMenuService, coordinateConverter) {
         this._cesiumService = _cesiumService;
         this._cameraService = _cameraService;
@@ -2931,7 +2904,38 @@ let AcMapComponent = class AcMapComponent {
     getCoordinateConverter() {
         return this.coordinateConverter;
     }
-};
+}
+AcMapComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-map',
+                template: `
+    <ac-default-plonter *ngIf="!disableDefaultPlonter"></ac-default-plonter>
+    <ac-context-menu-wrapper></ac-context-menu-wrapper>
+    <ng-content></ng-content>
+  `,
+                providers: [
+                    CesiumService,
+                    BillboardDrawerService,
+                    CesiumEventBuilder,
+                    KeyboardControlService,
+                    MapEventsManagerService,
+                    PlonterService,
+                    LabelDrawerService,
+                    PolylineDrawerService,
+                    PolylinePrimitiveDrawerService,
+                    EllipseDrawerService,
+                    PointDrawerService,
+                    ArcDrawerService,
+                    CzmlDrawerService,
+                    PolygonDrawerService,
+                    MapLayersService,
+                    CameraService,
+                    ScreenshotService,
+                    ContextMenuService,
+                    CoordinateConverter,
+                ]
+            },] }
+];
 AcMapComponent.ctorParameters = () => [
     { type: CesiumService },
     { type: CameraService },
@@ -2954,78 +2958,15 @@ AcMapComponent.ctorParameters = () => [
     { type: ContextMenuService },
     { type: CoordinateConverter }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapComponent.prototype, "disableDefaultPlonter", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcMapComponent.prototype, "mapId", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapComponent.prototype, "flyTo", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], AcMapComponent.prototype, "sceneMode", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcMapComponent.prototype, "containerId", void 0);
-AcMapComponent = __decorate([
-    Component({
-        selector: 'ac-map',
-        template: `
-    <ac-default-plonter *ngIf="!disableDefaultPlonter"></ac-default-plonter>
-    <ac-context-menu-wrapper></ac-context-menu-wrapper>
-    <ng-content></ng-content>
-  `,
-        providers: [
-            CesiumService,
-            BillboardDrawerService,
-            CesiumEventBuilder,
-            KeyboardControlService,
-            MapEventsManagerService,
-            PlonterService,
-            LabelDrawerService,
-            PolylineDrawerService,
-            PolylinePrimitiveDrawerService,
-            EllipseDrawerService,
-            PointDrawerService,
-            ArcDrawerService,
-            CzmlDrawerService,
-            PolygonDrawerService,
-            MapLayersService,
-            CameraService,
-            ScreenshotService,
-            ContextMenuService,
-            CoordinateConverter,
-        ]
-    }),
-    __param(3, Inject(DOCUMENT)),
-    __metadata("design:paramtypes", [CesiumService,
-        CameraService,
-        ElementRef, Object, MapsManagerService,
-        BillboardDrawerService,
-        LabelDrawerService,
-        EllipseDrawerService,
-        PolylineDrawerService,
-        PolygonDrawerService,
-        ArcDrawerService,
-        PointDrawerService,
-        CzmlDrawerService,
-        MapEventsManagerService,
-        KeyboardControlService,
-        MapLayersService,
-        ConfigurationService,
-        ScreenshotService,
-        ContextMenuService,
-        CoordinateConverter])
-], AcMapComponent);
+AcMapComponent.propDecorators = {
+    disableDefaultPlonter: [{ type: Input }],
+    mapId: [{ type: Input }],
+    flyTo: [{ type: Input }],
+    sceneMode: [{ type: Input }],
+    containerId: [{ type: Input }]
+};
 
-let LayerService = class LayerService {
+class LayerService {
     constructor() {
         this._cache = true;
         this.descriptions = [];
@@ -3092,10 +3033,10 @@ let LayerService = class LayerService {
     layerUpdates() {
         return this.layerUpdate;
     }
-};
-LayerService = __decorate([
-    Injectable()
-], LayerService);
+}
+LayerService.decorators = [
+    { type: Injectable }
+];
 
 /**
  * Action to do on entity
@@ -3106,7 +3047,7 @@ var ActionType;
     ActionType[ActionType["DELETE"] = 1] = "DELETE";
 })(ActionType || (ActionType = {}));
 
-let ComputationCache = class ComputationCache {
+class ComputationCache {
     constructor() {
         this._cache = new Map();
     }
@@ -3121,10 +3062,10 @@ let ComputationCache = class ComputationCache {
     clear() {
         this._cache.clear();
     }
-};
-ComputationCache = __decorate([
-    Injectable()
-], ComputationCache);
+}
+ComputationCache.decorators = [
+    { type: Injectable }
+];
 
 class Checker {
     static throwIfAnyNotPresent(values, propertyNames) {
@@ -3146,7 +3087,7 @@ class Checker {
  *  This allows us to change the position of the ellipses without creating a new primitive object
  *  as Cesium does not allow updating an ellipse.
  */
-let DynamicEllipseDrawerService = class DynamicEllipseDrawerService extends PrimitivesDrawerService {
+class DynamicEllipseDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.PrimitiveCollection, cesiumService);
     }
@@ -3158,30 +3099,28 @@ let DynamicEllipseDrawerService = class DynamicEllipseDrawerService extends Prim
         ellipse.updateLocationData(cesiumProps);
         return ellipse;
     }
-};
+}
+DynamicEllipseDrawerService.decorators = [
+    { type: Injectable }
+];
 DynamicEllipseDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-DynamicEllipseDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], DynamicEllipseDrawerService);
 
 /**
  *  This drawer is responsible for creating the dynamic version of the polyline component.
  */
-let DynamicPolylineDrawerService = class DynamicPolylineDrawerService extends PrimitivesDrawerService {
+class DynamicPolylineDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.PolylineCollection, cesiumService);
     }
-};
+}
+DynamicPolylineDrawerService.decorators = [
+    { type: Injectable }
+];
 DynamicPolylineDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-DynamicPolylineDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], DynamicPolylineDrawerService);
 
 /**
  *
@@ -3194,6 +3133,9 @@ class StaticPrimitiveDrawer extends PrimitivesDrawerService {
         this.geometryType = geometryType;
     }
     add(geometryProps, instanceProps, primitiveProps) {
+        if (Object.keys(instanceProps).length === 0) {
+            throw (new Error('instanceProps object is empty'));
+        }
         instanceProps.geometry = new this.geometryType(geometryProps);
         primitiveProps.geometryInstances = new Cesium.GeometryInstance(instanceProps);
         primitiveProps.asynchronous = false;
@@ -3211,24 +3153,23 @@ class StaticPrimitiveDrawer extends PrimitivesDrawerService {
 /**
  *  This drawer is responsible for creating the static version of the circle component.
  */
-let StaticCircleDrawerService = class StaticCircleDrawerService extends StaticPrimitiveDrawer {
+class StaticCircleDrawerService extends StaticPrimitiveDrawer {
     constructor(cesiumService) {
         super(Cesium.CircleGeometry, cesiumService);
     }
-};
+}
+StaticCircleDrawerService.decorators = [
+    { type: Injectable }
+];
 StaticCircleDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-StaticCircleDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], StaticCircleDrawerService);
 
 /**
  *  This drawer is responsible for creating the static version of the polyline component.
  *  This also allows us to change the color of the polylines.
  */
-let StaticPolylineDrawerService = class StaticPolylineDrawerService extends StaticPrimitiveDrawer {
+class StaticPolylineDrawerService extends StaticPrimitiveDrawer {
     constructor(cesiumService) {
         super(Cesium.PolylineGeometry, cesiumService);
     }
@@ -3247,231 +3188,217 @@ let StaticPolylineDrawerService = class StaticPolylineDrawerService extends Stat
         }
         return primitive;
     }
-};
+}
+StaticPolylineDrawerService.decorators = [
+    { type: Injectable }
+];
 StaticPolylineDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-StaticPolylineDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], StaticPolylineDrawerService);
 
 /**
  + This drawer is responsible for drawing a polygon over the Cesium map.
  + This implementation uses simple PolygonGeometry and Primitive parameters.
  + This doesn't allow us to change the position, color, etc.. of the polygons. For that you may use the dynamic polygon component.
  */
-let StaticPolygonDrawerService = class StaticPolygonDrawerService extends StaticPrimitiveDrawer {
+class StaticPolygonDrawerService extends StaticPrimitiveDrawer {
     constructor(cesiumService) {
         super(Cesium.PolygonGeometry, cesiumService);
     }
-};
+}
+StaticPolygonDrawerService.decorators = [
+    { type: Injectable }
+];
 StaticPolygonDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-StaticPolygonDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], StaticPolygonDrawerService);
 
 /**
  + *  This drawer is responsible for drawing an ellipse over the Cesium map.
  + *  This implementation uses simple EllipseGeometry and Primitive parameters.
  + *  This doesn't allow us to change the position, color, etc.. of the ellipses. For that you may use the dynamic ellipse component.
  + */
-let StaticEllipseDrawerService = class StaticEllipseDrawerService extends StaticPrimitiveDrawer {
+class StaticEllipseDrawerService extends StaticPrimitiveDrawer {
     constructor(cesiumService) {
         super(Cesium.EllipseGeometry, cesiumService);
     }
-};
+}
+StaticEllipseDrawerService.decorators = [
+    { type: Injectable }
+];
 StaticEllipseDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-StaticEllipseDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], StaticEllipseDrawerService);
 
 /**
  *  This drawer is responsible for drawing models.
  */
-let ModelDrawerService = class ModelDrawerService extends EntitiesDrawerService {
+class ModelDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.model);
     }
-};
+}
+ModelDrawerService.decorators = [
+    { type: Injectable }
+];
 ModelDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-ModelDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], ModelDrawerService);
 
 /**
  *  This drawer is responsible for drawing box.
  */
-let BoxDrawerService = class BoxDrawerService extends EntitiesDrawerService {
+class BoxDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.box);
     }
-};
+}
+BoxDrawerService.decorators = [
+    { type: Injectable }
+];
 BoxDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-BoxDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], BoxDrawerService);
 
 /**
  *  This drawer is responsible for drawing corridors .
  */
-let CorridorDrawerService = class CorridorDrawerService extends EntitiesDrawerService {
+class CorridorDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.corridor);
     }
-};
+}
+CorridorDrawerService.decorators = [
+    { type: Injectable }
+];
 CorridorDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-CorridorDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], CorridorDrawerService);
 
 /**
  *  This drawer is responsible for drawing cylinders.
  */
-let CylinderDrawerService = class CylinderDrawerService extends EntitiesDrawerService {
+class CylinderDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.cylinder);
     }
-};
+}
+CylinderDrawerService.decorators = [
+    { type: Injectable }
+];
 CylinderDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-CylinderDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], CylinderDrawerService);
 
 /**
  *  This drawer is responsible for drawing ellipsoid.
  */
-let EllipsoidDrawerService = class EllipsoidDrawerService extends EntitiesDrawerService {
+class EllipsoidDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.ellipsoid);
     }
-};
+}
+EllipsoidDrawerService.decorators = [
+    { type: Injectable }
+];
 EllipsoidDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-EllipsoidDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], EllipsoidDrawerService);
 
 /**
  *  This drawer is responsible for drawing polylines.
  */
-let PolylineVolumeDrawerService = class PolylineVolumeDrawerService extends EntitiesDrawerService {
+class PolylineVolumeDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.polylineVolume);
     }
-};
+}
+PolylineVolumeDrawerService.decorators = [
+    { type: Injectable }
+];
 PolylineVolumeDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PolylineVolumeDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PolylineVolumeDrawerService);
 
 /**
  *  This drawer is responsible for drawing polygons.
  */
-let WallDrawerService = class WallDrawerService extends EntitiesDrawerService {
+class WallDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.wall);
     }
-};
+}
+WallDrawerService.decorators = [
+    { type: Injectable }
+];
 WallDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-WallDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], WallDrawerService);
 
 /**
  *  This drawer is responsible for drawing rectangles.
  */
-let RectangleDrawerService = class RectangleDrawerService extends EntitiesDrawerService {
+class RectangleDrawerService extends EntitiesDrawerService {
     constructor(cesiumService) {
         super(cesiumService, GraphicsType.rectangle);
     }
-};
+}
+RectangleDrawerService.decorators = [
+    { type: Injectable }
+];
 RectangleDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-RectangleDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], RectangleDrawerService);
 
 /**
  *  This drawer is responsible for drawing labels as primitives.
  *  This drawer is more efficient than LabelDrawerService when drawing dynamic labels.
  */
-let LabelPrimitiveDrawerService = class LabelPrimitiveDrawerService extends PrimitivesDrawerService {
+class LabelPrimitiveDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.LabelCollection, cesiumService);
     }
-};
+}
+LabelPrimitiveDrawerService.decorators = [
+    { type: Injectable }
+];
 LabelPrimitiveDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-LabelPrimitiveDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], LabelPrimitiveDrawerService);
 
 /**
  *  This drawer is responsible for drawing billboards as primitives.
  *  This drawer is more efficient than BillboardDrawerService when drawing dynamic billboards.
  */
-let BillboardPrimitiveDrawerService = class BillboardPrimitiveDrawerService extends PrimitivesDrawerService {
+class BillboardPrimitiveDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.BillboardCollection, cesiumService);
     }
-};
+}
+BillboardPrimitiveDrawerService.decorators = [
+    { type: Injectable }
+];
 BillboardPrimitiveDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-BillboardPrimitiveDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], BillboardPrimitiveDrawerService);
 
 /**
  *  This drawer is responsible of drawing points as primitives.
  *  This drawer is more efficient than PointDrawerService when drawing dynamic points.
  */
-let PointPrimitiveDrawerService = class PointPrimitiveDrawerService extends PrimitivesDrawerService {
+class PointPrimitiveDrawerService extends PrimitivesDrawerService {
     constructor(cesiumService) {
         super(Cesium.PointPrimitiveCollection, cesiumService);
     }
-};
+}
+PointPrimitiveDrawerService.decorators = [
+    { type: Injectable }
+];
 PointPrimitiveDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-PointPrimitiveDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], PointPrimitiveDrawerService);
 
-let HtmlDrawerService = class HtmlDrawerService extends PrimitivesDrawerService {
+class HtmlDrawerService extends PrimitivesDrawerService {
     constructor(_cesiumService) {
         super(Cesium.HtmlCollection, _cesiumService);
         this._cesiumService = _cesiumService;
@@ -3481,14 +3408,13 @@ let HtmlDrawerService = class HtmlDrawerService extends PrimitivesDrawerService 
         cesiumProps.mapContainer = this._cesiumService.getMap().getMapContainer();
         return super.add(cesiumProps);
     }
-};
+}
+HtmlDrawerService.decorators = [
+    { type: Injectable }
+];
 HtmlDrawerService.ctorParameters = () => [
     { type: CesiumService }
 ];
-HtmlDrawerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [CesiumService])
-], HtmlDrawerService);
 
 // tslint:enable
 /**
@@ -3527,7 +3453,7 @@ HtmlDrawerService = __decorate([
  *  </ac-map>
  *  ```
  */
-let AcLayerComponent = class AcLayerComponent {
+class AcLayerComponent {
     constructor(layerService, _computationCache, mapLayersService, billboardDrawerService, labelDrawerService, ellipseDrawerService, polylineDrawerService, polygonDrawerService, arcDrawerService, pointDrawerService, modelDrawerService, boxDrawerService, corridorDrawerService, cylinderDrawerService, ellipsoidDrawerSerice, polylineVolumeDrawerService, wallDrawerService, rectangleDrawerService, dynamicEllipseDrawerService, dynamicPolylineDrawerService, staticCircleDrawerService, staticPolylineDrawerService, staticPolygonDrawerService, staticEllipseDrawerService, polylinePrimitiveDrawerService, labelPrimitiveDrawerService, billboardPrimitiveDrawerService, pointPrimitiveDrawerService, htmlDrawerService, czmlDrawerService) {
         this.layerService = layerService;
         this._computationCache = _computationCache;
@@ -3727,7 +3653,45 @@ let AcLayerComponent = class AcLayerComponent {
         // TODO make entity interface: collection of type entity not notification
         from(collection).subscribe((entity) => this._updateStream.next(entity));
     }
-};
+}
+AcLayerComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-layer',
+                template: '<ng-content></ng-content>',
+                providers: [
+                    LayerService,
+                    ComputationCache,
+                    BillboardDrawerService,
+                    LabelDrawerService,
+                    EllipseDrawerService,
+                    PolylineDrawerService,
+                    ArcDrawerService,
+                    PointDrawerService,
+                    PolygonDrawerService,
+                    ModelDrawerService,
+                    BoxDrawerService,
+                    CorridorDrawerService,
+                    CylinderDrawerService,
+                    EllipsoidDrawerService,
+                    PolylineVolumeDrawerService,
+                    WallDrawerService,
+                    RectangleDrawerService,
+                    PolylinePrimitiveDrawerService,
+                    LabelPrimitiveDrawerService,
+                    BillboardPrimitiveDrawerService,
+                    PointPrimitiveDrawerService,
+                    HtmlDrawerService,
+                    CzmlDrawerService,
+                    DynamicEllipseDrawerService,
+                    DynamicPolylineDrawerService,
+                    StaticCircleDrawerService,
+                    StaticPolylineDrawerService,
+                    StaticPolygonDrawerService,
+                    StaticEllipseDrawerService,
+                ],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
 AcLayerComponent.ctorParameters = () => [
     { type: LayerService },
     { type: ComputationCache },
@@ -3760,107 +3724,20 @@ AcLayerComponent.ctorParameters = () => [
     { type: HtmlDrawerService },
     { type: CzmlDrawerService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "show", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcLayerComponent.prototype, "acFor", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "context", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "store", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "options", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "zIndex", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcLayerComponent.prototype, "debug", void 0);
-AcLayerComponent = __decorate([
-    Component({
-        selector: 'ac-layer',
-        template: '<ng-content></ng-content>',
-        providers: [
-            LayerService,
-            ComputationCache,
-            BillboardDrawerService,
-            LabelDrawerService,
-            EllipseDrawerService,
-            PolylineDrawerService,
-            ArcDrawerService,
-            PointDrawerService,
-            PolygonDrawerService,
-            ModelDrawerService,
-            BoxDrawerService,
-            CorridorDrawerService,
-            CylinderDrawerService,
-            EllipsoidDrawerService,
-            PolylineVolumeDrawerService,
-            WallDrawerService,
-            RectangleDrawerService,
-            PolylinePrimitiveDrawerService,
-            LabelPrimitiveDrawerService,
-            BillboardPrimitiveDrawerService,
-            PointPrimitiveDrawerService,
-            HtmlDrawerService,
-            CzmlDrawerService,
-            DynamicEllipseDrawerService,
-            DynamicPolylineDrawerService,
-            StaticCircleDrawerService,
-            StaticPolylineDrawerService,
-            StaticPolygonDrawerService,
-            StaticEllipseDrawerService,
-        ],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [LayerService,
-        ComputationCache,
-        MapLayersService,
-        BillboardDrawerService,
-        LabelDrawerService,
-        EllipseDrawerService,
-        PolylineDrawerService,
-        PolygonDrawerService,
-        ArcDrawerService,
-        PointDrawerService,
-        ModelDrawerService,
-        BoxDrawerService,
-        CorridorDrawerService,
-        CylinderDrawerService,
-        EllipsoidDrawerService,
-        PolylineVolumeDrawerService,
-        WallDrawerService,
-        RectangleDrawerService,
-        DynamicEllipseDrawerService,
-        DynamicPolylineDrawerService,
-        StaticCircleDrawerService,
-        StaticPolylineDrawerService,
-        StaticPolygonDrawerService,
-        StaticEllipseDrawerService,
-        PolylinePrimitiveDrawerService,
-        LabelPrimitiveDrawerService,
-        BillboardPrimitiveDrawerService,
-        PointPrimitiveDrawerService,
-        HtmlDrawerService,
-        CzmlDrawerService])
-], AcLayerComponent);
+AcLayerComponent.propDecorators = {
+    show: [{ type: Input }],
+    acFor: [{ type: Input }],
+    context: [{ type: Input }],
+    store: [{ type: Input }],
+    options: [{ type: Input }],
+    zIndex: [{ type: Input }],
+    debug: [{ type: Input }]
+};
 
 /**
  *  Extend this class to create drawing on map components.
  */
-let EntityOnMapComponent = class EntityOnMapComponent {
+class EntityOnMapComponent {
     constructor(_drawer, mapLayers) {
         this._drawer = _drawer;
         this.mapLayers = mapLayers;
@@ -3897,19 +3774,17 @@ let EntityOnMapComponent = class EntityOnMapComponent {
         this.mapLayers.removeDataSources(this.dataSources);
         this.removeFromMap();
     }
-};
+}
+EntityOnMapComponent.decorators = [
+    { type: Directive }
+];
 EntityOnMapComponent.ctorParameters = () => [
     { type: BasicDrawerService },
     { type: MapLayersService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], EntityOnMapComponent.prototype, "props", void 0);
-EntityOnMapComponent = __decorate([
-    Directive(),
-    __metadata("design:paramtypes", [BasicDrawerService, MapLayersService])
-], EntityOnMapComponent);
+EntityOnMapComponent.propDecorators = {
+    props: [{ type: Input }]
+};
 
 /**
  *  This is a billboard implementation.
@@ -3930,35 +3805,34 @@ EntityOnMapComponent = __decorate([
  *    </ac-billboard>
  *  ```
  */
-let AcBillboardComponent = class AcBillboardComponent extends EntityOnMapComponent {
+class AcBillboardComponent extends EntityOnMapComponent {
     constructor(billboardDrawer, mapLayers) {
         super(billboardDrawer, mapLayers);
     }
-};
+}
+AcBillboardComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-billboard',
+                template: ''
+            },] }
+];
 AcBillboardComponent.ctorParameters = () => [
     { type: BillboardDrawerService },
     { type: MapLayersService }
 ];
-AcBillboardComponent = __decorate([
-    Component({
-        selector: 'ac-billboard',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [BillboardDrawerService, MapLayersService])
-], AcBillboardComponent);
 
-let JsonMapper = class JsonMapper {
+class JsonMapper {
     constructor() {
         this._mapper = new JsonStringMapper();
     }
     map(expression) {
         return this._mapper.map(expression);
     }
-};
-JsonMapper = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], JsonMapper);
+}
+JsonMapper.decorators = [
+    { type: Injectable }
+];
+JsonMapper.ctorParameters = () => [];
 
 /**
  * Service for effective assignment.
@@ -3983,7 +3857,7 @@ class SmartAssigner {
     }
 }
 
-let CesiumProperties = class CesiumProperties {
+class CesiumProperties {
     constructor(_parser, _jsonMapper) {
         this._parser = _parser;
         this._jsonMapper = _jsonMapper;
@@ -4035,22 +3909,20 @@ let CesiumProperties = class CesiumProperties {
         this._assignersCache.set(expression, assignFn);
         return assignFn;
     }
-};
+}
+CesiumProperties.decorators = [
+    { type: Injectable }
+];
 CesiumProperties.ctorParameters = () => [
     { type: Parse },
     { type: JsonMapper }
 ];
-CesiumProperties = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [Parse,
-        JsonMapper])
-], CesiumProperties);
 
 /**
  *  the ancestor class for creating components.
  *  extend this class to create desc component.
  */
-let BasicDesc = class BasicDesc {
+class BasicDesc {
     constructor(_drawer, _layerService, _computationCache, _cesiumProperties) {
         this._drawer = _drawer;
         this._layerService = _layerService;
@@ -4131,34 +4003,22 @@ let BasicDesc = class BasicDesc {
         this._layerService.unregisterDescription(this);
         this.removeAll();
     }
-};
+}
+BasicDesc.decorators = [
+    { type: Directive }
+];
 BasicDesc.ctorParameters = () => [
     { type: BasicDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], BasicDesc.prototype, "props", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], BasicDesc.prototype, "onDraw", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", EventEmitter)
-], BasicDesc.prototype, "onRemove", void 0);
-BasicDesc = __decorate([
-    Directive(),
-    __metadata("design:paramtypes", [BasicDrawerService,
-        LayerService,
-        ComputationCache,
-        CesiumProperties])
-], BasicDesc);
+BasicDesc.propDecorators = {
+    props: [{ type: Input }],
+    onDraw: [{ type: Output }],
+    onRemove: [{ type: Output }]
+};
 
-var AcBillboardDescComponent_1;
 /**
  *  This is a billboard implementation.
  *  The element must be a child of ac-layer element.
@@ -4178,28 +4038,25 @@ var AcBillboardDescComponent_1;
  *    </ac-billboard-desc>
  *  ```
  */
-let AcBillboardDescComponent = AcBillboardDescComponent_1 = class AcBillboardDescComponent extends BasicDesc {
+class AcBillboardDescComponent extends BasicDesc {
     constructor(billboardDrawer, layerService, computationCache, cesiumProperties) {
         super(billboardDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcBillboardDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-billboard-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBillboardDescComponent) }]
+            },] }
+];
 AcBillboardDescComponent.ctorParameters = () => [
     { type: BillboardDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcBillboardDescComponent = AcBillboardDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-billboard-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBillboardDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [BillboardDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcBillboardDescComponent);
 
-var AcEllipseDescComponent_1;
 /**
  *  This is an ellipse implementation.
  *  The element must be a child of ac-layer element.
@@ -4219,28 +4076,25 @@ var AcEllipseDescComponent_1;
  *    </ac-ellipse-desc>
  *  ```
  */
-let AcEllipseDescComponent = AcEllipseDescComponent_1 = class AcEllipseDescComponent extends BasicDesc {
+class AcEllipseDescComponent extends BasicDesc {
     constructor(ellipseDrawer, layerService, computationCache, cesiumProperties) {
         super(ellipseDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcEllipseDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-ellipse-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcEllipseDescComponent) }]
+            },] }
+];
 AcEllipseDescComponent.ctorParameters = () => [
     { type: EllipseDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcEllipseDescComponent = AcEllipseDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-ellipse-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcEllipseDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [EllipseDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcEllipseDescComponent);
 
-var AcPolylineDescComponent_1;
 /**
  *  This is a polyline implementation.
  *  The ac-label element must be a child of ac-map element.
@@ -4258,26 +4112,24 @@ var AcPolylineDescComponent_1;
  *    </ac-polyline-desc>
  * ```
  */
-let AcPolylineDescComponent = AcPolylineDescComponent_1 = class AcPolylineDescComponent extends BasicDesc {
+class AcPolylineDescComponent extends BasicDesc {
     constructor(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) {
         super(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPolylineDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polyline-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolylineDescComponent) }]
+            },] }
+];
 AcPolylineDescComponent.ctorParameters = () => [
     { type: PolylineDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPolylineDescComponent = AcPolylineDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-polyline-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolylineDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [PolylineDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPolylineDescComponent);
 
 /**
  * @example
@@ -4289,29 +4141,28 @@ AcPolylineDescComponent = AcPolylineDescComponent_1 = __decorate([
  *    }">
  * </ac-label-desc>
  */
-let PixelOffsetPipe = class PixelOffsetPipe {
+class PixelOffsetPipe {
     transform(value, args) {
         return new Cesium.Cartesian2(value[0], value[1]);
     }
-};
-PixelOffsetPipe = __decorate([
-    Pipe({
-        name: 'pixelOffset'
-    })
-], PixelOffsetPipe);
+}
+PixelOffsetPipe.decorators = [
+    { type: Pipe, args: [{
+                name: 'pixelOffset'
+            },] }
+];
 
-let RadiansToDegreesPipe = class RadiansToDegreesPipe {
+class RadiansToDegreesPipe {
     transform(value, args) {
         return (360 - Math.round(180 * value / Math.PI)) % 360;
     }
-};
-RadiansToDegreesPipe = __decorate([
-    Pipe({
-        name: 'radiansToDegrees'
-    })
-], RadiansToDegreesPipe);
+}
+RadiansToDegreesPipe.decorators = [
+    { type: Pipe, args: [{
+                name: 'radiansToDegrees'
+            },] }
+];
 
-var AcLabelDescComponent_1;
 /**
  *  This is a label implementation.
  *  The ac-label element must be a child of ac-layer element.
@@ -4330,37 +4181,34 @@ var AcLabelDescComponent_1;
  *    </ac-label-desc>
  *  ```
  */
-let AcLabelDescComponent = AcLabelDescComponent_1 = class AcLabelDescComponent extends BasicDesc {
+class AcLabelDescComponent extends BasicDesc {
     constructor(labelDrawer, layerService, computationCache, cesiumProperties) {
         super(labelDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcLabelDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-label-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcLabelDescComponent) }]
+            },] }
+];
 AcLabelDescComponent.ctorParameters = () => [
     { type: LabelDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcLabelDescComponent = AcLabelDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-label-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcLabelDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [LabelDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcLabelDescComponent);
 
-let UtilsModule = class UtilsModule {
-};
-UtilsModule = __decorate([
-    NgModule({
-        imports: [CommonModule],
-        providers: []
-    })
-], UtilsModule);
+class UtilsModule {
+}
+UtilsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule],
+                providers: []
+            },] }
+];
 
-var AcCircleDescComponent_1;
 /**
  *  This is a circle implementation.
  *  The element must be a child of ac-layer element.
@@ -4379,7 +4227,7 @@ var AcCircleDescComponent_1;
  *    </ac-circle-desc>
  *  ```
  */
-let AcCircleDescComponent = AcCircleDescComponent_1 = class AcCircleDescComponent extends BasicDesc {
+class AcCircleDescComponent extends BasicDesc {
     constructor(ellipseDrawer, layerService, computationCache, cesiumProperties) {
         super(ellipseDrawer, layerService, computationCache, cesiumProperties);
     }
@@ -4393,24 +4241,21 @@ let AcCircleDescComponent = AcCircleDescComponent_1 = class AcCircleDescComponen
     _getPropsAssigner() {
         return (cesiumObject, desc) => Object.assign(cesiumObject, desc);
     }
-};
+}
+AcCircleDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-circle-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCircleDescComponent) }]
+            },] }
+];
 AcCircleDescComponent.ctorParameters = () => [
     { type: EllipseDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcCircleDescComponent = AcCircleDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-circle-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCircleDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [EllipseDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcCircleDescComponent);
 
-var AcArcDescComponent_1;
 /**
  *  This is an implementation of an arc.
  *  The element must be a child of ac-layer element.
@@ -4440,26 +4285,24 @@ var AcArcDescComponent_1;
  *
  *    will draw an half circle
  */
-let AcArcDescComponent = AcArcDescComponent_1 = class AcArcDescComponent extends BasicDesc {
+class AcArcDescComponent extends BasicDesc {
     constructor(arcDrawer, layerService, computationCache, cesiumProperties) {
         super(arcDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcArcDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-arc-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcArcDescComponent) }]
+            },] }
+];
 AcArcDescComponent.ctorParameters = () => [
     { type: ArcDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcArcDescComponent = AcArcDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-arc-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcArcDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [ArcDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcArcDescComponent);
 
 /**
  * Angular Cesium parent entity, all entities should inherit from it.
@@ -4506,6 +4349,7 @@ var MapLayerProviderOptions;
     MapLayerProviderOptions[MapLayerProviderOptions["BingMaps"] = Cesium.BingMapsImageryProvider] = "BingMaps";
     MapLayerProviderOptions[MapLayerProviderOptions["GoogleEarthEnterpriseMaps"] = Cesium.GoogleEarthEnterpriseMapsProvider] = "GoogleEarthEnterpriseMaps";
     MapLayerProviderOptions[MapLayerProviderOptions["MapBox"] = Cesium.MapboxImageryProvider] = "MapBox";
+    MapLayerProviderOptions[MapLayerProviderOptions["MapboxStyleImageryProvider"] = Cesium.MapboxStyleImageryProvider] = "MapboxStyleImageryProvider";
     MapLayerProviderOptions[MapLayerProviderOptions["UrlTemplateImagery"] = Cesium.UrlTemplateImageryProvider] = "UrlTemplateImagery";
     MapLayerProviderOptions[MapLayerProviderOptions["OFFLINE"] = null] = "OFFLINE";
 })(MapLayerProviderOptions || (MapLayerProviderOptions = {}));
@@ -4534,7 +4378,7 @@ var MapTerrainProviderOptions;
  *    </ac-map-layer-provider>
  *  ```
  */
-let AcMapLayerProviderComponent = class AcMapLayerProviderComponent {
+class AcMapLayerProviderComponent {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
         /**
@@ -4580,6 +4424,7 @@ let AcMapLayerProviderComponent = class AcMapLayerProviderComponent {
             case MapLayerProviderOptions.BingMaps:
             case MapLayerProviderOptions.GoogleEarthEnterpriseMaps:
             case MapLayerProviderOptions.MapBox:
+            case MapLayerProviderOptions.MapboxStyleImageryProvider:
             case MapLayerProviderOptions.UrlTemplateImagery:
             case MapLayerProviderOptions.MapTileService:
             case MapLayerProviderOptions.OpenStreetMap:
@@ -4633,45 +4478,25 @@ let AcMapLayerProviderComponent = class AcMapLayerProviderComponent {
             this.imageryLayersCollection.remove(this.imageryLayer, true);
         }
     }
-};
+}
+AcMapLayerProviderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-map-layer-provider',
+                template: ''
+            },] }
+];
 AcMapLayerProviderComponent.ctorParameters = () => [
     { type: CesiumService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "options", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "provider", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], AcMapLayerProviderComponent.prototype, "index", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "show", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "alpha", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "brightness", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapLayerProviderComponent.prototype, "contrast", void 0);
-AcMapLayerProviderComponent = __decorate([
-    Component({
-        selector: 'ac-map-layer-provider',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [CesiumService])
-], AcMapLayerProviderComponent);
+AcMapLayerProviderComponent.propDecorators = {
+    options: [{ type: Input }],
+    provider: [{ type: Input }],
+    index: [{ type: Input }],
+    show: [{ type: Input }],
+    alpha: [{ type: Input }],
+    brightness: [{ type: Input }],
+    contrast: [{ type: Input }]
+};
 
 /**
  *  This component is used for adding a terrain provider service to the map (ac-map)
@@ -4684,7 +4509,7 @@ AcMapLayerProviderComponent = __decorate([
  *    </ac-map-terrain-provider>
  *  ```
  */
-let AcMapTerrainProviderComponent = class AcMapTerrainProviderComponent {
+class AcMapTerrainProviderComponent {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
         /**
@@ -4739,31 +4564,22 @@ let AcMapTerrainProviderComponent = class AcMapTerrainProviderComponent {
     ngOnDestroy() {
         this.cesiumService.getViewer().terrainProvider = this.defaultTerrainProvider;
     }
-};
+}
+AcMapTerrainProviderComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-map-terrain-provider',
+                template: ''
+            },] }
+];
 AcMapTerrainProviderComponent.ctorParameters = () => [
     { type: CesiumService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapTerrainProviderComponent.prototype, "options", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapTerrainProviderComponent.prototype, "provider", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcMapTerrainProviderComponent.prototype, "show", void 0);
-AcMapTerrainProviderComponent = __decorate([
-    Component({
-        selector: 'ac-map-terrain-provider',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [CesiumService])
-], AcMapTerrainProviderComponent);
+AcMapTerrainProviderComponent.propDecorators = {
+    options: [{ type: Input }],
+    provider: [{ type: Input }],
+    show: [{ type: Input }]
+};
 
-var AcPointDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-label element must be a child of ac-layer element.
@@ -4781,26 +4597,24 @@ var AcPointDescComponent_1;
  *   </ac-point-desc>
  *  ```
  */
-let AcPointDescComponent = AcPointDescComponent_1 = class AcPointDescComponent extends BasicDesc {
+class AcPointDescComponent extends BasicDesc {
     constructor(pointDrawerService, layerService, computationCache, cesiumProperties) {
         super(pointDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPointDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-point-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPointDescComponent) }]
+            },] }
+];
 AcPointDescComponent.ctorParameters = () => [
     { type: PointDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPointDescComponent = AcPointDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-point-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPointDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [PointDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPointDescComponent);
 
 /**
  *  This is a label implementation.
@@ -4820,22 +4634,21 @@ AcPointDescComponent = AcPointDescComponent_1 = __decorate([
  *  </ac-label>;
  *  ```
  */
-let AcLabelComponent = class AcLabelComponent extends EntityOnMapComponent {
+class AcLabelComponent extends EntityOnMapComponent {
     constructor(labelDrawer, mapLayers) {
         super(labelDrawer, mapLayers);
     }
-};
+}
+AcLabelComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-label',
+                template: ''
+            },] }
+];
 AcLabelComponent.ctorParameters = () => [
     { type: LabelDrawerService },
     { type: MapLayersService }
 ];
-AcLabelComponent = __decorate([
-    Component({
-        selector: 'ac-label',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [LabelDrawerService, MapLayersService])
-], AcLabelComponent);
 
 /**
  *  This is a polyline implementation.
@@ -4854,22 +4667,21 @@ AcLabelComponent = __decorate([
  *  </ac-polyline>
  *  ```
  */
-let AcPolylineComponent = class AcPolylineComponent extends EntityOnMapComponent {
+class AcPolylineComponent extends EntityOnMapComponent {
     constructor(polylineDrawer, mapLayers) {
         super(polylineDrawer, mapLayers);
     }
-};
+}
+AcPolylineComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polyline',
+                template: ''
+            },] }
+];
 AcPolylineComponent.ctorParameters = () => [
     { type: PolylineDrawerService },
     { type: MapLayersService }
 ];
-AcPolylineComponent = __decorate([
-    Component({
-        selector: 'ac-polyline',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PolylineDrawerService, MapLayersService])
-], AcPolylineComponent);
 
 /**
  *  This is an ellipse implementation.
@@ -4889,22 +4701,21 @@ AcPolylineComponent = __decorate([
  *  </ac-ellipse>
  *  ```
  */
-let AcEllipseComponent = class AcEllipseComponent extends EntityOnMapComponent {
+class AcEllipseComponent extends EntityOnMapComponent {
     constructor(ellipseDrawer, mapLayers) {
         super(ellipseDrawer, mapLayers);
     }
-};
+}
+AcEllipseComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-ellipse',
+                template: ''
+            },] }
+];
 AcEllipseComponent.ctorParameters = () => [
     { type: EllipseDrawerService },
     { type: MapLayersService }
 ];
-AcEllipseComponent = __decorate([
-    Component({
-        selector: 'ac-ellipse',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [EllipseDrawerService, MapLayersService])
-], AcEllipseComponent);
 
 /**
  *  This is a point implementation.
@@ -4922,22 +4733,21 @@ AcEllipseComponent = __decorate([
  *  </ac-point>
  *  ```
  */
-let AcPointComponent = class AcPointComponent extends EntityOnMapComponent {
+class AcPointComponent extends EntityOnMapComponent {
     constructor(pointDrawer, mapLayers) {
         super(pointDrawer, mapLayers);
     }
-};
+}
+AcPointComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-point',
+                template: ''
+            },] }
+];
 AcPointComponent.ctorParameters = () => [
     { type: PointDrawerService },
     { type: MapLayersService }
 ];
-AcPointComponent = __decorate([
-    Component({
-        selector: 'ac-point',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PointDrawerService, MapLayersService])
-], AcPointComponent);
 
 /**
  *  This is an html implementation.
@@ -4949,7 +4759,7 @@ AcPointComponent = __decorate([
  *  </ac-html>
  *  ```
  */
-let AcHtmlComponent = class AcHtmlComponent {
+class AcHtmlComponent {
     constructor(cesiumService, elementRef, renderer) {
         this.cesiumService = cesiumService;
         this.elementRef = elementRef;
@@ -5000,27 +4810,25 @@ let AcHtmlComponent = class AcHtmlComponent {
     ngOnDestroy() {
         this.remove();
     }
-};
+}
+AcHtmlComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-html',
+                template: `<ng-content></ng-content>`,
+                styles: [`:host {
+                position: absolute;
+                z-index: 100;
+				}`]
+            },] }
+];
 AcHtmlComponent.ctorParameters = () => [
     { type: CesiumService },
     { type: ElementRef },
     { type: Renderer2 }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcHtmlComponent.prototype, "props", void 0);
-AcHtmlComponent = __decorate([
-    Component({
-        selector: 'ac-html',
-        template: `<ng-content></ng-content>`,
-        styles: [`:host {
-                position: absolute;
-                z-index: 100;
-				}`]
-    }),
-    __metadata("design:paramtypes", [CesiumService, ElementRef, Renderer2])
-], AcHtmlComponent);
+AcHtmlComponent.propDecorators = {
+    props: [{ type: Input }]
+};
 
 /**
  *  This is a circle implementation.
@@ -5040,7 +4848,7 @@ AcHtmlComponent = __decorate([
  *  </ac-circle>
  *  ```
  */
-let AcCircleComponent = class AcCircleComponent extends EntityOnMapComponent {
+class AcCircleComponent extends EntityOnMapComponent {
     constructor(ellipseDrawerService, mapLayers) {
         super(ellipseDrawerService, mapLayers);
     }
@@ -5057,18 +4865,17 @@ let AcCircleComponent = class AcCircleComponent extends EntityOnMapComponent {
         this.updateEllipseProps();
         super.updateOnMap();
     }
-};
+}
+AcCircleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-circle',
+                template: ''
+            },] }
+];
 AcCircleComponent.ctorParameters = () => [
     { type: EllipseDrawerService },
     { type: MapLayersService }
 ];
-AcCircleComponent = __decorate([
-    Component({
-        selector: 'ac-circle',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [EllipseDrawerService, MapLayersService])
-], AcCircleComponent);
 
 /**
  *  This is an implementation of an arc.
@@ -5092,7 +4899,7 @@ AcCircleComponent = __decorate([
  *    </ac-arc-desc>
  *    ```
  */
-let AcArcComponent = class AcArcComponent extends EntityOnMapComponent {
+class AcArcComponent extends EntityOnMapComponent {
     constructor(arcDrawer, mapLayers) {
         super(arcDrawer, mapLayers);
     }
@@ -5116,32 +4923,23 @@ let AcArcComponent = class AcArcComponent extends EntityOnMapComponent {
             this.updateOnMap();
         }
     }
-};
+}
+AcArcComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-arc',
+                template: ''
+            },] }
+];
 AcArcComponent.ctorParameters = () => [
     { type: ArcDrawerService },
     { type: MapLayersService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcArcComponent.prototype, "geometryProps", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcArcComponent.prototype, "instanceProps", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcArcComponent.prototype, "primitiveProps", void 0);
-AcArcComponent = __decorate([
-    Component({
-        selector: 'ac-arc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [ArcDrawerService, MapLayersService])
-], AcArcComponent);
+AcArcComponent.propDecorators = {
+    geometryProps: [{ type: Input }],
+    instanceProps: [{ type: Input }],
+    primitiveProps: [{ type: Input }]
+};
 
-var AcPolygonDescComponent_1;
 /**
  *  This is a polygon implementation.
  *  The properties of props are the same as the properties of Entity and PolygonGraphics:
@@ -5158,28 +4956,26 @@ var AcPolygonDescComponent_1;
  *    </ac-polygon-desc>
  *  ```
  */
-let AcPolygonDescComponent = AcPolygonDescComponent_1 = class AcPolygonDescComponent extends BasicDesc {
+class AcPolygonDescComponent extends BasicDesc {
     constructor(polygonDrawer, layerService, computationCache, cesiumProperties) {
         super(polygonDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPolygonDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polygon-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolygonDescComponent) }]
+            },] }
+];
 AcPolygonDescComponent.ctorParameters = () => [
     { type: PolygonDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPolygonDescComponent = AcPolygonDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-polygon-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolygonDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [PolygonDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPolygonDescComponent);
 
-let AcDefaultPlonterComponent = class AcDefaultPlonterComponent {
+class AcDefaultPlonterComponent {
     constructor(plonterService, cd, geoConverter) {
         this.plonterService = plonterService;
         this.cd = cd;
@@ -5197,16 +4993,11 @@ let AcDefaultPlonterComponent = class AcDefaultPlonterComponent {
     chooseEntity(entity) {
         this.plonterService.resolvePlonter(entity);
     }
-};
-AcDefaultPlonterComponent.ctorParameters = () => [
-    { type: PlonterService },
-    { type: ChangeDetectorRef },
-    { type: CoordinateConverter }
-];
-AcDefaultPlonterComponent = __decorate([
-    Component({
-        selector: 'ac-default-plonter',
-        template: `
+}
+AcDefaultPlonterComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-default-plonter',
+                template: `
       <ac-html *ngIf="plonterService.plonterShown" [props]="{
         position: plonterPosition
       }">
@@ -5218,9 +5009,9 @@ AcDefaultPlonterComponent = __decorate([
         </div>
       </ac-html>
     `,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        providers: [CoordinateConverter],
-        styles: [`
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [CoordinateConverter],
+                styles: [`
         .plonter-context-menu {
             background-color: rgba(250, 250, 250, 0.8);
             box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.15);
@@ -5237,11 +5028,13 @@ AcDefaultPlonterComponent = __decorate([
         }
 
     `]
-    }),
-    __metadata("design:paramtypes", [PlonterService,
-        ChangeDetectorRef,
-        CoordinateConverter])
-], AcDefaultPlonterComponent);
+            },] }
+];
+AcDefaultPlonterComponent.ctorParameters = () => [
+    { type: PlonterService },
+    { type: ChangeDetectorRef },
+    { type: CoordinateConverter }
+];
 
 /**
  *  This is a polygon implementation.
@@ -5261,24 +5054,23 @@ AcDefaultPlonterComponent = __decorate([
  *    </ac-polygon>
  *  ```
  */
-let AcPolygonComponent = class AcPolygonComponent extends EntityOnMapComponent {
+class AcPolygonComponent extends EntityOnMapComponent {
     constructor(polygonDrawer, mapLayers) {
         super(polygonDrawer, mapLayers);
     }
-};
+}
+AcPolygonComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polygon',
+                template: ''
+            },] }
+];
 AcPolygonComponent.ctorParameters = () => [
     { type: PolygonDrawerService },
     { type: MapLayersService }
 ];
-AcPolygonComponent = __decorate([
-    Component({
-        selector: 'ac-polygon',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PolygonDrawerService, MapLayersService])
-], AcPolygonComponent);
 
-let BasicStaticPrimitiveDesc = class BasicStaticPrimitiveDesc extends BasicDesc {
+class BasicStaticPrimitiveDesc extends BasicDesc {
     constructor(_staticPrimitiveDrawer, layerService, computationCache, cesiumProperties) {
         super(_staticPrimitiveDrawer, layerService, computationCache, cesiumProperties);
         this._staticPrimitiveDrawer = _staticPrimitiveDrawer;
@@ -5303,30 +5095,21 @@ let BasicStaticPrimitiveDesc = class BasicStaticPrimitiveDesc extends BasicDesc 
             this._staticPrimitiveDrawer.update(primitive, geometryProps, instanceProps, primitiveProps);
         }
     }
-};
+}
+BasicStaticPrimitiveDesc.decorators = [
+    { type: Directive }
+];
 BasicStaticPrimitiveDesc.ctorParameters = () => [
     { type: StaticPrimitiveDrawer },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], BasicStaticPrimitiveDesc.prototype, "geometryProps", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], BasicStaticPrimitiveDesc.prototype, "instanceProps", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], BasicStaticPrimitiveDesc.prototype, "primitiveProps", void 0);
-BasicStaticPrimitiveDesc = __decorate([
-    Directive(),
-    __metadata("design:paramtypes", [StaticPrimitiveDrawer, LayerService,
-        ComputationCache, CesiumProperties])
-], BasicStaticPrimitiveDesc);
+BasicStaticPrimitiveDesc.propDecorators = {
+    geometryProps: [{ type: Input }],
+    instanceProps: [{ type: Input }],
+    primitiveProps: [{ type: Input }]
+};
 
 /**
  *
@@ -5352,25 +5135,23 @@ BasicStaticPrimitiveDesc = __decorate([
  *  &lt;/ac-static-ellipse-desc-desc&gt;
  *  ```
  */
-let AcStaticEllipseDescComponent = class AcStaticEllipseDescComponent extends BasicStaticPrimitiveDesc {
+class AcStaticEllipseDescComponent extends BasicStaticPrimitiveDesc {
     constructor(ellipseDrawer, layerService, computationCache, cesiumProperties) {
         super(ellipseDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcStaticEllipseDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-static-ellipse-desc',
+                template: ''
+            },] }
+];
 AcStaticEllipseDescComponent.ctorParameters = () => [
     { type: StaticEllipseDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcStaticEllipseDescComponent = __decorate([
-    Component({
-        selector: 'ac-static-ellipse-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [StaticEllipseDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcStaticEllipseDescComponent);
 
 /**
  *
@@ -5397,26 +5178,25 @@ AcStaticEllipseDescComponent = __decorate([
  *   __param__: {number} [1] width
  *   __param__: {number} [0.003] granularity
  */
-let AcDynamicEllipseDescComponent = class AcDynamicEllipseDescComponent extends BasicDesc {
+class AcDynamicEllipseDescComponent extends BasicDesc {
     constructor(ellipseDrawer, layerService, computationCache, cesiumProperties) {
         super(ellipseDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcDynamicEllipseDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-dynamic-ellipse-desc',
+                template: ''
+            },] }
+];
 AcDynamicEllipseDescComponent.ctorParameters = () => [
     { type: DynamicEllipseDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcDynamicEllipseDescComponent = __decorate([
-    Component({
-        selector: 'ac-dynamic-ellipse-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [DynamicEllipseDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcDynamicEllipseDescComponent);
 
+// tslint:disable
 // tslint:enable
 /**
  * @deprecated use ac-polylinc-desc instead
@@ -5433,26 +5213,25 @@ AcDynamicEllipseDescComponent = __decorate([
  *    &lt;/ac-dynamic-polyline-desc&gt;
  * ```
  */
-let AcDynamicPolylineDescComponent = class AcDynamicPolylineDescComponent extends BasicDesc {
+class AcDynamicPolylineDescComponent extends BasicDesc {
     constructor(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) {
         super(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcDynamicPolylineDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-dynamic-polyline-desc',
+                template: ''
+            },] }
+];
 AcDynamicPolylineDescComponent.ctorParameters = () => [
     { type: DynamicPolylineDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcDynamicPolylineDescComponent = __decorate([
-    Component({
-        selector: 'ac-dynamic-polyline-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [DynamicPolylineDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcDynamicPolylineDescComponent);
 
+// tslint:disable
 // tslint:enable
 /**
  * @deprecated use ac-ploygon-desc instead
@@ -5475,25 +5254,23 @@ AcDynamicPolylineDescComponent = __decorate([
  *    &gt;&lt;/ac-static-polygon-desc&gt;
  *    ```
  */
-let AcStaticPolygonDescComponent = class AcStaticPolygonDescComponent extends BasicStaticPrimitiveDesc {
+class AcStaticPolygonDescComponent extends BasicStaticPrimitiveDesc {
     constructor(polygonDrawer, layerService, computationCache, cesiumProperties) {
         super(polygonDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcStaticPolygonDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-static-polygon-desc',
+                template: ''
+            },] }
+];
 AcStaticPolygonDescComponent.ctorParameters = () => [
     { type: StaticPolygonDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcStaticPolygonDescComponent = __decorate([
-    Component({
-        selector: 'ac-static-polygon-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [StaticPolygonDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcStaticPolygonDescComponent);
 
 /**
  * @deprecated use ac-circle-desc
@@ -5515,25 +5292,23 @@ AcStaticPolygonDescComponent = __decorate([
  *    &lt;/ac-static-circle-desc&gt;
  *    ```
  */
-let AcStaticCircleDescComponent = class AcStaticCircleDescComponent extends BasicStaticPrimitiveDesc {
+class AcStaticCircleDescComponent extends BasicStaticPrimitiveDesc {
     constructor(staticCircleDrawer, layerService, computationCache, cesiumProperties) {
         super(staticCircleDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcStaticCircleDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-static-circle',
+                template: ''
+            },] }
+];
 AcStaticCircleDescComponent.ctorParameters = () => [
     { type: StaticCircleDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcStaticCircleDescComponent = __decorate([
-    Component({
-        selector: 'ac-static-circle',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [StaticCircleDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcStaticCircleDescComponent);
 
 /**
  * @deprecated use ac-circle-desc instead
@@ -5557,7 +5332,7 @@ AcStaticCircleDescComponent = __decorate([
  *   __param__: {number} [1] width
  *   __param__: {number} [0.003] granularity
  */
-let AcDynamicCircleDescComponent = class AcDynamicCircleDescComponent extends BasicDesc {
+class AcDynamicCircleDescComponent extends BasicDesc {
     constructor(ellipseDrawer, layerService, computationCache, cesiumProperties) {
         super(ellipseDrawer, layerService, computationCache, cesiumProperties);
     }
@@ -5567,22 +5342,21 @@ let AcDynamicCircleDescComponent = class AcDynamicCircleDescComponent extends Ba
         cesiumProps.semiMinorAxis = cesiumProps.radius;
         return cesiumProps;
     }
-};
+}
+AcDynamicCircleDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-dynamic-circle-desc',
+                template: ''
+            },] }
+];
 AcDynamicCircleDescComponent.ctorParameters = () => [
     { type: DynamicEllipseDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcDynamicCircleDescComponent = __decorate([
-    Component({
-        selector: 'ac-dynamic-circle-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [DynamicEllipseDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcDynamicCircleDescComponent);
 
+// tslint:disable
 // tslint:enable
 /**
  * @deprecated use ac-ployline-desc instead
@@ -5605,27 +5379,24 @@ AcDynamicCircleDescComponent = __decorate([
  *    }"&gt&lt/ac-static-polyline-desc&gt
  *  ```
  */
-let AcStaticPolylineDescComponent = class AcStaticPolylineDescComponent extends BasicStaticPrimitiveDesc {
+class AcStaticPolylineDescComponent extends BasicStaticPrimitiveDesc {
     constructor(polylineDrawerService, layerService, computationCache, cesiumProperties) {
         super(polylineDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcStaticPolylineDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-static-polyline-desc',
+                template: ''
+            },] }
+];
 AcStaticPolylineDescComponent.ctorParameters = () => [
     { type: StaticPolylineDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcStaticPolylineDescComponent = __decorate([
-    Component({
-        selector: 'ac-static-polyline-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [StaticPolylineDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcStaticPolylineDescComponent);
 
-var AcModelDescComponent_1;
 /**
  *  This is a model implementation.
  *  The ac-model element must be a child of ac-layer element.
@@ -5643,26 +5414,24 @@ var AcModelDescComponent_1;
  *    </ac-model-desc>
  *  ```
  */
-let AcModelDescComponent = AcModelDescComponent_1 = class AcModelDescComponent extends BasicDesc {
+class AcModelDescComponent extends BasicDesc {
     constructor(modelDrawer, layerService, computationCache, cesiumProperties) {
         super(modelDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcModelDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-model-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcModelDescComponent) }]
+            },] }
+];
 AcModelDescComponent.ctorParameters = () => [
     { type: ModelDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcModelDescComponent = AcModelDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-model-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcModelDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [ModelDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcModelDescComponent);
 
 /**
  *  This component is used for adding a 3d tileset layer to the map (ac-map).
@@ -5676,7 +5445,7 @@ AcModelDescComponent = AcModelDescComponent_1 = __decorate([
  *    </ac-3d-tile-layer>
  *  ```
  */
-let AcTileset3dComponent = class AcTileset3dComponent {
+class AcTileset3dComponent {
     constructor(cesiumService) {
         this.cesiumService = cesiumService;
         /**
@@ -5732,35 +5501,23 @@ let AcTileset3dComponent = class AcTileset3dComponent {
             this._3dtilesCollection.remove(this.tilesetInstance, false);
         }
     }
-};
+}
+AcTileset3dComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-3d-tile-layer',
+                template: ''
+            },] }
+];
 AcTileset3dComponent.ctorParameters = () => [
     { type: CesiumService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcTileset3dComponent.prototype, "options", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Number)
-], AcTileset3dComponent.prototype, "index", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcTileset3dComponent.prototype, "show", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcTileset3dComponent.prototype, "style", void 0);
-AcTileset3dComponent = __decorate([
-    Component({
-        selector: 'ac-3d-tile-layer',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [CesiumService])
-], AcTileset3dComponent);
+AcTileset3dComponent.propDecorators = {
+    options: [{ type: Input }],
+    index: [{ type: Input }],
+    show: [{ type: Input }],
+    style: [{ type: Input }]
+};
 
-var AcBoxDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-box-desc element must be a child of ac-layer element.
@@ -5779,28 +5536,25 @@ var AcBoxDescComponent_1;
  *   </ac-box-desc>
  *  ```
  */
-let AcBoxDescComponent = AcBoxDescComponent_1 = class AcBoxDescComponent extends BasicDesc {
+class AcBoxDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcBoxDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-box-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBoxDescComponent) }]
+            },] }
+];
 AcBoxDescComponent.ctorParameters = () => [
     { type: BoxDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcBoxDescComponent = AcBoxDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-box-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBoxDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [BoxDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcBoxDescComponent);
 
-var AcCylinderDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-box-desc element must be a child of ac-layer element.
@@ -5819,28 +5573,25 @@ var AcCylinderDescComponent_1;
  *   </ac-cylinder-desc>
  *  ```
  */
-let AcCylinderDescComponent = AcCylinderDescComponent_1 = class AcCylinderDescComponent extends BasicDesc {
+class AcCylinderDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcCylinderDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-cylinder-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCylinderDescComponent) }]
+            },] }
+];
 AcCylinderDescComponent.ctorParameters = () => [
     { type: CylinderDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcCylinderDescComponent = AcCylinderDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-cylinder-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCylinderDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [CylinderDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcCylinderDescComponent);
 
-var AcCorridorDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-box-desc element must be a child of ac-layer element.
@@ -5859,28 +5610,25 @@ var AcCorridorDescComponent_1;
  *   </ac-corridor-desc>
  *  ```
  */
-let AcCorridorDescComponent = AcCorridorDescComponent_1 = class AcCorridorDescComponent extends BasicDesc {
+class AcCorridorDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcCorridorDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-corridor-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCorridorDescComponent) }]
+            },] }
+];
 AcCorridorDescComponent.ctorParameters = () => [
     { type: CorridorDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcCorridorDescComponent = AcCorridorDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-corridor-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcCorridorDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [CorridorDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcCorridorDescComponent);
 
-var AcEllipsoidDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-box-desc element must be a child of ac-layer element.
@@ -5899,26 +5647,24 @@ var AcEllipsoidDescComponent_1;
  *   </ac-ellipsoid-desc>
  *  ```
  */
-let AcEllipsoidDescComponent = AcEllipsoidDescComponent_1 = class AcEllipsoidDescComponent extends BasicDesc {
+class AcEllipsoidDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcEllipsoidDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-ellipsoid-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcEllipsoidDescComponent) }]
+            },] }
+];
 AcEllipsoidDescComponent.ctorParameters = () => [
     { type: EllipsoidDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcEllipsoidDescComponent = AcEllipsoidDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-ellipsoid-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcEllipsoidDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [EllipsoidDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcEllipsoidDescComponent);
 
 /**
  *  This is a point implementation.
@@ -5938,27 +5684,24 @@ AcEllipsoidDescComponent = AcEllipsoidDescComponent_1 = __decorate([
  *   </ac-polyline-volume-desc>
  *  ```
  */
-let AcPolylineVolumeDescComponent = class AcPolylineVolumeDescComponent extends BasicDesc {
+class AcPolylineVolumeDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPolylineVolumeDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polyline-volume-desc',
+                template: ''
+            },] }
+];
 AcPolylineVolumeDescComponent.ctorParameters = () => [
     { type: PolylineVolumeDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPolylineVolumeDescComponent = __decorate([
-    Component({
-        selector: 'ac-polyline-volume-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PolylineVolumeDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPolylineVolumeDescComponent);
 
-var AcWallDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-box-desc element must be a child of ac-layer element.
@@ -5977,28 +5720,25 @@ var AcWallDescComponent_1;
  *   </ac-wall-desc>
  *  ```
  */
-let AcWallDescComponent = AcWallDescComponent_1 = class AcWallDescComponent extends BasicDesc {
+class AcWallDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcWallDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-wall-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcWallDescComponent) }]
+            },] }
+];
 AcWallDescComponent.ctorParameters = () => [
     { type: WallDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcWallDescComponent = AcWallDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-wall-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcWallDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [WallDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcWallDescComponent);
 
-var AcRectangleDescComponent_1;
 /**
  *  This is a point implementation.
  *  The ac-rectangle-desc element must be a child of ac-layer element.
@@ -6017,28 +5757,25 @@ var AcRectangleDescComponent_1;
  *   </ac-rectangle-desc>
  *  ```
  */
-let AcRectangleDescComponent = AcRectangleDescComponent_1 = class AcRectangleDescComponent extends BasicDesc {
+class AcRectangleDescComponent extends BasicDesc {
     constructor(drawerService, layerService, computationCache, cesiumProperties) {
         super(drawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcRectangleDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-rectangle-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcRectangleDescComponent) }]
+            },] }
+];
 AcRectangleDescComponent.ctorParameters = () => [
     { type: RectangleDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcRectangleDescComponent = AcRectangleDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-rectangle-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcRectangleDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [RectangleDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcRectangleDescComponent);
 
-var AcBillboardPrimitiveDescComponent_1;
 /**
  *  This is a billboard primitive implementation.
  *  The element must be a child of ac-layer element.
@@ -6057,28 +5794,25 @@ var AcBillboardPrimitiveDescComponent_1;
  *    </ac-billboard-primitive-desc>
  *  ```
  */
-let AcBillboardPrimitiveDescComponent = AcBillboardPrimitiveDescComponent_1 = class AcBillboardPrimitiveDescComponent extends BasicDesc {
+class AcBillboardPrimitiveDescComponent extends BasicDesc {
     constructor(billboardPrimitiveDrawer, layerService, computationCache, cesiumProperties) {
         super(billboardPrimitiveDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcBillboardPrimitiveDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-billboard-primitive-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBillboardPrimitiveDescComponent) }]
+            },] }
+];
 AcBillboardPrimitiveDescComponent.ctorParameters = () => [
     { type: BillboardPrimitiveDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcBillboardPrimitiveDescComponent = AcBillboardPrimitiveDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-billboard-primitive-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcBillboardPrimitiveDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [BillboardPrimitiveDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcBillboardPrimitiveDescComponent);
 
-var AcLabelPrimitiveDescComponent_1;
 /**
  *  This is a label primitive implementation.
  *  The ac-label element must be a child of ac-layer element.
@@ -6096,28 +5830,25 @@ var AcLabelPrimitiveDescComponent_1;
  *    </ac-label-primitive-desc>
  *  ```
  */
-let AcLabelPrimitiveDescComponent = AcLabelPrimitiveDescComponent_1 = class AcLabelPrimitiveDescComponent extends BasicDesc {
+class AcLabelPrimitiveDescComponent extends BasicDesc {
     constructor(labelPrimitiveDrawer, layerService, computationCache, cesiumProperties) {
         super(labelPrimitiveDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcLabelPrimitiveDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-label-primitive-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcLabelPrimitiveDescComponent) }]
+            },] }
+];
 AcLabelPrimitiveDescComponent.ctorParameters = () => [
     { type: LabelPrimitiveDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcLabelPrimitiveDescComponent = AcLabelPrimitiveDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-label-primitive-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcLabelPrimitiveDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [LabelPrimitiveDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcLabelPrimitiveDescComponent);
 
-var AcPolylinePrimitiveDescComponent_1;
 /**
  *  This is a polyline primitive implementation.
  *  The ac-label element must be a child of ac-map element.
@@ -6134,26 +5865,24 @@ var AcPolylinePrimitiveDescComponent_1;
  *    </ac-polyline-primitive-desc>
  * ```
  */
-let AcPolylinePrimitiveDescComponent = AcPolylinePrimitiveDescComponent_1 = class AcPolylinePrimitiveDescComponent extends BasicDesc {
+class AcPolylinePrimitiveDescComponent extends BasicDesc {
     constructor(polylinePrimitiveDrawerService, layerService, computationCache, cesiumProperties) {
         super(polylinePrimitiveDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPolylinePrimitiveDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-polyline-primitive-desc',
+                template: '',
+                providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolylinePrimitiveDescComponent) }]
+            },] }
+];
 AcPolylinePrimitiveDescComponent.ctorParameters = () => [
     { type: PolylinePrimitiveDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPolylinePrimitiveDescComponent = AcPolylinePrimitiveDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-polyline-primitive-desc',
-        template: '',
-        providers: [{ provide: BasicDesc, useExisting: forwardRef(() => AcPolylinePrimitiveDescComponent_1) }]
-    }),
-    __metadata("design:paramtypes", [PolylinePrimitiveDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPolylinePrimitiveDescComponent);
 
 class HtmlPrimitive {
     constructor(options, collection = null) {
@@ -6290,7 +6019,7 @@ class CesiumExtender {
     }
 }
 
-let AcHtmlManager = class AcHtmlManager {
+class AcHtmlManager {
     constructor() {
         this._entities = new Map();
     }
@@ -6309,11 +6038,11 @@ let AcHtmlManager = class AcHtmlManager {
     forEach(callback) {
         this._entities.forEach(callback);
     }
-};
-AcHtmlManager = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [])
-], AcHtmlManager);
+}
+AcHtmlManager.decorators = [
+    { type: Injectable }
+];
+AcHtmlManager.ctorParameters = () => [];
 
 class AcHtmlContext {
     constructor(id, context) {
@@ -6321,7 +6050,7 @@ class AcHtmlContext {
         this.context = context;
     }
 }
-let AcHtmlDirective = class AcHtmlDirective {
+class AcHtmlDirective {
     constructor(_templateRef, _viewContainerRef, _changeDetector, _layerService, _acHtmlManager) {
         this._templateRef = _templateRef;
         this._viewContainerRef = _viewContainerRef;
@@ -6362,7 +6091,12 @@ let AcHtmlDirective = class AcHtmlDirective {
         this._acHtmlManager.remove(id);
         primitive.element = null;
     }
-};
+}
+AcHtmlDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[acHtml]',
+            },] }
+];
 AcHtmlDirective.ctorParameters = () => [
     { type: TemplateRef },
     { type: ViewContainerRef },
@@ -6370,16 +6104,6 @@ AcHtmlDirective.ctorParameters = () => [
     { type: LayerService },
     { type: AcHtmlManager }
 ];
-AcHtmlDirective = __decorate([
-    Directive({
-        selector: '[acHtml]',
-    }),
-    __metadata("design:paramtypes", [TemplateRef,
-        ViewContainerRef,
-        ChangeDetectorRef,
-        LayerService,
-        AcHtmlManager])
-], AcHtmlDirective);
 
 /**
  *  This is an html implementation.
@@ -6403,7 +6127,7 @@ AcHtmlDirective = __decorate([
  *  </ac-html>
  *  ```
  */
-let AcHtmlDescComponent = class AcHtmlDescComponent extends BasicDesc {
+class AcHtmlDescComponent extends BasicDesc {
     constructor(htmlDrawer, layerService, computationCache, cesiumProperties) {
         super(htmlDrawer, layerService, computationCache, cesiumProperties);
     }
@@ -6442,38 +6166,32 @@ let AcHtmlDescComponent = class AcHtmlDescComponent extends BasicDesc {
         this._cesiumObjectsMap.clear();
         this._drawer.removeAll();
     }
-};
-AcHtmlDescComponent.ctorParameters = () => [
-    { type: HtmlDrawerService },
-    { type: LayerService },
-    { type: ComputationCache },
-    { type: CesiumProperties }
-];
-__decorate([
-    ViewChild(AcHtmlDirective, { static: true }),
-    __metadata("design:type", AcHtmlDirective)
-], AcHtmlDescComponent.prototype, "acHtmlCreator", void 0);
-__decorate([
-    ContentChild(TemplateRef, { static: true }),
-    __metadata("design:type", TemplateRef)
-], AcHtmlDescComponent.prototype, "acHtmlTemplate", void 0);
-AcHtmlDescComponent = __decorate([
-    Component({
-        selector: 'ac-html-desc',
-        providers: [AcHtmlManager],
-        template: `
+}
+AcHtmlDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-html-desc',
+                providers: [AcHtmlManager],
+                template: `
       <div *acHtml="let acHtmlEntityId = id; let acHtmlContext = context">
           <div [acHtmlContainer]="acHtmlEntityId">
               <ng-template [ngTemplateOutlet]="acHtmlTemplate"
                            [ngTemplateOutletContext]="acHtmlContext"></ng-template>
           </div>
       </div>`
-    }),
-    __metadata("design:paramtypes", [HtmlDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcHtmlDescComponent);
+            },] }
+];
+AcHtmlDescComponent.ctorParameters = () => [
+    { type: HtmlDrawerService },
+    { type: LayerService },
+    { type: ComputationCache },
+    { type: CesiumProperties }
+];
+AcHtmlDescComponent.propDecorators = {
+    acHtmlCreator: [{ type: ViewChild, args: [AcHtmlDirective, { static: true },] }],
+    acHtmlTemplate: [{ type: ContentChild, args: [TemplateRef, { static: true },] }]
+};
 
-let AcHtmlContainerDirective = class AcHtmlContainerDirective {
+class AcHtmlContainerDirective {
     constructor(_element, _acHtmlManager) {
         this._element = _element;
         this._acHtmlManager = _acHtmlManager;
@@ -6488,23 +6206,19 @@ let AcHtmlContainerDirective = class AcHtmlContainerDirective {
         const entity = this._acHtmlManager.get(this._id);
         entity.primitive.element = this._element.nativeElement;
     }
-};
+}
+AcHtmlContainerDirective.decorators = [
+    { type: Directive, args: [{
+                selector: '[acHtmlContainer]'
+            },] }
+];
 AcHtmlContainerDirective.ctorParameters = () => [
     { type: ElementRef },
     { type: AcHtmlManager }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", String),
-    __metadata("design:paramtypes", [String])
-], AcHtmlContainerDirective.prototype, "acHtmlContainer", null);
-AcHtmlContainerDirective = __decorate([
-    Directive({
-        selector: '[acHtmlContainer]'
-    }),
-    __metadata("design:paramtypes", [ElementRef,
-        AcHtmlManager])
-], AcHtmlContainerDirective);
+AcHtmlContainerDirective.propDecorators = {
+    acHtmlContainer: [{ type: Input }]
+};
 
 /**
  * This component is used to inject the component that is passed to the ContextMenuService when opening a context menu.
@@ -6530,7 +6244,7 @@ AcHtmlContainerDirective = __decorate([
  *
  * ```
  */
-let AcContextMenuWrapperComponent = class AcContextMenuWrapperComponent {
+class AcContextMenuWrapperComponent {
     constructor(contextMenuService, cd, componentFactoryResolver) {
         this.contextMenuService = contextMenuService;
         this.cd = cd;
@@ -6556,32 +6270,27 @@ let AcContextMenuWrapperComponent = class AcContextMenuWrapperComponent {
             this.contextMenuOpenSubscription.unsubscribe();
         }
     }
-};
+}
+AcContextMenuWrapperComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-context-menu-wrapper',
+                template: `
+    <ac-html *ngIf="contextMenuService.showContextMenu" [props]="{position: contextMenuService.position}">
+      <ng-template #contextMenuContainer></ng-template>
+    </ac-html>
+  `,
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
 AcContextMenuWrapperComponent.ctorParameters = () => [
     { type: ContextMenuService },
     { type: ChangeDetectorRef },
     { type: ComponentFactoryResolver }
 ];
-__decorate([
-    ViewChild('contextMenuContainer', { read: ViewContainerRef }),
-    __metadata("design:type", ViewContainerRef)
-], AcContextMenuWrapperComponent.prototype, "viewContainerRef", void 0);
-AcContextMenuWrapperComponent = __decorate([
-    Component({
-        selector: 'ac-context-menu-wrapper',
-        template: `
-    <ac-html *ngIf="contextMenuService.showContextMenu" [props]="{position: contextMenuService.position}">
-      <ng-template #contextMenuContainer></ng-template>
-    </ac-html>
-  `,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [ContextMenuService,
-        ChangeDetectorRef,
-        ComponentFactoryResolver])
-], AcContextMenuWrapperComponent);
+AcContextMenuWrapperComponent.propDecorators = {
+    viewContainerRef: [{ type: ViewChild, args: ['contextMenuContainer', { read: ViewContainerRef },] }]
+};
 
-var AcArrayDescComponent_1;
 /**
  *  This is component represents an array under `ac-layer`.
  *  The element must be a child of ac-layer element.
@@ -6607,7 +6316,7 @@ var AcArrayDescComponent_1;
  *</ac-layer>
  *  ```
  */
-let AcArrayDescComponent = AcArrayDescComponent_1 = class AcArrayDescComponent {
+class AcArrayDescComponent {
     constructor(layerService, cd) {
         this.layerService = layerService;
         this.cd = cd;
@@ -6706,39 +6415,11 @@ let AcArrayDescComponent = AcArrayDescComponent_1 = class AcArrayDescComponent {
         }
         return entityId + arrayItemId;
     }
-};
-AcArrayDescComponent.ctorParameters = () => [
-    { type: LayerService },
-    { type: ChangeDetectorRef }
-];
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcArrayDescComponent.prototype, "acFor", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Function)
-], AcArrayDescComponent.prototype, "idGetter", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcArrayDescComponent.prototype, "show", void 0);
-__decorate([
-    ViewChild('layer', { static: true }),
-    __metadata("design:type", AcLayerComponent)
-], AcArrayDescComponent.prototype, "layer", void 0);
-__decorate([
-    ContentChildren(BasicDesc, { descendants: false }),
-    __metadata("design:type", Object)
-], AcArrayDescComponent.prototype, "basicDescs", void 0);
-__decorate([
-    ContentChildren(AcArrayDescComponent_1, { descendants: false }),
-    __metadata("design:type", Object)
-], AcArrayDescComponent.prototype, "arrayDescs", void 0);
-AcArrayDescComponent = AcArrayDescComponent_1 = __decorate([
-    Component({
-        selector: 'ac-array-desc',
-        template: `
+}
+AcArrayDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-array-desc',
+                template: `
     <ac-layer #layer [acFor]="getAcForString()"
               [context]="layerService.context"
               [options]="layerService.options"
@@ -6747,10 +6428,21 @@ AcArrayDescComponent = AcArrayDescComponent_1 = __decorate([
       <ng-content #content></ng-content>
     </ac-layer>
   `,
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [LayerService, ChangeDetectorRef])
-], AcArrayDescComponent);
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+AcArrayDescComponent.ctorParameters = () => [
+    { type: LayerService },
+    { type: ChangeDetectorRef }
+];
+AcArrayDescComponent.propDecorators = {
+    acFor: [{ type: Input }],
+    idGetter: [{ type: Input }],
+    show: [{ type: Input }],
+    layer: [{ type: ViewChild, args: ['layer', { static: true },] }],
+    basicDescs: [{ type: ContentChildren, args: [BasicDesc, { descendants: false },] }],
+    arrayDescs: [{ type: ContentChildren, args: [AcArrayDescComponent, { descendants: false },] }]
+};
 
 /**
  *  This is a label primitive implementation.
@@ -6767,25 +6459,23 @@ AcArrayDescComponent = AcArrayDescComponent_1 = __decorate([
  *    </ac-point-primitive-desc>
  *  ```
  */
-let AcPointPrimitiveDescComponent = class AcPointPrimitiveDescComponent extends BasicDesc {
+class AcPointPrimitiveDescComponent extends BasicDesc {
     constructor(pointPrimitiveDrawerService, layerService, computationCache, cesiumProperties) {
         super(pointPrimitiveDrawerService, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcPointPrimitiveDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-point-primitive-desc',
+                template: ''
+            },] }
+];
 AcPointPrimitiveDescComponent.ctorParameters = () => [
     { type: PointPrimitiveDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcPointPrimitiveDescComponent = __decorate([
-    Component({
-        selector: 'ac-point-primitive-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PointPrimitiveDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcPointPrimitiveDescComponent);
 
 /**
  *  This is a polyline implementation.
@@ -6804,22 +6494,21 @@ AcPointPrimitiveDescComponent = __decorate([
  *  </ac-polyline>
  *  ```
  */
-let AcPrimitivePolylineComponent = class AcPrimitivePolylineComponent extends EntityOnMapComponent {
+class AcPrimitivePolylineComponent extends EntityOnMapComponent {
     constructor(polylineDrawer, mapLayers) {
         super(polylineDrawer, mapLayers);
     }
-};
+}
+AcPrimitivePolylineComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-primitive-polyline',
+                template: ''
+            },] }
+];
 AcPrimitivePolylineComponent.ctorParameters = () => [
     { type: PolylinePrimitiveDrawerService },
     { type: MapLayersService }
 ];
-AcPrimitivePolylineComponent = __decorate([
-    Component({
-        selector: 'ac-primitive-polyline',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [PolylinePrimitiveDrawerService, MapLayersService])
-], AcPrimitivePolylineComponent);
 
 // For angular parse usage
 var PARSE_PIPES_CONFIG_MAP = [
@@ -6851,25 +6540,23 @@ var PARSE_PIPES_CONFIG_MAP = [
  *    </ac-czml-desc>
  *  ```
  */
-let AcCzmlDescComponent = class AcCzmlDescComponent extends BasicDesc {
+class AcCzmlDescComponent extends BasicDesc {
     constructor(czmlDrawer, layerService, computationCache, cesiumProperties) {
         super(czmlDrawer, layerService, computationCache, cesiumProperties);
     }
-};
+}
+AcCzmlDescComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-czml-desc',
+                template: ''
+            },] }
+];
 AcCzmlDescComponent.ctorParameters = () => [
     { type: CzmlDrawerService },
     { type: LayerService },
     { type: ComputationCache },
     { type: CesiumProperties }
 ];
-AcCzmlDescComponent = __decorate([
-    Component({
-        selector: 'ac-czml-desc',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [CzmlDrawerService, LayerService,
-        ComputationCache, CesiumProperties])
-], AcCzmlDescComponent);
 
 /**
  *  This is a rectangle implementation.
@@ -6888,28 +6575,29 @@ AcCzmlDescComponent = __decorate([
  *    </ac-rectangle>
  *  ```
  */
-let AcRectangleComponent = class AcRectangleComponent extends EntityOnMapComponent {
+class AcRectangleComponent extends EntityOnMapComponent {
     constructor(rectangleDrawer, mapLayers) {
         super(rectangleDrawer, mapLayers);
     }
-};
+}
+AcRectangleComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-rectangle',
+                template: ''
+            },] }
+];
 AcRectangleComponent.ctorParameters = () => [
     { type: RectangleDrawerService },
     { type: MapLayersService }
 ];
-AcRectangleComponent = __decorate([
-    Component({
-        selector: 'ac-rectangle',
-        template: ''
-    }),
-    __metadata("design:paramtypes", [RectangleDrawerService, MapLayersService])
-], AcRectangleComponent);
 
-var AngularCesiumModule_1;
-let AngularCesiumModule = AngularCesiumModule_1 = class AngularCesiumModule {
+class AngularCesiumModule {
+    constructor() {
+        CesiumExtender.extend();
+    }
     static forRoot(config) {
         return {
-            ngModule: AngularCesiumModule_1,
+            ngModule: AngularCesiumModule,
             providers: [
                 JsonMapper, CesiumProperties, GeoUtilsService, ViewerFactory, MapsManagerService, ConfigurationService,
                 { provide: ANGULAR_CESIUM_CONFIG, useValue: config },
@@ -6918,125 +6606,122 @@ let AngularCesiumModule = AngularCesiumModule_1 = class AngularCesiumModule {
             ],
         };
     }
-    constructor() {
-        CesiumExtender.extend();
-    }
-};
-AngularCesiumModule = AngularCesiumModule_1 = __decorate([
-    NgModule({
-        imports: [
-            CommonModule,
-            Angular2ParseModule,
-            UtilsModule,
-        ],
-        declarations: [
-            AcMapComponent,
-            AcLayerComponent,
-            AcBillboardComponent,
-            AcBillboardDescComponent,
-            AcBillboardPrimitiveDescComponent,
-            AcLabelDescComponent,
-            AcLabelPrimitiveDescComponent,
-            AcEllipseDescComponent,
-            AcPolylineDescComponent,
-            AcPolylinePrimitiveDescComponent,
-            PixelOffsetPipe,
-            RadiansToDegreesPipe,
-            AcCircleDescComponent,
-            AcArcDescComponent,
-            AcMapLayerProviderComponent,
-            AcMapTerrainProviderComponent,
-            AcPointDescComponent,
-            AcLabelComponent,
-            AcPolylineComponent,
-            AcPrimitivePolylineComponent,
-            AcEllipseComponent,
-            AcPointComponent,
-            AcBillboardComponent,
-            AcHtmlComponent,
-            AcCircleComponent,
-            AcArcComponent,
-            AcPolygonDescComponent,
-            AcPolygonComponent,
-            AcDefaultPlonterComponent,
-            AcModelDescComponent,
-            AcTileset3dComponent,
-            AcBoxDescComponent,
-            AcCylinderDescComponent,
-            AcCorridorDescComponent,
-            AcEllipsoidDescComponent,
-            AcPolylineVolumeDescComponent,
-            AcWallDescComponent,
-            AcRectangleDescComponent,
-            AcContextMenuWrapperComponent,
-            AcPointPrimitiveDescComponent,
-            AcHtmlDescComponent,
-            AcHtmlDirective,
-            AcHtmlContainerDirective,
-            AcArrayDescComponent,
-            AcCzmlDescComponent,
-            AcStaticEllipseDescComponent,
-            AcDynamicEllipseDescComponent,
-            AcDynamicPolylineDescComponent,
-            AcStaticPolylineDescComponent,
-            AcDynamicCircleDescComponent,
-            AcStaticCircleDescComponent,
-            AcStaticPolygonDescComponent,
-            AcRectangleComponent
-        ],
-        exports: [
-            AcMapComponent,
-            AcBillboardComponent,
-            AcBillboardDescComponent,
-            AcBillboardPrimitiveDescComponent,
-            AcLabelDescComponent,
-            AcLabelPrimitiveDescComponent,
-            AcEllipseDescComponent,
-            AcPolylineDescComponent,
-            AcPolylinePrimitiveDescComponent,
-            AcLayerComponent,
-            AcCircleDescComponent,
-            AcArcDescComponent,
-            AcMapLayerProviderComponent,
-            AcMapTerrainProviderComponent,
-            AcPointDescComponent,
-            AcLabelComponent,
-            AcPolylineComponent,
-            AcPrimitivePolylineComponent,
-            AcEllipseComponent,
-            AcPointComponent,
-            AcBillboardComponent,
-            AcHtmlComponent,
-            AcCircleComponent,
-            AcArcComponent,
-            AcPolygonDescComponent,
-            AcPolygonComponent,
-            AcDefaultPlonterComponent,
-            AcModelDescComponent,
-            AcTileset3dComponent,
-            AcBoxDescComponent,
-            AcCylinderDescComponent,
-            AcCorridorDescComponent,
-            AcEllipsoidDescComponent,
-            AcPolylineVolumeDescComponent,
-            AcWallDescComponent,
-            AcRectangleDescComponent,
-            AcPointPrimitiveDescComponent,
-            AcHtmlDescComponent,
-            AcArrayDescComponent,
-            AcCzmlDescComponent,
-            AcRectangleComponent,
-            AcStaticEllipseDescComponent,
-            AcDynamicEllipseDescComponent,
-            AcDynamicPolylineDescComponent,
-            AcStaticPolylineDescComponent,
-            AcDynamicCircleDescComponent,
-            AcStaticCircleDescComponent,
-            AcStaticPolygonDescComponent,
-        ],
-    }),
-    __metadata("design:paramtypes", [])
-], AngularCesiumModule);
+}
+AngularCesiumModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [
+                    CommonModule,
+                    Angular2ParseModule,
+                    UtilsModule,
+                ],
+                declarations: [
+                    AcMapComponent,
+                    AcLayerComponent,
+                    AcBillboardComponent,
+                    AcBillboardDescComponent,
+                    AcBillboardPrimitiveDescComponent,
+                    AcLabelDescComponent,
+                    AcLabelPrimitiveDescComponent,
+                    AcEllipseDescComponent,
+                    AcPolylineDescComponent,
+                    AcPolylinePrimitiveDescComponent,
+                    PixelOffsetPipe,
+                    RadiansToDegreesPipe,
+                    AcCircleDescComponent,
+                    AcArcDescComponent,
+                    AcMapLayerProviderComponent,
+                    AcMapTerrainProviderComponent,
+                    AcPointDescComponent,
+                    AcLabelComponent,
+                    AcPolylineComponent,
+                    AcPrimitivePolylineComponent,
+                    AcEllipseComponent,
+                    AcPointComponent,
+                    AcBillboardComponent,
+                    AcHtmlComponent,
+                    AcCircleComponent,
+                    AcArcComponent,
+                    AcPolygonDescComponent,
+                    AcPolygonComponent,
+                    AcDefaultPlonterComponent,
+                    AcModelDescComponent,
+                    AcTileset3dComponent,
+                    AcBoxDescComponent,
+                    AcCylinderDescComponent,
+                    AcCorridorDescComponent,
+                    AcEllipsoidDescComponent,
+                    AcPolylineVolumeDescComponent,
+                    AcWallDescComponent,
+                    AcRectangleDescComponent,
+                    AcContextMenuWrapperComponent,
+                    AcPointPrimitiveDescComponent,
+                    AcHtmlDescComponent,
+                    AcHtmlDirective,
+                    AcHtmlContainerDirective,
+                    AcArrayDescComponent,
+                    AcCzmlDescComponent,
+                    AcStaticEllipseDescComponent,
+                    AcDynamicEllipseDescComponent,
+                    AcDynamicPolylineDescComponent,
+                    AcStaticPolylineDescComponent,
+                    AcDynamicCircleDescComponent,
+                    AcStaticCircleDescComponent,
+                    AcStaticPolygonDescComponent,
+                    AcRectangleComponent
+                ],
+                exports: [
+                    AcMapComponent,
+                    AcBillboardComponent,
+                    AcBillboardDescComponent,
+                    AcBillboardPrimitiveDescComponent,
+                    AcLabelDescComponent,
+                    AcLabelPrimitiveDescComponent,
+                    AcEllipseDescComponent,
+                    AcPolylineDescComponent,
+                    AcPolylinePrimitiveDescComponent,
+                    AcLayerComponent,
+                    AcCircleDescComponent,
+                    AcArcDescComponent,
+                    AcMapLayerProviderComponent,
+                    AcMapTerrainProviderComponent,
+                    AcPointDescComponent,
+                    AcLabelComponent,
+                    AcPolylineComponent,
+                    AcPrimitivePolylineComponent,
+                    AcEllipseComponent,
+                    AcPointComponent,
+                    AcBillboardComponent,
+                    AcHtmlComponent,
+                    AcCircleComponent,
+                    AcArcComponent,
+                    AcPolygonDescComponent,
+                    AcPolygonComponent,
+                    AcDefaultPlonterComponent,
+                    AcModelDescComponent,
+                    AcTileset3dComponent,
+                    AcBoxDescComponent,
+                    AcCylinderDescComponent,
+                    AcCorridorDescComponent,
+                    AcEllipsoidDescComponent,
+                    AcPolylineVolumeDescComponent,
+                    AcWallDescComponent,
+                    AcRectangleDescComponent,
+                    AcPointPrimitiveDescComponent,
+                    AcHtmlDescComponent,
+                    AcArrayDescComponent,
+                    AcCzmlDescComponent,
+                    AcRectangleComponent,
+                    AcStaticEllipseDescComponent,
+                    AcDynamicEllipseDescComponent,
+                    AcDynamicPolylineDescComponent,
+                    AcStaticPolylineDescComponent,
+                    AcDynamicCircleDescComponent,
+                    AcStaticCircleDescComponent,
+                    AcStaticPolygonDescComponent,
+                ],
+            },] }
+];
+AngularCesiumModule.ctorParameters = () => [];
 
 class DisposableObservable extends Observable {
 }
@@ -7080,7 +6765,7 @@ var CesiumEventModifier;
  * ```
  *
  */
-let SelectionManagerService = class SelectionManagerService {
+class SelectionManagerService {
     constructor(mapsManager) {
         this.mapsManager = mapsManager;
         this.selectedEntitiesItems$ = new BehaviorSubject([]);
@@ -7146,14 +6831,13 @@ let SelectionManagerService = class SelectionManagerService {
             this.toggleSelection(entity, addSelectedIndicator);
         });
     }
-};
+}
+SelectionManagerService.decorators = [
+    { type: Injectable }
+];
 SelectionManagerService.ctorParameters = () => [
     { type: MapsManagerService }
 ];
-SelectionManagerService = __decorate([
-    Injectable(),
-    __metadata("design:paramtypes", [MapsManagerService])
-], SelectionManagerService);
 
 // import './src/angular-cesium/operators';
 
@@ -7301,7 +6985,7 @@ const DEFAULT_POINT_OPTIONS = {
  *
  * ```
  */
-let PointsEditorService = class PointsEditorService {
+class PointsEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -7342,6 +7026,9 @@ let PointsEditorService = class PointsEditorService {
             editAction: EditActions.INIT,
             pointOptions: pointOptions,
         });
+        const finishCreation = (position) => {
+            return this.switchToEditMode(id, clientEditSubject, position, eventPriority, pointOptions, editorObservable, true);
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -7356,7 +7043,7 @@ let PointsEditorService = class PointsEditorService {
             pickConfig: options.pickConfiguration,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addLastPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.screenToPosition(endPosition);
             if (position) {
@@ -7371,7 +7058,7 @@ let PointsEditorService = class PointsEditorService {
         });
         addLastPointRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.screenToPosition(endPosition);
-            finishedCreate = this.switchToEditMode(id, clientEditSubject, position, eventPriority, pointOptions, editorObservable, true);
+            finishedCreate = finishCreation(position);
         });
         return editorObservable;
     }
@@ -7463,7 +7150,7 @@ let PointsEditorService = class PointsEditorService {
         pointOptions.pointProps = Object.assign(Object.assign({}, DEFAULT_POINT_OPTIONS.pointProps), options.pointProps);
         return pointOptions;
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -7517,6 +7204,12 @@ let PointsEditorService = class PointsEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Points editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation(null);
+        };
         observableToExtend.getCurrentPoint = () => this.getPoint(id);
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.pointManager.get(id).labels;
@@ -7532,10 +7225,10 @@ let PointsEditorService = class PointsEditorService {
             return point.getCurrentPoint();
         }
     }
-};
-PointsEditorService = __decorate([
-    Injectable()
-], PointsEditorService);
+}
+PointsEditorService.decorators = [
+    { type: Injectable }
+];
 
 const defaultLabelProps = {
     backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.7),
@@ -7671,7 +7364,7 @@ class EditablePoint extends AcEntity {
     }
 }
 
-let PointsManagerService = class PointsManagerService {
+class PointsManagerService {
     constructor() {
         this.points = new Map();
     }
@@ -7699,12 +7392,12 @@ let PointsManagerService = class PointsManagerService {
         this.points.forEach(point => point.dispose());
         this.points.clear();
     }
-};
-PointsManagerService = __decorate([
-    Injectable()
-], PointsManagerService);
+}
+PointsManagerService.decorators = [
+    { type: Injectable }
+];
 
-let PointsEditorComponent = class PointsEditorComponent {
+class PointsEditorComponent {
     constructor(pointsEditor, coordinateConverter, mapEventsManager, cameraService, pointsManager, cesiumService) {
         this.pointsEditor = pointsEditor;
         this.coordinateConverter = coordinateConverter;
@@ -7853,27 +7546,11 @@ let PointsEditorComponent = class PointsEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-PointsEditorComponent.ctorParameters = () => [
-    { type: PointsEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: PointsManagerService },
-    { type: CesiumService }
-];
-__decorate([
-    ViewChild('editPointLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PointsEditorComponent.prototype, "editPointLayer", void 0);
-__decorate([
-    ViewChild('pointLabelsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PointsEditorComponent.prototype, "pointLabelsLayer", void 0);
-PointsEditorComponent = __decorate([
-    Component({
-        selector: 'points-editor',
-        template: /*html*/ `
+}
+PointsEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'points-editor',
+                template: /*html*/ `
     <ac-layer #editPointLayer acFor="let point of editPoint$" [context]="this">
       <ac-point-desc
         props="{
@@ -7921,16 +7598,22 @@ PointsEditorComponent = __decorate([
       </ac-array-desc>
     </ac-layer>
   `,
-        providers: [CoordinateConverter, PointsManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [PointsEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        PointsManagerService,
-        CesiumService])
-], PointsEditorComponent);
+                providers: [CoordinateConverter, PointsManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+PointsEditorComponent.ctorParameters = () => [
+    { type: PointsEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: PointsManagerService },
+    { type: CesiumService }
+];
+PointsEditorComponent.propDecorators = {
+    editPointLayer: [{ type: ViewChild, args: ['editPointLayer',] }],
+    pointLabelsLayer: [{ type: ViewChild, args: ['pointLabelsLayer',] }]
+};
 
 class EditPolyline extends AcEntity {
     constructor(entityId, startPosition, endPosition, polylineProps) {
@@ -8267,7 +7950,7 @@ class EditablePolygon extends AcEntity {
     }
 }
 
-let PolygonsManagerService = class PolygonsManagerService {
+class PolygonsManagerService {
     constructor() {
         this.polygons = new Map();
     }
@@ -8286,10 +7969,10 @@ let PolygonsManagerService = class PolygonsManagerService {
         this.polygons.forEach(polygon => polygon.dispose());
         this.polygons.clear();
     }
-};
-PolygonsManagerService = __decorate([
-    Injectable()
-], PolygonsManagerService);
+}
+PolygonsManagerService.decorators = [
+    { type: Injectable }
+];
 
 const ɵ0$1 = () => Cesium.Color.WHITE;
 const DEFAULT_POLYGON_OPTIONS = {
@@ -8362,7 +8045,7 @@ const DEFAULT_POLYGON_OPTIONS = {
  *
  * ```
  */
-let PolygonsEditorService = class PolygonsEditorService {
+class PolygonsEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -8450,6 +8133,9 @@ let PolygonsEditorService = class PolygonsEditorService {
             editAction: EditActions.INIT,
             polygonOptions: polygonOptions,
         });
+        const finishCreation = (position) => {
+            return this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -8471,7 +8157,7 @@ let PolygonsEditorService = class PolygonsEditorService {
             priority,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration, addLastPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.screenToPosition(endPosition, polygonOptions.clampHeightTo3D, polygonOptions.clampHeightTo3DOptions);
             if (position) {
@@ -8506,7 +8192,7 @@ let PolygonsEditorService = class PolygonsEditorService {
             this.updateSubject.next(updateValue);
             clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
             if (polygonOptions.maximumNumberOfPoints && allPositions.length + 1 === polygonOptions.maximumNumberOfPoints) {
-                finishedCreate = this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+                finishedCreate = finishCreation(position);
             }
         });
         addLastPointRegistration.subscribe(({ movement: { endPosition } }) => {
@@ -8514,8 +8200,20 @@ let PolygonsEditorService = class PolygonsEditorService {
             if (!position) {
                 return;
             }
-            // position already added by addPointRegistration
-            finishedCreate = this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+            // Add last point to positions if not already added
+            const allPositions = this.getPositions(id);
+            if (!allPositions.find((cartesian) => cartesian.equals(position))) {
+                const updateValue = {
+                    id,
+                    positions: allPositions,
+                    editMode: EditModes.CREATE,
+                    updatedPosition: position,
+                    editAction: EditActions.ADD_POINT,
+                };
+                this.updateSubject.next(updateValue);
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            }
+            finishedCreate = finishCreation(position);
         });
         return editorObservable;
     }
@@ -8694,7 +8392,7 @@ let PolygonsEditorService = class PolygonsEditorService {
         }
         return polygonOptions;
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -8748,6 +8446,12 @@ let PolygonsEditorService = class PolygonsEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Polygons editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation(null);
+        };
         observableToExtend.getCurrentPoints = () => this.getPoints(id);
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.polygonsManager.get(id).labels;
@@ -8761,12 +8465,12 @@ let PolygonsEditorService = class PolygonsEditorService {
         const polygon = this.polygonsManager.get(id);
         return polygon.getRealPoints();
     }
-};
-PolygonsEditorService = __decorate([
-    Injectable()
-], PolygonsEditorService);
+}
+PolygonsEditorService.decorators = [
+    { type: Injectable }
+];
 
-let PolygonsEditorComponent = class PolygonsEditorComponent {
+class PolygonsEditorComponent {
     constructor(polygonsEditor, coordinateConverter, mapEventsManager, cameraService, polygonsManager, cesiumService) {
         this.polygonsEditor = polygonsEditor;
         this.coordinateConverter = coordinateConverter;
@@ -8829,6 +8533,7 @@ let PolygonsEditorComponent = class PolygonsEditorComponent {
             case EditActions.ADD_POINT: {
                 const polygon = this.polygonsManager.get(update.id);
                 if (update.updatedPosition) {
+                    polygon.moveTempMovingPoint(update.updatedPosition);
                     polygon.addPoint(update.updatedPosition);
                     this.renderEditLabels(polygon, update);
                 }
@@ -8951,31 +8656,11 @@ let PolygonsEditorComponent = class PolygonsEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-PolygonsEditorComponent.ctorParameters = () => [
-    { type: PolygonsEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: PolygonsManagerService },
-    { type: CesiumService }
-];
-__decorate([
-    ViewChild('editPolygonsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolygonsEditorComponent.prototype, "editPolygonsLayer", void 0);
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolygonsEditorComponent.prototype, "editPointsLayer", void 0);
-__decorate([
-    ViewChild('editPolylinesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolygonsEditorComponent.prototype, "editPolylinesLayer", void 0);
-PolygonsEditorComponent = __decorate([
-    Component({
-        selector: 'polygons-editor',
-        template: /*html*/ `
+}
+PolygonsEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'polygons-editor',
+                template: /*html*/ `
     <ac-layer #editPolylinesLayer acFor="let polyline of editPolylines$" [context]="this">
       <ac-polyline-desc
         props="{
@@ -9048,16 +8733,23 @@ PolygonsEditorComponent = __decorate([
       </ac-array-desc>
     </ac-layer>
   `,
-        providers: [CoordinateConverter, PolygonsManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [PolygonsEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        PolygonsManagerService,
-        CesiumService])
-], PolygonsEditorComponent);
+                providers: [CoordinateConverter, PolygonsManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+PolygonsEditorComponent.ctorParameters = () => [
+    { type: PolygonsEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: PolygonsManagerService },
+    { type: CesiumService }
+];
+PolygonsEditorComponent.propDecorators = {
+    editPolygonsLayer: [{ type: ViewChild, args: ['editPolygonsLayer',] }],
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }],
+    editPolylinesLayer: [{ type: ViewChild, args: ['editPolylinesLayer',] }]
+};
 
 class EditArc extends AcEntity {
     constructor(entityId, center, radius, delta, angle, _arcProps) {
@@ -9320,7 +9012,7 @@ class EditableCircle extends AcEntity {
     }
 }
 
-let CirclesManagerService = class CirclesManagerService {
+class CirclesManagerService {
     constructor() {
         this.circles = new Map();
     }
@@ -9343,10 +9035,10 @@ let CirclesManagerService = class CirclesManagerService {
         this.circles.forEach(circle => circle.dispose());
         this.circles.clear();
     }
-};
-CirclesManagerService = __decorate([
-    Injectable()
-], CirclesManagerService);
+}
+CirclesManagerService.decorators = [
+    { type: Injectable }
+];
 
 const ɵ0$2 = () => Cesium.Color.WHITE.withAlpha(0.8);
 const DEFAULT_CIRCLE_OPTIONS = {
@@ -9412,7 +9104,7 @@ const DEFAULT_CIRCLE_OPTIONS = {
  *
  * ```
  */
-let CirclesEditorService = class CirclesEditorService {
+class CirclesEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -9444,6 +9136,33 @@ let CirclesEditorService = class CirclesEditorService {
             editAction: EditActions.INIT,
             circleOptions,
         });
+        const finishCreation = (position) => {
+            const update = {
+                id,
+                center,
+                radiusPoint: position,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.ADD_LAST_POINT,
+            };
+            this.updateSubject.next(update);
+            clientEditSubject.next(Object.assign(Object.assign({}, update), this.getCircleProperties(id)));
+            const changeMode = {
+                id,
+                center,
+                radiusPoint: position,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.CHANGE_TO_EDIT,
+            };
+            this.updateSubject.next(changeMode);
+            clientEditSubject.next(Object.assign(Object.assign({}, update), this.getCircleProperties(id)));
+            if (this.observablesMap.has(id)) {
+                this.observablesMap.get(id).forEach(registration => registration.dispose());
+            }
+            this.observablesMap.delete(id);
+            this.editCircle(id, priority, clientEditSubject, circleOptions, editorObservable);
+            finishedCreate = true;
+            return finishedCreate;
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -9457,7 +9176,7 @@ let CirclesEditorService = class CirclesEditorService {
             priority,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         addPointRegistration.subscribe(({ movement: { endPosition } }) => {
             if (finishedCreate) {
                 return;
@@ -9478,30 +9197,7 @@ let CirclesEditorService = class CirclesEditorService {
                 center = position;
             }
             else {
-                const update = {
-                    id,
-                    center,
-                    radiusPoint: position,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.ADD_LAST_POINT,
-                };
-                this.updateSubject.next(update);
-                clientEditSubject.next(Object.assign(Object.assign({}, update), this.getCircleProperties(id)));
-                const changeMode = {
-                    id,
-                    center,
-                    radiusPoint: position,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.CHANGE_TO_EDIT,
-                };
-                this.updateSubject.next(changeMode);
-                clientEditSubject.next(Object.assign(Object.assign({}, update), this.getCircleProperties(id)));
-                if (this.observablesMap.has(id)) {
-                    this.observablesMap.get(id).forEach(registration => registration.dispose());
-                }
-                this.observablesMap.delete(id);
-                this.editCircle(id, priority, clientEditSubject, circleOptions, editorObservable);
-                finishedCreate = true;
+                finishedCreate = finishCreation(position);
             }
         });
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
@@ -9626,7 +9322,7 @@ let CirclesEditorService = class CirclesEditorService {
         this.observablesMap.set(id, observables);
         return editObservable || this.createEditorObservable(editSubject, id);
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -9685,6 +9381,12 @@ let CirclesEditorService = class CirclesEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Circles editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation(null);
+        };
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.circlesManager.get(id).labels;
         observableToExtend.getCenter = () => this.getCenterPosition(id);
@@ -9719,12 +9421,12 @@ let CirclesEditorService = class CirclesEditorService {
             radius: circle.getRadius(),
         };
     }
-};
-CirclesEditorService = __decorate([
-    Injectable()
-], CirclesEditorService);
+}
+CirclesEditorService.decorators = [
+    { type: Injectable }
+];
 
-let CirclesEditorComponent = class CirclesEditorComponent {
+class CirclesEditorComponent {
     constructor(circlesEditor, coordinateConverter, mapEventsManager, cameraService, circlesManager) {
         this.circlesEditor = circlesEditor;
         this.coordinateConverter = coordinateConverter;
@@ -9891,30 +9593,11 @@ let CirclesEditorComponent = class CirclesEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-CirclesEditorComponent.ctorParameters = () => [
-    { type: CirclesEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: CirclesManagerService }
-];
-__decorate([
-    ViewChild('editCirclesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], CirclesEditorComponent.prototype, "editCirclesLayer", void 0);
-__decorate([
-    ViewChild('editArcsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], CirclesEditorComponent.prototype, "editArcsLayer", void 0);
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], CirclesEditorComponent.prototype, "editPointsLayer", void 0);
-CirclesEditorComponent = __decorate([
-    Component({
-        selector: 'circles-editor',
-        template: /*html*/ `
+}
+CirclesEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'circles-editor',
+                template: /*html*/ `
       <ac-layer #editArcsLayer acFor="let arc of editArcs$" [context]="this">
           <ac-arc-desc
                   props="{
@@ -9995,15 +9678,22 @@ CirclesEditorComponent = __decorate([
           </ac-array-desc>
       </ac-layer>
   `,
-        providers: [CoordinateConverter, CirclesManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [CirclesEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        CirclesManagerService])
-], CirclesEditorComponent);
+                providers: [CoordinateConverter, CirclesManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+CirclesEditorComponent.ctorParameters = () => [
+    { type: CirclesEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: CirclesManagerService }
+];
+CirclesEditorComponent.propDecorators = {
+    editCirclesLayer: [{ type: ViewChild, args: ['editCirclesLayer',] }],
+    editArcsLayer: [{ type: ViewChild, args: ['editArcsLayer',] }],
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }]
+};
 
 class EditableEllipse extends AcEntity {
     constructor(id, ellipsesLayer, pointsLayer, coordinateConverter, options) {
@@ -10289,7 +9979,7 @@ class EditableEllipse extends AcEntity {
     }
 }
 
-let EllipsesManagerService = class EllipsesManagerService {
+class EllipsesManagerService {
     constructor() {
         this.ellipses = new Map();
     }
@@ -10309,10 +9999,10 @@ let EllipsesManagerService = class EllipsesManagerService {
         this.ellipses.forEach(ellipse => ellipse.dispose());
         this.ellipses.clear();
     }
-};
-EllipsesManagerService = __decorate([
-    Injectable()
-], EllipsesManagerService);
+}
+EllipsesManagerService.decorators = [
+    { type: Injectable }
+];
 
 const ɵ0$3 = () => Cesium.Color.WHITE;
 const DEFAULT_ELLIPSE_OPTIONS = {
@@ -10381,7 +10071,7 @@ const DEFAULT_ELLIPSE_OPTIONS = {
  *
  * ```
  */
-let EllipsesEditorService = class EllipsesEditorService {
+class EllipsesEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -10414,6 +10104,32 @@ let EllipsesEditorService = class EllipsesEditorService {
             editAction: EditActions.INIT,
             ellipseOptions,
         });
+        const finishCreation = (position) => {
+            const update = {
+                id,
+                center,
+                updatedPosition: position,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.ADD_LAST_POINT,
+            };
+            this.updateSubject.next(update);
+            clientEditSubject.next(Object.assign({}, update));
+            const changeMode = {
+                id,
+                center,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.CHANGE_TO_EDIT,
+            };
+            this.updateSubject.next(changeMode);
+            clientEditSubject.next(Object.assign({}, update));
+            if (this.observablesMap.has(id)) {
+                this.observablesMap.get(id).forEach(registration => registration.dispose());
+            }
+            this.observablesMap.delete(id);
+            this.editEllipse(id, priority, clientEditSubject, ellipseOptions, editorObservable);
+            finishedCreate = true;
+            return finishedCreate;
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -10427,7 +10143,7 @@ let EllipsesEditorService = class EllipsesEditorService {
             priority,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         addPointRegistration.subscribe(({ movement: { endPosition } }) => {
             if (finishedCreate) {
                 return;
@@ -10448,29 +10164,7 @@ let EllipsesEditorService = class EllipsesEditorService {
                 center = position;
             }
             else {
-                const update = {
-                    id,
-                    center,
-                    updatedPosition: position,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.ADD_LAST_POINT,
-                };
-                this.updateSubject.next(update);
-                clientEditSubject.next(Object.assign({}, update));
-                const changeMode = {
-                    id,
-                    center,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.CHANGE_TO_EDIT,
-                };
-                this.updateSubject.next(changeMode);
-                clientEditSubject.next(Object.assign({}, update));
-                if (this.observablesMap.has(id)) {
-                    this.observablesMap.get(id).forEach(registration => registration.dispose());
-                }
-                this.observablesMap.delete(id);
-                this.editEllipse(id, priority, clientEditSubject, ellipseOptions, editorObservable);
-                finishedCreate = true;
+                finishedCreate = finishCreation(position);
             }
         });
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
@@ -10606,7 +10300,7 @@ let EllipsesEditorService = class EllipsesEditorService {
         this.observablesMap.set(id, observables);
         return editObservable || this.createEditorObservable(editSubject, id);
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -10650,6 +10344,12 @@ let EllipsesEditorService = class EllipsesEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Ellipses editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation(null);
+        };
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.ellipsesManager.get(id).labels;
         observableToExtend.getCenter = () => this.getCenterPosition(id);
@@ -10688,12 +10388,12 @@ let EllipsesEditorService = class EllipsesEditorService {
             majorRadiusPointPosition: ellipse.getMajorRadiusPointPosition(),
         };
     }
-};
-EllipsesEditorService = __decorate([
-    Injectable()
-], EllipsesEditorService);
+}
+EllipsesEditorService.decorators = [
+    { type: Injectable }
+];
 
-let EllipsesEditorComponent = class EllipsesEditorComponent {
+class EllipsesEditorComponent {
     constructor(ellipsesEditor, coordinateConverter, mapEventsManager, cameraService, ellipsesManager, cesiumService) {
         this.ellipsesEditor = ellipsesEditor;
         this.coordinateConverter = coordinateConverter;
@@ -10870,27 +10570,11 @@ let EllipsesEditorComponent = class EllipsesEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-EllipsesEditorComponent.ctorParameters = () => [
-    { type: EllipsesEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: EllipsesManagerService },
-    { type: CesiumService }
-];
-__decorate([
-    ViewChild('editEllipsesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], EllipsesEditorComponent.prototype, "editEllipsesLayer", void 0);
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], EllipsesEditorComponent.prototype, "editPointsLayer", void 0);
-EllipsesEditorComponent = __decorate([
-    Component({
-        selector: 'ellipses-editor',
-        template: /*html*/ `
+}
+EllipsesEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ellipses-editor',
+                template: /*html*/ `
       <ac-layer #editPointsLayer acFor="let point of editPoints$" [context]="this">
           <ac-point-desc
                   props="{
@@ -10958,16 +10642,22 @@ EllipsesEditorComponent = __decorate([
           </ac-array-desc>
       </ac-layer>
   `,
-        providers: [CoordinateConverter, EllipsesManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [EllipsesEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        EllipsesManagerService,
-        CesiumService])
-], EllipsesEditorComponent);
+                providers: [CoordinateConverter, EllipsesManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+EllipsesEditorComponent.ctorParameters = () => [
+    { type: EllipsesEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: EllipsesManagerService },
+    { type: CesiumService }
+];
+EllipsesEditorComponent.propDecorators = {
+    editEllipsesLayer: [{ type: ViewChild, args: ['editEllipsesLayer',] }],
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }]
+};
 
 class EditablePolyline extends AcEntity {
     constructor(id, pointsLayer, polylinesLayer, coordinateConverter, editOptions, positions) {
@@ -11777,7 +11467,7 @@ const DEFAULT_POLYLINE_OPTIONS = {
  *
  * ```
  */
-let PolylinesEditorService = class PolylinesEditorService {
+class PolylinesEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -11858,6 +11548,9 @@ let PolylinesEditorService = class PolylinesEditorService {
             editAction: EditActions.INIT,
             polylineOptions: polylineOptions,
         });
+        const finishCreation = (position) => {
+            return this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -11879,7 +11572,7 @@ let PolylinesEditorService = class PolylinesEditorService {
             pickConfig: options.pickConfiguration,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration, addLastPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.screenToPosition(endPosition, polylineOptions.clampHeightTo3D, polylineOptions.clampHeightTo3DOptions);
             if (position) {
@@ -11914,7 +11607,7 @@ let PolylinesEditorService = class PolylinesEditorService {
             this.updateSubject.next(updateValue);
             clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
             if (polylineOptions.maximumNumberOfPoints && allPositions.length + 1 === polylineOptions.maximumNumberOfPoints) {
-                finishedCreate = this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+                finishedCreate = finishCreation(position);
             }
         });
         addLastPointRegistration.subscribe(({ movement: { endPosition } }) => {
@@ -11922,8 +11615,20 @@ let PolylinesEditorService = class PolylinesEditorService {
             if (!position) {
                 return;
             }
-            // position already added by addPointRegistration
-            finishedCreate = this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+            // Add last point to positions if not already added
+            const allPositions = this.getPositions(id);
+            if (!allPositions.find((cartesian) => cartesian.equals(position))) {
+                const updateValue = {
+                    id,
+                    positions: allPositions,
+                    editMode: EditModes.CREATE,
+                    updatedPosition: position,
+                    editAction: EditActions.ADD_POINT,
+                };
+                this.updateSubject.next(updateValue);
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            }
+            finishedCreate = finishCreation(position);
         });
         return editorObservable;
     }
@@ -12096,7 +11801,7 @@ let PolylinesEditorService = class PolylinesEditorService {
         }
         return polylineOptions;
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -12150,6 +11855,12 @@ let PolylinesEditorService = class PolylinesEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Polylines editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation(null);
+        };
         observableToExtend.getCurrentPoints = () => this.getPoints(id);
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.polylinesManager.get(id).labels;
@@ -12163,12 +11874,12 @@ let PolylinesEditorService = class PolylinesEditorService {
         const polyline = this.polylinesManager.get(id);
         return polyline.getRealPoints();
     }
-};
-PolylinesEditorService = __decorate([
-    Injectable()
-], PolylinesEditorService);
+}
+PolylinesEditorService.decorators = [
+    { type: Injectable }
+];
 
-let PolylinesManagerService = class PolylinesManagerService {
+class PolylinesManagerService {
     constructor() {
         this.polylines = new Map();
     }
@@ -12183,12 +11894,12 @@ let PolylinesManagerService = class PolylinesManagerService {
         this.polylines.forEach(polyline => polyline.dispose());
         this.polylines.clear();
     }
-};
-PolylinesManagerService = __decorate([
-    Injectable()
-], PolylinesManagerService);
+}
+PolylinesManagerService.decorators = [
+    { type: Injectable }
+];
 
-let PolylinesEditorComponent = class PolylinesEditorComponent {
+class PolylinesEditorComponent {
     constructor(polylinesEditor, coordinateConverter, mapEventsManager, cameraService, polylinesManager, cesiumService) {
         this.polylinesEditor = polylinesEditor;
         this.coordinateConverter = coordinateConverter;
@@ -12251,6 +11962,7 @@ let PolylinesEditorComponent = class PolylinesEditorComponent {
             case EditActions.ADD_POINT: {
                 const polyline = this.polylinesManager.get(update.id);
                 if (update.updatedPosition) {
+                    polyline.moveTempMovingPoint(update.updatedPosition);
                     polyline.addPoint(update.updatedPosition);
                     this.renderEditLabels(polyline, update);
                 }
@@ -12373,31 +12085,11 @@ let PolylinesEditorComponent = class PolylinesEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-PolylinesEditorComponent.ctorParameters = () => [
-    { type: PolylinesEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: PolylinesManagerService },
-    { type: CesiumService }
-];
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolylinesEditorComponent.prototype, "editPointsLayer", void 0);
-__decorate([
-    ViewChild('editPolylinesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolylinesEditorComponent.prototype, "editPolylinesLayer", void 0);
-__decorate([
-    ViewChild('polylineLabelsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], PolylinesEditorComponent.prototype, "polylineLabelsLayer", void 0);
-PolylinesEditorComponent = __decorate([
-    Component({
-        selector: 'polylines-editor',
-        template: /*html*/ `
+}
+PolylinesEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'polylines-editor',
+                template: /*html*/ `
     <ac-layer #editPolylinesLayer acFor="let polyline of editPolylines$" [context]="this">
       <ac-polyline-desc
         props="{
@@ -12459,18 +12151,25 @@ PolylinesEditorComponent = __decorate([
       </ac-array-desc>
     </ac-layer>
   `,
-        providers: [CoordinateConverter, PolylinesManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [PolylinesEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        PolylinesManagerService,
-        CesiumService])
-], PolylinesEditorComponent);
+                providers: [CoordinateConverter, PolylinesManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+PolylinesEditorComponent.ctorParameters = () => [
+    { type: PolylinesEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: PolylinesManagerService },
+    { type: CesiumService }
+];
+PolylinesEditorComponent.propDecorators = {
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }],
+    editPolylinesLayer: [{ type: ViewChild, args: ['editPolylinesLayer',] }],
+    polylineLabelsLayer: [{ type: ViewChild, args: ['polylineLabelsLayer',] }]
+};
 
-let HippodromeManagerService = class HippodromeManagerService {
+class HippodromeManagerService {
     constructor() {
         this.hippodromes = new Map();
     }
@@ -12485,10 +12184,10 @@ let HippodromeManagerService = class HippodromeManagerService {
         this.hippodromes.forEach(hippodrome => hippodrome.dispose());
         this.hippodromes.clear();
     }
-};
-HippodromeManagerService = __decorate([
-    Injectable()
-], HippodromeManagerService);
+}
+HippodromeManagerService.decorators = [
+    { type: Injectable }
+];
 
 const DEFAULT_HIPPODROME_OPTIONS = {
     addPointEvent: CesiumEvent.LEFT_CLICK,
@@ -12551,7 +12250,7 @@ const DEFAULT_HIPPODROME_OPTIONS = {
  *
  * ```
  */
-let HippodromeEditorService = class HippodromeEditorService {
+class HippodromeEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -12584,6 +12283,22 @@ let HippodromeEditorService = class HippodromeEditorService {
             editAction: EditActions.INIT,
             hippodromeOptions: hippodromeOptions,
         });
+        const finishCreation = () => {
+            const changeMode = {
+                id,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.CHANGE_TO_EDIT,
+            };
+            this.updateSubject.next(changeMode);
+            clientEditSubject.next(changeMode);
+            if (this.observablesMap.has(id)) {
+                this.observablesMap.get(id).forEach(registration => registration.dispose());
+            }
+            this.observablesMap.delete(id);
+            this.editHippodrome(id, eventPriority, clientEditSubject, hippodromeOptions, editorObservable);
+            finishedCreate = true;
+            return finishedCreate;
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pickConfig: options.pickConfiguration,
@@ -12597,7 +12312,7 @@ let HippodromeEditorService = class HippodromeEditorService {
             priority: eventPriority,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.coordinateConverter.screenToCartesian3(endPosition);
             if (position) {
@@ -12630,19 +12345,7 @@ let HippodromeEditorService = class HippodromeEditorService {
             this.updateSubject.next(updateValue);
             clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id), width: this.getWidth(id) }));
             if (!isFirstPoint) {
-                const changeMode = {
-                    id,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.CHANGE_TO_EDIT,
-                };
-                this.updateSubject.next(changeMode);
-                clientEditSubject.next(changeMode);
-                if (this.observablesMap.has(id)) {
-                    this.observablesMap.get(id).forEach(registration => registration.dispose());
-                }
-                this.observablesMap.delete(id);
-                this.editHippodrome(id, eventPriority, clientEditSubject, hippodromeOptions, editorObservable);
-                finishedCreate = true;
+                finishedCreate = finishCreation();
             }
         });
         return editorObservable;
@@ -12742,7 +12445,7 @@ let HippodromeEditorService = class HippodromeEditorService {
         hippodromeOptions.pointProps = Object.assign({}, DEFAULT_HIPPODROME_OPTIONS.pointProps, options.pointProps);
         return hippodromeOptions;
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -12798,6 +12501,12 @@ let HippodromeEditorService = class HippodromeEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Hippodrome editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation();
+        };
         observableToExtend.getCurrentPoints = () => this.getPoints(id);
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.hippodromeManager.get(id).labels;
@@ -12816,12 +12525,12 @@ let HippodromeEditorService = class HippodromeEditorService {
         const hippodrome = this.hippodromeManager.get(id);
         return hippodrome.getWidth();
     }
-};
-HippodromeEditorService = __decorate([
-    Injectable()
-], HippodromeEditorService);
+}
+HippodromeEditorService.decorators = [
+    { type: Injectable }
+];
 
-let HippodromeEditorComponent = class HippodromeEditorComponent {
+class HippodromeEditorComponent {
     constructor(hippodromesEditor, coordinateConverter, mapEventsManager, cameraService, hippodromesManager) {
         this.hippodromesEditor = hippodromesEditor;
         this.coordinateConverter = coordinateConverter;
@@ -12882,6 +12591,7 @@ let HippodromeEditorComponent = class HippodromeEditorComponent {
             case EditActions.ADD_POINT: {
                 const hippodrome = this.hippodromesManager.get(update.id);
                 if (update.updatedPosition) {
+                    hippodrome.moveTempMovingPoint(update.updatedPosition);
                     hippodrome.addPoint(update.updatedPosition);
                     this.renderEditLabels(hippodrome, update);
                 }
@@ -12984,26 +12694,11 @@ let HippodromeEditorComponent = class HippodromeEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-HippodromeEditorComponent.ctorParameters = () => [
-    { type: HippodromeEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: HippodromeManagerService }
-];
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], HippodromeEditorComponent.prototype, "editPointsLayer", void 0);
-__decorate([
-    ViewChild('editHippodromesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], HippodromeEditorComponent.prototype, "editHippodromesLayer", void 0);
-HippodromeEditorComponent = __decorate([
-    Component({
-        selector: 'hippodrome-editor',
-        template: /*html*/ `
+}
+HippodromeEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'hippodrome-editor',
+                template: /*html*/ `
       <ac-layer #editHippodromesLayer acFor="let hippodrome of editHippodromes$" [context]="this">
           <ac-corridor-desc props="{
             positions: hippodrome.getRealPositionsCallbackProperty(),
@@ -13063,21 +12758,27 @@ HippodromeEditorComponent = __decorate([
           </ac-point-desc>
       </ac-layer>
   `,
-        providers: [CoordinateConverter, HippodromeManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [HippodromeEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        HippodromeManagerService])
-], HippodromeEditorComponent);
+                providers: [CoordinateConverter, HippodromeManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+HippodromeEditorComponent.ctorParameters = () => [
+    { type: HippodromeEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: HippodromeManagerService }
+];
+HippodromeEditorComponent.propDecorators = {
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }],
+    editHippodromesLayer: [{ type: ViewChild, args: ['editHippodromesLayer',] }]
+};
 
 /**
  * The Service is used to preform, handle and subscribe to icon dragging when using the `DraggableToMapDirective`.
  * For more info check `DraggableToMapDirective` docs.
  */
-let DraggableToMapService = class DraggableToMapService {
+class DraggableToMapService {
     constructor(document, mapsManager) {
         this.document = document;
         this.mapsManager = mapsManager;
@@ -13168,16 +12869,14 @@ let DraggableToMapService = class DraggableToMapService {
         this.dragObservable = moveObservable.pipe(merge$1(dropSubject), takeUntil(stopper));
         this.stopper = stopper;
     }
-};
+}
+DraggableToMapService.decorators = [
+    { type: Injectable }
+];
 DraggableToMapService.ctorParameters = () => [
     { type: undefined, decorators: [{ type: Inject, args: [DOCUMENT,] }] },
     { type: MapsManagerService }
 ];
-DraggableToMapService = __decorate([
-    Injectable(),
-    __param(0, Inject(DOCUMENT)),
-    __metadata("design:paramtypes", [Object, MapsManagerService])
-], DraggableToMapService);
 
 /**
  * This directive is used to allow dragging of icons from outside the map over the map
@@ -13203,7 +12902,7 @@ DraggableToMapService = __decorate([
  *  this.iconDragService.cancel();
  * ```
  */
-let DraggableToMapDirective = class DraggableToMapDirective {
+class DraggableToMapDirective {
     constructor(el, iconDragService) {
         this.iconDragService = iconDragService;
         el.nativeElement.style['user-drag'] = 'none';
@@ -13225,25 +12924,18 @@ let DraggableToMapDirective = class DraggableToMapDirective {
     onMouseDown() {
         this.iconDragService.drag(this.src, this.style);
     }
-};
+}
+DraggableToMapDirective.decorators = [
+    { type: Directive, args: [{ selector: '[draggableToMap]' },] }
+];
 DraggableToMapDirective.ctorParameters = () => [
     { type: ElementRef },
     { type: DraggableToMapService }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], DraggableToMapDirective.prototype, "draggableToMap", void 0);
-__decorate([
-    HostListener('mousedown'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
-], DraggableToMapDirective.prototype, "onMouseDown", null);
-DraggableToMapDirective = __decorate([
-    Directive({ selector: '[draggableToMap]' }),
-    __metadata("design:paramtypes", [ElementRef, DraggableToMapService])
-], DraggableToMapDirective);
+DraggableToMapDirective.propDecorators = {
+    draggableToMap: [{ type: Input }],
+    onMouseDown: [{ type: HostListener, args: ['mousedown',] }]
+};
 
 /**
  * Toolbar widget, act as a container for ac-toolbar-button components
@@ -13260,7 +12952,7 @@ DraggableToMapDirective = __decorate([
  * ```
  *
  */
-let AcToolbarComponent = class AcToolbarComponent {
+class AcToolbarComponent {
     constructor(element, cesiumService) {
         this.element = element;
         this.cesiumService = cesiumService;
@@ -13301,27 +12993,11 @@ let AcToolbarComponent = class AcToolbarComponent {
             this.element.nativeElement.style.top = `${event.y}px`;
         });
     }
-};
-AcToolbarComponent.ctorParameters = () => [
-    { type: ElementRef },
-    { type: CesiumService }
-];
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcToolbarComponent.prototype, "toolbarClass", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], AcToolbarComponent.prototype, "allowDrag", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], AcToolbarComponent.prototype, "onDrag", void 0);
-AcToolbarComponent = __decorate([
-    Component({
-        selector: 'ac-toolbar',
-        template: `
+}
+AcToolbarComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-toolbar',
+                template: `
         <div class="{{toolbarClass}}">
             <div *ngIf="allowDrag">
                 <ac-toolbar-button>
@@ -13332,8 +13008,8 @@ AcToolbarComponent = __decorate([
             <ng-content></ng-content>
         </div>
     `,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        styles: [`
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [`
         :host {
             position: absolute;
             top: 20px;
@@ -13344,18 +13020,26 @@ AcToolbarComponent = __decorate([
             -webkit-user-drag: none;
         }
     `]
-    }),
-    __metadata("design:paramtypes", [ElementRef, CesiumService])
-], AcToolbarComponent);
+            },] }
+];
+AcToolbarComponent.ctorParameters = () => [
+    { type: ElementRef },
+    { type: CesiumService }
+];
+AcToolbarComponent.propDecorators = {
+    toolbarClass: [{ type: Input }],
+    allowDrag: [{ type: Input }],
+    onDrag: [{ type: Output }]
+};
 
-let DragIconComponent = class DragIconComponent {
+class DragIconComponent {
     constructor() {
     }
-};
-DragIconComponent = __decorate([
-    Component({
-        selector: 'ac-drag-icon',
-        template: `
+}
+DragIconComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-drag-icon',
+                template: `
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"  height="25"  width="25"
 	 viewBox="0 0 476.737 476.737" style="enable-background:new 0 0 476.737 476.737;" xml:space="preserve">
 <g>
@@ -13404,9 +13088,9 @@ DragIconComponent = __decorate([
 </g>
 </svg>
     `
-    }),
-    __metadata("design:paramtypes", [])
-], DragIconComponent);
+            },] }
+];
+DragIconComponent.ctorParameters = () => [];
 
 /**
  * Toolbar button widget, act as a single button inside ac-toolbar component
@@ -13424,40 +13108,24 @@ DragIconComponent = __decorate([
  * ```
  *
  */
-let AcToolbarButtonComponent = class AcToolbarButtonComponent {
+class AcToolbarButtonComponent {
     constructor() {
         this.onClick = new EventEmitter();
     }
     ngOnInit() {
     }
-};
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcToolbarButtonComponent.prototype, "iconUrl", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcToolbarButtonComponent.prototype, "buttonClass", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", String)
-], AcToolbarButtonComponent.prototype, "iconClass", void 0);
-__decorate([
-    Output(),
-    __metadata("design:type", Object)
-], AcToolbarButtonComponent.prototype, "onClick", void 0);
-AcToolbarButtonComponent = __decorate([
-    Component({
-        selector: 'ac-toolbar-button',
-        template: `
+}
+AcToolbarButtonComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'ac-toolbar-button',
+                template: `
         <div (click)="onClick.emit()" class="button-container {{buttonClass}}">
             <img *ngIf="iconUrl" [src]="iconUrl" class="icon {{iconClass}}"/>
             <ng-content></ng-content>
         </div>
     `,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        styles: [`
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                styles: [`
         .button-container {
             border-radius: 1px;
             background-color: rgba(255, 255, 255, 0.8);
@@ -13481,9 +13149,15 @@ AcToolbarButtonComponent = __decorate([
             width: 30px;
         }
     `]
-    }),
-    __metadata("design:paramtypes", [])
-], AcToolbarButtonComponent);
+            },] }
+];
+AcToolbarButtonComponent.ctorParameters = () => [];
+AcToolbarButtonComponent.propDecorators = {
+    iconUrl: [{ type: Input }],
+    buttonClass: [{ type: Input }],
+    iconClass: [{ type: Input }],
+    onClick: [{ type: Output }]
+};
 
 /**
  *
@@ -13509,7 +13183,7 @@ AcToolbarButtonComponent = __decorate([
  * ```
  *
  */
-let RangeAndBearingComponent = class RangeAndBearingComponent {
+class RangeAndBearingComponent {
     constructor(polylineEditor, coordinateConverter) {
         this.polylineEditor = polylineEditor;
         this.coordinateConverter = coordinateConverter;
@@ -13560,50 +13234,30 @@ let RangeAndBearingComponent = class RangeAndBearingComponent {
         }
         return rnb;
     }
-};
+}
+RangeAndBearingComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'range-and-bearing',
+                template: `
+    <polylines-editor></polylines-editor>
+  `,
+                changeDetection: ChangeDetectionStrategy.OnPush,
+                providers: [PolylinesEditorService]
+            },] }
+];
 RangeAndBearingComponent.ctorParameters = () => [
     { type: PolylinesEditorService },
     { type: CoordinateConverter }
 ];
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], RangeAndBearingComponent.prototype, "lineEditOptions", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], RangeAndBearingComponent.prototype, "labelsStyle", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], RangeAndBearingComponent.prototype, "distanceLabelsStyle", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Object)
-], RangeAndBearingComponent.prototype, "bearingLabelsStyle", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Function)
-], RangeAndBearingComponent.prototype, "bearingStringFn", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Function)
-], RangeAndBearingComponent.prototype, "distanceStringFn", void 0);
-__decorate([
-    Input(),
-    __metadata("design:type", Function)
-], RangeAndBearingComponent.prototype, "labelsRenderFn", void 0);
-RangeAndBearingComponent = __decorate([
-    Component({
-        selector: 'range-and-bearing',
-        template: `
-    <polylines-editor></polylines-editor>
-  `,
-        changeDetection: ChangeDetectionStrategy.OnPush,
-        providers: [PolylinesEditorService]
-    }),
-    __metadata("design:paramtypes", [PolylinesEditorService, CoordinateConverter])
-], RangeAndBearingComponent);
+RangeAndBearingComponent.propDecorators = {
+    lineEditOptions: [{ type: Input }],
+    labelsStyle: [{ type: Input }],
+    distanceLabelsStyle: [{ type: Input }],
+    bearingLabelsStyle: [{ type: Input }],
+    bearingStringFn: [{ type: Input }],
+    distanceStringFn: [{ type: Input }],
+    labelsRenderFn: [{ type: Input }]
+};
 
 /**
  * The Service is as a "zoom to rectangle" tool
@@ -13649,7 +13303,7 @@ var MouseButtons;
     MouseButtons[MouseButtons["MIDDLE"] = 1] = "MIDDLE";
     MouseButtons[MouseButtons["RIGHT"] = 2] = "RIGHT";
 })(MouseButtons || (MouseButtons = {}));
-let ZoomToRectangleService = class ZoomToRectangleService {
+class ZoomToRectangleService {
     constructor(mapsManager, cameraService, cesiumService) {
         this.mapsManager = mapsManager;
         this.mapsZoomElements = new Map();
@@ -13817,22 +13471,17 @@ let ZoomToRectangleService = class ZoomToRectangleService {
         });
         return true;
     }
-};
+}
+ZoomToRectangleService.decorators = [
+    { type: Injectable }
+];
 ZoomToRectangleService.ctorParameters = () => [
     { type: MapsManagerService },
     { type: CameraService, decorators: [{ type: Optional }] },
     { type: CesiumService, decorators: [{ type: Optional }] }
 ];
-ZoomToRectangleService = __decorate([
-    Injectable(),
-    __param(1, Optional()),
-    __param(2, Optional()),
-    __metadata("design:paramtypes", [MapsManagerService,
-        CameraService,
-        CesiumService])
-], ZoomToRectangleService);
 
-let RectanglesManagerService = class RectanglesManagerService {
+class RectanglesManagerService {
     constructor() {
         this.rectangles = new Map();
     }
@@ -13851,10 +13500,10 @@ let RectanglesManagerService = class RectanglesManagerService {
         this.rectangles.forEach(rectangle => rectangle.dispose());
         this.rectangles.clear();
     }
-};
-RectanglesManagerService = __decorate([
-    Injectable()
-], RectanglesManagerService);
+}
+RectanglesManagerService.decorators = [
+    { type: Injectable }
+];
 
 const DEFAULT_RECTANGLE_OPTIONS = {
     addPointEvent: CesiumEvent.LEFT_CLICK,
@@ -13919,7 +13568,7 @@ const DEFAULT_RECTANGLE_OPTIONS = {
  *
  * ```
  */
-let RectanglesEditorService = class RectanglesEditorService {
+class RectanglesEditorService {
     constructor() {
         this.updateSubject = new Subject();
         this.updatePublisher = publish()(this.updateSubject); // TODO maybe not needed
@@ -13953,6 +13602,22 @@ let RectanglesEditorService = class RectanglesEditorService {
             editAction: EditActions.INIT,
             rectangleOptions: rectangleOptions,
         });
+        const finishCreation = () => {
+            const changeMode = {
+                id,
+                editMode: EditModes.CREATE,
+                editAction: EditActions.CHANGE_TO_EDIT,
+            };
+            this.updateSubject.next(changeMode);
+            clientEditSubject.next(changeMode);
+            if (this.observablesMap.has(id)) {
+                this.observablesMap.get(id).forEach(registration => registration.dispose());
+            }
+            this.observablesMap.delete(id);
+            this.editRectangle(id, positions, priority, clientEditSubject, rectangleOptions, editorObservable);
+            finishedCreate = true;
+            return finishedCreate;
+        };
         const mouseMoveRegistration = this.mapEventsManager.register({
             event: CesiumEvent.MOUSE_MOVE,
             pick: PickOptions.NO_PICK,
@@ -13966,7 +13631,7 @@ let RectanglesEditorService = class RectanglesEditorService {
             priority,
         });
         this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-        const editorObservable = this.createEditorObservable(clientEditSubject, id);
+        const editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
         mouseMoveRegistration.subscribe(({ movement: { endPosition } }) => {
             const position = this.coordinateConverter.screenToCartesian3(endPosition);
             if (position) {
@@ -13999,19 +13664,7 @@ let RectanglesEditorService = class RectanglesEditorService {
             this.updateSubject.next(updateValue);
             clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
             if (!isFirstPoint) {
-                const changeMode = {
-                    id,
-                    editMode: EditModes.CREATE,
-                    editAction: EditActions.CHANGE_TO_EDIT,
-                };
-                this.updateSubject.next(changeMode);
-                clientEditSubject.next(changeMode);
-                if (this.observablesMap.has(id)) {
-                    this.observablesMap.get(id).forEach(registration => registration.dispose());
-                }
-                this.observablesMap.delete(id);
-                this.editRectangle(id, positions, priority, clientEditSubject, rectangleOptions, editorObservable);
-                finishedCreate = true;
+                finishedCreate = finishCreation();
             }
         });
         return editorObservable;
@@ -14125,7 +13778,7 @@ let RectanglesEditorService = class RectanglesEditorService {
         }
         return rectangleOptions;
     }
-    createEditorObservable(observableToExtend, id) {
+    createEditorObservable(observableToExtend, id, finishCreation) {
         observableToExtend.dispose = () => {
             const observables = this.observablesMap.get(id);
             if (observables) {
@@ -14181,6 +13834,12 @@ let RectanglesEditorService = class RectanglesEditorService {
                 updateLabels: labels,
             });
         };
+        observableToExtend.finishCreation = () => {
+            if (!finishCreation) {
+                throw new Error('Rectangles editor error edit(): cannot call finishCreation() on edit');
+            }
+            return finishCreation();
+        };
         observableToExtend.getCurrentPoints = () => this.getPoints(id);
         observableToExtend.getEditValue = () => observableToExtend.getValue();
         observableToExtend.getLabels = () => this.rectanglesManager.get(id).labels;
@@ -14194,12 +13853,12 @@ let RectanglesEditorService = class RectanglesEditorService {
         const rectangle = this.rectanglesManager.get(id);
         return rectangle.getRealPoints();
     }
-};
-RectanglesEditorService = __decorate([
-    Injectable()
-], RectanglesEditorService);
+}
+RectanglesEditorService.decorators = [
+    { type: Injectable }
+];
 
-let RectanglesEditorComponent = class RectanglesEditorComponent {
+class RectanglesEditorComponent {
     constructor(rectanglesEditor, coordinateConverter, mapEventsManager, cameraService, rectanglesManager, cesiumService) {
         this.rectanglesEditor = rectanglesEditor;
         this.coordinateConverter = coordinateConverter;
@@ -14261,6 +13920,7 @@ let RectanglesEditorComponent = class RectanglesEditorComponent {
             case EditActions.ADD_POINT: {
                 const rectangle = this.rectanglesManager.get(update.id);
                 if (update.updatedPosition) {
+                    rectangle.moveTempMovingPoint(update.updatedPosition);
                     rectangle.addPoint(update.updatedPosition);
                     this.renderEditLabels(rectangle, update);
                 }
@@ -14372,27 +14032,11 @@ let RectanglesEditorComponent = class RectanglesEditorComponent {
     getPointShow(point) {
         return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
     }
-};
-RectanglesEditorComponent.ctorParameters = () => [
-    { type: RectanglesEditorService },
-    { type: CoordinateConverter },
-    { type: MapEventsManagerService },
-    { type: CameraService },
-    { type: RectanglesManagerService },
-    { type: CesiumService }
-];
-__decorate([
-    ViewChild('editRectanglesLayer'),
-    __metadata("design:type", AcLayerComponent)
-], RectanglesEditorComponent.prototype, "editRectanglesLayer", void 0);
-__decorate([
-    ViewChild('editPointsLayer'),
-    __metadata("design:type", AcLayerComponent)
-], RectanglesEditorComponent.prototype, "editPointsLayer", void 0);
-RectanglesEditorComponent = __decorate([
-    Component({
-        selector: 'rectangles-editor',
-        template: /*html*/ `
+}
+RectanglesEditorComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'rectangles-editor',
+                template: /*html*/ `
     <ac-layer #editPointsLayer acFor="let point of editPoints$" [context]="this">
       <ac-point-desc
         props="{
@@ -14455,55 +14099,61 @@ RectanglesEditorComponent = __decorate([
       </ac-array-desc>
     </ac-layer>
   `,
-        providers: [CoordinateConverter, RectanglesManagerService],
-        changeDetection: ChangeDetectionStrategy.OnPush
-    }),
-    __metadata("design:paramtypes", [RectanglesEditorService,
-        CoordinateConverter,
-        MapEventsManagerService,
-        CameraService,
-        RectanglesManagerService,
-        CesiumService])
-], RectanglesEditorComponent);
-
-let AngularCesiumWidgetsModule = class AngularCesiumWidgetsModule {
+                providers: [CoordinateConverter, RectanglesManagerService],
+                changeDetection: ChangeDetectionStrategy.OnPush
+            },] }
+];
+RectanglesEditorComponent.ctorParameters = () => [
+    { type: RectanglesEditorService },
+    { type: CoordinateConverter },
+    { type: MapEventsManagerService },
+    { type: CameraService },
+    { type: RectanglesManagerService },
+    { type: CesiumService }
+];
+RectanglesEditorComponent.propDecorators = {
+    editRectanglesLayer: [{ type: ViewChild, args: ['editRectanglesLayer',] }],
+    editPointsLayer: [{ type: ViewChild, args: ['editPointsLayer',] }]
 };
-AngularCesiumWidgetsModule = __decorate([
-    NgModule({
-        imports: [CommonModule, AngularCesiumModule],
-        declarations: [
-            PointsEditorComponent,
-            HippodromeEditorComponent,
-            PolygonsEditorComponent,
-            RectanglesEditorComponent,
-            CirclesEditorComponent,
-            EllipsesEditorComponent,
-            PolylinesEditorComponent,
-            DraggableToMapDirective,
-            DragIconComponent,
-            AcToolbarComponent,
-            AcToolbarButtonComponent,
-            RangeAndBearingComponent,
-        ],
-        exports: [
-            PointsEditorComponent,
-            HippodromeEditorComponent,
-            PolygonsEditorComponent,
-            RectanglesEditorComponent,
-            CirclesEditorComponent,
-            EllipsesEditorComponent,
-            PolylinesEditorComponent,
-            DraggableToMapDirective,
-            AcToolbarComponent,
-            AcToolbarButtonComponent,
-            RangeAndBearingComponent,
-        ],
-        providers: [
-            DraggableToMapService,
-            ZoomToRectangleService,
-        ]
-    })
-], AngularCesiumWidgetsModule);
+
+class AngularCesiumWidgetsModule {
+}
+AngularCesiumWidgetsModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [CommonModule, AngularCesiumModule],
+                declarations: [
+                    PointsEditorComponent,
+                    HippodromeEditorComponent,
+                    PolygonsEditorComponent,
+                    RectanglesEditorComponent,
+                    CirclesEditorComponent,
+                    EllipsesEditorComponent,
+                    PolylinesEditorComponent,
+                    DraggableToMapDirective,
+                    DragIconComponent,
+                    AcToolbarComponent,
+                    AcToolbarButtonComponent,
+                    RangeAndBearingComponent,
+                ],
+                exports: [
+                    PointsEditorComponent,
+                    HippodromeEditorComponent,
+                    PolygonsEditorComponent,
+                    RectanglesEditorComponent,
+                    CirclesEditorComponent,
+                    EllipsesEditorComponent,
+                    PolylinesEditorComponent,
+                    DraggableToMapDirective,
+                    AcToolbarComponent,
+                    AcToolbarButtonComponent,
+                    RangeAndBearingComponent,
+                ],
+                providers: [
+                    DraggableToMapService,
+                    ZoomToRectangleService,
+                ]
+            },] }
+];
 
 /*
  * Public API Surface of angular-cesium

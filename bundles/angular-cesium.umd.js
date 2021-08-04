@@ -1,205 +1,31 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('geodesy'), require('util'), require('rxjs/operators'), require('rxjs'), require('primitive-primitives'), require('json-string-mapper'), require('angular2parse'), require('lodash.get')) :
     typeof define === 'function' && define.amd ? define('angular-cesium', ['exports', '@angular/core', '@angular/common', 'geodesy', 'util', 'rxjs/operators', 'rxjs', 'primitive-primitives', 'json-string-mapper', 'angular2parse', 'lodash.get'], factory) :
-    (global = global || self, factory(global['angular-cesium'] = {}, global.ng.core, global.ng.common, global.geodesy, global.util, global.rxjs.operators, global.rxjs, global.primitivePrimitives, global.jsonStringMapper, global.angular2parse, global._get));
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global['angular-cesium'] = {}, global.ng.core, global.ng.common, global.geodesy, global.util, global.rxjs.operators, global.rxjs, global.primitivePrimitives, global.jsonStringMapper, global.angular2parse, global._get));
 }(this, (function (exports, core, common, geodesy, util, operators, rxjs, primitivePrimitives, jsonStringMapper, angular2parse, _get) { 'use strict';
 
-    /*! *****************************************************************************
-    Copyright (c) Microsoft Corporation. All rights reserved.
-    Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-    this file except in compliance with the License. You may obtain a copy of the
-    License at http://www.apache.org/licenses/LICENSE-2.0
-
-    THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-    KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-    WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-    MERCHANTABLITY OR NON-INFRINGEMENT.
-
-    See the Apache Version 2.0 License for specific language governing permissions
-    and limitations under the License.
-    ***************************************************************************** */
-    /* global Reflect, Promise */
-
-    var extendStatics = function(d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-
-    function __extends(d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    }
-
-    var __assign = function() {
-        __assign = Object.assign || function __assign(t) {
-            for (var s, i = 1, n = arguments.length; i < n; i++) {
-                s = arguments[i];
-                for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-            return t;
-        };
-        return __assign.apply(this, arguments);
-    };
-
-    function __rest(s, e) {
-        var t = {};
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-            t[p] = s[p];
-        if (s != null && typeof Object.getOwnPropertySymbols === "function")
-            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                    t[p[i]] = s[p[i]];
-            }
-        return t;
-    }
-
-    function __decorate(decorators, target, key, desc) {
-        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-    }
-
-    function __param(paramIndex, decorator) {
-        return function (target, key) { decorator(target, key, paramIndex); }
-    }
-
-    function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-    }
-
-    function __awaiter(thisArg, _arguments, P, generator) {
-        return new (P || (P = Promise))(function (resolve, reject) {
-            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-            function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-            step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-    }
-
-    function __generator(thisArg, body) {
-        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-        function verb(n) { return function (v) { return step([n, v]); }; }
-        function step(op) {
-            if (f) throw new TypeError("Generator is already executing.");
-            while (_) try {
-                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-                if (y = 0, t) op = [op[0] & 2, t.value];
-                switch (op[0]) {
-                    case 0: case 1: t = op; break;
-                    case 4: _.label++; return { value: op[1], done: false };
-                    case 5: _.label++; y = op[1]; op = [0]; continue;
-                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                    default:
-                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                        if (t[2]) _.ops.pop();
-                        _.trys.pop(); continue;
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () {
+                            return e[k];
+                        }
+                    });
                 }
-                op = body.call(thisArg, _);
-            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+            });
         }
+        n['default'] = e;
+        return Object.freeze(n);
     }
 
-    function __exportStar(m, exports) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
-
-    function __values(o) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-        if (m) return m.call(o);
-        return {
-            next: function () {
-                if (o && i >= o.length) o = void 0;
-                return { value: o && o[i++], done: !o };
-            }
-        };
-    }
-
-    function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o), r, ar = [], e;
-        try {
-            while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-        }
-        catch (error) { e = { error: error }; }
-        finally {
-            try {
-                if (r && !r.done && (m = i["return"])) m.call(i);
-            }
-            finally { if (e) throw e.error; }
-        }
-        return ar;
-    }
-
-    function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++)
-            ar = ar.concat(__read(arguments[i]));
-        return ar;
-    }
-
-    function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-        for (var r = Array(s), k = 0, i = 0; i < il; i++)
-            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-                r[k] = a[j];
-        return r;
-    };
-
-    function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-    }
-
-    function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []), i, q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-        function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-        function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-        function fulfill(value) { resume("next", value); }
-        function reject(value) { resume("throw", value); }
-        function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-    }
-
-    function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-    }
-
-    function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator], i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-    }
-
-    function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-        return cooked;
-    };
-
-    function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-        result.default = mod;
-        return result;
-    }
-
-    function __importDefault(mod) {
-        return (mod && mod.__esModule) ? mod : { default: mod };
-    }
+    var geodesy__namespace = /*#__PURE__*/_interopNamespace(geodesy);
+    var _get__namespace = /*#__PURE__*/_interopNamespace(_get);
 
     var ViewerFactory = /** @class */ (function () {
         function ViewerFactory() {
@@ -215,7 +41,7 @@
         ViewerFactory.prototype.createViewer = function (mapContainer, options) {
             var viewer = null;
             if (options) {
-                viewer = new this.cesium.Viewer(mapContainer, __assign({ contextOptions: {
+                viewer = new this.cesium.Viewer(mapContainer, Object.assign({ contextOptions: {
                         webgl: { preserveDrawingBuffer: true }
                     } }, options));
             }
@@ -228,12 +54,12 @@
             }
             return viewer;
         };
-        ViewerFactory = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], ViewerFactory);
         return ViewerFactory;
     }());
+    ViewerFactory.decorators = [
+        { type: core.Injectable }
+    ];
+    ViewerFactory.ctorParameters = function () { return []; };
 
     /**
      * Service for setting cesium viewer map options.
@@ -264,7 +90,7 @@
             set: function (value) {
                 this._viewerOptions = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ViewerConfiguration.prototype.getNextViewerOptions = function () {
@@ -287,7 +113,7 @@
             set: function (value) {
                 this._viewerModifier = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ViewerConfiguration.prototype.getNextViewerModifier = function () {
@@ -298,11 +124,11 @@
                 return this._viewerModifier;
             }
         };
-        ViewerConfiguration = __decorate([
-            core.Injectable()
-        ], ViewerConfiguration);
         return ViewerConfiguration;
     }());
+    ViewerConfiguration.decorators = [
+        { type: core.Injectable }
+    ];
 
     /**
      *  Service that initialize cesium viewer and expose cesium viewer and scene.
@@ -349,18 +175,16 @@
         CesiumService.prototype.getMap = function () {
             return this.map;
         };
-        CesiumService.ctorParameters = function () { return [
-            { type: core.NgZone },
-            { type: ViewerFactory },
-            { type: ViewerConfiguration, decorators: [{ type: core.Optional }] }
-        ]; };
-        CesiumService = __decorate([
-            core.Injectable(),
-            __param(2, core.Optional()),
-            __metadata("design:paramtypes", [core.NgZone, ViewerFactory, ViewerConfiguration])
-        ], CesiumService);
         return CesiumService;
     }());
+    CesiumService.decorators = [
+        { type: core.Injectable }
+    ];
+    CesiumService.ctorParameters = function () { return [
+        { type: core.NgZone },
+        { type: ViewerFactory },
+        { type: ViewerConfiguration, decorators: [{ type: core.Optional }] }
+    ]; };
 
     /**
      * Fix for the constant entity shadowing.
@@ -698,21 +522,18 @@
                 fixCesiumEntitiesShadows();
             }
         }
-        ConfigurationService.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [ANGULAR_CESIUM_CONFIG,] }] }
-        ]; };
-        ConfigurationService = __decorate([
-            core.Injectable(),
-            __param(0, core.Optional()), __param(0, core.Inject(ANGULAR_CESIUM_CONFIG)),
-            __metadata("design:paramtypes", [Object])
-        ], ConfigurationService);
         return ConfigurationService;
     }());
+    ConfigurationService.decorators = [
+        { type: core.Injectable }
+    ];
+    ConfigurationService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core.Optional }, { type: core.Inject, args: [ANGULAR_CESIUM_CONFIG,] }] }
+    ]; };
 
     /**
      * Cesium scene modes
      */
-
     (function (SceneMode) {
         SceneMode[SceneMode["SCENE3D"] = 0] = "SCENE3D";
         SceneMode[SceneMode["COLUMBUS_VIEW"] = 1] = "COLUMBUS_VIEW";
@@ -729,7 +550,6 @@
         function CameraService() {
             this.isSceneModePerformance2D = false;
         }
-        CameraService_1 = CameraService;
         CameraService.prototype.init = function (cesiumService) {
             this.viewer = cesiumService.getViewer();
             this.scene = cesiumService.getScene();
@@ -865,7 +685,7 @@
                     this.scene.morphToColumbusView(duration);
                     var morphCompleteEventListener_1 = this.scene.morphComplete.addEventListener(function () {
                         _this.camera.setView({
-                            destination: Cesium.Cartesian3.fromDegrees(0.0, 0.0, Math.min(CameraService_1.PERFORMANCE_2D_ALTITUDE, _this.getMaximumZoom())),
+                            destination: Cesium.Cartesian3.fromDegrees(0.0, 0.0, Math.min(CameraService.PERFORMANCE_2D_ALTITUDE, _this.getMaximumZoom())),
                             orientation: {
                                 pitch: Cesium.Math.toRadians(-90)
                             }
@@ -982,19 +802,17 @@
         CameraService.prototype.untrackEntity = function () {
             this.trackEntity();
         };
-        var CameraService_1;
-        CameraService.PERFORMANCE_2D_ALTITUDE = 25000000;
-        CameraService = CameraService_1 = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], CameraService);
         return CameraService;
     }());
+    CameraService.PERFORMANCE_2D_ALTITUDE = 25000000;
+    CameraService.decorators = [
+        { type: core.Injectable }
+    ];
+    CameraService.ctorParameters = function () { return []; };
 
     /**
      * Event options for registration on map-event-manager.
      */
-
     (function (CesiumEvent) {
         CesiumEvent[CesiumEvent["MOUSE_MOVE"] = Cesium.ScreenSpaceEventType.MOUSE_MOVE] = "MOUSE_MOVE";
         CesiumEvent[CesiumEvent["LEFT_CLICK"] = Cesium.ScreenSpaceEventType.LEFT_CLICK] = "LEFT_CLICK";
@@ -1027,7 +845,6 @@
      *  PICK_ONE    - in case a few entities are picked plonter is resolved . use Cesium.scene.drillPick()
      *  PICK_ALL    - all entities are picked. use Cesium.scene.drillPick()
      */
-
     (function (PickOptions) {
         PickOptions[PickOptions["NO_PICK"] = 0] = "NO_PICK";
         PickOptions[PickOptions["PICK_FIRST"] = 1] = "PICK_FIRST";
@@ -1079,49 +896,49 @@
             get: function () {
                 return this._contextMenuChangeNotifier;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "showContextMenu", {
             get: function () {
                 return this._showContextMenu;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "options", {
             get: function () {
                 return this._options;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "position", {
             get: function () {
                 return this._position;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "content", {
             get: function () {
                 return this._content;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "onOpen", {
             get: function () {
                 return this._onOpen;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(ContextMenuService.prototype, "onClose", {
             get: function () {
                 return this._onClose;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ContextMenuService.prototype.init = function (mapEventsManager) {
@@ -1165,14 +982,14 @@
             this._contextMenuChangeNotifier.emit();
             this._onClose.emit();
         };
-        ContextMenuService = __decorate([
-            core.Injectable()
-        ], ContextMenuService);
         return ContextMenuService;
     }());
+    ContextMenuService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var LatLonVectors = geodesy.LatLonVectors; // doesnt exists on typings
-    window['geodesy'] = geodesy;
+    window['geodesy'] = geodesy__namespace;
     /**
      *  Given different types of coordinates, we provide you a service converting those types to the most common other types.
      *  We are using the geodesy implementation of UTM conversion. see: https://github.com/chrisveness/geodesy.
@@ -1216,7 +1033,7 @@
                     ' to do screen position calculations');
             }
             else {
-                var screenPosition = __assign({}, screenPos);
+                var screenPosition = Object.assign({}, screenPos);
                 if (addMapCanvasBoundsToPos) {
                     var mapBounds = this.cesiumService.getViewer().canvas.getBoundingClientRect();
                     screenPosition.x += mapBounds.left;
@@ -1294,16 +1111,332 @@
             var secondCart = Cesium.Cartographic.fromCartesian(secondCartesian3);
             return this.bearingTo(firstCart, secondCart);
         };
-        CoordinateConverter.ctorParameters = function () { return [
-            { type: CesiumService, decorators: [{ type: core.Optional }] }
-        ]; };
-        CoordinateConverter = __decorate([
-            core.Injectable(),
-            __param(0, core.Optional()),
-            __metadata("design:paramtypes", [CesiumService])
-        ], CoordinateConverter);
         return CoordinateConverter;
     }());
+    CoordinateConverter.decorators = [
+        { type: core.Injectable }
+    ];
+    CoordinateConverter.ctorParameters = function () { return [
+        { type: CesiumService, decorators: [{ type: core.Optional }] }
+    ]; };
+
+    /*! *****************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+    /* global Reflect, Promise */
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b)
+                if (Object.prototype.hasOwnProperty.call(b, p))
+                    d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    function __extends(d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    }
+    var __assign = function () {
+        __assign = Object.assign || function __assign(t) {
+            for (var s, i = 1, n = arguments.length; i < n; i++) {
+                s = arguments[i];
+                for (var p in s)
+                    if (Object.prototype.hasOwnProperty.call(s, p))
+                        t[p] = s[p];
+            }
+            return t;
+        };
+        return __assign.apply(this, arguments);
+    };
+    function __rest(s, e) {
+        var t = {};
+        for (var p in s)
+            if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+                t[p] = s[p];
+        if (s != null && typeof Object.getOwnPropertySymbols === "function")
+            for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+                if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                    t[p[i]] = s[p[i]];
+            }
+        return t;
+    }
+    function __decorate(decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+            r = Reflect.decorate(decorators, target, key, desc);
+        else
+            for (var i = decorators.length - 1; i >= 0; i--)
+                if (d = decorators[i])
+                    r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    }
+    function __param(paramIndex, decorator) {
+        return function (target, key) { decorator(target, key, paramIndex); };
+    }
+    function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+            return Reflect.metadata(metadataKey, metadataValue);
+    }
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try {
+                step(generator.next(value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function rejected(value) { try {
+                step(generator["throw"](value));
+            }
+            catch (e) {
+                reject(e);
+            } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function () { if (t[0] & 1)
+                throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function () { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f)
+                throw new TypeError("Generator is already executing.");
+            while (_)
+                try {
+                    if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done)
+                        return t;
+                    if (y = 0, t)
+                        op = [op[0] & 2, t.value];
+                    switch (op[0]) {
+                        case 0:
+                        case 1:
+                            t = op;
+                            break;
+                        case 4:
+                            _.label++;
+                            return { value: op[1], done: false };
+                        case 5:
+                            _.label++;
+                            y = op[1];
+                            op = [0];
+                            continue;
+                        case 7:
+                            op = _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                        default:
+                            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                                _ = 0;
+                                continue;
+                            }
+                            if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) {
+                                _.label = op[1];
+                                break;
+                            }
+                            if (op[0] === 6 && _.label < t[1]) {
+                                _.label = t[1];
+                                t = op;
+                                break;
+                            }
+                            if (t && _.label < t[2]) {
+                                _.label = t[2];
+                                _.ops.push(op);
+                                break;
+                            }
+                            if (t[2])
+                                _.ops.pop();
+                            _.trys.pop();
+                            continue;
+                    }
+                    op = body.call(thisArg, _);
+                }
+                catch (e) {
+                    op = [6, e];
+                    y = 0;
+                }
+                finally {
+                    f = t = 0;
+                }
+            if (op[0] & 5)
+                throw op[1];
+            return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+    var __createBinding = Object.create ? (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        Object.defineProperty(o, k2, { enumerable: true, get: function () { return m[k]; } });
+    }) : (function (o, m, k, k2) {
+        if (k2 === undefined)
+            k2 = k;
+        o[k2] = m[k];
+    });
+    function __exportStar(m, o) {
+        for (var p in m)
+            if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p))
+                __createBinding(o, m, p);
+    }
+    function __values(o) {
+        var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+        if (m)
+            return m.call(o);
+        if (o && typeof o.length === "number")
+            return {
+                next: function () {
+                    if (o && i >= o.length)
+                        o = void 0;
+                    return { value: o && o[i++], done: !o };
+                }
+            };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+    }
+    function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m)
+            return o;
+        var i = m.call(o), r, ar = [], e;
+        try {
+            while ((n === void 0 || n-- > 0) && !(r = i.next()).done)
+                ar.push(r.value);
+        }
+        catch (error) {
+            e = { error: error };
+        }
+        finally {
+            try {
+                if (r && !r.done && (m = i["return"]))
+                    m.call(i);
+            }
+            finally {
+                if (e)
+                    throw e.error;
+            }
+        }
+        return ar;
+    }
+    /** @deprecated */
+    function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++)
+            ar = ar.concat(__read(arguments[i]));
+        return ar;
+    }
+    /** @deprecated */
+    function __spreadArrays() {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++)
+            s += arguments[i].length;
+        for (var r = Array(s), k = 0, i = 0; i < il; i++)
+            for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+                r[k] = a[j];
+        return r;
+    }
+    function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2)
+            for (var i = 0, l = from.length, ar; i < l; i++) {
+                if (ar || !(i in from)) {
+                    if (!ar)
+                        ar = Array.prototype.slice.call(from, 0, i);
+                    ar[i] = from[i];
+                }
+            }
+        return to.concat(ar || from);
+    }
+    function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+    }
+    function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []), i, q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+        function verb(n) { if (g[n])
+            i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+        function resume(n, v) { try {
+            step(g[n](v));
+        }
+        catch (e) {
+            settle(q[0][3], e);
+        } }
+        function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+        function fulfill(value) { resume("next", value); }
+        function reject(value) { resume("throw", value); }
+        function settle(f, v) { if (f(v), q.shift(), q.length)
+            resume(q[0][0], q[0][1]); }
+    }
+    function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+        function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+    }
+    function __asyncValues(o) {
+        if (!Symbol.asyncIterator)
+            throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator], i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+        function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+        function settle(resolve, reject, d, v) { Promise.resolve(v).then(function (v) { resolve({ value: v, done: d }); }, reject); }
+    }
+    function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) {
+            Object.defineProperty(cooked, "raw", { value: raw });
+        }
+        else {
+            cooked.raw = raw;
+        }
+        return cooked;
+    }
+    ;
+    var __setModuleDefault = Object.create ? (function (o, v) {
+        Object.defineProperty(o, "default", { enumerable: true, value: v });
+    }) : function (o, v) {
+        o["default"] = v;
+    };
+    function __importStar(mod) {
+        if (mod && mod.__esModule)
+            return mod;
+        var result = {};
+        if (mod != null)
+            for (var k in mod)
+                if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k))
+                    __createBinding(result, mod, k);
+        __setModuleDefault(result, mod);
+        return result;
+    }
+    function __importDefault(mod) {
+        return (mod && mod.__esModule) ? mod : { default: mod };
+    }
+    function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+    }
+    function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m")
+            throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f)
+            throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver))
+            throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+    }
 
     /**
      *  Abstract drawer. All drawers extends this class.
@@ -1375,7 +1508,6 @@
         function GeoUtilsService(cesiumService) {
             this.cesiumService = cesiumService;
         }
-        GeoUtilsService_1 = GeoUtilsService;
         GeoUtilsService.pointByLocationDistanceAndAzimuth = function (currentLocation, meterDistance, radianAzimuth, deprecated) {
             var distance = meterDistance / Cesium.Ellipsoid.WGS84.maximumRadius;
             var cartographicLocation = currentLocation instanceof Cesium.Cartesian3 ? Cesium.Cartographic.fromCartesian(currentLocation) : currentLocation;
@@ -1390,7 +1522,7 @@
             while (counter === 0 ||
                 (counter < 16 && Math.max(resultDistance, meterDistance) / Math.min(resultDistance, meterDistance) > 1.000001)) {
                 var factor = distanceFactorRangeMin + (distanceFactorRangeMax - distanceFactorRangeMin) / 2;
-                resultPosition = GeoUtilsService_1._pointByLocationDistanceAndAzimuth(cartographicLocation, distance * (1 + factor), radianAzimuth);
+                resultPosition = GeoUtilsService._pointByLocationDistanceAndAzimuth(cartographicLocation, distance * (1 + factor), radianAzimuth);
                 resultDistance = this.distance(cartesianLocation, resultPosition);
                 if (resultDistance > meterDistance) {
                     distanceFactorRangeMax = distanceFactorRangeMin + (distanceFactorRangeMax - distanceFactorRangeMin) / 2;
@@ -1449,16 +1581,14 @@
             var camera = this.cesiumService.getViewer().camera;
             return camera.pickEllipsoid(screenPos);
         };
-        var GeoUtilsService_1;
-        GeoUtilsService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        GeoUtilsService = GeoUtilsService_1 = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], GeoUtilsService);
         return GeoUtilsService;
     }());
+    GeoUtilsService.decorators = [
+        { type: core.Injectable }
+    ];
+    GeoUtilsService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      +  This drawer is responsible for drawing an arc over the Cesium map.
@@ -1511,16 +1641,14 @@
             primitive.positions = this._calculateArc(cesiumProps);
             return primitive;
         };
-        ArcDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        ArcDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], ArcDrawerService);
         return ArcDrawerService;
     }(PrimitivesDrawerService));
-
+    ArcDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    ArcDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     (function (GraphicsType) {
         GraphicsType[GraphicsType["ellipse"] = Cesium.EllipseGraphics] = "ellipse";
@@ -1557,7 +1685,7 @@
             get: function () {
                 return this._isSuspended;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(OptimizedEntityCollection.prototype, "updateRate", {
@@ -1567,7 +1695,7 @@
             set: function (value) {
                 this._updateRate = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(OptimizedEntityCollection.prototype, "collectionSize", {
@@ -1577,7 +1705,7 @@
             set: function (value) {
                 this._collectionSize = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         OptimizedEntityCollection.prototype.collection = function () {
@@ -1790,15 +1918,14 @@
         function BillboardDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.billboard) || this;
         }
-        BillboardDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        BillboardDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], BillboardDrawerService);
         return BillboardDrawerService;
     }(EntitiesDrawerService));
+    BillboardDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    BillboardDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing czml dataSources.
@@ -1834,15 +1961,14 @@
         CzmlDrawerService.prototype.setShow = function (showValue) {
             this.czmlStream.entities.show = showValue;
         };
-        CzmlDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        CzmlDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], CzmlDrawerService);
         return CzmlDrawerService;
     }(BasicDrawerService));
+    CzmlDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    CzmlDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing ellipses.
@@ -1852,15 +1978,14 @@
         function EllipseDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.ellipse) || this;
         }
-        EllipseDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        EllipseDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], EllipseDrawerService);
         return EllipseDrawerService;
     }(EntitiesDrawerService));
+    EllipseDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    EllipseDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing labels.
@@ -1870,15 +1995,14 @@
         function LabelDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.label) || this;
         }
-        LabelDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        LabelDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], LabelDrawerService);
         return LabelDrawerService;
     }(EntitiesDrawerService));
+    LabelDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    LabelDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing points.
@@ -1888,15 +2012,14 @@
         function PointDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.point) || this;
         }
-        PointDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PointDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PointDrawerService);
         return PointDrawerService;
     }(EntitiesDrawerService));
+    PointDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PointDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing polygons.
@@ -1906,15 +2029,14 @@
         function PolygonDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.polygon) || this;
         }
-        PolygonDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PolygonDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PolygonDrawerService);
         return PolygonDrawerService;
     }(EntitiesDrawerService));
+    PolygonDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PolygonDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible of drawing polylines.
@@ -1924,15 +2046,14 @@
         function PolylineDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.polyline) || this;
         }
-        PolylineDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PolylineDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PolylineDrawerService);
         return PolylineDrawerService;
     }(EntitiesDrawerService));
+    PolylineDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PolylineDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible of drawing polylines as primitives.
@@ -1966,16 +2087,14 @@
             }
             return cesiumProps;
         };
-        PolylinePrimitiveDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PolylinePrimitiveDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PolylinePrimitiveDrawerService);
         return PolylinePrimitiveDrawerService;
     }(PrimitivesDrawerService));
-
+    PolylinePrimitiveDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PolylinePrimitiveDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     (function (KeyboardAction) {
         KeyboardAction[KeyboardAction["CAMERA_FORWARD"] = 0] = "CAMERA_FORWARD";
@@ -2489,18 +2608,16 @@
             this.document.removeEventListener('keyup', this.handleKeyup);
             this.cesiumService.getViewer().clock.onTick.removeEventListener(this.handleTick);
         };
-        KeyboardControlService.ctorParameters = function () { return [
-            { type: core.NgZone },
-            { type: CesiumService },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
-        ]; };
-        KeyboardControlService = __decorate([
-            core.Injectable(),
-            __param(2, core.Inject(common.DOCUMENT)),
-            __metadata("design:paramtypes", [core.NgZone, CesiumService, Object])
-        ], KeyboardControlService);
         return KeyboardControlService;
     }());
+    KeyboardControlService.decorators = [
+        { type: core.Injectable }
+    ];
+    KeyboardControlService.ctorParameters = function () { return [
+        { type: core.NgZone },
+        { type: CesiumService },
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] }
+    ]; };
 
     var CesiumPureEventObserver = /** @class */ (function () {
         function CesiumPureEventObserver(event, modifier) {
@@ -2548,21 +2665,21 @@
                 stopEvent = exports.CesiumEvent.MIDDLE_UP;
             }
             var startEventObservable = this.eventFactory.get(startEvent, this.modifier);
-            var stopEventObservable = this.eventFactory.get(stopEvent, this.modifier);
+            var stopEventObservable = rxjs.merge(this.eventFactory.get(stopEvent, this.modifier), this.eventFactory.get(exports.CesiumEvent.MOUSE_MOVE, this.modifier) // Prevent drag mistaken for long press
+            );
             // publish for preventing side effect
             var longPressObservable = operators.publish()(startEventObservable.pipe(operators.mergeMap(function (e) { return rxjs.of(e).pipe(operators.delay(CesiumLongPressObserver.LONG_PRESS_EVENTS_DURATION), operators.takeUntil(stopEventObservable)); })));
             return longPressObservable;
         };
-        CesiumLongPressObserver.LONG_PRESS_EVENTS_DURATION = 250;
         return CesiumLongPressObserver;
     }(CesiumPureEventObserver));
+    CesiumLongPressObserver.LONG_PRESS_EVENTS_DURATION = 250;
 
     var CesiumEventBuilder = /** @class */ (function () {
         function CesiumEventBuilder(cesiumService) {
             this.cesiumService = cesiumService;
             this.cesiumEventsObservables = new Map();
         }
-        CesiumEventBuilder_1 = CesiumEventBuilder;
         CesiumEventBuilder.getEventFullName = function (event, modifier) {
             if (modifier) {
                 return event + "_" + modifier;
@@ -2575,7 +2692,7 @@
             this.eventsHandler = this.cesiumService.getViewer().screenSpaceEventHandler;
         };
         CesiumEventBuilder.prototype.get = function (event, modifier) {
-            var eventName = CesiumEventBuilder_1.getEventFullName(event, modifier);
+            var eventName = CesiumEventBuilder.getEventFullName(event, modifier);
             if (this.cesiumEventsObservables.has(eventName)) {
                 return this.cesiumEventsObservables.get(eventName);
             }
@@ -2587,7 +2704,7 @@
         };
         CesiumEventBuilder.prototype.createCesiumEventObservable = function (event, modifier) {
             var cesiumEventObservable;
-            if (CesiumEventBuilder_1.longPressEvents.has(event)) {
+            if (CesiumEventBuilder.longPressEvents.has(event)) {
                 cesiumEventObservable = this.createSpecialCesiumEventObservable(event, modifier);
             }
             else {
@@ -2600,21 +2717,19 @@
             // could support more events if needed
             return new CesiumLongPressObserver(event, modifier, this).init();
         };
-        var CesiumEventBuilder_1;
-        CesiumEventBuilder.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        CesiumEventBuilder.longPressEvents = new Set([
-            exports.CesiumEvent.LONG_LEFT_PRESS,
-            exports.CesiumEvent.LONG_RIGHT_PRESS,
-            exports.CesiumEvent.LONG_MIDDLE_PRESS
-        ]);
-        CesiumEventBuilder = CesiumEventBuilder_1 = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], CesiumEventBuilder);
         return CesiumEventBuilder;
     }());
+    CesiumEventBuilder.longPressEvents = new Set([
+        exports.CesiumEvent.LONG_LEFT_PRESS,
+        exports.CesiumEvent.LONG_RIGHT_PRESS,
+        exports.CesiumEvent.LONG_MIDDLE_PRESS
+    ]);
+    CesiumEventBuilder.decorators = [
+        { type: core.Injectable }
+    ];
+    CesiumEventBuilder.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      * Service for solving plonter.
@@ -2630,28 +2745,28 @@
             get: function () {
                 return this._plonterChangeNotifier;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PlonterService.prototype, "plonterShown", {
             get: function () {
                 return this._plonterShown;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PlonterService.prototype, "entitesToPlonter", {
             get: function () {
                 return this._entitesToPlonter;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PlonterService.prototype, "plonterClickPosition", {
             get: function () {
                 return this._eventResult.movement;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         PlonterService.prototype.plonterIt = function (eventResult) {
@@ -2667,12 +2782,12 @@
             this._plonterChangeNotifier.emit();
             this._plonterObserver.next(this._eventResult);
         };
-        PlonterService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], PlonterService);
         return PlonterService;
     }());
+    PlonterService.decorators = [
+        { type: core.Injectable }
+    ];
+    PlonterService.ctorParameters = function () { return []; };
 
     var ɵ0 = function (array) {
         return array.reduce(function (accumulator, currentValue) {
@@ -2706,13 +2821,13 @@
             }
             return { mouseDownEvent: mouseDownEvent, mouseUpEvent: mouseUpEvent };
         };
-        CesiumDragDropHelper.dragEvents = new Set([
-            exports.CesiumEvent.LEFT_CLICK_DRAG,
-            exports.CesiumEvent.RIGHT_CLICK_DRAG,
-            exports.CesiumEvent.MIDDLE_CLICK_DRAG
-        ]);
         return CesiumDragDropHelper;
     }());
+    CesiumDragDropHelper.dragEvents = new Set([
+        exports.CesiumEvent.LEFT_CLICK_DRAG,
+        exports.CesiumEvent.RIGHT_CLICK_DRAG,
+        exports.CesiumEvent.MIDDLE_CLICK_DRAG
+    ]);
 
     var Registration = /** @class */ (function () {
         function Registration(observable, stopper, priority, isPaused) {
@@ -2924,19 +3039,16 @@
                 return rxjs.of(entitiesAndMovement);
             }
         };
-        MapEventsManagerService.ctorParameters = function () { return [
-            { type: CesiumService },
-            { type: CesiumEventBuilder },
-            { type: PlonterService }
-        ]; };
-        MapEventsManagerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService,
-                CesiumEventBuilder,
-                PlonterService])
-        ], MapEventsManagerService);
         return MapEventsManagerService;
     }());
+    MapEventsManagerService.decorators = [
+        { type: core.Injectable }
+    ];
+    MapEventsManagerService.ctorParameters = function () { return [
+        { type: CesiumService },
+        { type: CesiumEventBuilder },
+        { type: PlonterService }
+    ]; };
 
     var MapLayersService = /** @class */ (function () {
         function MapLayersService(cesiumService) {
@@ -2980,15 +3092,14 @@
                 }
             });
         };
-        MapLayersService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        MapLayersService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], MapLayersService);
         return MapLayersService;
     }());
+    MapLayersService.decorators = [
+        { type: core.Injectable }
+    ];
+    MapLayersService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  The service manages `ac-map` instances. `ac-map` register itself to this service.
@@ -3088,12 +3199,12 @@
             this.eventRemoveCallbacks.forEach(function (removeCallback) { return removeCallback(); });
             this.eventRemoveCallbacks = [];
         };
-        MapsManagerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], MapsManagerService);
         return MapsManagerService;
     }());
+    MapsManagerService.decorators = [
+        { type: core.Injectable }
+    ];
+    MapsManagerService.ctorParameters = function () { return []; };
 
     /**
      * Take screenshot of your cesium globe.
@@ -3130,15 +3241,14 @@
             link.click();
             document.body.removeChild(link);
         };
-        ScreenshotService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        ScreenshotService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], ScreenshotService);
         return ScreenshotService;
     }());
+    ScreenshotService.decorators = [
+        { type: core.Injectable }
+    ];
+    ScreenshotService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      * This is a map implementation, creates the cesium map.
@@ -3279,96 +3389,64 @@
         AcMapComponent.prototype.getCoordinateConverter = function () {
             return this.coordinateConverter;
         };
-        AcMapComponent.ctorParameters = function () { return [
-            { type: CesiumService },
-            { type: CameraService },
-            { type: core.ElementRef },
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: MapsManagerService },
-            { type: BillboardDrawerService },
-            { type: LabelDrawerService },
-            { type: EllipseDrawerService },
-            { type: PolylineDrawerService },
-            { type: PolygonDrawerService },
-            { type: ArcDrawerService },
-            { type: PointDrawerService },
-            { type: CzmlDrawerService },
-            { type: MapEventsManagerService },
-            { type: KeyboardControlService },
-            { type: MapLayersService },
-            { type: ConfigurationService },
-            { type: ScreenshotService },
-            { type: ContextMenuService },
-            { type: CoordinateConverter }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapComponent.prototype, "disableDefaultPlonter", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcMapComponent.prototype, "mapId", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapComponent.prototype, "flyTo", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], AcMapComponent.prototype, "sceneMode", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcMapComponent.prototype, "containerId", void 0);
-        AcMapComponent = __decorate([
-            core.Component({
-                selector: 'ac-map',
-                template: "\n    <ac-default-plonter *ngIf=\"!disableDefaultPlonter\"></ac-default-plonter>\n    <ac-context-menu-wrapper></ac-context-menu-wrapper>\n    <ng-content></ng-content>\n  ",
-                providers: [
-                    CesiumService,
-                    BillboardDrawerService,
-                    CesiumEventBuilder,
-                    KeyboardControlService,
-                    MapEventsManagerService,
-                    PlonterService,
-                    LabelDrawerService,
-                    PolylineDrawerService,
-                    PolylinePrimitiveDrawerService,
-                    EllipseDrawerService,
-                    PointDrawerService,
-                    ArcDrawerService,
-                    CzmlDrawerService,
-                    PolygonDrawerService,
-                    MapLayersService,
-                    CameraService,
-                    ScreenshotService,
-                    ContextMenuService,
-                    CoordinateConverter,
-                ]
-            }),
-            __param(3, core.Inject(common.DOCUMENT)),
-            __metadata("design:paramtypes", [CesiumService,
-                CameraService,
-                core.ElementRef, Object, MapsManagerService,
-                BillboardDrawerService,
-                LabelDrawerService,
-                EllipseDrawerService,
-                PolylineDrawerService,
-                PolygonDrawerService,
-                ArcDrawerService,
-                PointDrawerService,
-                CzmlDrawerService,
-                MapEventsManagerService,
-                KeyboardControlService,
-                MapLayersService,
-                ConfigurationService,
-                ScreenshotService,
-                ContextMenuService,
-                CoordinateConverter])
-        ], AcMapComponent);
         return AcMapComponent;
     }());
+    AcMapComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-map',
+                    template: "\n    <ac-default-plonter *ngIf=\"!disableDefaultPlonter\"></ac-default-plonter>\n    <ac-context-menu-wrapper></ac-context-menu-wrapper>\n    <ng-content></ng-content>\n  ",
+                    providers: [
+                        CesiumService,
+                        BillboardDrawerService,
+                        CesiumEventBuilder,
+                        KeyboardControlService,
+                        MapEventsManagerService,
+                        PlonterService,
+                        LabelDrawerService,
+                        PolylineDrawerService,
+                        PolylinePrimitiveDrawerService,
+                        EllipseDrawerService,
+                        PointDrawerService,
+                        ArcDrawerService,
+                        CzmlDrawerService,
+                        PolygonDrawerService,
+                        MapLayersService,
+                        CameraService,
+                        ScreenshotService,
+                        ContextMenuService,
+                        CoordinateConverter,
+                    ]
+                },] }
+    ];
+    AcMapComponent.ctorParameters = function () { return [
+        { type: CesiumService },
+        { type: CameraService },
+        { type: core.ElementRef },
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+        { type: MapsManagerService },
+        { type: BillboardDrawerService },
+        { type: LabelDrawerService },
+        { type: EllipseDrawerService },
+        { type: PolylineDrawerService },
+        { type: PolygonDrawerService },
+        { type: ArcDrawerService },
+        { type: PointDrawerService },
+        { type: CzmlDrawerService },
+        { type: MapEventsManagerService },
+        { type: KeyboardControlService },
+        { type: MapLayersService },
+        { type: ConfigurationService },
+        { type: ScreenshotService },
+        { type: ContextMenuService },
+        { type: CoordinateConverter }
+    ]; };
+    AcMapComponent.propDecorators = {
+        disableDefaultPlonter: [{ type: core.Input }],
+        mapId: [{ type: core.Input }],
+        flyTo: [{ type: core.Input }],
+        sceneMode: [{ type: core.Input }],
+        containerId: [{ type: core.Input }]
+    };
 
     var LayerService = /** @class */ (function () {
         function LayerService() {
@@ -3383,7 +3461,7 @@
             set: function (value) {
                 this._cache = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(LayerService.prototype, "zIndex", {
@@ -3396,7 +3474,7 @@
                 }
                 this._zIndex = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(LayerService.prototype, "show", {
@@ -3409,7 +3487,7 @@
                 }
                 this._show = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(LayerService.prototype, "options", {
@@ -3420,7 +3498,7 @@
                 this._options = value;
                 this.layerUpdate.emit();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(LayerService.prototype, "context", {
@@ -3431,7 +3509,7 @@
                 this._context = context;
                 this.layerUpdate.emit();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         LayerService.prototype.setEntityName = function (name) {
@@ -3457,16 +3535,15 @@
         LayerService.prototype.layerUpdates = function () {
             return this.layerUpdate;
         };
-        LayerService = __decorate([
-            core.Injectable()
-        ], LayerService);
         return LayerService;
     }());
+    LayerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     /**
      * Action to do on entity
      */
-
     (function (ActionType) {
         ActionType[ActionType["ADD_UPDATE"] = 0] = "ADD_UPDATE";
         ActionType[ActionType["DELETE"] = 1] = "DELETE";
@@ -3487,11 +3564,11 @@
         ComputationCache.prototype.clear = function () {
             this._cache.clear();
         };
-        ComputationCache = __decorate([
-            core.Injectable()
-        ], ComputationCache);
         return ComputationCache;
     }());
+    ComputationCache.decorators = [
+        { type: core.Injectable }
+    ];
 
     var Checker = /** @class */ (function () {
         function Checker() {
@@ -3529,15 +3606,14 @@
             ellipse.updateLocationData(cesiumProps);
             return ellipse;
         };
-        DynamicEllipseDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        DynamicEllipseDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], DynamicEllipseDrawerService);
         return DynamicEllipseDrawerService;
     }(PrimitivesDrawerService));
+    DynamicEllipseDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    DynamicEllipseDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for creating the dynamic version of the polyline component.
@@ -3547,15 +3623,14 @@
         function DynamicPolylineDrawerService(cesiumService) {
             return _super.call(this, Cesium.PolylineCollection, cesiumService) || this;
         }
-        DynamicPolylineDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        DynamicPolylineDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], DynamicPolylineDrawerService);
         return DynamicPolylineDrawerService;
     }(PrimitivesDrawerService));
+    DynamicPolylineDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    DynamicPolylineDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *
@@ -3570,6 +3645,9 @@
             return _this;
         }
         StaticPrimitiveDrawer.prototype.add = function (geometryProps, instanceProps, primitiveProps) {
+            if (Object.keys(instanceProps).length === 0) {
+                throw (new Error('instanceProps object is empty'));
+            }
             instanceProps.geometry = new this.geometryType(geometryProps);
             primitiveProps.geometryInstances = new Cesium.GeometryInstance(instanceProps);
             primitiveProps.asynchronous = false;
@@ -3593,15 +3671,14 @@
         function StaticCircleDrawerService(cesiumService) {
             return _super.call(this, Cesium.CircleGeometry, cesiumService) || this;
         }
-        StaticCircleDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        StaticCircleDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], StaticCircleDrawerService);
         return StaticCircleDrawerService;
     }(StaticPrimitiveDrawer));
+    StaticCircleDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    StaticCircleDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for creating the static version of the polyline component.
@@ -3627,15 +3704,14 @@
             }
             return primitive;
         };
-        StaticPolylineDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        StaticPolylineDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], StaticPolylineDrawerService);
         return StaticPolylineDrawerService;
     }(StaticPrimitiveDrawer));
+    StaticPolylineDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    StaticPolylineDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      + This drawer is responsible for drawing a polygon over the Cesium map.
@@ -3647,15 +3723,14 @@
         function StaticPolygonDrawerService(cesiumService) {
             return _super.call(this, Cesium.PolygonGeometry, cesiumService) || this;
         }
-        StaticPolygonDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        StaticPolygonDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], StaticPolygonDrawerService);
         return StaticPolygonDrawerService;
     }(StaticPrimitiveDrawer));
+    StaticPolygonDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    StaticPolygonDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      + *  This drawer is responsible for drawing an ellipse over the Cesium map.
@@ -3667,15 +3742,14 @@
         function StaticEllipseDrawerService(cesiumService) {
             return _super.call(this, Cesium.EllipseGeometry, cesiumService) || this;
         }
-        StaticEllipseDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        StaticEllipseDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], StaticEllipseDrawerService);
         return StaticEllipseDrawerService;
     }(StaticPrimitiveDrawer));
+    StaticEllipseDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    StaticEllipseDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing models.
@@ -3685,15 +3759,14 @@
         function ModelDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.model) || this;
         }
-        ModelDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        ModelDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], ModelDrawerService);
         return ModelDrawerService;
     }(EntitiesDrawerService));
+    ModelDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    ModelDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing box.
@@ -3703,15 +3776,14 @@
         function BoxDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.box) || this;
         }
-        BoxDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        BoxDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], BoxDrawerService);
         return BoxDrawerService;
     }(EntitiesDrawerService));
+    BoxDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    BoxDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing corridors .
@@ -3721,15 +3793,14 @@
         function CorridorDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.corridor) || this;
         }
-        CorridorDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        CorridorDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], CorridorDrawerService);
         return CorridorDrawerService;
     }(EntitiesDrawerService));
+    CorridorDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    CorridorDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing cylinders.
@@ -3739,15 +3810,14 @@
         function CylinderDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.cylinder) || this;
         }
-        CylinderDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        CylinderDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], CylinderDrawerService);
         return CylinderDrawerService;
     }(EntitiesDrawerService));
+    CylinderDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    CylinderDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing ellipsoid.
@@ -3757,15 +3827,14 @@
         function EllipsoidDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.ellipsoid) || this;
         }
-        EllipsoidDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        EllipsoidDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], EllipsoidDrawerService);
         return EllipsoidDrawerService;
     }(EntitiesDrawerService));
+    EllipsoidDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    EllipsoidDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing polylines.
@@ -3775,15 +3844,14 @@
         function PolylineVolumeDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.polylineVolume) || this;
         }
-        PolylineVolumeDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PolylineVolumeDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PolylineVolumeDrawerService);
         return PolylineVolumeDrawerService;
     }(EntitiesDrawerService));
+    PolylineVolumeDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PolylineVolumeDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing polygons.
@@ -3793,15 +3861,14 @@
         function WallDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.wall) || this;
         }
-        WallDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        WallDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], WallDrawerService);
         return WallDrawerService;
     }(EntitiesDrawerService));
+    WallDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    WallDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing rectangles.
@@ -3811,15 +3878,14 @@
         function RectangleDrawerService(cesiumService) {
             return _super.call(this, cesiumService, exports.ɵf.rectangle) || this;
         }
-        RectangleDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        RectangleDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], RectangleDrawerService);
         return RectangleDrawerService;
     }(EntitiesDrawerService));
+    RectangleDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    RectangleDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing labels as primitives.
@@ -3830,15 +3896,14 @@
         function LabelPrimitiveDrawerService(cesiumService) {
             return _super.call(this, Cesium.LabelCollection, cesiumService) || this;
         }
-        LabelPrimitiveDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        LabelPrimitiveDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], LabelPrimitiveDrawerService);
         return LabelPrimitiveDrawerService;
     }(PrimitivesDrawerService));
+    LabelPrimitiveDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    LabelPrimitiveDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible for drawing billboards as primitives.
@@ -3849,15 +3914,14 @@
         function BillboardPrimitiveDrawerService(cesiumService) {
             return _super.call(this, Cesium.BillboardCollection, cesiumService) || this;
         }
-        BillboardPrimitiveDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        BillboardPrimitiveDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], BillboardPrimitiveDrawerService);
         return BillboardPrimitiveDrawerService;
     }(PrimitivesDrawerService));
+    BillboardPrimitiveDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    BillboardPrimitiveDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     /**
      *  This drawer is responsible of drawing points as primitives.
@@ -3868,15 +3932,14 @@
         function PointPrimitiveDrawerService(cesiumService) {
             return _super.call(this, Cesium.PointPrimitiveCollection, cesiumService) || this;
         }
-        PointPrimitiveDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        PointPrimitiveDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], PointPrimitiveDrawerService);
         return PointPrimitiveDrawerService;
     }(PrimitivesDrawerService));
+    PointPrimitiveDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    PointPrimitiveDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     var HtmlDrawerService = /** @class */ (function (_super) {
         __extends(HtmlDrawerService, _super);
@@ -3890,15 +3953,14 @@
             cesiumProps.mapContainer = this._cesiumService.getMap().getMapContainer();
             return _super.prototype.add.call(this, cesiumProps);
         };
-        HtmlDrawerService.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        HtmlDrawerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [CesiumService])
-        ], HtmlDrawerService);
         return HtmlDrawerService;
     }(PrimitivesDrawerService));
+    HtmlDrawerService.decorators = [
+        { type: core.Injectable }
+    ];
+    HtmlDrawerService.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
 
     // tslint:enable
     /**
@@ -4141,136 +4203,87 @@
             // TODO make entity interface: collection of type entity not notification
             rxjs.from(collection).subscribe(function (entity) { return _this._updateStream.next(entity); });
         };
-        AcLayerComponent.ctorParameters = function () { return [
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: MapLayersService },
-            { type: BillboardDrawerService },
-            { type: LabelDrawerService },
-            { type: EllipseDrawerService },
-            { type: PolylineDrawerService },
-            { type: PolygonDrawerService },
-            { type: ArcDrawerService },
-            { type: PointDrawerService },
-            { type: ModelDrawerService },
-            { type: BoxDrawerService },
-            { type: CorridorDrawerService },
-            { type: CylinderDrawerService },
-            { type: EllipsoidDrawerService },
-            { type: PolylineVolumeDrawerService },
-            { type: WallDrawerService },
-            { type: RectangleDrawerService },
-            { type: DynamicEllipseDrawerService },
-            { type: DynamicPolylineDrawerService },
-            { type: StaticCircleDrawerService },
-            { type: StaticPolylineDrawerService },
-            { type: StaticPolygonDrawerService },
-            { type: StaticEllipseDrawerService },
-            { type: PolylinePrimitiveDrawerService },
-            { type: LabelPrimitiveDrawerService },
-            { type: BillboardPrimitiveDrawerService },
-            { type: PointPrimitiveDrawerService },
-            { type: HtmlDrawerService },
-            { type: CzmlDrawerService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "show", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcLayerComponent.prototype, "acFor", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "context", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "store", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "options", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "zIndex", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcLayerComponent.prototype, "debug", void 0);
-        AcLayerComponent = __decorate([
-            core.Component({
-                selector: 'ac-layer',
-                template: '<ng-content></ng-content>',
-                providers: [
-                    LayerService,
-                    ComputationCache,
-                    BillboardDrawerService,
-                    LabelDrawerService,
-                    EllipseDrawerService,
-                    PolylineDrawerService,
-                    ArcDrawerService,
-                    PointDrawerService,
-                    PolygonDrawerService,
-                    ModelDrawerService,
-                    BoxDrawerService,
-                    CorridorDrawerService,
-                    CylinderDrawerService,
-                    EllipsoidDrawerService,
-                    PolylineVolumeDrawerService,
-                    WallDrawerService,
-                    RectangleDrawerService,
-                    PolylinePrimitiveDrawerService,
-                    LabelPrimitiveDrawerService,
-                    BillboardPrimitiveDrawerService,
-                    PointPrimitiveDrawerService,
-                    HtmlDrawerService,
-                    CzmlDrawerService,
-                    DynamicEllipseDrawerService,
-                    DynamicPolylineDrawerService,
-                    StaticCircleDrawerService,
-                    StaticPolylineDrawerService,
-                    StaticPolygonDrawerService,
-                    StaticEllipseDrawerService,
-                ],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [LayerService,
-                ComputationCache,
-                MapLayersService,
-                BillboardDrawerService,
-                LabelDrawerService,
-                EllipseDrawerService,
-                PolylineDrawerService,
-                PolygonDrawerService,
-                ArcDrawerService,
-                PointDrawerService,
-                ModelDrawerService,
-                BoxDrawerService,
-                CorridorDrawerService,
-                CylinderDrawerService,
-                EllipsoidDrawerService,
-                PolylineVolumeDrawerService,
-                WallDrawerService,
-                RectangleDrawerService,
-                DynamicEllipseDrawerService,
-                DynamicPolylineDrawerService,
-                StaticCircleDrawerService,
-                StaticPolylineDrawerService,
-                StaticPolygonDrawerService,
-                StaticEllipseDrawerService,
-                PolylinePrimitiveDrawerService,
-                LabelPrimitiveDrawerService,
-                BillboardPrimitiveDrawerService,
-                PointPrimitiveDrawerService,
-                HtmlDrawerService,
-                CzmlDrawerService])
-        ], AcLayerComponent);
         return AcLayerComponent;
     }());
+    AcLayerComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-layer',
+                    template: '<ng-content></ng-content>',
+                    providers: [
+                        LayerService,
+                        ComputationCache,
+                        BillboardDrawerService,
+                        LabelDrawerService,
+                        EllipseDrawerService,
+                        PolylineDrawerService,
+                        ArcDrawerService,
+                        PointDrawerService,
+                        PolygonDrawerService,
+                        ModelDrawerService,
+                        BoxDrawerService,
+                        CorridorDrawerService,
+                        CylinderDrawerService,
+                        EllipsoidDrawerService,
+                        PolylineVolumeDrawerService,
+                        WallDrawerService,
+                        RectangleDrawerService,
+                        PolylinePrimitiveDrawerService,
+                        LabelPrimitiveDrawerService,
+                        BillboardPrimitiveDrawerService,
+                        PointPrimitiveDrawerService,
+                        HtmlDrawerService,
+                        CzmlDrawerService,
+                        DynamicEllipseDrawerService,
+                        DynamicPolylineDrawerService,
+                        StaticCircleDrawerService,
+                        StaticPolylineDrawerService,
+                        StaticPolygonDrawerService,
+                        StaticEllipseDrawerService,
+                    ],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    AcLayerComponent.ctorParameters = function () { return [
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: MapLayersService },
+        { type: BillboardDrawerService },
+        { type: LabelDrawerService },
+        { type: EllipseDrawerService },
+        { type: PolylineDrawerService },
+        { type: PolygonDrawerService },
+        { type: ArcDrawerService },
+        { type: PointDrawerService },
+        { type: ModelDrawerService },
+        { type: BoxDrawerService },
+        { type: CorridorDrawerService },
+        { type: CylinderDrawerService },
+        { type: EllipsoidDrawerService },
+        { type: PolylineVolumeDrawerService },
+        { type: WallDrawerService },
+        { type: RectangleDrawerService },
+        { type: DynamicEllipseDrawerService },
+        { type: DynamicPolylineDrawerService },
+        { type: StaticCircleDrawerService },
+        { type: StaticPolylineDrawerService },
+        { type: StaticPolygonDrawerService },
+        { type: StaticEllipseDrawerService },
+        { type: PolylinePrimitiveDrawerService },
+        { type: LabelPrimitiveDrawerService },
+        { type: BillboardPrimitiveDrawerService },
+        { type: PointPrimitiveDrawerService },
+        { type: HtmlDrawerService },
+        { type: CzmlDrawerService }
+    ]; };
+    AcLayerComponent.propDecorators = {
+        show: [{ type: core.Input }],
+        acFor: [{ type: core.Input }],
+        context: [{ type: core.Input }],
+        store: [{ type: core.Input }],
+        options: [{ type: core.Input }],
+        zIndex: [{ type: core.Input }],
+        debug: [{ type: core.Input }]
+    };
 
     /**
      *  Extend this class to create drawing on map components.
@@ -4312,20 +4325,18 @@
             this.mapLayers.removeDataSources(this.dataSources);
             this.removeFromMap();
         };
-        EntityOnMapComponent.ctorParameters = function () { return [
-            { type: BasicDrawerService },
-            { type: MapLayersService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], EntityOnMapComponent.prototype, "props", void 0);
-        EntityOnMapComponent = __decorate([
-            core.Directive(),
-            __metadata("design:paramtypes", [BasicDrawerService, MapLayersService])
-        ], EntityOnMapComponent);
         return EntityOnMapComponent;
     }());
+    EntityOnMapComponent.decorators = [
+        { type: core.Directive }
+    ];
+    EntityOnMapComponent.ctorParameters = function () { return [
+        { type: BasicDrawerService },
+        { type: MapLayersService }
+    ]; };
+    EntityOnMapComponent.propDecorators = {
+        props: [{ type: core.Input }]
+    };
 
     /**
      *  This is a billboard implementation.
@@ -4351,19 +4362,18 @@
         function AcBillboardComponent(billboardDrawer, mapLayers) {
             return _super.call(this, billboardDrawer, mapLayers) || this;
         }
-        AcBillboardComponent.ctorParameters = function () { return [
-            { type: BillboardDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcBillboardComponent = __decorate([
-            core.Component({
-                selector: 'ac-billboard',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [BillboardDrawerService, MapLayersService])
-        ], AcBillboardComponent);
         return AcBillboardComponent;
     }(EntityOnMapComponent));
+    AcBillboardComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-billboard',
+                    template: ''
+                },] }
+    ];
+    AcBillboardComponent.ctorParameters = function () { return [
+        { type: BillboardDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     var JsonMapper = /** @class */ (function () {
         function JsonMapper() {
@@ -4372,12 +4382,12 @@
         JsonMapper.prototype.map = function (expression) {
             return this._mapper.map(expression);
         };
-        JsonMapper = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], JsonMapper);
         return JsonMapper;
     }());
+    JsonMapper.decorators = [
+        { type: core.Injectable }
+    ];
+    JsonMapper.ctorParameters = function () { return []; };
 
     /**
      * Service for effective assignment.
@@ -4463,17 +4473,15 @@
             this._assignersCache.set(expression, assignFn);
             return assignFn;
         };
-        CesiumProperties.ctorParameters = function () { return [
-            { type: angular2parse.Parse },
-            { type: JsonMapper }
-        ]; };
-        CesiumProperties = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [angular2parse.Parse,
-                JsonMapper])
-        ], CesiumProperties);
         return CesiumProperties;
     }());
+    CesiumProperties.decorators = [
+        { type: core.Injectable }
+    ];
+    CesiumProperties.ctorParameters = function () { return [
+        { type: angular2parse.Parse },
+        { type: JsonMapper }
+    ]; };
 
     /**
      *  the ancestor class for creating components.
@@ -4561,33 +4569,22 @@
             this._layerService.unregisterDescription(this);
             this.removeAll();
         };
-        BasicDesc.ctorParameters = function () { return [
-            { type: BasicDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], BasicDesc.prototype, "props", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", core.EventEmitter)
-        ], BasicDesc.prototype, "onDraw", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", core.EventEmitter)
-        ], BasicDesc.prototype, "onRemove", void 0);
-        BasicDesc = __decorate([
-            core.Directive(),
-            __metadata("design:paramtypes", [BasicDrawerService,
-                LayerService,
-                ComputationCache,
-                CesiumProperties])
-        ], BasicDesc);
         return BasicDesc;
     }());
+    BasicDesc.decorators = [
+        { type: core.Directive }
+    ];
+    BasicDesc.ctorParameters = function () { return [
+        { type: BasicDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
+    BasicDesc.propDecorators = {
+        props: [{ type: core.Input }],
+        onDraw: [{ type: core.Output }],
+        onRemove: [{ type: core.Output }]
+    };
 
     /**
      *  This is a billboard implementation.
@@ -4613,25 +4610,21 @@
         function AcBillboardDescComponent(billboardDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, billboardDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcBillboardDescComponent_1 = AcBillboardDescComponent;
-        var AcBillboardDescComponent_1;
-        AcBillboardDescComponent.ctorParameters = function () { return [
-            { type: BillboardDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcBillboardDescComponent = AcBillboardDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-billboard-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBillboardDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [BillboardDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcBillboardDescComponent);
         return AcBillboardDescComponent;
     }(BasicDesc));
+    AcBillboardDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-billboard-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBillboardDescComponent; }) }]
+                },] }
+    ];
+    AcBillboardDescComponent.ctorParameters = function () { return [
+        { type: BillboardDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is an ellipse implementation.
@@ -4657,25 +4650,21 @@
         function AcEllipseDescComponent(ellipseDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, ellipseDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcEllipseDescComponent_1 = AcEllipseDescComponent;
-        var AcEllipseDescComponent_1;
-        AcEllipseDescComponent.ctorParameters = function () { return [
-            { type: EllipseDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcEllipseDescComponent = AcEllipseDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-ellipse-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcEllipseDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [EllipseDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcEllipseDescComponent);
         return AcEllipseDescComponent;
     }(BasicDesc));
+    AcEllipseDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-ellipse-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcEllipseDescComponent; }) }]
+                },] }
+    ];
+    AcEllipseDescComponent.ctorParameters = function () { return [
+        { type: EllipseDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a polyline implementation.
@@ -4699,25 +4688,21 @@
         function AcPolylineDescComponent(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPolylineDescComponent_1 = AcPolylineDescComponent;
-        var AcPolylineDescComponent_1;
-        AcPolylineDescComponent.ctorParameters = function () { return [
-            { type: PolylineDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPolylineDescComponent = AcPolylineDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-polyline-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolylineDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [PolylineDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPolylineDescComponent);
         return AcPolylineDescComponent;
     }(BasicDesc));
+    AcPolylineDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polyline-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolylineDescComponent; }) }]
+                },] }
+    ];
+    AcPolylineDescComponent.ctorParameters = function () { return [
+        { type: PolylineDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      * @example
@@ -4735,13 +4720,13 @@
         PixelOffsetPipe.prototype.transform = function (value, args) {
             return new Cesium.Cartesian2(value[0], value[1]);
         };
-        PixelOffsetPipe = __decorate([
-            core.Pipe({
-                name: 'pixelOffset'
-            })
-        ], PixelOffsetPipe);
         return PixelOffsetPipe;
     }());
+    PixelOffsetPipe.decorators = [
+        { type: core.Pipe, args: [{
+                    name: 'pixelOffset'
+                },] }
+    ];
 
     var RadiansToDegreesPipe = /** @class */ (function () {
         function RadiansToDegreesPipe() {
@@ -4749,13 +4734,13 @@
         RadiansToDegreesPipe.prototype.transform = function (value, args) {
             return (360 - Math.round(180 * value / Math.PI)) % 360;
         };
-        RadiansToDegreesPipe = __decorate([
-            core.Pipe({
-                name: 'radiansToDegrees'
-            })
-        ], RadiansToDegreesPipe);
         return RadiansToDegreesPipe;
     }());
+    RadiansToDegreesPipe.decorators = [
+        { type: core.Pipe, args: [{
+                    name: 'radiansToDegrees'
+                },] }
+    ];
 
     /**
      *  This is a label implementation.
@@ -4780,37 +4765,33 @@
         function AcLabelDescComponent(labelDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, labelDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcLabelDescComponent_1 = AcLabelDescComponent;
-        var AcLabelDescComponent_1;
-        AcLabelDescComponent.ctorParameters = function () { return [
-            { type: LabelDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcLabelDescComponent = AcLabelDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-label-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcLabelDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [LabelDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcLabelDescComponent);
         return AcLabelDescComponent;
     }(BasicDesc));
+    AcLabelDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-label-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcLabelDescComponent; }) }]
+                },] }
+    ];
+    AcLabelDescComponent.ctorParameters = function () { return [
+        { type: LabelDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     var UtilsModule = /** @class */ (function () {
         function UtilsModule() {
         }
-        UtilsModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule],
-                providers: []
-            })
-        ], UtilsModule);
         return UtilsModule;
     }());
+    UtilsModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule],
+                    providers: []
+                },] }
+    ];
 
     /**
      *  This is a circle implementation.
@@ -4835,7 +4816,6 @@
         function AcCircleDescComponent(ellipseDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, ellipseDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcCircleDescComponent_1 = AcCircleDescComponent;
         AcCircleDescComponent.prototype._propsEvaluator = function (context) {
             var cesiumProps = _super.prototype._propsEvaluator.call(this, context);
             cesiumProps.semiMajorAxis = cesiumProps.radius;
@@ -4846,24 +4826,21 @@
         AcCircleDescComponent.prototype._getPropsAssigner = function () {
             return function (cesiumObject, desc) { return Object.assign(cesiumObject, desc); };
         };
-        var AcCircleDescComponent_1;
-        AcCircleDescComponent.ctorParameters = function () { return [
-            { type: EllipseDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcCircleDescComponent = AcCircleDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-circle-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCircleDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [EllipseDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcCircleDescComponent);
         return AcCircleDescComponent;
     }(BasicDesc));
+    AcCircleDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-circle-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCircleDescComponent; }) }]
+                },] }
+    ];
+    AcCircleDescComponent.ctorParameters = function () { return [
+        { type: EllipseDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is an implementation of an arc.
@@ -4899,25 +4876,21 @@
         function AcArcDescComponent(arcDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, arcDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcArcDescComponent_1 = AcArcDescComponent;
-        var AcArcDescComponent_1;
-        AcArcDescComponent.ctorParameters = function () { return [
-            { type: ArcDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcArcDescComponent = AcArcDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-arc-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcArcDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [ArcDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcArcDescComponent);
         return AcArcDescComponent;
     }(BasicDesc));
+    AcArcDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-arc-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcArcDescComponent; }) }]
+                },] }
+    ];
+    AcArcDescComponent.ctorParameters = function () { return [
+        { type: ArcDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      * Angular Cesium parent entity, all entities should inherit from it.
@@ -4957,7 +4930,6 @@
         return AcNotification;
     }());
 
-
     (function (MapLayerProviderOptions) {
         MapLayerProviderOptions[MapLayerProviderOptions["ArcGisMapServer"] = Cesium.ArcGisMapServerImageryProvider] = "ArcGisMapServer";
         MapLayerProviderOptions[MapLayerProviderOptions["WebMapTileService"] = Cesium.WebMapTileServiceImageryProvider] = "WebMapTileService";
@@ -4968,10 +4940,10 @@
         MapLayerProviderOptions[MapLayerProviderOptions["BingMaps"] = Cesium.BingMapsImageryProvider] = "BingMaps";
         MapLayerProviderOptions[MapLayerProviderOptions["GoogleEarthEnterpriseMaps"] = Cesium.GoogleEarthEnterpriseMapsProvider] = "GoogleEarthEnterpriseMaps";
         MapLayerProviderOptions[MapLayerProviderOptions["MapBox"] = Cesium.MapboxImageryProvider] = "MapBox";
+        MapLayerProviderOptions[MapLayerProviderOptions["MapboxStyleImageryProvider"] = Cesium.MapboxStyleImageryProvider] = "MapboxStyleImageryProvider";
         MapLayerProviderOptions[MapLayerProviderOptions["UrlTemplateImagery"] = Cesium.UrlTemplateImageryProvider] = "UrlTemplateImagery";
         MapLayerProviderOptions[MapLayerProviderOptions["OFFLINE"] = null] = "OFFLINE";
     })(exports.MapLayerProviderOptions || (exports.MapLayerProviderOptions = {}));
-
 
     (function (MapTerrainProviderOptions) {
         MapTerrainProviderOptions[MapTerrainProviderOptions["CesiumTerrain"] = Cesium.CesiumTerrainProvider] = "CesiumTerrain";
@@ -5042,6 +5014,7 @@
                 case exports.MapLayerProviderOptions.BingMaps:
                 case exports.MapLayerProviderOptions.GoogleEarthEnterpriseMaps:
                 case exports.MapLayerProviderOptions.MapBox:
+                case exports.MapLayerProviderOptions.MapboxStyleImageryProvider:
                 case exports.MapLayerProviderOptions.UrlTemplateImagery:
                 case exports.MapLayerProviderOptions.MapTileService:
                 case exports.MapLayerProviderOptions.OpenStreetMap:
@@ -5095,46 +5068,26 @@
                 this.imageryLayersCollection.remove(this.imageryLayer, true);
             }
         };
-        AcMapLayerProviderComponent.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "options", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "provider", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], AcMapLayerProviderComponent.prototype, "index", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "show", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "alpha", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "brightness", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapLayerProviderComponent.prototype, "contrast", void 0);
-        AcMapLayerProviderComponent = __decorate([
-            core.Component({
-                selector: 'ac-map-layer-provider',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [CesiumService])
-        ], AcMapLayerProviderComponent);
         return AcMapLayerProviderComponent;
     }());
+    AcMapLayerProviderComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-map-layer-provider',
+                    template: ''
+                },] }
+    ];
+    AcMapLayerProviderComponent.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
+    AcMapLayerProviderComponent.propDecorators = {
+        options: [{ type: core.Input }],
+        provider: [{ type: core.Input }],
+        index: [{ type: core.Input }],
+        show: [{ type: core.Input }],
+        alpha: [{ type: core.Input }],
+        brightness: [{ type: core.Input }],
+        contrast: [{ type: core.Input }]
+    };
 
     /**
      *  This component is used for adding a terrain provider service to the map (ac-map)
@@ -5202,30 +5155,22 @@
         AcMapTerrainProviderComponent.prototype.ngOnDestroy = function () {
             this.cesiumService.getViewer().terrainProvider = this.defaultTerrainProvider;
         };
-        AcMapTerrainProviderComponent.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapTerrainProviderComponent.prototype, "options", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapTerrainProviderComponent.prototype, "provider", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcMapTerrainProviderComponent.prototype, "show", void 0);
-        AcMapTerrainProviderComponent = __decorate([
-            core.Component({
-                selector: 'ac-map-terrain-provider',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [CesiumService])
-        ], AcMapTerrainProviderComponent);
         return AcMapTerrainProviderComponent;
     }());
+    AcMapTerrainProviderComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-map-terrain-provider',
+                    template: ''
+                },] }
+    ];
+    AcMapTerrainProviderComponent.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
+    AcMapTerrainProviderComponent.propDecorators = {
+        options: [{ type: core.Input }],
+        provider: [{ type: core.Input }],
+        show: [{ type: core.Input }]
+    };
 
     /**
      *  This is a point implementation.
@@ -5249,25 +5194,21 @@
         function AcPointDescComponent(pointDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, pointDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPointDescComponent_1 = AcPointDescComponent;
-        var AcPointDescComponent_1;
-        AcPointDescComponent.ctorParameters = function () { return [
-            { type: PointDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPointDescComponent = AcPointDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-point-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPointDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [PointDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPointDescComponent);
         return AcPointDescComponent;
     }(BasicDesc));
+    AcPointDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-point-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPointDescComponent; }) }]
+                },] }
+    ];
+    AcPointDescComponent.ctorParameters = function () { return [
+        { type: PointDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a label implementation.
@@ -5292,19 +5233,18 @@
         function AcLabelComponent(labelDrawer, mapLayers) {
             return _super.call(this, labelDrawer, mapLayers) || this;
         }
-        AcLabelComponent.ctorParameters = function () { return [
-            { type: LabelDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcLabelComponent = __decorate([
-            core.Component({
-                selector: 'ac-label',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [LabelDrawerService, MapLayersService])
-        ], AcLabelComponent);
         return AcLabelComponent;
     }(EntityOnMapComponent));
+    AcLabelComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-label',
+                    template: ''
+                },] }
+    ];
+    AcLabelComponent.ctorParameters = function () { return [
+        { type: LabelDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     /**
      *  This is a polyline implementation.
@@ -5328,19 +5268,18 @@
         function AcPolylineComponent(polylineDrawer, mapLayers) {
             return _super.call(this, polylineDrawer, mapLayers) || this;
         }
-        AcPolylineComponent.ctorParameters = function () { return [
-            { type: PolylineDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcPolylineComponent = __decorate([
-            core.Component({
-                selector: 'ac-polyline',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PolylineDrawerService, MapLayersService])
-        ], AcPolylineComponent);
         return AcPolylineComponent;
     }(EntityOnMapComponent));
+    AcPolylineComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polyline',
+                    template: ''
+                },] }
+    ];
+    AcPolylineComponent.ctorParameters = function () { return [
+        { type: PolylineDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     /**
      *  This is an ellipse implementation.
@@ -5365,19 +5304,18 @@
         function AcEllipseComponent(ellipseDrawer, mapLayers) {
             return _super.call(this, ellipseDrawer, mapLayers) || this;
         }
-        AcEllipseComponent.ctorParameters = function () { return [
-            { type: EllipseDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcEllipseComponent = __decorate([
-            core.Component({
-                selector: 'ac-ellipse',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [EllipseDrawerService, MapLayersService])
-        ], AcEllipseComponent);
         return AcEllipseComponent;
     }(EntityOnMapComponent));
+    AcEllipseComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-ellipse',
+                    template: ''
+                },] }
+    ];
+    AcEllipseComponent.ctorParameters = function () { return [
+        { type: EllipseDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -5400,19 +5338,18 @@
         function AcPointComponent(pointDrawer, mapLayers) {
             return _super.call(this, pointDrawer, mapLayers) || this;
         }
-        AcPointComponent.ctorParameters = function () { return [
-            { type: PointDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcPointComponent = __decorate([
-            core.Component({
-                selector: 'ac-point',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PointDrawerService, MapLayersService])
-        ], AcPointComponent);
         return AcPointComponent;
     }(EntityOnMapComponent));
+    AcPointComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-point',
+                    template: ''
+                },] }
+    ];
+    AcPointComponent.ctorParameters = function () { return [
+        { type: PointDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     /**
      *  This is an html implementation.
@@ -5476,25 +5413,23 @@
         AcHtmlComponent.prototype.ngOnDestroy = function () {
             this.remove();
         };
-        AcHtmlComponent.ctorParameters = function () { return [
-            { type: CesiumService },
-            { type: core.ElementRef },
-            { type: core.Renderer2 }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcHtmlComponent.prototype, "props", void 0);
-        AcHtmlComponent = __decorate([
-            core.Component({
-                selector: 'ac-html',
-                template: "<ng-content></ng-content>",
-                styles: [":host {\n                position: absolute;\n                z-index: 100;\n\t\t\t\t}"]
-            }),
-            __metadata("design:paramtypes", [CesiumService, core.ElementRef, core.Renderer2])
-        ], AcHtmlComponent);
         return AcHtmlComponent;
     }());
+    AcHtmlComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-html',
+                    template: "<ng-content></ng-content>",
+                    styles: [":host {\n                position: absolute;\n                z-index: 100;\n\t\t\t\t}"]
+                },] }
+    ];
+    AcHtmlComponent.ctorParameters = function () { return [
+        { type: CesiumService },
+        { type: core.ElementRef },
+        { type: core.Renderer2 }
+    ]; };
+    AcHtmlComponent.propDecorators = {
+        props: [{ type: core.Input }]
+    };
 
     /**
      *  This is a circle implementation.
@@ -5532,19 +5467,18 @@
             this.updateEllipseProps();
             _super.prototype.updateOnMap.call(this);
         };
-        AcCircleComponent.ctorParameters = function () { return [
-            { type: EllipseDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcCircleComponent = __decorate([
-            core.Component({
-                selector: 'ac-circle',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [EllipseDrawerService, MapLayersService])
-        ], AcCircleComponent);
         return AcCircleComponent;
     }(EntityOnMapComponent));
+    AcCircleComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-circle',
+                    template: ''
+                },] }
+    ];
+    AcCircleComponent.ctorParameters = function () { return [
+        { type: EllipseDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     /**
      *  This is an implementation of an arc.
@@ -5593,31 +5527,23 @@
                 this.updateOnMap();
             }
         };
-        AcArcComponent.ctorParameters = function () { return [
-            { type: ArcDrawerService },
-            { type: MapLayersService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcArcComponent.prototype, "geometryProps", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcArcComponent.prototype, "instanceProps", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcArcComponent.prototype, "primitiveProps", void 0);
-        AcArcComponent = __decorate([
-            core.Component({
-                selector: 'ac-arc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [ArcDrawerService, MapLayersService])
-        ], AcArcComponent);
         return AcArcComponent;
     }(EntityOnMapComponent));
+    AcArcComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-arc',
+                    template: ''
+                },] }
+    ];
+    AcArcComponent.ctorParameters = function () { return [
+        { type: ArcDrawerService },
+        { type: MapLayersService }
+    ]; };
+    AcArcComponent.propDecorators = {
+        geometryProps: [{ type: core.Input }],
+        instanceProps: [{ type: core.Input }],
+        primitiveProps: [{ type: core.Input }]
+    };
 
     /**
      *  This is a polygon implementation.
@@ -5640,25 +5566,21 @@
         function AcPolygonDescComponent(polygonDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, polygonDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPolygonDescComponent_1 = AcPolygonDescComponent;
-        var AcPolygonDescComponent_1;
-        AcPolygonDescComponent.ctorParameters = function () { return [
-            { type: PolygonDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPolygonDescComponent = AcPolygonDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-polygon-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolygonDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [PolygonDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPolygonDescComponent);
         return AcPolygonDescComponent;
     }(BasicDesc));
+    AcPolygonDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polygon-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolygonDescComponent; }) }]
+                },] }
+    ];
+    AcPolygonDescComponent.ctorParameters = function () { return [
+        { type: PolygonDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     var AcDefaultPlonterComponent = /** @class */ (function () {
         function AcDefaultPlonterComponent(plonterService, cd, geoConverter) {
@@ -5677,31 +5599,28 @@
                     return this.geoConverter.screenToCartesian3(screenPos);
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         AcDefaultPlonterComponent.prototype.chooseEntity = function (entity) {
             this.plonterService.resolvePlonter(entity);
         };
-        AcDefaultPlonterComponent.ctorParameters = function () { return [
-            { type: PlonterService },
-            { type: core.ChangeDetectorRef },
-            { type: CoordinateConverter }
-        ]; };
-        AcDefaultPlonterComponent = __decorate([
-            core.Component({
-                selector: 'ac-default-plonter',
-                template: "\n      <ac-html *ngIf=\"plonterService.plonterShown\" [props]=\"{\n        position: plonterPosition\n      }\">\n        <div class=\"plonter-context-menu\">\n          <div *ngFor=\"let entity of plonterService.entitesToPlonter\">\n            <div class=\"plonter-item\" (click)=\"chooseEntity(entity)\">{{ entity?.name || entity?.id }}\n            </div>\n          </div>\n        </div>\n      </ac-html>\n    ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush,
-                providers: [CoordinateConverter],
-                styles: ["\n        .plonter-context-menu {\n            background-color: rgba(250, 250, 250, 0.8);\n            box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.15);\n        }\n\n        .plonter-item {\n            cursor: pointer;\n            padding: 2px 15px;\n            text-align: start;\n        }\n\n        .plonter-item:hover {\n            background-color: rgba(0, 0, 0, 0.15);\n        }\n\n    "]
-            }),
-            __metadata("design:paramtypes", [PlonterService,
-                core.ChangeDetectorRef,
-                CoordinateConverter])
-        ], AcDefaultPlonterComponent);
         return AcDefaultPlonterComponent;
     }());
+    AcDefaultPlonterComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-default-plonter',
+                    template: "\n      <ac-html *ngIf=\"plonterService.plonterShown\" [props]=\"{\n        position: plonterPosition\n      }\">\n        <div class=\"plonter-context-menu\">\n          <div *ngFor=\"let entity of plonterService.entitesToPlonter\">\n            <div class=\"plonter-item\" (click)=\"chooseEntity(entity)\">{{ entity?.name || entity?.id }}\n            </div>\n          </div>\n        </div>\n      </ac-html>\n    ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    providers: [CoordinateConverter],
+                    styles: ["\n        .plonter-context-menu {\n            background-color: rgba(250, 250, 250, 0.8);\n            box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.15);\n        }\n\n        .plonter-item {\n            cursor: pointer;\n            padding: 2px 15px;\n            text-align: start;\n        }\n\n        .plonter-item:hover {\n            background-color: rgba(0, 0, 0, 0.15);\n        }\n\n    "]
+                },] }
+    ];
+    AcDefaultPlonterComponent.ctorParameters = function () { return [
+        { type: PlonterService },
+        { type: core.ChangeDetectorRef },
+        { type: CoordinateConverter }
+    ]; };
 
     /**
      *  This is a polygon implementation.
@@ -5726,19 +5645,18 @@
         function AcPolygonComponent(polygonDrawer, mapLayers) {
             return _super.call(this, polygonDrawer, mapLayers) || this;
         }
-        AcPolygonComponent.ctorParameters = function () { return [
-            { type: PolygonDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcPolygonComponent = __decorate([
-            core.Component({
-                selector: 'ac-polygon',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PolygonDrawerService, MapLayersService])
-        ], AcPolygonComponent);
         return AcPolygonComponent;
     }(EntityOnMapComponent));
+    AcPolygonComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polygon',
+                    template: ''
+                },] }
+    ];
+    AcPolygonComponent.ctorParameters = function () { return [
+        { type: PolygonDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     var BasicStaticPrimitiveDesc = /** @class */ (function (_super) {
         __extends(BasicStaticPrimitiveDesc, _super);
@@ -5767,31 +5685,22 @@
                 this._staticPrimitiveDrawer.update(primitive, geometryProps, instanceProps, primitiveProps);
             }
         };
-        BasicStaticPrimitiveDesc.ctorParameters = function () { return [
-            { type: StaticPrimitiveDrawer },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], BasicStaticPrimitiveDesc.prototype, "geometryProps", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], BasicStaticPrimitiveDesc.prototype, "instanceProps", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], BasicStaticPrimitiveDesc.prototype, "primitiveProps", void 0);
-        BasicStaticPrimitiveDesc = __decorate([
-            core.Directive(),
-            __metadata("design:paramtypes", [StaticPrimitiveDrawer, LayerService,
-                ComputationCache, CesiumProperties])
-        ], BasicStaticPrimitiveDesc);
         return BasicStaticPrimitiveDesc;
     }(BasicDesc));
+    BasicStaticPrimitiveDesc.decorators = [
+        { type: core.Directive }
+    ];
+    BasicStaticPrimitiveDesc.ctorParameters = function () { return [
+        { type: StaticPrimitiveDrawer },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
+    BasicStaticPrimitiveDesc.propDecorators = {
+        geometryProps: [{ type: core.Input }],
+        instanceProps: [{ type: core.Input }],
+        primitiveProps: [{ type: core.Input }]
+    };
 
     /**
      *
@@ -5822,22 +5731,20 @@
         function AcStaticEllipseDescComponent(ellipseDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, ellipseDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcStaticEllipseDescComponent.ctorParameters = function () { return [
-            { type: StaticEllipseDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcStaticEllipseDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-static-ellipse-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [StaticEllipseDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcStaticEllipseDescComponent);
         return AcStaticEllipseDescComponent;
     }(BasicStaticPrimitiveDesc));
+    AcStaticEllipseDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-static-ellipse-desc',
+                    template: ''
+                },] }
+    ];
+    AcStaticEllipseDescComponent.ctorParameters = function () { return [
+        { type: StaticEllipseDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *
@@ -5869,22 +5776,20 @@
         function AcDynamicEllipseDescComponent(ellipseDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, ellipseDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcDynamicEllipseDescComponent.ctorParameters = function () { return [
-            { type: DynamicEllipseDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcDynamicEllipseDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-dynamic-ellipse-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [DynamicEllipseDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcDynamicEllipseDescComponent);
         return AcDynamicEllipseDescComponent;
     }(BasicDesc));
+    AcDynamicEllipseDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-dynamic-ellipse-desc',
+                    template: ''
+                },] }
+    ];
+    AcDynamicEllipseDescComponent.ctorParameters = function () { return [
+        { type: DynamicEllipseDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     // tslint:enable
     /**
@@ -5907,22 +5812,20 @@
         function AcDynamicPolylineDescComponent(dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, dynamicPolylineDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcDynamicPolylineDescComponent.ctorParameters = function () { return [
-            { type: DynamicPolylineDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcDynamicPolylineDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-dynamic-polyline-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [DynamicPolylineDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcDynamicPolylineDescComponent);
         return AcDynamicPolylineDescComponent;
     }(BasicDesc));
+    AcDynamicPolylineDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-dynamic-polyline-desc',
+                    template: ''
+                },] }
+    ];
+    AcDynamicPolylineDescComponent.ctorParameters = function () { return [
+        { type: DynamicPolylineDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     // tslint:enable
     /**
@@ -5951,22 +5854,20 @@
         function AcStaticPolygonDescComponent(polygonDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, polygonDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcStaticPolygonDescComponent.ctorParameters = function () { return [
-            { type: StaticPolygonDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcStaticPolygonDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-static-polygon-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [StaticPolygonDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcStaticPolygonDescComponent);
         return AcStaticPolygonDescComponent;
     }(BasicStaticPrimitiveDesc));
+    AcStaticPolygonDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-static-polygon-desc',
+                    template: ''
+                },] }
+    ];
+    AcStaticPolygonDescComponent.ctorParameters = function () { return [
+        { type: StaticPolygonDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      * @deprecated use ac-circle-desc
@@ -5993,22 +5894,20 @@
         function AcStaticCircleDescComponent(staticCircleDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, staticCircleDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcStaticCircleDescComponent.ctorParameters = function () { return [
-            { type: StaticCircleDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcStaticCircleDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-static-circle',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [StaticCircleDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcStaticCircleDescComponent);
         return AcStaticCircleDescComponent;
     }(BasicStaticPrimitiveDesc));
+    AcStaticCircleDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-static-circle',
+                    template: ''
+                },] }
+    ];
+    AcStaticCircleDescComponent.ctorParameters = function () { return [
+        { type: StaticCircleDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      * @deprecated use ac-circle-desc instead
@@ -6043,22 +5942,20 @@
             cesiumProps.semiMinorAxis = cesiumProps.radius;
             return cesiumProps;
         };
-        AcDynamicCircleDescComponent.ctorParameters = function () { return [
-            { type: DynamicEllipseDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcDynamicCircleDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-dynamic-circle-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [DynamicEllipseDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcDynamicCircleDescComponent);
         return AcDynamicCircleDescComponent;
     }(BasicDesc));
+    AcDynamicCircleDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-dynamic-circle-desc',
+                    template: ''
+                },] }
+    ];
+    AcDynamicCircleDescComponent.ctorParameters = function () { return [
+        { type: DynamicEllipseDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     // tslint:enable
     /**
@@ -6087,22 +5984,20 @@
         function AcStaticPolylineDescComponent(polylineDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, polylineDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcStaticPolylineDescComponent.ctorParameters = function () { return [
-            { type: StaticPolylineDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcStaticPolylineDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-static-polyline-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [StaticPolylineDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcStaticPolylineDescComponent);
         return AcStaticPolylineDescComponent;
     }(BasicStaticPrimitiveDesc));
+    AcStaticPolylineDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-static-polyline-desc',
+                    template: ''
+                },] }
+    ];
+    AcStaticPolylineDescComponent.ctorParameters = function () { return [
+        { type: StaticPolylineDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a model implementation.
@@ -6126,25 +6021,21 @@
         function AcModelDescComponent(modelDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, modelDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcModelDescComponent_1 = AcModelDescComponent;
-        var AcModelDescComponent_1;
-        AcModelDescComponent.ctorParameters = function () { return [
-            { type: ModelDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcModelDescComponent = AcModelDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-model-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcModelDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [ModelDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcModelDescComponent);
         return AcModelDescComponent;
     }(BasicDesc));
+    AcModelDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-model-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcModelDescComponent; }) }]
+                },] }
+    ];
+    AcModelDescComponent.ctorParameters = function () { return [
+        { type: ModelDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This component is used for adding a 3d tileset layer to the map (ac-map).
@@ -6214,34 +6105,23 @@
                 this._3dtilesCollection.remove(this.tilesetInstance, false);
             }
         };
-        AcTileset3dComponent.ctorParameters = function () { return [
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcTileset3dComponent.prototype, "options", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Number)
-        ], AcTileset3dComponent.prototype, "index", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcTileset3dComponent.prototype, "show", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcTileset3dComponent.prototype, "style", void 0);
-        AcTileset3dComponent = __decorate([
-            core.Component({
-                selector: 'ac-3d-tile-layer',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [CesiumService])
-        ], AcTileset3dComponent);
         return AcTileset3dComponent;
     }());
+    AcTileset3dComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-3d-tile-layer',
+                    template: ''
+                },] }
+    ];
+    AcTileset3dComponent.ctorParameters = function () { return [
+        { type: CesiumService }
+    ]; };
+    AcTileset3dComponent.propDecorators = {
+        options: [{ type: core.Input }],
+        index: [{ type: core.Input }],
+        show: [{ type: core.Input }],
+        style: [{ type: core.Input }]
+    };
 
     /**
      *  This is a point implementation.
@@ -6266,25 +6146,21 @@
         function AcBoxDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcBoxDescComponent_1 = AcBoxDescComponent;
-        var AcBoxDescComponent_1;
-        AcBoxDescComponent.ctorParameters = function () { return [
-            { type: BoxDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcBoxDescComponent = AcBoxDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-box-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBoxDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [BoxDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcBoxDescComponent);
         return AcBoxDescComponent;
     }(BasicDesc));
+    AcBoxDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-box-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBoxDescComponent; }) }]
+                },] }
+    ];
+    AcBoxDescComponent.ctorParameters = function () { return [
+        { type: BoxDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6309,25 +6185,21 @@
         function AcCylinderDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcCylinderDescComponent_1 = AcCylinderDescComponent;
-        var AcCylinderDescComponent_1;
-        AcCylinderDescComponent.ctorParameters = function () { return [
-            { type: CylinderDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcCylinderDescComponent = AcCylinderDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-cylinder-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCylinderDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [CylinderDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcCylinderDescComponent);
         return AcCylinderDescComponent;
     }(BasicDesc));
+    AcCylinderDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-cylinder-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCylinderDescComponent; }) }]
+                },] }
+    ];
+    AcCylinderDescComponent.ctorParameters = function () { return [
+        { type: CylinderDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6352,25 +6224,21 @@
         function AcCorridorDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcCorridorDescComponent_1 = AcCorridorDescComponent;
-        var AcCorridorDescComponent_1;
-        AcCorridorDescComponent.ctorParameters = function () { return [
-            { type: CorridorDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcCorridorDescComponent = AcCorridorDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-corridor-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCorridorDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [CorridorDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcCorridorDescComponent);
         return AcCorridorDescComponent;
     }(BasicDesc));
+    AcCorridorDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-corridor-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcCorridorDescComponent; }) }]
+                },] }
+    ];
+    AcCorridorDescComponent.ctorParameters = function () { return [
+        { type: CorridorDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6395,25 +6263,21 @@
         function AcEllipsoidDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcEllipsoidDescComponent_1 = AcEllipsoidDescComponent;
-        var AcEllipsoidDescComponent_1;
-        AcEllipsoidDescComponent.ctorParameters = function () { return [
-            { type: EllipsoidDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcEllipsoidDescComponent = AcEllipsoidDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-ellipsoid-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcEllipsoidDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [EllipsoidDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcEllipsoidDescComponent);
         return AcEllipsoidDescComponent;
     }(BasicDesc));
+    AcEllipsoidDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-ellipsoid-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcEllipsoidDescComponent; }) }]
+                },] }
+    ];
+    AcEllipsoidDescComponent.ctorParameters = function () { return [
+        { type: EllipsoidDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6438,22 +6302,20 @@
         function AcPolylineVolumeDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPolylineVolumeDescComponent.ctorParameters = function () { return [
-            { type: PolylineVolumeDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPolylineVolumeDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-polyline-volume-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PolylineVolumeDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPolylineVolumeDescComponent);
         return AcPolylineVolumeDescComponent;
     }(BasicDesc));
+    AcPolylineVolumeDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polyline-volume-desc',
+                    template: ''
+                },] }
+    ];
+    AcPolylineVolumeDescComponent.ctorParameters = function () { return [
+        { type: PolylineVolumeDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6478,25 +6340,21 @@
         function AcWallDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcWallDescComponent_1 = AcWallDescComponent;
-        var AcWallDescComponent_1;
-        AcWallDescComponent.ctorParameters = function () { return [
-            { type: WallDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcWallDescComponent = AcWallDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-wall-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcWallDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [WallDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcWallDescComponent);
         return AcWallDescComponent;
     }(BasicDesc));
+    AcWallDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-wall-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcWallDescComponent; }) }]
+                },] }
+    ];
+    AcWallDescComponent.ctorParameters = function () { return [
+        { type: WallDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a point implementation.
@@ -6521,25 +6379,21 @@
         function AcRectangleDescComponent(drawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, drawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcRectangleDescComponent_1 = AcRectangleDescComponent;
-        var AcRectangleDescComponent_1;
-        AcRectangleDescComponent.ctorParameters = function () { return [
-            { type: RectangleDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcRectangleDescComponent = AcRectangleDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-rectangle-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcRectangleDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [RectangleDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcRectangleDescComponent);
         return AcRectangleDescComponent;
     }(BasicDesc));
+    AcRectangleDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-rectangle-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcRectangleDescComponent; }) }]
+                },] }
+    ];
+    AcRectangleDescComponent.ctorParameters = function () { return [
+        { type: RectangleDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a billboard primitive implementation.
@@ -6564,25 +6418,21 @@
         function AcBillboardPrimitiveDescComponent(billboardPrimitiveDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, billboardPrimitiveDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcBillboardPrimitiveDescComponent_1 = AcBillboardPrimitiveDescComponent;
-        var AcBillboardPrimitiveDescComponent_1;
-        AcBillboardPrimitiveDescComponent.ctorParameters = function () { return [
-            { type: BillboardPrimitiveDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcBillboardPrimitiveDescComponent = AcBillboardPrimitiveDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-billboard-primitive-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBillboardPrimitiveDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [BillboardPrimitiveDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcBillboardPrimitiveDescComponent);
         return AcBillboardPrimitiveDescComponent;
     }(BasicDesc));
+    AcBillboardPrimitiveDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-billboard-primitive-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcBillboardPrimitiveDescComponent; }) }]
+                },] }
+    ];
+    AcBillboardPrimitiveDescComponent.ctorParameters = function () { return [
+        { type: BillboardPrimitiveDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a label primitive implementation.
@@ -6606,25 +6456,21 @@
         function AcLabelPrimitiveDescComponent(labelPrimitiveDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, labelPrimitiveDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcLabelPrimitiveDescComponent_1 = AcLabelPrimitiveDescComponent;
-        var AcLabelPrimitiveDescComponent_1;
-        AcLabelPrimitiveDescComponent.ctorParameters = function () { return [
-            { type: LabelPrimitiveDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcLabelPrimitiveDescComponent = AcLabelPrimitiveDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-label-primitive-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcLabelPrimitiveDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [LabelPrimitiveDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcLabelPrimitiveDescComponent);
         return AcLabelPrimitiveDescComponent;
     }(BasicDesc));
+    AcLabelPrimitiveDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-label-primitive-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcLabelPrimitiveDescComponent; }) }]
+                },] }
+    ];
+    AcLabelPrimitiveDescComponent.ctorParameters = function () { return [
+        { type: LabelPrimitiveDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a polyline primitive implementation.
@@ -6647,25 +6493,21 @@
         function AcPolylinePrimitiveDescComponent(polylinePrimitiveDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, polylinePrimitiveDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPolylinePrimitiveDescComponent_1 = AcPolylinePrimitiveDescComponent;
-        var AcPolylinePrimitiveDescComponent_1;
-        AcPolylinePrimitiveDescComponent.ctorParameters = function () { return [
-            { type: PolylinePrimitiveDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPolylinePrimitiveDescComponent = AcPolylinePrimitiveDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-polyline-primitive-desc',
-                template: '',
-                providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolylinePrimitiveDescComponent_1; }) }]
-            }),
-            __metadata("design:paramtypes", [PolylinePrimitiveDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPolylinePrimitiveDescComponent);
         return AcPolylinePrimitiveDescComponent;
     }(BasicDesc));
+    AcPolylinePrimitiveDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-polyline-primitive-desc',
+                    template: '',
+                    providers: [{ provide: BasicDesc, useExisting: core.forwardRef(function () { return AcPolylinePrimitiveDescComponent; }) }]
+                },] }
+    ];
+    AcPolylinePrimitiveDescComponent.ctorParameters = function () { return [
+        { type: PolylinePrimitiveDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     var HtmlPrimitive = /** @class */ (function () {
         function HtmlPrimitive(options, collection) {
@@ -6685,7 +6527,7 @@
             set: function (scene) {
                 this._scene = scene;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(HtmlPrimitive.prototype, "show", {
@@ -6703,7 +6545,7 @@
                     }
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(HtmlPrimitive.prototype, "position", {
@@ -6713,7 +6555,7 @@
             set: function (position) {
                 this._position = position;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(HtmlPrimitive.prototype, "pixelOffset", {
@@ -6723,7 +6565,7 @@
             set: function (pixelOffset) {
                 this._pixelOffset = pixelOffset;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(HtmlPrimitive.prototype, "element", {
@@ -6738,7 +6580,7 @@
                     this._element.style.zIndex = Number.MAX_VALUE.toString();
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(HtmlPrimitive.prototype, "collection", {
@@ -6748,7 +6590,7 @@
             set: function (collection) {
                 this._collection = collection;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         HtmlPrimitive.prototype.update = function () {
@@ -6786,7 +6628,7 @@
             get: function () {
                 return this._collection.length;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         HtmlCollection.prototype.get = function (index) {
@@ -6855,12 +6697,12 @@
         AcHtmlManager.prototype.forEach = function (callback) {
             this._entities.forEach(callback);
         };
-        AcHtmlManager = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [])
-        ], AcHtmlManager);
         return AcHtmlManager;
     }());
+    AcHtmlManager.decorators = [
+        { type: core.Injectable }
+    ];
+    AcHtmlManager.ctorParameters = function () { return []; };
 
     var AcHtmlContext = /** @class */ (function () {
         function AcHtmlContext(id, context) {
@@ -6910,25 +6752,20 @@
             this._acHtmlManager.remove(id);
             primitive.element = null;
         };
-        AcHtmlDirective.ctorParameters = function () { return [
-            { type: core.TemplateRef },
-            { type: core.ViewContainerRef },
-            { type: core.ChangeDetectorRef },
-            { type: LayerService },
-            { type: AcHtmlManager }
-        ]; };
-        AcHtmlDirective = __decorate([
-            core.Directive({
-                selector: '[acHtml]',
-            }),
-            __metadata("design:paramtypes", [core.TemplateRef,
-                core.ViewContainerRef,
-                core.ChangeDetectorRef,
-                LayerService,
-                AcHtmlManager])
-        ], AcHtmlDirective);
         return AcHtmlDirective;
     }());
+    AcHtmlDirective.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[acHtml]',
+                },] }
+    ];
+    AcHtmlDirective.ctorParameters = function () { return [
+        { type: core.TemplateRef },
+        { type: core.ViewContainerRef },
+        { type: core.ChangeDetectorRef },
+        { type: LayerService },
+        { type: AcHtmlManager }
+    ]; };
 
     /**
      *  This is an html implementation.
@@ -6993,31 +6830,25 @@
             this._cesiumObjectsMap.clear();
             this._drawer.removeAll();
         };
-        AcHtmlDescComponent.ctorParameters = function () { return [
-            { type: HtmlDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        __decorate([
-            core.ViewChild(AcHtmlDirective, { static: true }),
-            __metadata("design:type", AcHtmlDirective)
-        ], AcHtmlDescComponent.prototype, "acHtmlCreator", void 0);
-        __decorate([
-            core.ContentChild(core.TemplateRef, { static: true }),
-            __metadata("design:type", core.TemplateRef)
-        ], AcHtmlDescComponent.prototype, "acHtmlTemplate", void 0);
-        AcHtmlDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-html-desc',
-                providers: [AcHtmlManager],
-                template: "\n      <div *acHtml=\"let acHtmlEntityId = id; let acHtmlContext = context\">\n          <div [acHtmlContainer]=\"acHtmlEntityId\">\n              <ng-template [ngTemplateOutlet]=\"acHtmlTemplate\"\n                           [ngTemplateOutletContext]=\"acHtmlContext\"></ng-template>\n          </div>\n      </div>"
-            }),
-            __metadata("design:paramtypes", [HtmlDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcHtmlDescComponent);
         return AcHtmlDescComponent;
     }(BasicDesc));
+    AcHtmlDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-html-desc',
+                    providers: [AcHtmlManager],
+                    template: "\n      <div *acHtml=\"let acHtmlEntityId = id; let acHtmlContext = context\">\n          <div [acHtmlContainer]=\"acHtmlEntityId\">\n              <ng-template [ngTemplateOutlet]=\"acHtmlTemplate\"\n                           [ngTemplateOutletContext]=\"acHtmlContext\"></ng-template>\n          </div>\n      </div>"
+                },] }
+    ];
+    AcHtmlDescComponent.ctorParameters = function () { return [
+        { type: HtmlDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
+    AcHtmlDescComponent.propDecorators = {
+        acHtmlCreator: [{ type: core.ViewChild, args: [AcHtmlDirective, { static: true },] }],
+        acHtmlTemplate: [{ type: core.ContentChild, args: [core.TemplateRef, { static: true },] }]
+    };
 
     var AcHtmlContainerDirective = /** @class */ (function () {
         function AcHtmlContainerDirective(_element, _acHtmlManager) {
@@ -7028,7 +6859,7 @@
             set: function (id) {
                 this._id = id;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         AcHtmlContainerDirective.prototype.ngOnInit = function () {
@@ -7038,24 +6869,20 @@
             var entity = this._acHtmlManager.get(this._id);
             entity.primitive.element = this._element.nativeElement;
         };
-        AcHtmlContainerDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: AcHtmlManager }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String),
-            __metadata("design:paramtypes", [String])
-        ], AcHtmlContainerDirective.prototype, "acHtmlContainer", null);
-        AcHtmlContainerDirective = __decorate([
-            core.Directive({
-                selector: '[acHtmlContainer]'
-            }),
-            __metadata("design:paramtypes", [core.ElementRef,
-                AcHtmlManager])
-        ], AcHtmlContainerDirective);
         return AcHtmlContainerDirective;
     }());
+    AcHtmlContainerDirective.decorators = [
+        { type: core.Directive, args: [{
+                    selector: '[acHtmlContainer]'
+                },] }
+    ];
+    AcHtmlContainerDirective.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: AcHtmlManager }
+    ]; };
+    AcHtmlContainerDirective.propDecorators = {
+        acHtmlContainer: [{ type: core.Input }]
+    };
 
     /**
      * This component is used to inject the component that is passed to the ContextMenuService when opening a context menu.
@@ -7108,27 +6935,23 @@
                 this.contextMenuOpenSubscription.unsubscribe();
             }
         };
-        AcContextMenuWrapperComponent.ctorParameters = function () { return [
-            { type: ContextMenuService },
-            { type: core.ChangeDetectorRef },
-            { type: core.ComponentFactoryResolver }
-        ]; };
-        __decorate([
-            core.ViewChild('contextMenuContainer', { read: core.ViewContainerRef }),
-            __metadata("design:type", core.ViewContainerRef)
-        ], AcContextMenuWrapperComponent.prototype, "viewContainerRef", void 0);
-        AcContextMenuWrapperComponent = __decorate([
-            core.Component({
-                selector: 'ac-context-menu-wrapper',
-                template: "\n    <ac-html *ngIf=\"contextMenuService.showContextMenu\" [props]=\"{position: contextMenuService.position}\">\n      <ng-template #contextMenuContainer></ng-template>\n    </ac-html>\n  ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [ContextMenuService,
-                core.ChangeDetectorRef,
-                core.ComponentFactoryResolver])
-        ], AcContextMenuWrapperComponent);
         return AcContextMenuWrapperComponent;
     }());
+    AcContextMenuWrapperComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-context-menu-wrapper',
+                    template: "\n    <ac-html *ngIf=\"contextMenuService.showContextMenu\" [props]=\"{position: contextMenuService.position}\">\n      <ng-template #contextMenuContainer></ng-template>\n    </ac-html>\n  ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    AcContextMenuWrapperComponent.ctorParameters = function () { return [
+        { type: ContextMenuService },
+        { type: core.ChangeDetectorRef },
+        { type: core.ComponentFactoryResolver }
+    ]; };
+    AcContextMenuWrapperComponent.propDecorators = {
+        viewContainerRef: [{ type: core.ViewChild, args: ['contextMenuContainer', { read: core.ViewContainerRef },] }]
+    };
 
     /**
      *  This is component represents an array under `ac-layer`.
@@ -7165,7 +6988,6 @@
             this.acForRgx = /^let\s+.+\s+of\s+.+$/;
             this.arrayObservable$ = new rxjs.Subject();
         }
-        AcArrayDescComponent_1 = AcArrayDescComponent;
         AcArrayDescComponent.prototype.ngOnChanges = function (changes) {
             if (changes['acFor'].firstChange) {
                 var acForString = changes['acFor'].currentValue;
@@ -7211,7 +7033,7 @@
         };
         AcArrayDescComponent.prototype.draw = function (context, id, contextEntity) {
             var _this = this;
-            var get = _get;
+            var get = _get__namespace;
             var entitiesArray = get(context, this.arrayPath);
             if (!entitiesArray) {
                 return;
@@ -7259,45 +7081,27 @@
             }
             return entityId + arrayItemId;
         };
-        var AcArrayDescComponent_1;
-        AcArrayDescComponent.ctorParameters = function () { return [
-            { type: LayerService },
-            { type: core.ChangeDetectorRef }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcArrayDescComponent.prototype, "acFor", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Function)
-        ], AcArrayDescComponent.prototype, "idGetter", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcArrayDescComponent.prototype, "show", void 0);
-        __decorate([
-            core.ViewChild('layer', { static: true }),
-            __metadata("design:type", AcLayerComponent)
-        ], AcArrayDescComponent.prototype, "layer", void 0);
-        __decorate([
-            core.ContentChildren(BasicDesc, { descendants: false }),
-            __metadata("design:type", Object)
-        ], AcArrayDescComponent.prototype, "basicDescs", void 0);
-        __decorate([
-            core.ContentChildren(AcArrayDescComponent_1, { descendants: false }),
-            __metadata("design:type", Object)
-        ], AcArrayDescComponent.prototype, "arrayDescs", void 0);
-        AcArrayDescComponent = AcArrayDescComponent_1 = __decorate([
-            core.Component({
-                selector: 'ac-array-desc',
-                template: "\n    <ac-layer #layer [acFor]=\"getAcForString()\"\n              [context]=\"layerService.context\"\n              [options]=\"layerService.options\"\n              [show]=\"layerService.show && show\"\n              [zIndex]=\"layerService.zIndex\">\n      <ng-content #content></ng-content>\n    </ac-layer>\n  ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [LayerService, core.ChangeDetectorRef])
-        ], AcArrayDescComponent);
         return AcArrayDescComponent;
     }());
+    AcArrayDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-array-desc',
+                    template: "\n    <ac-layer #layer [acFor]=\"getAcForString()\"\n              [context]=\"layerService.context\"\n              [options]=\"layerService.options\"\n              [show]=\"layerService.show && show\"\n              [zIndex]=\"layerService.zIndex\">\n      <ng-content #content></ng-content>\n    </ac-layer>\n  ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    AcArrayDescComponent.ctorParameters = function () { return [
+        { type: LayerService },
+        { type: core.ChangeDetectorRef }
+    ]; };
+    AcArrayDescComponent.propDecorators = {
+        acFor: [{ type: core.Input }],
+        idGetter: [{ type: core.Input }],
+        show: [{ type: core.Input }],
+        layer: [{ type: core.ViewChild, args: ['layer', { static: true },] }],
+        basicDescs: [{ type: core.ContentChildren, args: [BasicDesc, { descendants: false },] }],
+        arrayDescs: [{ type: core.ContentChildren, args: [AcArrayDescComponent, { descendants: false },] }]
+    };
 
     /**
      *  This is a label primitive implementation.
@@ -7319,22 +7123,20 @@
         function AcPointPrimitiveDescComponent(pointPrimitiveDrawerService, layerService, computationCache, cesiumProperties) {
             return _super.call(this, pointPrimitiveDrawerService, layerService, computationCache, cesiumProperties) || this;
         }
-        AcPointPrimitiveDescComponent.ctorParameters = function () { return [
-            { type: PointPrimitiveDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcPointPrimitiveDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-point-primitive-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PointPrimitiveDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcPointPrimitiveDescComponent);
         return AcPointPrimitiveDescComponent;
     }(BasicDesc));
+    AcPointPrimitiveDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-point-primitive-desc',
+                    template: ''
+                },] }
+    ];
+    AcPointPrimitiveDescComponent.ctorParameters = function () { return [
+        { type: PointPrimitiveDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a polyline implementation.
@@ -7358,19 +7160,18 @@
         function AcPrimitivePolylineComponent(polylineDrawer, mapLayers) {
             return _super.call(this, polylineDrawer, mapLayers) || this;
         }
-        AcPrimitivePolylineComponent.ctorParameters = function () { return [
-            { type: PolylinePrimitiveDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcPrimitivePolylineComponent = __decorate([
-            core.Component({
-                selector: 'ac-primitive-polyline',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [PolylinePrimitiveDrawerService, MapLayersService])
-        ], AcPrimitivePolylineComponent);
         return AcPrimitivePolylineComponent;
     }(EntityOnMapComponent));
+    AcPrimitivePolylineComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-primitive-polyline',
+                    template: ''
+                },] }
+    ];
+    AcPrimitivePolylineComponent.ctorParameters = function () { return [
+        { type: PolylinePrimitiveDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     // For angular parse usage
     var PARSE_PIPES_CONFIG_MAP = [
@@ -7407,22 +7208,20 @@
         function AcCzmlDescComponent(czmlDrawer, layerService, computationCache, cesiumProperties) {
             return _super.call(this, czmlDrawer, layerService, computationCache, cesiumProperties) || this;
         }
-        AcCzmlDescComponent.ctorParameters = function () { return [
-            { type: CzmlDrawerService },
-            { type: LayerService },
-            { type: ComputationCache },
-            { type: CesiumProperties }
-        ]; };
-        AcCzmlDescComponent = __decorate([
-            core.Component({
-                selector: 'ac-czml-desc',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [CzmlDrawerService, LayerService,
-                ComputationCache, CesiumProperties])
-        ], AcCzmlDescComponent);
         return AcCzmlDescComponent;
     }(BasicDesc));
+    AcCzmlDescComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-czml-desc',
+                    template: ''
+                },] }
+    ];
+    AcCzmlDescComponent.ctorParameters = function () { return [
+        { type: CzmlDrawerService },
+        { type: LayerService },
+        { type: ComputationCache },
+        { type: CesiumProperties }
+    ]; };
 
     /**
      *  This is a rectangle implementation.
@@ -7446,28 +7245,26 @@
         function AcRectangleComponent(rectangleDrawer, mapLayers) {
             return _super.call(this, rectangleDrawer, mapLayers) || this;
         }
-        AcRectangleComponent.ctorParameters = function () { return [
-            { type: RectangleDrawerService },
-            { type: MapLayersService }
-        ]; };
-        AcRectangleComponent = __decorate([
-            core.Component({
-                selector: 'ac-rectangle',
-                template: ''
-            }),
-            __metadata("design:paramtypes", [RectangleDrawerService, MapLayersService])
-        ], AcRectangleComponent);
         return AcRectangleComponent;
     }(EntityOnMapComponent));
+    AcRectangleComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-rectangle',
+                    template: ''
+                },] }
+    ];
+    AcRectangleComponent.ctorParameters = function () { return [
+        { type: RectangleDrawerService },
+        { type: MapLayersService }
+    ]; };
 
     var AngularCesiumModule = /** @class */ (function () {
         function AngularCesiumModule() {
             CesiumExtender.extend();
         }
-        AngularCesiumModule_1 = AngularCesiumModule;
         AngularCesiumModule.forRoot = function (config) {
             return {
-                ngModule: AngularCesiumModule_1,
+                ngModule: AngularCesiumModule,
                 providers: [
                     JsonMapper, CesiumProperties, GeoUtilsService, ViewerFactory, MapsManagerService, ConfigurationService,
                     { provide: ANGULAR_CESIUM_CONFIG, useValue: config },
@@ -7476,124 +7273,123 @@
                 ],
             };
         };
-        var AngularCesiumModule_1;
-        AngularCesiumModule = AngularCesiumModule_1 = __decorate([
-            core.NgModule({
-                imports: [
-                    common.CommonModule,
-                    angular2parse.Angular2ParseModule,
-                    UtilsModule,
-                ],
-                declarations: [
-                    AcMapComponent,
-                    AcLayerComponent,
-                    AcBillboardComponent,
-                    AcBillboardDescComponent,
-                    AcBillboardPrimitiveDescComponent,
-                    AcLabelDescComponent,
-                    AcLabelPrimitiveDescComponent,
-                    AcEllipseDescComponent,
-                    AcPolylineDescComponent,
-                    AcPolylinePrimitiveDescComponent,
-                    PixelOffsetPipe,
-                    RadiansToDegreesPipe,
-                    AcCircleDescComponent,
-                    AcArcDescComponent,
-                    AcMapLayerProviderComponent,
-                    AcMapTerrainProviderComponent,
-                    AcPointDescComponent,
-                    AcLabelComponent,
-                    AcPolylineComponent,
-                    AcPrimitivePolylineComponent,
-                    AcEllipseComponent,
-                    AcPointComponent,
-                    AcBillboardComponent,
-                    AcHtmlComponent,
-                    AcCircleComponent,
-                    AcArcComponent,
-                    AcPolygonDescComponent,
-                    AcPolygonComponent,
-                    AcDefaultPlonterComponent,
-                    AcModelDescComponent,
-                    AcTileset3dComponent,
-                    AcBoxDescComponent,
-                    AcCylinderDescComponent,
-                    AcCorridorDescComponent,
-                    AcEllipsoidDescComponent,
-                    AcPolylineVolumeDescComponent,
-                    AcWallDescComponent,
-                    AcRectangleDescComponent,
-                    AcContextMenuWrapperComponent,
-                    AcPointPrimitiveDescComponent,
-                    AcHtmlDescComponent,
-                    AcHtmlDirective,
-                    AcHtmlContainerDirective,
-                    AcArrayDescComponent,
-                    AcCzmlDescComponent,
-                    AcStaticEllipseDescComponent,
-                    AcDynamicEllipseDescComponent,
-                    AcDynamicPolylineDescComponent,
-                    AcStaticPolylineDescComponent,
-                    AcDynamicCircleDescComponent,
-                    AcStaticCircleDescComponent,
-                    AcStaticPolygonDescComponent,
-                    AcRectangleComponent
-                ],
-                exports: [
-                    AcMapComponent,
-                    AcBillboardComponent,
-                    AcBillboardDescComponent,
-                    AcBillboardPrimitiveDescComponent,
-                    AcLabelDescComponent,
-                    AcLabelPrimitiveDescComponent,
-                    AcEllipseDescComponent,
-                    AcPolylineDescComponent,
-                    AcPolylinePrimitiveDescComponent,
-                    AcLayerComponent,
-                    AcCircleDescComponent,
-                    AcArcDescComponent,
-                    AcMapLayerProviderComponent,
-                    AcMapTerrainProviderComponent,
-                    AcPointDescComponent,
-                    AcLabelComponent,
-                    AcPolylineComponent,
-                    AcPrimitivePolylineComponent,
-                    AcEllipseComponent,
-                    AcPointComponent,
-                    AcBillboardComponent,
-                    AcHtmlComponent,
-                    AcCircleComponent,
-                    AcArcComponent,
-                    AcPolygonDescComponent,
-                    AcPolygonComponent,
-                    AcDefaultPlonterComponent,
-                    AcModelDescComponent,
-                    AcTileset3dComponent,
-                    AcBoxDescComponent,
-                    AcCylinderDescComponent,
-                    AcCorridorDescComponent,
-                    AcEllipsoidDescComponent,
-                    AcPolylineVolumeDescComponent,
-                    AcWallDescComponent,
-                    AcRectangleDescComponent,
-                    AcPointPrimitiveDescComponent,
-                    AcHtmlDescComponent,
-                    AcArrayDescComponent,
-                    AcCzmlDescComponent,
-                    AcRectangleComponent,
-                    AcStaticEllipseDescComponent,
-                    AcDynamicEllipseDescComponent,
-                    AcDynamicPolylineDescComponent,
-                    AcStaticPolylineDescComponent,
-                    AcDynamicCircleDescComponent,
-                    AcStaticCircleDescComponent,
-                    AcStaticPolygonDescComponent,
-                ],
-            }),
-            __metadata("design:paramtypes", [])
-        ], AngularCesiumModule);
         return AngularCesiumModule;
     }());
+    AngularCesiumModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [
+                        common.CommonModule,
+                        angular2parse.Angular2ParseModule,
+                        UtilsModule,
+                    ],
+                    declarations: [
+                        AcMapComponent,
+                        AcLayerComponent,
+                        AcBillboardComponent,
+                        AcBillboardDescComponent,
+                        AcBillboardPrimitiveDescComponent,
+                        AcLabelDescComponent,
+                        AcLabelPrimitiveDescComponent,
+                        AcEllipseDescComponent,
+                        AcPolylineDescComponent,
+                        AcPolylinePrimitiveDescComponent,
+                        PixelOffsetPipe,
+                        RadiansToDegreesPipe,
+                        AcCircleDescComponent,
+                        AcArcDescComponent,
+                        AcMapLayerProviderComponent,
+                        AcMapTerrainProviderComponent,
+                        AcPointDescComponent,
+                        AcLabelComponent,
+                        AcPolylineComponent,
+                        AcPrimitivePolylineComponent,
+                        AcEllipseComponent,
+                        AcPointComponent,
+                        AcBillboardComponent,
+                        AcHtmlComponent,
+                        AcCircleComponent,
+                        AcArcComponent,
+                        AcPolygonDescComponent,
+                        AcPolygonComponent,
+                        AcDefaultPlonterComponent,
+                        AcModelDescComponent,
+                        AcTileset3dComponent,
+                        AcBoxDescComponent,
+                        AcCylinderDescComponent,
+                        AcCorridorDescComponent,
+                        AcEllipsoidDescComponent,
+                        AcPolylineVolumeDescComponent,
+                        AcWallDescComponent,
+                        AcRectangleDescComponent,
+                        AcContextMenuWrapperComponent,
+                        AcPointPrimitiveDescComponent,
+                        AcHtmlDescComponent,
+                        AcHtmlDirective,
+                        AcHtmlContainerDirective,
+                        AcArrayDescComponent,
+                        AcCzmlDescComponent,
+                        AcStaticEllipseDescComponent,
+                        AcDynamicEllipseDescComponent,
+                        AcDynamicPolylineDescComponent,
+                        AcStaticPolylineDescComponent,
+                        AcDynamicCircleDescComponent,
+                        AcStaticCircleDescComponent,
+                        AcStaticPolygonDescComponent,
+                        AcRectangleComponent
+                    ],
+                    exports: [
+                        AcMapComponent,
+                        AcBillboardComponent,
+                        AcBillboardDescComponent,
+                        AcBillboardPrimitiveDescComponent,
+                        AcLabelDescComponent,
+                        AcLabelPrimitiveDescComponent,
+                        AcEllipseDescComponent,
+                        AcPolylineDescComponent,
+                        AcPolylinePrimitiveDescComponent,
+                        AcLayerComponent,
+                        AcCircleDescComponent,
+                        AcArcDescComponent,
+                        AcMapLayerProviderComponent,
+                        AcMapTerrainProviderComponent,
+                        AcPointDescComponent,
+                        AcLabelComponent,
+                        AcPolylineComponent,
+                        AcPrimitivePolylineComponent,
+                        AcEllipseComponent,
+                        AcPointComponent,
+                        AcBillboardComponent,
+                        AcHtmlComponent,
+                        AcCircleComponent,
+                        AcArcComponent,
+                        AcPolygonDescComponent,
+                        AcPolygonComponent,
+                        AcDefaultPlonterComponent,
+                        AcModelDescComponent,
+                        AcTileset3dComponent,
+                        AcBoxDescComponent,
+                        AcCylinderDescComponent,
+                        AcCorridorDescComponent,
+                        AcEllipsoidDescComponent,
+                        AcPolylineVolumeDescComponent,
+                        AcWallDescComponent,
+                        AcRectangleDescComponent,
+                        AcPointPrimitiveDescComponent,
+                        AcHtmlDescComponent,
+                        AcArrayDescComponent,
+                        AcCzmlDescComponent,
+                        AcRectangleComponent,
+                        AcStaticEllipseDescComponent,
+                        AcDynamicEllipseDescComponent,
+                        AcDynamicPolylineDescComponent,
+                        AcStaticPolylineDescComponent,
+                        AcDynamicCircleDescComponent,
+                        AcStaticCircleDescComponent,
+                        AcStaticPolygonDescComponent,
+                    ],
+                },] }
+    ];
+    AngularCesiumModule.ctorParameters = function () { return []; };
 
     var DisposableObservable = /** @class */ (function (_super) {
         __extends(DisposableObservable, _super);
@@ -7606,7 +7402,6 @@
     /**
      * EventModifier options for registration on map-event-manager.
      */
-
     (function (CesiumEventModifier) {
         CesiumEventModifier[CesiumEventModifier["ALT"] = Cesium.KeyboardEventModifier.ALT] = "ALT";
         CesiumEventModifier[CesiumEventModifier["CTRL"] = Cesium.KeyboardEventModifier.CTRL] = "CTRL";
@@ -7710,25 +7505,22 @@
                 _this.toggleSelection(entity, addSelectedIndicator);
             });
         };
-        SelectionManagerService.ctorParameters = function () { return [
-            { type: MapsManagerService }
-        ]; };
-        SelectionManagerService = __decorate([
-            core.Injectable(),
-            __metadata("design:paramtypes", [MapsManagerService])
-        ], SelectionManagerService);
         return SelectionManagerService;
     }());
+    SelectionManagerService.decorators = [
+        { type: core.Injectable }
+    ];
+    SelectionManagerService.ctorParameters = function () { return [
+        { type: MapsManagerService }
+    ]; };
 
     // import './src/angular-cesium/operators';
-
 
     (function (EditModes) {
         EditModes[EditModes["CREATE"] = 0] = "CREATE";
         EditModes[EditModes["EDIT"] = 1] = "EDIT";
         EditModes[EditModes["CREATE_OR_EDIT"] = 2] = "CREATE_OR_EDIT";
     })(exports.EditModes || (exports.EditModes = {}));
-
 
     (function (EditActions) {
         EditActions[EditActions["INIT"] = 0] = "INIT";
@@ -7760,7 +7552,7 @@
             _this.editedEntityId = entityId;
             _this.position = position;
             _this.id = _this.generateId();
-            _this.pointProps = __assign({}, pointProps);
+            _this.pointProps = Object.assign({}, pointProps);
             _this._virtualEditPoint = virtualPoint;
             return _this;
         }
@@ -7771,7 +7563,7 @@
             set: function (value) {
                 this._show = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditPoint.prototype, "props", {
@@ -7781,7 +7573,7 @@
             set: function (value) {
                 this.pointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditPoint.prototype.isVirtualEditPoint = function () {
@@ -7810,9 +7602,9 @@
         EditPoint.prototype.generateId = function () {
             return 'edit-point-' + EditPoint.counter++;
         };
-        EditPoint.counter = 0;
         return EditPoint;
     }(AcEntity));
+    EditPoint.counter = 0;
 
     function generateKey(length) {
         if (length === void 0) { length = 12; }
@@ -7927,6 +7719,9 @@
                 editAction: exports.EditActions.INIT,
                 pointOptions: pointOptions,
             });
+            var finishCreation = function (position) {
+                return _this.switchToEditMode(id, clientEditSubject, position, eventPriority, pointOptions, editorObservable, true);
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -7941,7 +7736,7 @@
                 pickConfig: options.pickConfiguration,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addLastPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             mouseMoveRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.screenToPosition(endPosition);
@@ -7958,7 +7753,7 @@
             addLastPointRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.screenToPosition(endPosition);
-                finishedCreate = _this.switchToEditMode(id, clientEditSubject, position, eventPriority, pointOptions, editorObservable, true);
+                finishedCreate = finishCreation(position);
             });
             return editorObservable;
         };
@@ -7971,7 +7766,7 @@
                 editAction: exports.EditActions.ADD_LAST_POINT,
             };
             this.updateSubject.next(update);
-            clientEditSubject.next(__assign(__assign({}, update), { position: position, point: this.getPoint(id) }));
+            clientEditSubject.next(Object.assign(Object.assign({}, update), { position: position, point: this.getPoint(id) }));
             var changeMode = {
                 id: id,
                 editMode: exports.EditModes.CREATE,
@@ -8005,7 +7800,7 @@
                 pointOptions: pointOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), { position: position, point: this.getPoint(id) }));
+            editSubject.next(Object.assign(Object.assign({}, update), { position: position, point: this.getPoint(id) }));
             return this.editPoint(id, position, priority, editSubject, pointOptions);
         };
         PointsEditorService.prototype.editPoint = function (id, position, priority, editSubject, options, editObservable) {
@@ -8044,7 +7839,7 @@
                     editAction: drop ? exports.EditActions.DRAG_POINT_FINISH : exports.EditActions.DRAG_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { position: updatedPosition, point: _this.getPoint(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { position: updatedPosition, point: _this.getPoint(id) }));
             });
             var observables = [pointDragRegistration, pointRemoveRegistration];
             this.observablesMap.set(id, observables);
@@ -8053,11 +7848,11 @@
         PointsEditorService.prototype.setOptions = function (options) {
             var defaultClone = JSON.parse(JSON.stringify(DEFAULT_POINT_OPTIONS));
             var pointOptions = Object.assign(defaultClone, options);
-            pointOptions.pointProps = __assign(__assign({}, DEFAULT_POINT_OPTIONS.pointProps), options.pointProps);
-            pointOptions.pointProps = __assign(__assign({}, DEFAULT_POINT_OPTIONS.pointProps), options.pointProps);
+            pointOptions.pointProps = Object.assign(Object.assign({}, DEFAULT_POINT_OPTIONS.pointProps), options.pointProps);
+            pointOptions.pointProps = Object.assign(Object.assign({}, DEFAULT_POINT_OPTIONS.pointProps), options.pointProps);
             return pointOptions;
         };
-        PointsEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        PointsEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -8112,6 +7907,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Points editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation(null);
+            };
             observableToExtend.getCurrentPoint = function () { return _this.getPoint(id); };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.pointManager.get(id).labels; };
@@ -8127,11 +7928,11 @@
                 return point.getCurrentPoint();
             }
         };
-        PointsEditorService = __decorate([
-            core.Injectable()
-        ], PointsEditorService);
         return PointsEditorService;
     }());
+    PointsEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var defaultLabelProps = {
         backgroundColor: new Cesium.Color(0.165, 0.165, 0.165, 0.7),
@@ -8167,7 +7968,7 @@
             _this.editOptions = editOptions;
             _this._enableEdit = true;
             _this._labels = [];
-            _this._props = __assign({}, editOptions.pointProps);
+            _this._props = Object.assign({}, editOptions.pointProps);
             if (position) {
                 _this.createFromExisting(position);
             }
@@ -8189,7 +7990,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePoint.prototype, "props", {
@@ -8199,7 +8000,7 @@
             set: function (value) {
                 this._props = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePoint.prototype, "enableEdit", {
@@ -8217,7 +8018,7 @@
                 }
                 this.updatePointLayer();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditablePoint.prototype.createFromExisting = function (position) {
@@ -8310,11 +8111,11 @@
             this.points.forEach(function (point) { return point.dispose(); });
             this.points.clear();
         };
-        PointsManagerService = __decorate([
-            core.Injectable()
-        ], PointsManagerService);
         return PointsManagerService;
     }());
+    PointsManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var PointsEditorComponent = /** @class */ (function () {
         function PointsEditorComponent(pointsEditor, coordinateConverter, mapEventsManager, cameraService, pointsManager, cesiumService) {
@@ -8466,38 +8267,28 @@
         PointsEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        PointsEditorComponent.ctorParameters = function () { return [
-            { type: PointsEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: PointsManagerService },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.ViewChild('editPointLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PointsEditorComponent.prototype, "editPointLayer", void 0);
-        __decorate([
-            core.ViewChild('pointLabelsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PointsEditorComponent.prototype, "pointLabelsLayer", void 0);
-        PointsEditorComponent = __decorate([
-            core.Component({
-                selector: 'points-editor',
-                template: /*html*/ "\n    <ac-layer #editPointLayer acFor=\"let point of editPoint$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      ></ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #pointLabelsLayer acFor=\"let pointLabels of pointLabels$\" [context]=\"this\">\n      <ac-array-desc acFor=\"let label of pointLabels.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
-                providers: [CoordinateConverter, PointsManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [PointsEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                PointsManagerService,
-                CesiumService])
-        ], PointsEditorComponent);
         return PointsEditorComponent;
     }());
+    PointsEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'points-editor',
+                    template: /*html*/ "\n    <ac-layer #editPointLayer acFor=\"let point of editPoint$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      ></ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #pointLabelsLayer acFor=\"let pointLabels of pointLabels$\" [context]=\"this\">\n      <ac-array-desc acFor=\"let label of pointLabels.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
+                    providers: [CoordinateConverter, PointsManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    PointsEditorComponent.ctorParameters = function () { return [
+        { type: PointsEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: PointsManagerService },
+        { type: CesiumService }
+    ]; };
+    PointsEditorComponent.propDecorators = {
+        editPointLayer: [{ type: core.ViewChild, args: ['editPointLayer',] }],
+        pointLabelsLayer: [{ type: core.ViewChild, args: ['pointLabelsLayer',] }]
+    };
 
     var EditPolyline = /** @class */ (function (_super) {
         __extends(EditPolyline, _super);
@@ -8506,7 +8297,7 @@
             _this.editedEntityId = entityId;
             _this.id = _this.generateId();
             _this.positions = [startPosition, endPosition];
-            _this._polylineProps = __assign({}, polylineProps);
+            _this._polylineProps = Object.assign({}, polylineProps);
             return _this;
         }
         Object.defineProperty(EditPolyline.prototype, "props", {
@@ -8516,7 +8307,7 @@
             set: function (value) {
                 this._polylineProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditPolyline.prototype.getEditedEntityId = function () {
@@ -8549,9 +8340,9 @@
         EditPolyline.prototype.generateId = function () {
             return 'edit-polyline-' + EditPolyline.counter++;
         };
-        EditPolyline.counter = 0;
         return EditPolyline;
     }(AcEntity));
+    EditPolyline.counter = 0;
 
     var EditablePolygon = /** @class */ (function (_super) {
         __extends(EditablePolygon, _super);
@@ -8568,9 +8359,9 @@
             _this.doneCreation = false;
             _this._enableEdit = true;
             _this._labels = [];
-            _this.polygonProps = __assign({}, polygonOptions.polygonProps);
-            _this.defaultPointProps = __assign({}, polygonOptions.pointProps);
-            _this.defaultPolylineProps = __assign({}, polygonOptions.polylineProps);
+            _this.polygonProps = Object.assign({}, polygonOptions.polygonProps);
+            _this.defaultPointProps = Object.assign({}, polygonOptions.pointProps);
+            _this.defaultPolylineProps = Object.assign({}, polygonOptions.polylineProps);
             if (positions && positions.length >= 3) {
                 _this.createFromExisting(positions);
             }
@@ -8592,7 +8383,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolygon.prototype, "defaultPolylineProps", {
@@ -8602,7 +8393,7 @@
             set: function (value) {
                 this._defaultPolylineProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolygon.prototype, "defaultPointProps", {
@@ -8612,7 +8403,7 @@
             set: function (value) {
                 this._defaultPointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolygon.prototype, "polygonProps", {
@@ -8622,7 +8413,7 @@
             set: function (value) {
                 this._polygonProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolygon.prototype, "enableEdit", {
@@ -8637,7 +8428,7 @@
                     _this.updatePointsLayer(false, point);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditablePolygon.prototype.createFromExisting = function (positions) {
@@ -8899,11 +8690,11 @@
             this.polygons.forEach(function (polygon) { return polygon.dispose(); });
             this.polygons.clear();
         };
-        PolygonsManagerService = __decorate([
-            core.Injectable()
-        ], PolygonsManagerService);
         return PolygonsManagerService;
     }());
+    PolygonsManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var ɵ0$1 = function () { return Cesium.Color.WHITE; };
     var DEFAULT_POLYGON_OPTIONS = {
@@ -9072,6 +8863,9 @@
                 editAction: exports.EditActions.INIT,
                 polygonOptions: polygonOptions,
             });
+            var finishCreation = function (position) {
+                return _this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -9093,7 +8887,7 @@
                 priority: priority,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration, addLastPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             mouseMoveRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.screenToPosition(endPosition, polygonOptions.clampHeightTo3D, polygonOptions.clampHeightTo3DOptions);
@@ -9128,9 +8922,9 @@
                     editAction: exports.EditActions.ADD_POINT,
                 };
                 _this.updateSubject.next(updateValue);
-                clientEditSubject.next(__assign(__assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 if (polygonOptions.maximumNumberOfPoints && allPositions.length + 1 === polygonOptions.maximumNumberOfPoints) {
-                    finishedCreate = _this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+                    finishedCreate = finishCreation(position);
                 }
             });
             addLastPointRegistration.subscribe(function (_a) {
@@ -9139,8 +8933,20 @@
                 if (!position) {
                     return;
                 }
-                // position already added by addPointRegistration
-                finishedCreate = _this.switchToEditMode(id, position, clientEditSubject, positions, priority, polygonOptions, editorObservable, finishedCreate);
+                // Add last point to positions if not already added
+                var allPositions = _this.getPositions(id);
+                if (!allPositions.find(function (cartesian) { return cartesian.equals(position); })) {
+                    var updateValue = {
+                        id: id,
+                        positions: allPositions,
+                        editMode: exports.EditModes.CREATE,
+                        updatedPosition: position,
+                        editAction: exports.EditActions.ADD_POINT,
+                    };
+                    _this.updateSubject.next(updateValue);
+                    clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                }
+                finishedCreate = finishCreation(position);
             });
             return editorObservable;
         };
@@ -9153,7 +8959,7 @@
                 editAction: exports.EditActions.ADD_LAST_POINT,
             };
             this.updateSubject.next(updateValue);
-            clientEditSubject.next(__assign(__assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: this.getPositions(id), points: this.getPoints(id) }));
             var changeMode = {
                 id: id,
                 editMode: exports.EditModes.CREATE,
@@ -9190,7 +8996,7 @@
                 polygonOptions: polygonOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            editSubject.next(Object.assign(Object.assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
             return this.editPolygon(id, positions, priority, editSubject, polygonOptions);
         };
         PolygonsEditorService.prototype.editPolygon = function (id, positions, priority, editSubject, options, editObservable) {
@@ -9244,7 +9050,7 @@
                     editAction: drop ? exports.EditActions.DRAG_POINT_FINISH : exports.EditActions.DRAG_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 _this.clampPointsDebounced(id, options.clampHeightTo3D, options.clampHeightTo3DOptions);
             });
             if (shapeDragRegistration) {
@@ -9269,7 +9075,7 @@
                         editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE,
                     };
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                    editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 });
             }
             pointRemoveRegistration.subscribe(function (_a) {
@@ -9291,7 +9097,7 @@
                     editAction: exports.EditActions.REMOVE_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 _this.clampPoints(id, options.clampHeightTo3D, options.clampHeightTo3DOptions);
             });
             var observables = [pointDragRegistration, pointRemoveRegistration];
@@ -9309,10 +9115,10 @@
             }
             var defaultClone = JSON.parse(JSON.stringify(DEFAULT_POLYGON_OPTIONS));
             var polygonOptions = Object.assign(defaultClone, options);
-            polygonOptions.pointProps = __assign(__assign({}, DEFAULT_POLYGON_OPTIONS.pointProps), options.pointProps);
-            polygonOptions.polygonProps = __assign(__assign({}, DEFAULT_POLYGON_OPTIONS.polygonProps), options.polygonProps);
-            polygonOptions.polylineProps = __assign(__assign({}, DEFAULT_POLYGON_OPTIONS.polylineProps), options.polylineProps);
-            polygonOptions.clampHeightTo3DOptions = __assign(__assign({}, DEFAULT_POLYGON_OPTIONS.clampHeightTo3DOptions), options.clampHeightTo3DOptions);
+            polygonOptions.pointProps = Object.assign(Object.assign({}, DEFAULT_POLYGON_OPTIONS.pointProps), options.pointProps);
+            polygonOptions.polygonProps = Object.assign(Object.assign({}, DEFAULT_POLYGON_OPTIONS.polygonProps), options.polygonProps);
+            polygonOptions.polylineProps = Object.assign(Object.assign({}, DEFAULT_POLYGON_OPTIONS.polylineProps), options.polylineProps);
+            polygonOptions.clampHeightTo3DOptions = Object.assign(Object.assign({}, DEFAULT_POLYGON_OPTIONS.clampHeightTo3DOptions), options.clampHeightTo3DOptions);
             if (options.clampHeightTo3D) {
                 if (!this.cesiumScene.pickPositionSupported || !this.cesiumScene.clampToHeightSupported) {
                     throw new Error("Cesium pickPosition and clampToHeight must be supported to use clampHeightTo3D");
@@ -9331,7 +9137,7 @@
             }
             return polygonOptions;
         };
-        PolygonsEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        PolygonsEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -9386,6 +9192,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Polygons editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation(null);
+            };
             observableToExtend.getCurrentPoints = function () { return _this.getPoints(id); };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.polygonsManager.get(id).labels; };
@@ -9399,11 +9211,11 @@
             var polygon = this.polygonsManager.get(id);
             return polygon.getRealPoints();
         };
-        PolygonsEditorService = __decorate([
-            core.Injectable()
-        ], PolygonsEditorService);
         return PolygonsEditorService;
     }());
+    PolygonsEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var PolygonsEditorComponent = /** @class */ (function () {
         function PolygonsEditorComponent(polygonsEditor, coordinateConverter, mapEventsManager, cameraService, polygonsManager, cesiumService) {
@@ -9469,6 +9281,7 @@
                 case exports.EditActions.ADD_POINT: {
                     var polygon = this.polygonsManager.get(update.id);
                     if (update.updatedPosition) {
+                        polygon.moveTempMovingPoint(update.updatedPosition);
                         polygon.addPoint(update.updatedPosition);
                         this.renderEditLabels(polygon, update);
                     }
@@ -9591,42 +9404,29 @@
         PolygonsEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        PolygonsEditorComponent.ctorParameters = function () { return [
-            { type: PolygonsEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: PolygonsManagerService },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.ViewChild('editPolygonsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolygonsEditorComponent.prototype, "editPolygonsLayer", void 0);
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolygonsEditorComponent.prototype, "editPointsLayer", void 0);
-        __decorate([
-            core.ViewChild('editPolylinesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolygonsEditorComponent.prototype, "editPolylinesLayer", void 0);
-        PolygonsEditorComponent = __decorate([
-            core.Component({
-                selector: 'polygons-editor',
-                template: /*html*/ "\n    <ac-layer #editPolylinesLayer acFor=\"let polyline of editPolylines$\" [context]=\"this\">\n      <ac-polyline-desc\n        props=\"{\n        positions: polyline.getPositionsCallbackProperty(),\n        width: polyline.props.width,\n        material: polyline.props.material(),\n        clampToGround: polyline.props.clampToGround,\n        zIndex: polyline.props.zIndex,\n        classificationType: polyline.props.classificationType,\n      }\"\n      >\n      </ac-polyline-desc>\n    </ac-layer>\n\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      >\n      </ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #editPolygonsLayer acFor=\"let polygon of editPolygons$\" [context]=\"this\">\n      <ac-polygon-desc\n        props=\"{\n          hierarchy: polygon.getPositionsHierarchyCallbackProperty(),\n          material: polygon.polygonProps.material,\n          fill: polygon.polygonProps.fill,\n          classificationType: polygon.polygonProps.classificationType,\n          zIndex: polygon.polygonProps.zIndex,\n        }\"\n      >\n      </ac-polygon-desc>\n      <ac-array-desc acFor=\"let label of polygon.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
-                providers: [CoordinateConverter, PolygonsManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [PolygonsEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                PolygonsManagerService,
-                CesiumService])
-        ], PolygonsEditorComponent);
         return PolygonsEditorComponent;
     }());
+    PolygonsEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'polygons-editor',
+                    template: /*html*/ "\n    <ac-layer #editPolylinesLayer acFor=\"let polyline of editPolylines$\" [context]=\"this\">\n      <ac-polyline-desc\n        props=\"{\n        positions: polyline.getPositionsCallbackProperty(),\n        width: polyline.props.width,\n        material: polyline.props.material(),\n        clampToGround: polyline.props.clampToGround,\n        zIndex: polyline.props.zIndex,\n        classificationType: polyline.props.classificationType,\n      }\"\n      >\n      </ac-polyline-desc>\n    </ac-layer>\n\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      >\n      </ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #editPolygonsLayer acFor=\"let polygon of editPolygons$\" [context]=\"this\">\n      <ac-polygon-desc\n        props=\"{\n          hierarchy: polygon.getPositionsHierarchyCallbackProperty(),\n          material: polygon.polygonProps.material,\n          fill: polygon.polygonProps.fill,\n          classificationType: polygon.polygonProps.classificationType,\n          zIndex: polygon.polygonProps.zIndex,\n        }\"\n      >\n      </ac-polygon-desc>\n      <ac-array-desc acFor=\"let label of polygon.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
+                    providers: [CoordinateConverter, PolygonsManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    PolygonsEditorComponent.ctorParameters = function () { return [
+        { type: PolygonsEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: PolygonsManagerService },
+        { type: CesiumService }
+    ]; };
+    PolygonsEditorComponent.propDecorators = {
+        editPolygonsLayer: [{ type: core.ViewChild, args: ['editPolygonsLayer',] }],
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }],
+        editPolylinesLayer: [{ type: core.ViewChild, args: ['editPolylinesLayer',] }]
+    };
 
     var EditArc = /** @class */ (function (_super) {
         __extends(EditArc, _super);
@@ -9648,7 +9448,7 @@
             set: function (props) {
                 this._arcProps = props;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditArc.prototype, "angle", {
@@ -9658,7 +9458,7 @@
             set: function (value) {
                 this._angle = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditArc.prototype, "delta", {
@@ -9668,7 +9468,7 @@
             set: function (value) {
                 this._delta = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditArc.prototype, "radius", {
@@ -9678,7 +9478,7 @@
             set: function (value) {
                 this._radius = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditArc.prototype, "center", {
@@ -9688,7 +9488,7 @@
             set: function (value) {
                 this._center = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditArc.prototype.updateCenter = function (center) {
@@ -9702,9 +9502,9 @@
         EditArc.prototype.generateId = function () {
             return 'edit-arc-' + EditArc.counter++;
         };
-        EditArc.counter = 0;
         return EditArc;
     }(AcEntity));
+    EditArc.counter = 0;
 
     var EditableCircle = /** @class */ (function (_super) {
         __extends(EditableCircle, _super);
@@ -9718,9 +9518,9 @@
             _this.doneCreation = false;
             _this._enableEdit = true;
             _this._labels = [];
-            _this._circleProps = __assign({}, options.circleProps);
-            _this._pointProps = __assign({}, options.pointProps);
-            _this._polylineProps = __assign({}, options.polylineProps);
+            _this._circleProps = Object.assign({}, options.circleProps);
+            _this._pointProps = Object.assign({}, options.pointProps);
+            _this._polylineProps = Object.assign({}, options.polylineProps);
             return _this;
         }
         Object.defineProperty(EditableCircle.prototype, "labels", {
@@ -9744,7 +9544,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "polylineProps", {
@@ -9754,7 +9554,7 @@
             set: function (value) {
                 this._polylineProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "pointProps", {
@@ -9764,7 +9564,7 @@
             set: function (value) {
                 this._pointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "circleProps", {
@@ -9774,21 +9574,21 @@
             set: function (value) {
                 this._circleProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "center", {
             get: function () {
                 return this._center;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "radiusPoint", {
             get: function () {
                 return this._radiusPoint;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableCircle.prototype, "enableEdit", {
@@ -9801,7 +9601,7 @@
                 this._radiusPoint.show = value;
                 this.updatePointsLayer();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditableCircle.prototype.setManually = function (center, radiusPoint, centerPointProp, radiusPointProp, circleProp) {
@@ -9970,11 +9770,11 @@
             this.circles.forEach(function (circle) { return circle.dispose(); });
             this.circles.clear();
         };
-        CirclesManagerService = __decorate([
-            core.Injectable()
-        ], CirclesManagerService);
         return CirclesManagerService;
     }());
+    CirclesManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var ɵ0$2 = function () { return Cesium.Color.WHITE.withAlpha(0.8); };
     var DEFAULT_CIRCLE_OPTIONS = {
@@ -10075,6 +9875,33 @@
                 editAction: exports.EditActions.INIT,
                 circleOptions: circleOptions,
             });
+            var finishCreation = function (position) {
+                var update = {
+                    id: id,
+                    center: center,
+                    radiusPoint: position,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.ADD_LAST_POINT,
+                };
+                _this.updateSubject.next(update);
+                clientEditSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
+                var changeMode = {
+                    id: id,
+                    center: center,
+                    radiusPoint: position,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.CHANGE_TO_EDIT,
+                };
+                _this.updateSubject.next(changeMode);
+                clientEditSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
+                if (_this.observablesMap.has(id)) {
+                    _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
+                }
+                _this.observablesMap.delete(id);
+                _this.editCircle(id, priority, clientEditSubject, circleOptions, editorObservable);
+                finishedCreate = true;
+                return finishedCreate;
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -10088,7 +9915,7 @@
                 priority: priority,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             addPointRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 if (finishedCreate) {
@@ -10106,34 +9933,11 @@
                         editAction: exports.EditActions.ADD_POINT,
                     };
                     _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
+                    clientEditSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
                     center = position;
                 }
                 else {
-                    var update = {
-                        id: id,
-                        center: center,
-                        radiusPoint: position,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.ADD_LAST_POINT,
-                    };
-                    _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
-                    var changeMode = {
-                        id: id,
-                        center: center,
-                        radiusPoint: position,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.CHANGE_TO_EDIT,
-                    };
-                    _this.updateSubject.next(changeMode);
-                    clientEditSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
-                    if (_this.observablesMap.has(id)) {
-                        _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
-                    }
-                    _this.observablesMap.delete(id);
-                    _this.editCircle(id, priority, clientEditSubject, circleOptions, editorObservable);
-                    finishedCreate = true;
+                    finishedCreate = finishCreation(position);
                 }
             });
             mouseMoveRegistration.subscribe(function (_a) {
@@ -10151,7 +9955,7 @@
                         editAction: exports.EditActions.MOUSE_MOVE,
                     };
                     _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
+                    clientEditSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
                 }
             });
             return editorObservable;
@@ -10176,7 +9980,7 @@
                 circleOptions: circleOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), this.getCircleProperties(id)));
+            editSubject.next(Object.assign(Object.assign({}, update), this.getCircleProperties(id)));
             return this.editCircle(id, priority, editSubject, circleOptions);
         };
         CirclesEditorService.prototype.editCircle = function (id, priority, editSubject, options, editObservable) {
@@ -10235,7 +10039,7 @@
                     editAction: editAction,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
+                editSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
             });
             if (shapeDragRegistration) {
                 shapeDragRegistration
@@ -10260,7 +10064,7 @@
                         editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE,
                     };
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign(__assign({}, update), _this.getCircleProperties(id)));
+                    editSubject.next(Object.assign(Object.assign({}, update), _this.getCircleProperties(id)));
                 });
             }
             var observables = [pointDragRegistration];
@@ -10270,7 +10074,7 @@
             this.observablesMap.set(id, observables);
             return editObservable || this.createEditorObservable(editSubject, id);
         };
-        CirclesEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        CirclesEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -10330,6 +10134,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Circles editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation(null);
+            };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.circlesManager.get(id).labels; };
             observableToExtend.getCenter = function () { return _this.getCenterPosition(id); };
@@ -10364,11 +10174,11 @@
                 radius: circle.getRadius(),
             };
         };
-        CirclesEditorService = __decorate([
-            core.Injectable()
-        ], CirclesEditorService);
         return CirclesEditorService;
     }());
+    CirclesEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var CirclesEditorComponent = /** @class */ (function () {
         function CirclesEditorComponent(circlesEditor, coordinateConverter, mapEventsManager, cameraService, circlesManager) {
@@ -10538,40 +10348,28 @@
         CirclesEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        CirclesEditorComponent.ctorParameters = function () { return [
-            { type: CirclesEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: CirclesManagerService }
-        ]; };
-        __decorate([
-            core.ViewChild('editCirclesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], CirclesEditorComponent.prototype, "editCirclesLayer", void 0);
-        __decorate([
-            core.ViewChild('editArcsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], CirclesEditorComponent.prototype, "editArcsLayer", void 0);
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], CirclesEditorComponent.prototype, "editPointsLayer", void 0);
-        CirclesEditorComponent = __decorate([
-            core.Component({
-                selector: 'circles-editor',
-                template: /*html*/ "\n      <ac-layer #editArcsLayer acFor=\"let arc of editArcs$\" [context]=\"this\">\n          <ac-arc-desc\n                  props=\"{\n        angle: arc.angle,\n        delta: arc.delta,\n        center: arc.center,\n        radius: arc.radius,\n        quality: 30,\n        color: arc.props.material()\n    }\"\n          >\n          </ac-arc-desc>\n      </ac-layer>\n\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc\n                  props=\"{\n                    position: point.getPositionCallbackProperty(),\n                    pixelSize: getPointSize(point),\n                    color: point.props.color,\n                    outlineColor: point.props.outlineColor,\n                    outlineWidth: point.props.outlineWidth,\n                    show: getPointShow(point),\n                    disableDepthTestDistance: point.props.disableDepthTestDistance,\n                    heightReference: point.props.heightReference,\n    }\"\n          >\n          </ac-point-desc>\n      </ac-layer>\n\n      <ac-layer #editCirclesLayer acFor=\"let circle of editCircles$\" [context]=\"this\" [zIndex]=\"0\">\n          <ac-ellipse-desc\n                  props=\"{\n                  position: circle.getCenterCallbackProperty(),\n                  semiMajorAxis: circle.getRadiusCallbackProperty(),\n                  semiMinorAxis: circle.getRadiusCallbackProperty(),\n                  material: circle.circleProps.material,\n                  outline: circle.circleProps.outline,\n                  height: 0\n                  outlineWidth: circle.circleProps.outlineWidth,\n                  outlineColor: circle.circleProps.outlineColor,\n                  fill: circle.circleProps.fill,\n                  classificationType: circle.circleProps.classificationType,\n                  zIndex: circle.circleProps.zIndex,\n                  shadows: circle.circleProps.shadows,\n    }\"\n          >\n          </ac-ellipse-desc>\n\n          <ac-array-desc acFor=\"let label of circle.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc\n                      props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n              >\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n  ",
-                providers: [CoordinateConverter, CirclesManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [CirclesEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                CirclesManagerService])
-        ], CirclesEditorComponent);
         return CirclesEditorComponent;
     }());
+    CirclesEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'circles-editor',
+                    template: /*html*/ "\n      <ac-layer #editArcsLayer acFor=\"let arc of editArcs$\" [context]=\"this\">\n          <ac-arc-desc\n                  props=\"{\n        angle: arc.angle,\n        delta: arc.delta,\n        center: arc.center,\n        radius: arc.radius,\n        quality: 30,\n        color: arc.props.material()\n    }\"\n          >\n          </ac-arc-desc>\n      </ac-layer>\n\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc\n                  props=\"{\n                    position: point.getPositionCallbackProperty(),\n                    pixelSize: getPointSize(point),\n                    color: point.props.color,\n                    outlineColor: point.props.outlineColor,\n                    outlineWidth: point.props.outlineWidth,\n                    show: getPointShow(point),\n                    disableDepthTestDistance: point.props.disableDepthTestDistance,\n                    heightReference: point.props.heightReference,\n    }\"\n          >\n          </ac-point-desc>\n      </ac-layer>\n\n      <ac-layer #editCirclesLayer acFor=\"let circle of editCircles$\" [context]=\"this\" [zIndex]=\"0\">\n          <ac-ellipse-desc\n                  props=\"{\n                  position: circle.getCenterCallbackProperty(),\n                  semiMajorAxis: circle.getRadiusCallbackProperty(),\n                  semiMinorAxis: circle.getRadiusCallbackProperty(),\n                  material: circle.circleProps.material,\n                  outline: circle.circleProps.outline,\n                  height: 0\n                  outlineWidth: circle.circleProps.outlineWidth,\n                  outlineColor: circle.circleProps.outlineColor,\n                  fill: circle.circleProps.fill,\n                  classificationType: circle.circleProps.classificationType,\n                  zIndex: circle.circleProps.zIndex,\n                  shadows: circle.circleProps.shadows,\n    }\"\n          >\n          </ac-ellipse-desc>\n\n          <ac-array-desc acFor=\"let label of circle.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc\n                      props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n              >\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n  ",
+                    providers: [CoordinateConverter, CirclesManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    CirclesEditorComponent.ctorParameters = function () { return [
+        { type: CirclesEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: CirclesManagerService }
+    ]; };
+    CirclesEditorComponent.propDecorators = {
+        editCirclesLayer: [{ type: core.ViewChild, args: ['editCirclesLayer',] }],
+        editArcsLayer: [{ type: core.ViewChild, args: ['editArcsLayer',] }],
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }]
+    };
 
     var EditableEllipse = /** @class */ (function (_super) {
         __extends(EditableEllipse, _super);
@@ -10587,8 +10385,8 @@
             _this._enableEdit = true;
             _this._minorRadiusPoints = [];
             _this._labels = [];
-            _this._ellipseProps = __assign({}, options.ellipseProps);
-            _this._pointProps = __assign({}, options.pointProps);
+            _this._ellipseProps = Object.assign({}, options.ellipseProps);
+            _this._pointProps = Object.assign({}, options.pointProps);
             return _this;
         }
         Object.defineProperty(EditableEllipse.prototype, "labels", {
@@ -10620,7 +10418,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableEllipse.prototype, "polylineProps", {
@@ -10630,7 +10428,7 @@
             set: function (value) {
                 this._polylineProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableEllipse.prototype, "pointProps", {
@@ -10640,7 +10438,7 @@
             set: function (value) {
                 this._pointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableEllipse.prototype, "ellipseProps", {
@@ -10650,21 +10448,21 @@
             set: function (value) {
                 this._ellipseProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableEllipse.prototype, "center", {
             get: function () {
                 return this._center;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableEllipse.prototype, "majorRadiusPoint", {
             get: function () {
                 return this._majorRadiusPoint;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditableEllipse.prototype.getMajorRadiusPointPosition = function () {
@@ -10689,7 +10487,7 @@
                 this._majorRadiusPoint.show = value;
                 this.updatePointsLayer();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditableEllipse.prototype.setManually = function (center, majorRadius, rotation, minorRadius, centerPointProp, radiusPointProp, ellipseProp) {
@@ -10918,11 +10716,11 @@
             this.ellipses.forEach(function (ellipse) { return ellipse.dispose(); });
             this.ellipses.clear();
         };
-        EllipsesManagerService = __decorate([
-            core.Injectable()
-        ], EllipsesManagerService);
         return EllipsesManagerService;
     }());
+    EllipsesManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var ɵ0$3 = function () { return Cesium.Color.WHITE; };
     var DEFAULT_ELLIPSE_OPTIONS = {
@@ -11027,6 +10825,32 @@
                 editAction: exports.EditActions.INIT,
                 ellipseOptions: ellipseOptions,
             });
+            var finishCreation = function (position) {
+                var update = {
+                    id: id,
+                    center: center,
+                    updatedPosition: position,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.ADD_LAST_POINT,
+                };
+                _this.updateSubject.next(update);
+                clientEditSubject.next(Object.assign({}, update));
+                var changeMode = {
+                    id: id,
+                    center: center,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.CHANGE_TO_EDIT,
+                };
+                _this.updateSubject.next(changeMode);
+                clientEditSubject.next(Object.assign({}, update));
+                if (_this.observablesMap.has(id)) {
+                    _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
+                }
+                _this.observablesMap.delete(id);
+                _this.editEllipse(id, priority, clientEditSubject, ellipseOptions, editorObservable);
+                finishedCreate = true;
+                return finishedCreate;
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -11040,7 +10864,7 @@
                 priority: priority,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             addPointRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 if (finishedCreate) {
@@ -11058,33 +10882,11 @@
                         editAction: exports.EditActions.ADD_POINT,
                     };
                     _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign({}, update));
+                    clientEditSubject.next(Object.assign({}, update));
                     center = position;
                 }
                 else {
-                    var update = {
-                        id: id,
-                        center: center,
-                        updatedPosition: position,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.ADD_LAST_POINT,
-                    };
-                    _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign({}, update));
-                    var changeMode = {
-                        id: id,
-                        center: center,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.CHANGE_TO_EDIT,
-                    };
-                    _this.updateSubject.next(changeMode);
-                    clientEditSubject.next(__assign({}, update));
-                    if (_this.observablesMap.has(id)) {
-                        _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
-                    }
-                    _this.observablesMap.delete(id);
-                    _this.editEllipse(id, priority, clientEditSubject, ellipseOptions, editorObservable);
-                    finishedCreate = true;
+                    finishedCreate = finishCreation(position);
                 }
             });
             mouseMoveRegistration.subscribe(function (_a) {
@@ -11102,7 +10904,7 @@
                         editAction: exports.EditActions.MOUSE_MOVE,
                     };
                     _this.updateSubject.next(update);
-                    clientEditSubject.next(__assign({}, update));
+                    clientEditSubject.next(Object.assign({}, update));
                 }
             });
             return editorObservable;
@@ -11129,7 +10931,7 @@
                 ellipseOptions: ellipseOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign({}, update));
+            editSubject.next(Object.assign({}, update));
             return this.editEllipse(id, priority, editSubject, ellipseOptions);
         };
         EllipsesEditorService.prototype.editEllipse = function (id, priority, editSubject, options, editObservable) {
@@ -11191,17 +10993,17 @@
                     _this.cameraService.enableInputs(true);
                     return;
                 }
-                var update = __assign({ id: id, updatedPoint: point, startDragPosition: startDragPosition,
+                var update = Object.assign({ id: id, updatedPoint: point, startDragPosition: startDragPosition,
                     endDragPosition: endDragPosition, editMode: exports.EditModes.EDIT, editAction: editAction }, _this.getEllipseProperties(id));
                 _this.updateSubject.next(update);
-                editSubject.next(__assign({}, update));
+                editSubject.next(Object.assign({}, update));
             });
             if (addSecondRadiusRegistration) {
                 addSecondRadiusRegistration.subscribe(function (_a) {
                     var _b = _a.movement, endPosition = _b.endPosition, startPosition = _b.startPosition, drop = _b.drop, entities = _a.entities;
-                    var update = __assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.TRANSFORM }, _this.getEllipseProperties(id));
+                    var update = Object.assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.TRANSFORM }, _this.getEllipseProperties(id));
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign({}, update));
+                    editSubject.next(Object.assign({}, update));
                 });
             }
             if (shapeDragRegistration) {
@@ -11217,11 +11019,11 @@
                     if (!endDragPosition || !startDragPosition) {
                         return;
                     }
-                    var update = __assign({ id: id,
+                    var update = Object.assign({ id: id,
                         startDragPosition: startDragPosition,
                         endDragPosition: endDragPosition, editMode: exports.EditModes.EDIT, editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE }, _this.getEllipseProperties(id));
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign({}, update));
+                    editSubject.next(Object.assign({}, update));
                 });
             }
             var observables = [pointDragRegistration];
@@ -11234,7 +11036,7 @@
             this.observablesMap.set(id, observables);
             return editObservable || this.createEditorObservable(editSubject, id);
         };
-        EllipsesEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        EllipsesEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -11249,10 +11051,10 @@
                 });
             };
             observableToExtend.enable = function () {
-                _this.updateSubject.next(__assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.ENABLE }, _this.getEllipseProperties(id)));
+                _this.updateSubject.next(Object.assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.ENABLE }, _this.getEllipseProperties(id)));
             };
             observableToExtend.disable = function () {
-                _this.updateSubject.next(__assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.DISABLE }, _this.getEllipseProperties(id)));
+                _this.updateSubject.next(Object.assign({ id: id, editMode: exports.EditModes.EDIT, editAction: exports.EditActions.DISABLE }, _this.getEllipseProperties(id)));
             };
             observableToExtend.setManually = function (center, majorRadius, rotation, minorRadius, centerPointProp, radiusPointProp, ellipseProp) {
                 var ellipse = _this.ellipsesManager.get(id);
@@ -11278,6 +11080,12 @@
                     editAction: exports.EditActions.UPDATE_EDIT_LABELS,
                     updateLabels: labels,
                 });
+            };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Ellipses editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation(null);
             };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.ellipsesManager.get(id).labels; };
@@ -11317,11 +11125,11 @@
                 majorRadiusPointPosition: ellipse.getMajorRadiusPointPosition(),
             };
         };
-        EllipsesEditorService = __decorate([
-            core.Injectable()
-        ], EllipsesEditorService);
         return EllipsesEditorService;
     }());
+    EllipsesEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var EllipsesEditorComponent = /** @class */ (function () {
         function EllipsesEditorComponent(ellipsesEditor, coordinateConverter, mapEventsManager, cameraService, ellipsesManager, cesiumService) {
@@ -11501,38 +11309,28 @@
         EllipsesEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        EllipsesEditorComponent.ctorParameters = function () { return [
-            { type: EllipsesEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: EllipsesManagerService },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.ViewChild('editEllipsesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], EllipsesEditorComponent.prototype, "editEllipsesLayer", void 0);
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], EllipsesEditorComponent.prototype, "editPointsLayer", void 0);
-        EllipsesEditorComponent = __decorate([
-            core.Component({
-                selector: 'ellipses-editor',
-                template: /*html*/ "\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc\n                  props=\"{\n                    position: point.getPositionCallbackProperty(),\n                    pixelSize: getPointSize(point),\n                    color: point.props.color,\n                    outlineColor: point.props.outlineColor,\n                    outlineWidth: point.props.outlineWidth,\n                    show: getPointShow(point),\n                    disableDepthTestDistance: point.props.disableDepthTestDistance,\n                    heightReference: point.props.heightReference,\n    }\"\n          >\n          </ac-point-desc>\n      </ac-layer>\n\n      <ac-layer #editEllipsesLayer acFor=\"let ellipse of editEllipses$\" [context]=\"this\" [zIndex]=\"0\">\n          <ac-ellipse-desc\n                  props=\"{\n                    position: ellipse.getCenterCallbackProperty(),\n                    semiMajorAxis: ellipse.getMajorRadiusCallbackProperty(),\n                    semiMinorAxis: ellipse.getMinorRadiusCallbackProperty(),\n                    rotation: ellipse.getRotationCallbackProperty(),\n                    material: ellipse.ellipseProps.material,\n                    outline: ellipse.ellipseProps.outline,\n                    outlineWidth: ellipse.ellipseProps.outlineWidth,\n                    outlineColor: ellipse.ellipseProps.outlineColor,\n                    height: 0,\n                    fill: ellipse.ellipseProps.fill,\n                    classificationType: ellipse.ellipseProps.classificationType,\n                    zIndex: ellipse.ellipseProps.zIndex,\n                    shadows: ellipse.ellipseProps.shadows,\n    }\"\n          >\n          </ac-ellipse-desc>\n\n          <ac-array-desc acFor=\"let label of ellipse.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc\n                      props=\"{\n                        position: label.position,\n                        text: label.text,\n                        backgroundColor: label.backgroundColor,\n                        backgroundPadding: label.backgroundPadding,\n                        distanceDisplayCondition: label.distanceDisplayCondition,\n                        eyeOffset: label.eyeOffset,\n                        fillColor: label.fillColor,\n                        font: label.font,\n                        heightReference: label.heightReference,\n                        horizontalOrigin: label.horizontalOrigin,\n                        outlineColor: label.outlineColor,\n                        outlineWidth: label.outlineWidth,\n                        pixelOffset: label.pixelOffset,\n                        pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n                        scale: label.scale,\n                        scaleByDistance: label.scaleByDistance,\n                        show: label.show,\n                        showBackground: label.showBackground,\n                        style: label.style,\n                        translucencyByDistance: label.translucencyByDistance,\n                        verticalOrigin: label.verticalOrigin,\n                        disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n              >\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n  ",
-                providers: [CoordinateConverter, EllipsesManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [EllipsesEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                EllipsesManagerService,
-                CesiumService])
-        ], EllipsesEditorComponent);
         return EllipsesEditorComponent;
     }());
+    EllipsesEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ellipses-editor',
+                    template: /*html*/ "\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc\n                  props=\"{\n                    position: point.getPositionCallbackProperty(),\n                    pixelSize: getPointSize(point),\n                    color: point.props.color,\n                    outlineColor: point.props.outlineColor,\n                    outlineWidth: point.props.outlineWidth,\n                    show: getPointShow(point),\n                    disableDepthTestDistance: point.props.disableDepthTestDistance,\n                    heightReference: point.props.heightReference,\n    }\"\n          >\n          </ac-point-desc>\n      </ac-layer>\n\n      <ac-layer #editEllipsesLayer acFor=\"let ellipse of editEllipses$\" [context]=\"this\" [zIndex]=\"0\">\n          <ac-ellipse-desc\n                  props=\"{\n                    position: ellipse.getCenterCallbackProperty(),\n                    semiMajorAxis: ellipse.getMajorRadiusCallbackProperty(),\n                    semiMinorAxis: ellipse.getMinorRadiusCallbackProperty(),\n                    rotation: ellipse.getRotationCallbackProperty(),\n                    material: ellipse.ellipseProps.material,\n                    outline: ellipse.ellipseProps.outline,\n                    outlineWidth: ellipse.ellipseProps.outlineWidth,\n                    outlineColor: ellipse.ellipseProps.outlineColor,\n                    height: 0,\n                    fill: ellipse.ellipseProps.fill,\n                    classificationType: ellipse.ellipseProps.classificationType,\n                    zIndex: ellipse.ellipseProps.zIndex,\n                    shadows: ellipse.ellipseProps.shadows,\n    }\"\n          >\n          </ac-ellipse-desc>\n\n          <ac-array-desc acFor=\"let label of ellipse.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc\n                      props=\"{\n                        position: label.position,\n                        text: label.text,\n                        backgroundColor: label.backgroundColor,\n                        backgroundPadding: label.backgroundPadding,\n                        distanceDisplayCondition: label.distanceDisplayCondition,\n                        eyeOffset: label.eyeOffset,\n                        fillColor: label.fillColor,\n                        font: label.font,\n                        heightReference: label.heightReference,\n                        horizontalOrigin: label.horizontalOrigin,\n                        outlineColor: label.outlineColor,\n                        outlineWidth: label.outlineWidth,\n                        pixelOffset: label.pixelOffset,\n                        pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n                        scale: label.scale,\n                        scaleByDistance: label.scaleByDistance,\n                        show: label.show,\n                        showBackground: label.showBackground,\n                        style: label.style,\n                        translucencyByDistance: label.translucencyByDistance,\n                        verticalOrigin: label.verticalOrigin,\n                        disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n              >\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n  ",
+                    providers: [CoordinateConverter, EllipsesManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    EllipsesEditorComponent.ctorParameters = function () { return [
+        { type: EllipsesEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: EllipsesManagerService },
+        { type: CesiumService }
+    ]; };
+    EllipsesEditorComponent.propDecorators = {
+        editEllipsesLayer: [{ type: core.ViewChild, args: ['editEllipsesLayer',] }],
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }]
+    };
 
     var EditablePolyline = /** @class */ (function (_super) {
         __extends(EditablePolyline, _super);
@@ -11548,8 +11346,8 @@
             _this.doneCreation = false;
             _this._enableEdit = true;
             _this._labels = [];
-            _this._pointProps = __assign({}, editOptions.pointProps);
-            _this.props = __assign({}, editOptions.polylineProps);
+            _this._pointProps = Object.assign({}, editOptions.pointProps);
+            _this.props = Object.assign({}, editOptions.polylineProps);
             if (positions && positions.length >= 2) {
                 _this.createFromExisting(positions);
             }
@@ -11571,7 +11369,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolyline.prototype, "props", {
@@ -11581,7 +11379,7 @@
             set: function (value) {
                 this.polylineProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolyline.prototype, "pointProps", {
@@ -11591,7 +11389,7 @@
             set: function (value) {
                 this._pointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditablePolyline.prototype, "enableEdit", {
@@ -11606,7 +11404,7 @@
                     _this.updatePointsLayer(false, point);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditablePolyline.prototype.createFromExisting = function (positions) {
@@ -11857,8 +11655,8 @@
             _this.done = false;
             _this._enableEdit = true;
             _this._labels = [];
-            _this.defaultPointProps = __assign({}, editOptions.pointProps);
-            _this.rectangleProps = __assign({}, editOptions.rectangleProps);
+            _this.defaultPointProps = Object.assign({}, editOptions.pointProps);
+            _this.rectangleProps = Object.assign({}, editOptions.rectangleProps);
             if (positions && positions.length === 2) {
                 _this.createFromExisting(positions);
             }
@@ -11883,7 +11681,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableRectangle.prototype, "rectangleProps", {
@@ -11893,7 +11691,7 @@
             set: function (value) {
                 this._rectangleProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableRectangle.prototype, "defaultPointProps", {
@@ -11903,7 +11701,7 @@
             set: function (value) {
                 this._defaultPointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableRectangle.prototype, "enableEdit", {
@@ -11918,7 +11716,7 @@
                     _this.updatePointsLayer(point);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditableRectangle.prototype.createFromExisting = function (positions) {
@@ -12148,8 +11946,8 @@
             _this.done = false;
             _this._enableEdit = true;
             _this._labels = [];
-            _this.defaultPointProps = __assign({}, editOptions.pointProps);
-            _this.hippodromeProps = __assign({}, editOptions.hippodromeProps);
+            _this.defaultPointProps = Object.assign({}, editOptions.pointProps);
+            _this.hippodromeProps = Object.assign({}, editOptions.hippodromeProps);
             if (positions && positions.length === 2) {
                 _this.createFromExisting(positions);
             }
@@ -12174,7 +11972,7 @@
                     return Object.assign({}, defaultLabelProps, label);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableHippodrome.prototype, "hippodromeProps", {
@@ -12184,7 +11982,7 @@
             set: function (value) {
                 this._hippodromeProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableHippodrome.prototype, "defaultPointProps", {
@@ -12194,7 +11992,7 @@
             set: function (value) {
                 this._defaultPointProps = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(EditableHippodrome.prototype, "enableEdit", {
@@ -12209,7 +12007,7 @@
                     _this.updatePointsLayer(point);
                 });
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         EditableHippodrome.prototype.createFromExisting = function (positions) {
@@ -12566,6 +12364,9 @@
                 editAction: exports.EditActions.INIT,
                 polylineOptions: polylineOptions,
             });
+            var finishCreation = function (position) {
+                return _this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -12587,7 +12388,7 @@
                 pickConfig: options.pickConfiguration,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration, addLastPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             mouseMoveRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.screenToPosition(endPosition, polylineOptions.clampHeightTo3D, polylineOptions.clampHeightTo3DOptions);
@@ -12622,9 +12423,9 @@
                     editAction: exports.EditActions.ADD_POINT,
                 };
                 _this.updateSubject.next(updateValue);
-                clientEditSubject.next(__assign(__assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 if (polylineOptions.maximumNumberOfPoints && allPositions.length + 1 === polylineOptions.maximumNumberOfPoints) {
-                    finishedCreate = _this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+                    finishedCreate = finishCreation(position);
                 }
             });
             addLastPointRegistration.subscribe(function (_a) {
@@ -12633,8 +12434,20 @@
                 if (!position) {
                     return;
                 }
-                // position already added by addPointRegistration
-                finishedCreate = _this.switchToEditMode(id, position, clientEditSubject, positions, eventPriority, polylineOptions, editorObservable, finishedCreate);
+                // Add last point to positions if not already added
+                var allPositions = _this.getPositions(id);
+                if (!allPositions.find(function (cartesian) { return cartesian.equals(position); })) {
+                    var updateValue = {
+                        id: id,
+                        positions: allPositions,
+                        editMode: exports.EditModes.CREATE,
+                        updatedPosition: position,
+                        editAction: exports.EditActions.ADD_POINT,
+                    };
+                    _this.updateSubject.next(updateValue);
+                    clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                }
+                finishedCreate = finishCreation(position);
             });
             return editorObservable;
         };
@@ -12647,7 +12460,7 @@
                 editAction: exports.EditActions.ADD_LAST_POINT,
             };
             this.updateSubject.next(update);
-            clientEditSubject.next(__assign(__assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            clientEditSubject.next(Object.assign(Object.assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
             var changeMode = {
                 id: id,
                 editMode: exports.EditModes.CREATE,
@@ -12684,7 +12497,7 @@
                 polylineOptions: polylineOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            editSubject.next(Object.assign(Object.assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
             return this.editPolyline(id, positions, priority, editSubject, polylineOptions);
         };
         PolylinesEditorService.prototype.editPolyline = function (id, positions, priority, editSubject, options, editObservable) {
@@ -12740,7 +12553,7 @@
                         editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE,
                     };
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                    editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 });
             }
             pointDragRegistration.pipe(operators.tap(function (_a) {
@@ -12763,7 +12576,7 @@
                     editAction: drop ? exports.EditActions.DRAG_POINT_FINISH : exports.EditActions.DRAG_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 _this.clampPointsDebounced(id, options.clampHeightTo3D, options.clampHeightTo3DOptions);
             });
             pointRemoveRegistration.subscribe(function (_a) {
@@ -12785,7 +12598,7 @@
                     editAction: exports.EditActions.REMOVE_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 _this.clampPoints(id, options.clampHeightTo3D, options.clampHeightTo3DOptions);
             });
             var observables = [pointDragRegistration, pointRemoveRegistration];
@@ -12798,9 +12611,9 @@
         PolylinesEditorService.prototype.setOptions = function (options) {
             var defaultClone = JSON.parse(JSON.stringify(DEFAULT_POLYLINE_OPTIONS));
             var polylineOptions = Object.assign(defaultClone, options);
-            polylineOptions.pointProps = __assign(__assign({}, DEFAULT_POLYLINE_OPTIONS.pointProps), options.pointProps);
-            polylineOptions.polylineProps = __assign(__assign({}, DEFAULT_POLYLINE_OPTIONS.polylineProps), options.polylineProps);
-            polylineOptions.clampHeightTo3DOptions = __assign(__assign({}, DEFAULT_POLYLINE_OPTIONS.clampHeightTo3DOptions), options.clampHeightTo3DOptions);
+            polylineOptions.pointProps = Object.assign(Object.assign({}, DEFAULT_POLYLINE_OPTIONS.pointProps), options.pointProps);
+            polylineOptions.polylineProps = Object.assign(Object.assign({}, DEFAULT_POLYLINE_OPTIONS.polylineProps), options.polylineProps);
+            polylineOptions.clampHeightTo3DOptions = Object.assign(Object.assign({}, DEFAULT_POLYLINE_OPTIONS.clampHeightTo3DOptions), options.clampHeightTo3DOptions);
             if (options.clampHeightTo3D) {
                 if (!this.cesiumScene.pickPositionSupported || !this.cesiumScene.clampToHeightSupported) {
                     throw new Error("Cesium pickPosition and clampToHeight must be supported to use clampHeightTo3D");
@@ -12819,7 +12632,7 @@
             }
             return polylineOptions;
         };
-        PolylinesEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        PolylinesEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -12874,6 +12687,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Polylines editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation(null);
+            };
             observableToExtend.getCurrentPoints = function () { return _this.getPoints(id); };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.polylinesManager.get(id).labels; };
@@ -12887,11 +12706,11 @@
             var polyline = this.polylinesManager.get(id);
             return polyline.getRealPoints();
         };
-        PolylinesEditorService = __decorate([
-            core.Injectable()
-        ], PolylinesEditorService);
         return PolylinesEditorService;
     }());
+    PolylinesEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var PolylinesManagerService = /** @class */ (function () {
         function PolylinesManagerService() {
@@ -12908,11 +12727,11 @@
             this.polylines.forEach(function (polyline) { return polyline.dispose(); });
             this.polylines.clear();
         };
-        PolylinesManagerService = __decorate([
-            core.Injectable()
-        ], PolylinesManagerService);
         return PolylinesManagerService;
     }());
+    PolylinesManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var PolylinesEditorComponent = /** @class */ (function () {
         function PolylinesEditorComponent(polylinesEditor, coordinateConverter, mapEventsManager, cameraService, polylinesManager, cesiumService) {
@@ -12978,6 +12797,7 @@
                 case exports.EditActions.ADD_POINT: {
                     var polyline = this.polylinesManager.get(update.id);
                     if (update.updatedPosition) {
+                        polyline.moveTempMovingPoint(update.updatedPosition);
                         polyline.addPoint(update.updatedPosition);
                         this.renderEditLabels(polyline, update);
                     }
@@ -13100,42 +12920,29 @@
         PolylinesEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        PolylinesEditorComponent.ctorParameters = function () { return [
-            { type: PolylinesEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: PolylinesManagerService },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolylinesEditorComponent.prototype, "editPointsLayer", void 0);
-        __decorate([
-            core.ViewChild('editPolylinesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolylinesEditorComponent.prototype, "editPolylinesLayer", void 0);
-        __decorate([
-            core.ViewChild('polylineLabelsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], PolylinesEditorComponent.prototype, "polylineLabelsLayer", void 0);
-        PolylinesEditorComponent = __decorate([
-            core.Component({
-                selector: 'polylines-editor',
-                template: /*html*/ "\n    <ac-layer #editPolylinesLayer acFor=\"let polyline of editPolylines$\" [context]=\"this\">\n      <ac-polyline-desc\n        props=\"{\n        positions: polyline.getPositionsCallbackProperty(),\n        width: polyline.props.width,\n        material: polyline.props.material(),\n        clampToGround: polyline.props.clampToGround,\n        zIndex: polyline.props.zIndex,\n        classificationType: polyline.props.classificationType,\n      }\"\n      >\n      </ac-polyline-desc>\n    </ac-layer>\n\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      ></ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #polylineLabelsLayer acFor=\"let polylineLabels of polylineLabels$\" [context]=\"this\">\n      <ac-array-desc acFor=\"let label of polylineLabels.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
-                providers: [CoordinateConverter, PolylinesManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [PolylinesEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                PolylinesManagerService,
-                CesiumService])
-        ], PolylinesEditorComponent);
         return PolylinesEditorComponent;
     }());
+    PolylinesEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'polylines-editor',
+                    template: /*html*/ "\n    <ac-layer #editPolylinesLayer acFor=\"let polyline of editPolylines$\" [context]=\"this\">\n      <ac-polyline-desc\n        props=\"{\n        positions: polyline.getPositionsCallbackProperty(),\n        width: polyline.props.width,\n        material: polyline.props.material(),\n        clampToGround: polyline.props.clampToGround,\n        zIndex: polyline.props.zIndex,\n        classificationType: polyline.props.classificationType,\n      }\"\n      >\n      </ac-polyline-desc>\n    </ac-layer>\n\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      ></ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #polylineLabelsLayer acFor=\"let polylineLabels of polylineLabels$\" [context]=\"this\">\n      <ac-array-desc acFor=\"let label of polylineLabels.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
+                    providers: [CoordinateConverter, PolylinesManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    PolylinesEditorComponent.ctorParameters = function () { return [
+        { type: PolylinesEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: PolylinesManagerService },
+        { type: CesiumService }
+    ]; };
+    PolylinesEditorComponent.propDecorators = {
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }],
+        editPolylinesLayer: [{ type: core.ViewChild, args: ['editPolylinesLayer',] }],
+        polylineLabelsLayer: [{ type: core.ViewChild, args: ['polylineLabelsLayer',] }]
+    };
 
     var HippodromeManagerService = /** @class */ (function () {
         function HippodromeManagerService() {
@@ -13152,11 +12959,11 @@
             this.hippodromes.forEach(function (hippodrome) { return hippodrome.dispose(); });
             this.hippodromes.clear();
         };
-        HippodromeManagerService = __decorate([
-            core.Injectable()
-        ], HippodromeManagerService);
         return HippodromeManagerService;
     }());
+    HippodromeManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var DEFAULT_HIPPODROME_OPTIONS = {
         addPointEvent: exports.CesiumEvent.LEFT_CLICK,
@@ -13255,6 +13062,22 @@
                 editAction: exports.EditActions.INIT,
                 hippodromeOptions: hippodromeOptions,
             });
+            var finishCreation = function () {
+                var changeMode = {
+                    id: id,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.CHANGE_TO_EDIT,
+                };
+                _this.updateSubject.next(changeMode);
+                clientEditSubject.next(changeMode);
+                if (_this.observablesMap.has(id)) {
+                    _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
+                }
+                _this.observablesMap.delete(id);
+                _this.editHippodrome(id, eventPriority, clientEditSubject, hippodromeOptions, editorObservable);
+                finishedCreate = true;
+                return finishedCreate;
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pickConfig: options.pickConfiguration,
@@ -13268,7 +13091,7 @@
                 priority: eventPriority,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             mouseMoveRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.coordinateConverter.screenToCartesian3(endPosition);
@@ -13301,21 +13124,9 @@
                     editAction: exports.EditActions.ADD_POINT,
                 };
                 _this.updateSubject.next(updateValue);
-                clientEditSubject.next(__assign(__assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
                 if (!isFirstPoint) {
-                    var changeMode = {
-                        id: id,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.CHANGE_TO_EDIT,
-                    };
-                    _this.updateSubject.next(changeMode);
-                    clientEditSubject.next(changeMode);
-                    if (_this.observablesMap.has(id)) {
-                        _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
-                    }
-                    _this.observablesMap.delete(id);
-                    _this.editHippodrome(id, eventPriority, clientEditSubject, hippodromeOptions, editorObservable);
-                    finishedCreate = true;
+                    finishedCreate = finishCreation();
                 }
             });
             return editorObservable;
@@ -13341,7 +13152,7 @@
                 hippodromeOptions: hippodromeEditOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id), width: this.getWidth(id) }));
+            editSubject.next(Object.assign(Object.assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id), width: this.getWidth(id) }));
             return this.editHippodrome(id, priority, editSubject, hippodromeEditOptions);
         };
         HippodromeEditorService.prototype.editHippodrome = function (id, priority, editSubject, options, editObservable) {
@@ -13385,7 +13196,7 @@
                     editAction: drop ? exports.EditActions.DRAG_POINT_FINISH : exports.EditActions.DRAG_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
             });
             if (shapeDragRegistration) {
                 shapeDragRegistration
@@ -13409,7 +13220,7 @@
                         editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE,
                     };
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
+                    editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id), width: _this.getWidth(id) }));
                 });
             }
             var observables = [pointDragRegistration];
@@ -13426,7 +13237,7 @@
             hippodromeOptions.pointProps = Object.assign({}, DEFAULT_HIPPODROME_OPTIONS.pointProps, options.pointProps);
             return hippodromeOptions;
         };
-        HippodromeEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        HippodromeEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -13483,6 +13294,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Hippodrome editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation();
+            };
             observableToExtend.getCurrentPoints = function () { return _this.getPoints(id); };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.hippodromeManager.get(id).labels; };
@@ -13501,11 +13318,11 @@
             var hippodrome = this.hippodromeManager.get(id);
             return hippodrome.getWidth();
         };
-        HippodromeEditorService = __decorate([
-            core.Injectable()
-        ], HippodromeEditorService);
         return HippodromeEditorService;
     }());
+    HippodromeEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var HippodromeEditorComponent = /** @class */ (function () {
         function HippodromeEditorComponent(hippodromesEditor, coordinateConverter, mapEventsManager, cameraService, hippodromesManager) {
@@ -13569,6 +13386,7 @@
                 case exports.EditActions.ADD_POINT: {
                     var hippodrome = this.hippodromesManager.get(update.id);
                     if (update.updatedPosition) {
+                        hippodrome.moveTempMovingPoint(update.updatedPosition);
                         hippodrome.addPoint(update.updatedPosition);
                         this.renderEditLabels(hippodrome, update);
                     }
@@ -13671,36 +13489,27 @@
         HippodromeEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        HippodromeEditorComponent.ctorParameters = function () { return [
-            { type: HippodromeEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: HippodromeManagerService }
-        ]; };
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], HippodromeEditorComponent.prototype, "editPointsLayer", void 0);
-        __decorate([
-            core.ViewChild('editHippodromesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], HippodromeEditorComponent.prototype, "editHippodromesLayer", void 0);
-        HippodromeEditorComponent = __decorate([
-            core.Component({
-                selector: 'hippodrome-editor',
-                template: /*html*/ "\n      <ac-layer #editHippodromesLayer acFor=\"let hippodrome of editHippodromes$\" [context]=\"this\">\n          <ac-corridor-desc props=\"{\n            positions: hippodrome.getRealPositionsCallbackProperty(),\n            cornerType: Cesium.CornerType.ROUNDED,\n            material: hippodrome.hippodromeProps.material,\n            width : hippodrome.hippodromeProps.width,\n            outline: hippodrome.hippodromeProps.outline,\n            outlineColor: hippodrome.hippodromeProps.outlineColor,\n            outlineWidth: hippodrome.hippodromeProps.outlineWidth,\n            height: 0,\n            classificationType: hippodrome.hippodromeProps.classificationType,\n            zIndex: hippodrome.hippodromeProps.zIndex,\n            shadows: hippodrome.hippodromeProps.shadows,\n    }\">\n          </ac-corridor-desc>\n\n          <ac-array-desc acFor=\"let label of hippodrome.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\">\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc props=\"{\n         position: point.getPositionCallbackProperty(),\n         pixelSize: getPointSize(point),\n         color: point.props.color,\n         outlineColor: point.props.outlineColor,\n         outlineWidth: point.props.outlineWidth,\n         show: getPointShow(point),\n         disableDepthTestDistance: point.props.disableDepthTestDistance,\n         heightReference: point.props.heightReference,\n    }\">\n          </ac-point-desc>\n      </ac-layer>\n  ",
-                providers: [CoordinateConverter, HippodromeManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [HippodromeEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                HippodromeManagerService])
-        ], HippodromeEditorComponent);
         return HippodromeEditorComponent;
     }());
+    HippodromeEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'hippodrome-editor',
+                    template: /*html*/ "\n      <ac-layer #editHippodromesLayer acFor=\"let hippodrome of editHippodromes$\" [context]=\"this\">\n          <ac-corridor-desc props=\"{\n            positions: hippodrome.getRealPositionsCallbackProperty(),\n            cornerType: Cesium.CornerType.ROUNDED,\n            material: hippodrome.hippodromeProps.material,\n            width : hippodrome.hippodromeProps.width,\n            outline: hippodrome.hippodromeProps.outline,\n            outlineColor: hippodrome.hippodromeProps.outlineColor,\n            outlineWidth: hippodrome.hippodromeProps.outlineWidth,\n            height: 0,\n            classificationType: hippodrome.hippodromeProps.classificationType,\n            zIndex: hippodrome.hippodromeProps.zIndex,\n            shadows: hippodrome.hippodromeProps.shadows,\n    }\">\n          </ac-corridor-desc>\n\n          <ac-array-desc acFor=\"let label of hippodrome.labels\" [idGetter]=\"getLabelId\">\n              <ac-label-primitive-desc props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\">\n              </ac-label-primitive-desc>\n          </ac-array-desc>\n      </ac-layer>\n\n      <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n          <ac-point-desc props=\"{\n         position: point.getPositionCallbackProperty(),\n         pixelSize: getPointSize(point),\n         color: point.props.color,\n         outlineColor: point.props.outlineColor,\n         outlineWidth: point.props.outlineWidth,\n         show: getPointShow(point),\n         disableDepthTestDistance: point.props.disableDepthTestDistance,\n         heightReference: point.props.heightReference,\n    }\">\n          </ac-point-desc>\n      </ac-layer>\n  ",
+                    providers: [CoordinateConverter, HippodromeManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    HippodromeEditorComponent.ctorParameters = function () { return [
+        { type: HippodromeEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: HippodromeManagerService }
+    ]; };
+    HippodromeEditorComponent.propDecorators = {
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }],
+        editHippodromesLayer: [{ type: core.ViewChild, args: ['editHippodromesLayer',] }]
+    };
 
     /**
      * The Service is used to preform, handle and subscribe to icon dragging when using the `DraggableToMapDirective`.
@@ -13799,17 +13608,15 @@
             this.dragObservable = moveObservable.pipe(operators.merge(dropSubject), operators.takeUntil(stopper));
             this.stopper = stopper;
         };
-        DraggableToMapService.ctorParameters = function () { return [
-            { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
-            { type: MapsManagerService }
-        ]; };
-        DraggableToMapService = __decorate([
-            core.Injectable(),
-            __param(0, core.Inject(common.DOCUMENT)),
-            __metadata("design:paramtypes", [Object, MapsManagerService])
-        ], DraggableToMapService);
         return DraggableToMapService;
     }());
+    DraggableToMapService.decorators = [
+        { type: core.Injectable }
+    ];
+    DraggableToMapService.ctorParameters = function () { return [
+        { type: undefined, decorators: [{ type: core.Inject, args: [common.DOCUMENT,] }] },
+        { type: MapsManagerService }
+    ]; };
 
     /**
      * This directive is used to allow dragging of icons from outside the map over the map
@@ -13857,26 +13664,19 @@
         DraggableToMapDirective.prototype.onMouseDown = function () {
             this.iconDragService.drag(this.src, this.style);
         };
-        DraggableToMapDirective.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: DraggableToMapService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], DraggableToMapDirective.prototype, "draggableToMap", void 0);
-        __decorate([
-            core.HostListener('mousedown'),
-            __metadata("design:type", Function),
-            __metadata("design:paramtypes", []),
-            __metadata("design:returntype", void 0)
-        ], DraggableToMapDirective.prototype, "onMouseDown", null);
-        DraggableToMapDirective = __decorate([
-            core.Directive({ selector: '[draggableToMap]' }),
-            __metadata("design:paramtypes", [core.ElementRef, DraggableToMapService])
-        ], DraggableToMapDirective);
         return DraggableToMapDirective;
     }());
+    DraggableToMapDirective.decorators = [
+        { type: core.Directive, args: [{ selector: '[draggableToMap]' },] }
+    ];
+    DraggableToMapDirective.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: DraggableToMapService }
+    ]; };
+    DraggableToMapDirective.propDecorators = {
+        draggableToMap: [{ type: core.Input }],
+        onMouseDown: [{ type: core.HostListener, args: ['mousedown',] }]
+    };
 
     /**
      * Toolbar widget, act as a container for ac-toolbar-button components
@@ -13935,46 +13735,38 @@
                 _this.element.nativeElement.style.top = event.y + "px";
             });
         };
-        AcToolbarComponent.ctorParameters = function () { return [
-            { type: core.ElementRef },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcToolbarComponent.prototype, "toolbarClass", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], AcToolbarComponent.prototype, "allowDrag", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", Object)
-        ], AcToolbarComponent.prototype, "onDrag", void 0);
-        AcToolbarComponent = __decorate([
-            core.Component({
-                selector: 'ac-toolbar',
-                template: "\n        <div class=\"{{toolbarClass}}\">\n            <div *ngIf=\"allowDrag\">\n                <ac-toolbar-button>\n                    <ac-drag-icon></ac-drag-icon>\n                </ac-toolbar-button>\n            </div>\n\n            <ng-content></ng-content>\n        </div>\n    ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush,
-                styles: ["\n        :host {\n            position: absolute;\n            top: 20px;\n            left: 20px;\n            width: 20px;\n            height: 20px;\n            z-index: 999;\n            -webkit-user-drag: none;\n        }\n    "]
-            }),
-            __metadata("design:paramtypes", [core.ElementRef, CesiumService])
-        ], AcToolbarComponent);
         return AcToolbarComponent;
     }());
+    AcToolbarComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-toolbar',
+                    template: "\n        <div class=\"{{toolbarClass}}\">\n            <div *ngIf=\"allowDrag\">\n                <ac-toolbar-button>\n                    <ac-drag-icon></ac-drag-icon>\n                </ac-toolbar-button>\n            </div>\n\n            <ng-content></ng-content>\n        </div>\n    ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    styles: ["\n        :host {\n            position: absolute;\n            top: 20px;\n            left: 20px;\n            width: 20px;\n            height: 20px;\n            z-index: 999;\n            -webkit-user-drag: none;\n        }\n    "]
+                },] }
+    ];
+    AcToolbarComponent.ctorParameters = function () { return [
+        { type: core.ElementRef },
+        { type: CesiumService }
+    ]; };
+    AcToolbarComponent.propDecorators = {
+        toolbarClass: [{ type: core.Input }],
+        allowDrag: [{ type: core.Input }],
+        onDrag: [{ type: core.Output }]
+    };
 
     var DragIconComponent = /** @class */ (function () {
         function DragIconComponent() {
         }
-        DragIconComponent = __decorate([
-            core.Component({
-                selector: 'ac-drag-icon',
-                template: "\n        <svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\"  x=\"0px\" y=\"0px\"  height=\"25\"  width=\"25\"\n\t viewBox=\"0 0 476.737 476.737\" style=\"enable-background:new 0 0 476.737 476.737;\" xml:space=\"preserve\">\n<g>\n\t<g>\n\t\t<path style=\"fill:#010002;\" d=\"M475.498,232.298l-3.401-5.149l-63.565-63.565c-6.198-6.198-16.304-6.198-22.47,0\n\t\t\tc-6.198,6.198-6.198,16.273,0,22.47l36.423,36.423H254.26V54.253l36.423,36.423c6.166,6.198,16.273,6.198,22.47,0\n\t\t\tc6.166-6.198,6.166-16.273,0-22.47L249.588,4.64l-0.159-0.095l-4.99-3.305L238.369,0h-0.064l-6.007,1.24l-4.99,3.305l-0.191,0.095\n\t\t\tl-63.565,63.565c-6.198,6.198-6.198,16.273,0,22.47s16.273,6.198,22.47,0l36.455-36.423v168.225H54.253l36.423-36.423\n\t\t\tc6.198-6.198,6.198-16.273,0-22.47s-16.273-6.198-22.47,0L4.64,227.149l-0.095,0.159l-3.305,4.99L0,238.369v0.064l1.24,6.007\n\t\t\tl3.305,4.958l0.095,0.191l63.565,63.565c6.198,6.198,16.273,6.198,22.47,0c6.198-6.166,6.198-16.273,0-22.47L54.253,254.26\n\t\t\th168.225v168.225l-36.423-36.423c-6.198-6.166-16.273-6.166-22.47,0c-6.198,6.198-6.198,16.304,0,22.47l63.565,63.565l5.149,3.432\n\t\t\tl6.007,1.208h0.064l6.07-1.24l5.149-3.401l63.565-63.565c6.166-6.198,6.166-16.304,0-22.47c-6.198-6.198-16.304-6.198-22.47,0\n\t\t\tl-36.423,36.423V254.26h168.225l-36.423,36.423c-6.166,6.166-6.166,16.273,0,22.47c6.198,6.166,16.304,6.166,22.47,0\n\t\t\tl63.565-63.565l3.432-5.149l1.208-6.007v-0.064L475.498,232.298z\"/>\n\t</g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>\n    "
-            }),
-            __metadata("design:paramtypes", [])
-        ], DragIconComponent);
         return DragIconComponent;
     }());
+    DragIconComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-drag-icon',
+                    template: "\n        <svg version=\"1.1\" id=\"Capa_1\" xmlns=\"http://www.w3.org/2000/svg\"  x=\"0px\" y=\"0px\"  height=\"25\"  width=\"25\"\n\t viewBox=\"0 0 476.737 476.737\" style=\"enable-background:new 0 0 476.737 476.737;\" xml:space=\"preserve\">\n<g>\n\t<g>\n\t\t<path style=\"fill:#010002;\" d=\"M475.498,232.298l-3.401-5.149l-63.565-63.565c-6.198-6.198-16.304-6.198-22.47,0\n\t\t\tc-6.198,6.198-6.198,16.273,0,22.47l36.423,36.423H254.26V54.253l36.423,36.423c6.166,6.198,16.273,6.198,22.47,0\n\t\t\tc6.166-6.198,6.166-16.273,0-22.47L249.588,4.64l-0.159-0.095l-4.99-3.305L238.369,0h-0.064l-6.007,1.24l-4.99,3.305l-0.191,0.095\n\t\t\tl-63.565,63.565c-6.198,6.198-6.198,16.273,0,22.47s16.273,6.198,22.47,0l36.455-36.423v168.225H54.253l36.423-36.423\n\t\t\tc6.198-6.198,6.198-16.273,0-22.47s-16.273-6.198-22.47,0L4.64,227.149l-0.095,0.159l-3.305,4.99L0,238.369v0.064l1.24,6.007\n\t\t\tl3.305,4.958l0.095,0.191l63.565,63.565c6.198,6.198,16.273,6.198,22.47,0c6.198-6.166,6.198-16.273,0-22.47L54.253,254.26\n\t\t\th168.225v168.225l-36.423-36.423c-6.198-6.166-16.273-6.166-22.47,0c-6.198,6.198-6.198,16.304,0,22.47l63.565,63.565l5.149,3.432\n\t\t\tl6.007,1.208h0.064l6.07-1.24l5.149-3.401l63.565-63.565c6.166-6.198,6.166-16.304,0-22.47c-6.198-6.198-16.304-6.198-22.47,0\n\t\t\tl-36.423,36.423V254.26h168.225l-36.423,36.423c-6.166,6.166-6.166,16.273,0,22.47c6.198,6.166,16.304,6.166,22.47,0\n\t\t\tl63.565-63.565l3.432-5.149l1.208-6.007v-0.064L475.498,232.298z\"/>\n\t</g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n<g>\n</g>\n</svg>\n    "
+                },] }
+    ];
+    DragIconComponent.ctorParameters = function () { return []; };
 
     /**
      * Toolbar button widget, act as a single button inside ac-toolbar component
@@ -13998,33 +13790,23 @@
         }
         AcToolbarButtonComponent.prototype.ngOnInit = function () {
         };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcToolbarButtonComponent.prototype, "iconUrl", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcToolbarButtonComponent.prototype, "buttonClass", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", String)
-        ], AcToolbarButtonComponent.prototype, "iconClass", void 0);
-        __decorate([
-            core.Output(),
-            __metadata("design:type", Object)
-        ], AcToolbarButtonComponent.prototype, "onClick", void 0);
-        AcToolbarButtonComponent = __decorate([
-            core.Component({
-                selector: 'ac-toolbar-button',
-                template: "\n        <div (click)=\"onClick.emit()\" class=\"button-container {{buttonClass}}\">\n            <img *ngIf=\"iconUrl\" [src]=\"iconUrl\" class=\"icon {{iconClass}}\"/>\n            <ng-content></ng-content>\n        </div>\n    ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush,
-                styles: ["\n        .button-container {\n            border-radius: 1px;\n            background-color: rgba(255, 255, 255, 0.8);\n            height: 30px;\n            width: 30px;\n            padding: 5px;\n            transition: all 0.2s;\n            cursor: pointer;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            flex-direction: column;\n        }\n\n        .button-container:hover {\n            background-color: rgba(255, 255, 255, 0.95);\n        }\n\n        .icon {\n            height: 30px;\n            width: 30px;\n        }\n    "]
-            }),
-            __metadata("design:paramtypes", [])
-        ], AcToolbarButtonComponent);
         return AcToolbarButtonComponent;
     }());
+    AcToolbarButtonComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'ac-toolbar-button',
+                    template: "\n        <div (click)=\"onClick.emit()\" class=\"button-container {{buttonClass}}\">\n            <img *ngIf=\"iconUrl\" [src]=\"iconUrl\" class=\"icon {{iconClass}}\"/>\n            <ng-content></ng-content>\n        </div>\n    ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    styles: ["\n        .button-container {\n            border-radius: 1px;\n            background-color: rgba(255, 255, 255, 0.8);\n            height: 30px;\n            width: 30px;\n            padding: 5px;\n            transition: all 0.2s;\n            cursor: pointer;\n            display: flex;\n            justify-content: center;\n            align-items: center;\n            flex-direction: column;\n        }\n\n        .button-container:hover {\n            background-color: rgba(255, 255, 255, 0.95);\n        }\n\n        .icon {\n            height: 30px;\n            width: 30px;\n        }\n    "]
+                },] }
+    ];
+    AcToolbarButtonComponent.ctorParameters = function () { return []; };
+    AcToolbarButtonComponent.propDecorators = {
+        iconUrl: [{ type: core.Input }],
+        buttonClass: [{ type: core.Input }],
+        iconClass: [{ type: core.Input }],
+        onClick: [{ type: core.Output }]
+    };
 
     /**
      *
@@ -14062,7 +13844,7 @@
         RangeAndBearingComponent.prototype.create = function (_a) {
             var _this = this;
             var _b = _a === void 0 ? { lineEditOptions: {}, labelsStyle: {}, distanceLabelsStyle: {}, bearingLabelsStyle: {} } : _a, _c = _b.lineEditOptions, lineEditOptions = _c === void 0 ? {} : _c, _d = _b.labelsStyle, labelsStyle = _d === void 0 ? {} : _d, _e = _b.distanceLabelsStyle, distanceLabelsStyle = _e === void 0 ? {} : _e, _f = _b.bearingLabelsStyle, bearingLabelsStyle = _f === void 0 ? {} : _f, bearingStringFn = _b.bearingStringFn, distanceStringFn = _b.distanceStringFn, labelsRenderFn = _b.labelsRenderFn;
-            var rnb = this.polylineEditor.create(__assign(__assign({ allowDrag: false, pointProps: {
+            var rnb = this.polylineEditor.create(Object.assign(Object.assign({ allowDrag: false, pointProps: {
                     showVirtual: false,
                     pixelSize: 8,
                 }, polylineProps: {
@@ -14087,103 +13869,44 @@
                             var previousPosition = array[index - 1];
                             var bearing = _this.coordinateConverter.bearingToCartesian(previousPosition, position);
                             var distance = Cesium.Cartesian3.distance(previousPosition, position) / 1000;
-                            labels.push(__assign(__assign(__assign(__assign({ text: (bearingStringFn && bearingStringFn(bearing)) ||
+                            labels.push(Object.assign(Object.assign(Object.assign(Object.assign({ text: (bearingStringFn && bearingStringFn(bearing)) ||
                                     (_this.bearingStringFn && _this.bearingStringFn(bearing)) ||
-                                    bearing.toFixed(2) + "\u00B0", scale: 0.2, font: '80px Helvetica', pixelOffset: new Cesium.Cartesian2(-20, -8), position: new Cesium.Cartesian3((position.x + previousPosition.x) / 2, (position.y + previousPosition.y) / 2, (position.z + previousPosition.z) / 2), fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.WHITE, showBackground: true }, _this.labelsStyle), labelsStyle), _this.bearingLabelsStyle), bearingLabelsStyle), __assign(__assign(__assign(__assign({ text: (distanceStringFn && distanceStringFn(totalDistance + distance)) ||
+                                    bearing.toFixed(2) + "\u00B0", scale: 0.2, font: '80px Helvetica', pixelOffset: new Cesium.Cartesian2(-20, -8), position: new Cesium.Cartesian3((position.x + previousPosition.x) / 2, (position.y + previousPosition.y) / 2, (position.z + previousPosition.z) / 2), fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.WHITE, showBackground: true }, _this.labelsStyle), labelsStyle), _this.bearingLabelsStyle), bearingLabelsStyle), Object.assign(Object.assign(Object.assign(Object.assign({ text: (distanceStringFn && distanceStringFn(totalDistance + distance)) ||
                                     (_this.distanceStringFn && _this.distanceStringFn(totalDistance + distance)) ||
                                     (totalDistance + distance).toFixed(2) + " Km", scale: 0.2, font: '80px Helvetica', pixelOffset: new Cesium.Cartesian2(-35, -8), position: position, fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.WHITE, showBackground: true }, _this.labelsStyle), labelsStyle), _this.distanceLabelsStyle), distanceLabelsStyle));
                             totalDistance += distance;
                         }
                         return labels;
                     }, [
-                        __assign(__assign(__assign(__assign({ text: (distanceStringFn && distanceStringFn(0)) || (_this.distanceStringFn && _this.distanceStringFn(0)) || "0 Km", scale: 0.2, font: '80px Helvetica', pixelOffset: new Cesium.Cartesian2(-20, -8), position: positions[0], fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.WHITE, showBackground: true }, _this.labelsStyle), labelsStyle), _this.distanceLabelsStyle), distanceLabelsStyle),
+                        Object.assign(Object.assign(Object.assign(Object.assign({ text: (distanceStringFn && distanceStringFn(0)) || (_this.distanceStringFn && _this.distanceStringFn(0)) || "0 Km", scale: 0.2, font: '80px Helvetica', pixelOffset: new Cesium.Cartesian2(-20, -8), position: positions[0], fillColor: Cesium.Color.WHITE, outlineColor: Cesium.Color.WHITE, showBackground: true }, _this.labelsStyle), labelsStyle), _this.distanceLabelsStyle), distanceLabelsStyle),
                     ]);
                 });
             }
             return rnb;
         };
-        RangeAndBearingComponent.ctorParameters = function () { return [
-            { type: PolylinesEditorService },
-            { type: CoordinateConverter }
-        ]; };
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], RangeAndBearingComponent.prototype, "lineEditOptions", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], RangeAndBearingComponent.prototype, "labelsStyle", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], RangeAndBearingComponent.prototype, "distanceLabelsStyle", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Object)
-        ], RangeAndBearingComponent.prototype, "bearingLabelsStyle", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Function)
-        ], RangeAndBearingComponent.prototype, "bearingStringFn", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Function)
-        ], RangeAndBearingComponent.prototype, "distanceStringFn", void 0);
-        __decorate([
-            core.Input(),
-            __metadata("design:type", Function)
-        ], RangeAndBearingComponent.prototype, "labelsRenderFn", void 0);
-        RangeAndBearingComponent = __decorate([
-            core.Component({
-                selector: 'range-and-bearing',
-                template: "\n    <polylines-editor></polylines-editor>\n  ",
-                changeDetection: core.ChangeDetectionStrategy.OnPush,
-                providers: [PolylinesEditorService]
-            }),
-            __metadata("design:paramtypes", [PolylinesEditorService, CoordinateConverter])
-        ], RangeAndBearingComponent);
         return RangeAndBearingComponent;
     }());
-
-    /**
-     * The Service is as a "zoom to rectangle" tool
-     *
-     * example:
-     * ```
-     * constructor(
-     *   private cameraService: CameraService,
-     *   private cesiumService: CesiumService,
-     *   private zoomToRectangleService: ZoomToRectangleService,
-     * ) {
-     *   this.zoomToRectangleService.init(cesiumService, cameraService);
-     * }
-     * ...
-     * this.zoomToRectangleService.activate({onComplete: () => this.zoomToRectangleService.disable()});
-     * ```
-     *
-     * `init()` - initialize the service with CameraService and CesiumService.
-     * If no mapId is provided to activate() - must be called before calling `activate()`.
-     *
-     * `disable()` - disables the tool.
-     *
-     * `activate()` -
-     * @param options
-     * {
-     *  onStart - optional - a callback that will be called when the user start drawing the rectangle
-     *  onComplete - optional - a callback that will be called when the tool zoom in
-     *  autoDisableOnZoom - optional - determines if the tool should auto disable after zoom - default: true
-     *  animationDurationInSeconds - optional - zoom animation duration in seconds - default: 0.5
-     *  borderStyle - optional - the style of the rectangle element border - default: '3px dashed #FFFFFF'
-     *  backgroundColor - optional - the background color of the rectangle element - default: 'transparent'
-     *  resetKeyCode - optional - the key code of the key that is used to reset the drawing of the rectangle - default: 27 (ESC key)
-     *  threshold - optional - the minimum area of the screen rectangle (in pixels) that is required to perform zoom - default: 9
-     *  keepRotation - optional - whether or not to keep the rotation when zooming in - default: true
-     *  mouseButton - optional - sets the mouse button for drawing the rectangle - default: left mouse button (0)
-     * }
-     * @param mapId - optional - the mapId of the map that the tool will be used in.
-     *
-     */
+    RangeAndBearingComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'range-and-bearing',
+                    template: "\n    <polylines-editor></polylines-editor>\n  ",
+                    changeDetection: core.ChangeDetectionStrategy.OnPush,
+                    providers: [PolylinesEditorService]
+                },] }
+    ];
+    RangeAndBearingComponent.ctorParameters = function () { return [
+        { type: PolylinesEditorService },
+        { type: CoordinateConverter }
+    ]; };
+    RangeAndBearingComponent.propDecorators = {
+        lineEditOptions: [{ type: core.Input }],
+        labelsStyle: [{ type: core.Input }],
+        distanceLabelsStyle: [{ type: core.Input }],
+        bearingLabelsStyle: [{ type: core.Input }],
+        bearingStringFn: [{ type: core.Input }],
+        distanceStringFn: [{ type: core.Input }],
+        labelsRenderFn: [{ type: core.Input }]
+    };
 
     (function (MouseButtons) {
         MouseButtons[MouseButtons["LEFT"] = 0] = "LEFT";
@@ -14360,21 +14083,16 @@
             });
             return true;
         };
-        ZoomToRectangleService.ctorParameters = function () { return [
-            { type: MapsManagerService },
-            { type: CameraService, decorators: [{ type: core.Optional }] },
-            { type: CesiumService, decorators: [{ type: core.Optional }] }
-        ]; };
-        ZoomToRectangleService = __decorate([
-            core.Injectable(),
-            __param(1, core.Optional()),
-            __param(2, core.Optional()),
-            __metadata("design:paramtypes", [MapsManagerService,
-                CameraService,
-                CesiumService])
-        ], ZoomToRectangleService);
         return ZoomToRectangleService;
     }());
+    ZoomToRectangleService.decorators = [
+        { type: core.Injectable }
+    ];
+    ZoomToRectangleService.ctorParameters = function () { return [
+        { type: MapsManagerService },
+        { type: CameraService, decorators: [{ type: core.Optional }] },
+        { type: CesiumService, decorators: [{ type: core.Optional }] }
+    ]; };
 
     var RectanglesManagerService = /** @class */ (function () {
         function RectanglesManagerService() {
@@ -14395,11 +14113,11 @@
             this.rectangles.forEach(function (rectangle) { return rectangle.dispose(); });
             this.rectangles.clear();
         };
-        RectanglesManagerService = __decorate([
-            core.Injectable()
-        ], RectanglesManagerService);
         return RectanglesManagerService;
     }());
+    RectanglesManagerService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var DEFAULT_RECTANGLE_OPTIONS = {
         addPointEvent: exports.CesiumEvent.LEFT_CLICK,
@@ -14501,6 +14219,22 @@
                 editAction: exports.EditActions.INIT,
                 rectangleOptions: rectangleOptions,
             });
+            var finishCreation = function () {
+                var changeMode = {
+                    id: id,
+                    editMode: exports.EditModes.CREATE,
+                    editAction: exports.EditActions.CHANGE_TO_EDIT,
+                };
+                _this.updateSubject.next(changeMode);
+                clientEditSubject.next(changeMode);
+                if (_this.observablesMap.has(id)) {
+                    _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
+                }
+                _this.observablesMap.delete(id);
+                _this.editRectangle(id, positions, priority, clientEditSubject, rectangleOptions, editorObservable);
+                finishedCreate = true;
+                return finishedCreate;
+            };
             var mouseMoveRegistration = this.mapEventsManager.register({
                 event: exports.CesiumEvent.MOUSE_MOVE,
                 pick: exports.PickOptions.NO_PICK,
@@ -14514,7 +14248,7 @@
                 priority: priority,
             });
             this.observablesMap.set(id, [mouseMoveRegistration, addPointRegistration]);
-            var editorObservable = this.createEditorObservable(clientEditSubject, id);
+            var editorObservable = this.createEditorObservable(clientEditSubject, id, finishCreation);
             mouseMoveRegistration.subscribe(function (_a) {
                 var endPosition = _a.movement.endPosition;
                 var position = _this.coordinateConverter.screenToCartesian3(endPosition);
@@ -14547,21 +14281,9 @@
                     editAction: exports.EditActions.ADD_POINT,
                 };
                 _this.updateSubject.next(updateValue);
-                clientEditSubject.next(__assign(__assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                clientEditSubject.next(Object.assign(Object.assign({}, updateValue), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 if (!isFirstPoint) {
-                    var changeMode = {
-                        id: id,
-                        editMode: exports.EditModes.CREATE,
-                        editAction: exports.EditActions.CHANGE_TO_EDIT,
-                    };
-                    _this.updateSubject.next(changeMode);
-                    clientEditSubject.next(changeMode);
-                    if (_this.observablesMap.has(id)) {
-                        _this.observablesMap.get(id).forEach(function (registration) { return registration.dispose(); });
-                    }
-                    _this.observablesMap.delete(id);
-                    _this.editRectangle(id, positions, priority, clientEditSubject, rectangleOptions, editorObservable);
-                    finishedCreate = true;
+                    finishedCreate = finishCreation();
                 }
             });
             return editorObservable;
@@ -14587,7 +14309,7 @@
                 rectangleOptions: rectangleOptions,
             };
             this.updateSubject.next(update);
-            editSubject.next(__assign(__assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
+            editSubject.next(Object.assign(Object.assign({}, update), { positions: this.getPositions(id), points: this.getPoints(id) }));
             return this.editRectangle(id, positions, priority, editSubject, rectangleOptions);
         };
         RectanglesEditorService.prototype.editRectangle = function (id, positions, priority, editSubject, options, editObservable) {
@@ -14631,7 +14353,7 @@
                     editAction: drop ? exports.EditActions.DRAG_POINT_FINISH : exports.EditActions.DRAG_POINT,
                 };
                 _this.updateSubject.next(update);
-                editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
             });
             if (shapeDragRegistration) {
                 shapeDragRegistration
@@ -14655,7 +14377,7 @@
                         editAction: drop ? exports.EditActions.DRAG_SHAPE_FINISH : exports.EditActions.DRAG_SHAPE,
                     };
                     _this.updateSubject.next(update);
-                    editSubject.next(__assign(__assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
+                    editSubject.next(Object.assign(Object.assign({}, update), { positions: _this.getPositions(id), points: _this.getPoints(id) }));
                 });
             }
             var observables = [pointDragRegistration];
@@ -14686,7 +14408,7 @@
             }
             return rectangleOptions;
         };
-        RectanglesEditorService.prototype.createEditorObservable = function (observableToExtend, id) {
+        RectanglesEditorService.prototype.createEditorObservable = function (observableToExtend, id, finishCreation) {
             var _this = this;
             observableToExtend.dispose = function () {
                 var observables = _this.observablesMap.get(id);
@@ -14743,6 +14465,12 @@
                     updateLabels: labels,
                 });
             };
+            observableToExtend.finishCreation = function () {
+                if (!finishCreation) {
+                    throw new Error('Rectangles editor error edit(): cannot call finishCreation() on edit');
+                }
+                return finishCreation();
+            };
             observableToExtend.getCurrentPoints = function () { return _this.getPoints(id); };
             observableToExtend.getEditValue = function () { return observableToExtend.getValue(); };
             observableToExtend.getLabels = function () { return _this.rectanglesManager.get(id).labels; };
@@ -14756,11 +14484,11 @@
             var rectangle = this.rectanglesManager.get(id);
             return rectangle.getRealPoints();
         };
-        RectanglesEditorService = __decorate([
-            core.Injectable()
-        ], RectanglesEditorService);
         return RectanglesEditorService;
     }());
+    RectanglesEditorService.decorators = [
+        { type: core.Injectable }
+    ];
 
     var RectanglesEditorComponent = /** @class */ (function () {
         function RectanglesEditorComponent(rectanglesEditor, coordinateConverter, mapEventsManager, cameraService, rectanglesManager, cesiumService) {
@@ -14825,6 +14553,7 @@
                 case exports.EditActions.ADD_POINT: {
                     var rectangle = this.rectanglesManager.get(update.id);
                     if (update.updatedPosition) {
+                        rectangle.moveTempMovingPoint(update.updatedPosition);
                         rectangle.addPoint(update.updatedPosition);
                         this.renderEditLabels(rectangle, update);
                     }
@@ -14936,80 +14665,78 @@
         RectanglesEditorComponent.prototype.getPointShow = function (point) {
             return point.show && (point.isVirtualEditPoint() ? point.props.showVirtual : point.props.show);
         };
-        RectanglesEditorComponent.ctorParameters = function () { return [
-            { type: RectanglesEditorService },
-            { type: CoordinateConverter },
-            { type: MapEventsManagerService },
-            { type: CameraService },
-            { type: RectanglesManagerService },
-            { type: CesiumService }
-        ]; };
-        __decorate([
-            core.ViewChild('editRectanglesLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], RectanglesEditorComponent.prototype, "editRectanglesLayer", void 0);
-        __decorate([
-            core.ViewChild('editPointsLayer'),
-            __metadata("design:type", AcLayerComponent)
-        ], RectanglesEditorComponent.prototype, "editPointsLayer", void 0);
-        RectanglesEditorComponent = __decorate([
-            core.Component({
-                selector: 'rectangles-editor',
-                template: /*html*/ "\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      >\n      </ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #editRectanglesLayer acFor=\"let rectangle of editRectangles$\" [context]=\"this\">\n      <ac-rectangle-desc\n        props=\"{\n          coordinates: rectangle.getRectangleCallbackProperty(),\n          material: rectangle.rectangleProps.material,\n          fill: rectangle.rectangleProps.fill,\n          classificationType: rectangle.rectangleProps.classificationType,\n          zIndex: rectangle.rectangleProps.zIndex,\n          outline: rectangle.rectangleProps.outline,\n          outlineColor: rectangle.rectangleProps.outlineColor,\n          height: rectangle.rectangleProps.height,\n          extrudedHeight: rectangle.rectangleProps.extrudedHeight\n        }\"\n      >\n      </ac-rectangle-desc>\n      <ac-array-desc acFor=\"let label of rectangle.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
-                providers: [CoordinateConverter, RectanglesManagerService],
-                changeDetection: core.ChangeDetectionStrategy.OnPush
-            }),
-            __metadata("design:paramtypes", [RectanglesEditorService,
-                CoordinateConverter,
-                MapEventsManagerService,
-                CameraService,
-                RectanglesManagerService,
-                CesiumService])
-        ], RectanglesEditorComponent);
         return RectanglesEditorComponent;
     }());
+    RectanglesEditorComponent.decorators = [
+        { type: core.Component, args: [{
+                    selector: 'rectangles-editor',
+                    template: /*html*/ "\n    <ac-layer #editPointsLayer acFor=\"let point of editPoints$\" [context]=\"this\">\n      <ac-point-desc\n        props=\"{\n        position: point.getPositionCallbackProperty(),\n        pixelSize: getPointSize(point),\n        color: point.props.color,\n        outlineColor: point.props.outlineColor,\n        outlineWidth: point.props.outlineWidth,\n        show: getPointShow(point),\n        disableDepthTestDistance: point.props.disableDepthTestDistance,\n        heightReference: point.props.heightReference,\n    }\"\n      >\n      </ac-point-desc>\n    </ac-layer>\n\n    <ac-layer #editRectanglesLayer acFor=\"let rectangle of editRectangles$\" [context]=\"this\">\n      <ac-rectangle-desc\n        props=\"{\n          coordinates: rectangle.getRectangleCallbackProperty(),\n          material: rectangle.rectangleProps.material,\n          fill: rectangle.rectangleProps.fill,\n          classificationType: rectangle.rectangleProps.classificationType,\n          zIndex: rectangle.rectangleProps.zIndex,\n          outline: rectangle.rectangleProps.outline,\n          outlineColor: rectangle.rectangleProps.outlineColor,\n          height: rectangle.rectangleProps.height,\n          extrudedHeight: rectangle.rectangleProps.extrudedHeight\n        }\"\n      >\n      </ac-rectangle-desc>\n      <ac-array-desc acFor=\"let label of rectangle.labels\" [idGetter]=\"getLabelId\">\n        <ac-label-primitive-desc\n          props=\"{\n            position: label.position,\n            backgroundColor: label.backgroundColor,\n            backgroundPadding: label.backgroundPadding,\n            distanceDisplayCondition: label.distanceDisplayCondition,\n            eyeOffset: label.eyeOffset,\n            fillColor: label.fillColor,\n            font: label.font,\n            heightReference: label.heightReference,\n            horizontalOrigin: label.horizontalOrigin,\n            outlineColor: label.outlineColor,\n            outlineWidth: label.outlineWidth,\n            pixelOffset: label.pixelOffset,\n            pixelOffsetScaleByDistance: label.pixelOffsetScaleByDistance,\n            scale: label.scale,\n            scaleByDistance: label.scaleByDistance,\n            show: label.show,\n            showBackground: label.showBackground,\n            style: label.style,\n            text: label.text,\n            translucencyByDistance: label.translucencyByDistance,\n            verticalOrigin: label.verticalOrigin,\n            disableDepthTestDistance: label.disableDepthTestDistance,\n        }\"\n        >\n        </ac-label-primitive-desc>\n      </ac-array-desc>\n    </ac-layer>\n  ",
+                    providers: [CoordinateConverter, RectanglesManagerService],
+                    changeDetection: core.ChangeDetectionStrategy.OnPush
+                },] }
+    ];
+    RectanglesEditorComponent.ctorParameters = function () { return [
+        { type: RectanglesEditorService },
+        { type: CoordinateConverter },
+        { type: MapEventsManagerService },
+        { type: CameraService },
+        { type: RectanglesManagerService },
+        { type: CesiumService }
+    ]; };
+    RectanglesEditorComponent.propDecorators = {
+        editRectanglesLayer: [{ type: core.ViewChild, args: ['editRectanglesLayer',] }],
+        editPointsLayer: [{ type: core.ViewChild, args: ['editPointsLayer',] }]
+    };
 
     var AngularCesiumWidgetsModule = /** @class */ (function () {
         function AngularCesiumWidgetsModule() {
         }
-        AngularCesiumWidgetsModule = __decorate([
-            core.NgModule({
-                imports: [common.CommonModule, AngularCesiumModule],
-                declarations: [
-                    PointsEditorComponent,
-                    HippodromeEditorComponent,
-                    PolygonsEditorComponent,
-                    RectanglesEditorComponent,
-                    CirclesEditorComponent,
-                    EllipsesEditorComponent,
-                    PolylinesEditorComponent,
-                    DraggableToMapDirective,
-                    DragIconComponent,
-                    AcToolbarComponent,
-                    AcToolbarButtonComponent,
-                    RangeAndBearingComponent,
-                ],
-                exports: [
-                    PointsEditorComponent,
-                    HippodromeEditorComponent,
-                    PolygonsEditorComponent,
-                    RectanglesEditorComponent,
-                    CirclesEditorComponent,
-                    EllipsesEditorComponent,
-                    PolylinesEditorComponent,
-                    DraggableToMapDirective,
-                    AcToolbarComponent,
-                    AcToolbarButtonComponent,
-                    RangeAndBearingComponent,
-                ],
-                providers: [
-                    DraggableToMapService,
-                    ZoomToRectangleService,
-                ]
-            })
-        ], AngularCesiumWidgetsModule);
         return AngularCesiumWidgetsModule;
     }());
+    AngularCesiumWidgetsModule.decorators = [
+        { type: core.NgModule, args: [{
+                    imports: [common.CommonModule, AngularCesiumModule],
+                    declarations: [
+                        PointsEditorComponent,
+                        HippodromeEditorComponent,
+                        PolygonsEditorComponent,
+                        RectanglesEditorComponent,
+                        CirclesEditorComponent,
+                        EllipsesEditorComponent,
+                        PolylinesEditorComponent,
+                        DraggableToMapDirective,
+                        DragIconComponent,
+                        AcToolbarComponent,
+                        AcToolbarButtonComponent,
+                        RangeAndBearingComponent,
+                    ],
+                    exports: [
+                        PointsEditorComponent,
+                        HippodromeEditorComponent,
+                        PolygonsEditorComponent,
+                        RectanglesEditorComponent,
+                        CirclesEditorComponent,
+                        EllipsesEditorComponent,
+                        PolylinesEditorComponent,
+                        DraggableToMapDirective,
+                        AcToolbarComponent,
+                        AcToolbarButtonComponent,
+                        RangeAndBearingComponent,
+                    ],
+                    providers: [
+                        DraggableToMapService,
+                        ZoomToRectangleService,
+                    ]
+                },] }
+    ];
+
+    /*
+     * Public API Surface of angular-cesium
+     */
+
+    /**
+     * Generated bundle index. Do not edit.
+     */
 
     exports.AcArcComponent = AcArcComponent;
     exports.AcArcDescComponent = AcArcDescComponent;

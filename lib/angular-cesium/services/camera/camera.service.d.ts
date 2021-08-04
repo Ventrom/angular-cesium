@@ -127,6 +127,6 @@ export declare class CameraService {
         flyTo: boolean;
         flyToDuration?: number;
         altitude?: number;
-    }): Promise<unknown>;
+    }): Promise<void>;
     untrackEntity(): void;
 }
