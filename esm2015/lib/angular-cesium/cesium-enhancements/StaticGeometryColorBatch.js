@@ -98,8 +98,7 @@ Batch.prototype.update = function (time) {
     var i;
     if (this.createPrimitive) {
         var geometries = this.geometry.values;
-        var geometriesLength = geometries.length;
-        if (geometriesLength > 0) {
+        if (geometries.length > 0) {
             if (defined(primitive)) {
                 if (!defined(this.oldPrimitive)) {
                     this.oldPrimitive = primitive;
@@ -108,7 +107,7 @@ Batch.prototype.update = function (time) {
                     primitives.remove(primitive);
                 }
             }
-            for (i = 0; i < geometriesLength; i++) {
+            for (i = 0; i < geometries.length; i++) {
                 var geometryItem = geometries[i];
                 var originalAttributes = geometryItem.attributes;
                 attributes = this.attributes.get(geometryItem.id.id);
