@@ -41,8 +41,6 @@ import { ScreenshotService } from '../../services/screenshot/screenshot.service'
 @Component({
   selector: 'ac-map',
   template: `
-    <ac-default-plonter *ngIf="!disableDefaultPlonter"></ac-default-plonter>
-    <ac-context-menu-wrapper></ac-context-menu-wrapper>
     <ng-content></ng-content>
   `,
   providers: [
@@ -72,7 +70,7 @@ export class AcMapComponent implements OnChanges, OnInit, AfterViewInit, OnDestr
    * Disable default plonter context menu
    */
   @Input()
-  disableDefaultPlonter = false;
+  disableDefaultPlonter = true;
 
   /**
    * Set the id name of the map
