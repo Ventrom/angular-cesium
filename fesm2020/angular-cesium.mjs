@@ -2517,7 +2517,7 @@ Batch.prototype.update = function (time) {
     var attributes;
     var i;
     if (this.createPrimitive) {
-        var geometries = this.geometry.values;
+        var geometries = this.geometry.values.filter(g => g !== undefined);
         var geometriesLength = geometries.length;
         if (geometriesLength > 0) {
             if (defined(primitive)) {
