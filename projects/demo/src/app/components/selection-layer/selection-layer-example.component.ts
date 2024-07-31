@@ -10,7 +10,7 @@ import {
   CesiumEventModifier,
   SelectionManagerService
 } from 'angular-cesium';
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 class MyEntity extends AcEntity {
   selected = false;

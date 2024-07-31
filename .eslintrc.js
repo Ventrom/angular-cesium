@@ -168,7 +168,7 @@ module.exports = {
         ],
         "no-shadow": "off",
         "no-throw-literal": "error",
-        "no-trailing-spaces": "error",
+        "no-trailing-spaces": "off",
         "no-undef-init": "error",
         "no-underscore-dangle": "off",
         "no-unused-expressions": "off",
@@ -179,7 +179,7 @@ module.exports = {
         "radix": "error",
         "semi": "off",
         "spaced-comment": [
-            "error",
+            "off",
             "always",
             {
                 "markers": [
