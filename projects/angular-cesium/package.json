@@ -1,6 +1,6 @@
 {
   "name": "angular-cesium",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "license": "MIT",
   "description": "Angular library for working with Cesium.",
   "repository": "https://github.com/articodeltd/angular-cesium",
@@ -11,12 +11,12 @@
     "Angular2 Cesium"
   ],
   "peerDependencies": {
-    "@angular/common": "^17.0.0",
-    "@angular/core": "^17.0.0",
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
     "cesium": ">= 1.48.0"
   },
   "dependencies": {
-    "angular2parse": "^17.0.0",
+    "angular2parse": "^18.0.0",
     "geodesy": "^1.1.1",
     "@types/geodesy": "^1.1.2",
     "json-string-mapper": "^1.0.0",
