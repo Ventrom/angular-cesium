@@ -11,12 +11,15 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-cesium-demo",
+            "outputPath": {
+              "base": "dist/angular-cesium-demo"
+            },
             "index": "projects/demo/src/index.html",
-            "main": "projects/demo/src/main.ts",
-            "polyfills": "projects/demo/src/polyfills.ts",
+            "polyfills": [
+              "projects/demo/src/polyfills.ts"
+            ],
             "tsConfig": "projects/demo/tsconfig.app.json",
             "assets": [
               "projects/demo/src/favicon.ico",
@@ -39,12 +42,11 @@
               "geodesy",
               "util"
             ],
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/demo/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -59,8 +61,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -168,12 +168,15 @@
       "prefix": "",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/landing-page",
+            "outputPath": {
+              "base": "dist/landing-page"
+            },
             "index": "projects/landing-page/src/index.html",
-            "main": "projects/landing-page/src/main.ts",
-            "polyfills": "projects/landing-page/src/polyfills.ts",
+            "polyfills": [
+              "projects/landing-page/src/polyfills.ts"
+            ],
             "tsConfig": "projects/landing-page/tsconfig.app.json",
             "assets": [
               "projects/landing-page/src/favicon.ico",
@@ -188,13 +191,14 @@
               "projects/landing-page/src/styles.scss",
               "./node_modules/cesium/Build/Cesium/Widgets/widgets.css"
             ],
-            "scripts": ["./node_modules/cesium/Build/Cesium/Cesium.js"],
-            "vendorChunk": true,
+            "scripts": [
+              "./node_modules/cesium/Build/Cesium/Cesium.js"
+            ],
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "projects/landing-page/src/main.ts"
           },
           "configurations": {
             "production": {
@@ -209,8 +213,6 @@
               "sourceMap": false,
               "namedChunks": false,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
