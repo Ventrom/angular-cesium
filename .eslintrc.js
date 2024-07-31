@@ -48,21 +48,21 @@ module.exports = {
                 "accessibility": "explicit"
             }
         ],
-        "@typescript-eslint/indent": "error",
+        "@typescript-eslint/indent": "off",
         "@typescript-eslint/member-delimiter-style": [
             "error",
             {
                 "multiline": {
-                    "delimiter": "semi",
+                    "delimiter": "comma",
                     "requireLast": true
                 },
                 "singleline": {
-                    "delimiter": "semi",
+                    "delimiter": "comma",
                     "requireLast": false
                 }
             }
         ],
-        "@typescript-eslint/member-ordering": "error",
+        "@typescript-eslint/member-ordering": "off",
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -94,7 +94,7 @@ module.exports = {
         "@typescript-eslint/no-unused-expressions": "error",
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/quotes": [
-            "error",
+            "off",
             "single"
         ],
         "@typescript-eslint/semi": [
